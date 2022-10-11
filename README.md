@@ -8,14 +8,18 @@ QFilip#7594
 Introduction:
 
 Welcome to the AOE2:DE RMS Collaboration project! This repository is intended to be a comprehensive library of custom Random Map Scripts, maintaned as an archive, and the source for an in-game mod of the same name. Since it is based in GitHub, any scripts shared through the repository are monitored for changes, which is useful for code review and collaboration, but can involve additional responsibilities. Ideally, scripts shared through this repository are visible as the "Random Map Location" in the scenario editor:
+
 ![image](https://user-images.githubusercontent.com/115369420/195188704-9df23df3-3f3d-45f6-8793-ebef0d36fb38.png) 
-and through lobby custom map selection: 
+
+and through lobby custom map selection:
+ 
 ![image](https://user-images.githubusercontent.com/115369420/195189829-b59a3e71-a014-4c81-89aa-602594adca95.png). 
+
 However, given the hundreds or thousands of scripts contained in this repository, if each were shown in this manner, finding the right map in game would become more difficult than writing the script itself! For this reason, all collaborators should observe the following guidelines.
 
 Guidelines:
 
-1) First and foremost, this GitHub repository is an archive of "Script Inactive" or ".si" files, not ".rms" files. If everyone shared all of their .rms files, then it would be nearly impossible to find the correct script among a massive list in game. Script Inactive files are not detected by the game, but can be easily made from .rms files (and vice-versa) simply by changing the extension. The Script Inactive files of this repository are still detectable by the auto-mod application, which will convert them into .rms and save them somewhere else, to be published to the game as a mod intended for the players.
+1) First and foremost, this GitHub repository is an archive of "Script Inactive" or ".si" files, not ".rms" files. If everyone shared all of their .rms files, then it would be nearly impossible to find the correct script among a massive list in game. Script Inactive files are not detected by the game, but can be easily made from .rms files (and vice-versa) simply by changing the extension. The Script Inactive files of this repository are still detectable by the auto-mod application, which will convert them into .rms and save them somewhere else, to be published to the game as a mod intended for the players. Please restrict the number of .rms files you own in this repository to one or two. Remember -- this doe
 
 
 
