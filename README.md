@@ -4,7 +4,17 @@ Collaborative Random Map Scripting (RMS) Project
 TechChariot#4776
 QFilip#7594
 
-Instructions:
+
+Introduction:
+
+Welcome to the AOE2:DE RMS Collaboration project! This repository is intended to be a comprehensive library of custom Random Map Scripts, maintaned as an archive, and the source for an in-game mod of the same name. Since it is based in GitHub, any scripts shared through the repository are monitored for changes, which is useful for code review and collaboration, but can involve additional responsibilities. Ideally, scripts shared through this repository are visible as the "Random Map Location" in the scenario editor: ![image](https://user-images.githubusercontent.com/115369420/195188704-9df23df3-3f3d-45f6-8793-ebef0d36fb38.png) and through lobby custom map selection: ![image](https://user-images.githubusercontent.com/115369420/195189829-b59a3e71-a014-4c81-89aa-602594adca95.png). However, given the hundreds or thousands of scripts contained in this repository, if each were shown in this manner, finding the right map in game would become very awkward.
+
+
+
+
+
+
+Configuration Instructions:
 
 1) Create a free Github Account by going to the following website: https://github.com/, clicking on the button below and following the  prompts/instructions:
 ![image](https://user-images.githubusercontent.com/115369420/194990488-0ea840ee-bf04-4c92-a261-27658236f0cb.png)
