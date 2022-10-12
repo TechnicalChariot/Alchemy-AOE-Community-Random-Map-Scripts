@@ -25,6 +25,8 @@ However, in addition to seeing your own work, you will also see the .rms files s
 
 3) PERMISSION TO SHARE: -- By uploading content to our Github Repository, you are agreeing that we can share your .si files (converted to .rms for the players, obviously) through an AOE2:DE mod/mods, fully crediting your amazing work, and bragging about how lucky we are to know and work with you. 
 
+4) WHERE TO DISCUSS -- Collaboration discussion and webhook updates available through the following Discord Server: https://discord.gg/h9DvzHBNPr
+
 Configuration Instructions:
 
 1) Create a free Github Account by going to the following website: https://github.com/, clicking on the button below and following the  prompts/instructions:
