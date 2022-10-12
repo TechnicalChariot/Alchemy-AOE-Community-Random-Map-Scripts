@@ -7,7 +7,7 @@ QFilip#7594
 
 Introduction:
 
-Welcome to the AOE2:DE RMS Collaboration project! This repository is intended to be a comprehensive library of custom Random Map Scripts, maintaned as an archive, and the source for an in-game mod of the same name. Since it is based in GitHub, any scripts shared through the repository are monitored for changes, which is useful for code review and collaboration, but can involve additional responsibilities. All collaborators should observe the following guidelines, to help us make sure that this repository is productive for everyone.
+Welcome to the AOE2:DE RMS Collaboration project! This repository is intended to be a comprehensive library of custom Random Map Scripts, maintaned as an archive, and the source for an in-game mod of the same name. Since it is based in GitHub, any scripts shared through the repository are monitored for changes, which is useful for code review and collaboration, but can involve additional responsibilities. To help us make sure that this repository is productive for everyone, please observe the guidelines below.
 
 Guidelines:
 
