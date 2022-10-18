@@ -10,6 +10,8 @@ Introduction:
 Welcome to the AOE2:DE RMS Collaboration project! This repository is intended to be a comprehensive library of custom Random Map Scripts and the source for an in-game mod of the same name. Since it is based in GitHub, any scripts shared through the repository are monitored for changes, which is useful for code review and collaboration, but can involve additional responsibilities. To help us make sure that this repository is productive for everyone, please observe the guidelines below.
 
 
+
+___________________________________________________________________________________________________________________________________________________________
 How to Configure Github Repository on Your PC:
 
 1) Create a free Github Account by going to the following website: https://github.com/, clicking on the button below and following the  prompts/instructions:
@@ -44,6 +46,8 @@ Any folders or files you add to this folder will be tracked by Github and visibl
 
 
 
+
+____________________________________________________________________________________________________________________________________________________________
 How to Share Scripts on the Repository:
 
 1) Launch Github Desktop by double clicking the following Icon:
@@ -88,6 +92,8 @@ If you want your game to display all published maps in the repository, select th
 
 
 
+
+_____________________________________________________________________________________________________________________________________________________________
 How to Publish Scripts to the "Entire-Library":
 
 1) Change current branch to "Entire-Library".
