@@ -83,7 +83,10 @@ Failure to follow this step will result in your new branch attempting to copy ov
 10) Note that the changes have been detected by Github Desktop (1) (the green plus-sign indicates that you are adding a file). Type in a summary (2) and hit "Commit to Example-Script" (3):
 ![image](https://user-images.githubusercontent.com/115369420/196483111-7336a6dc-7256-4c9a-9907-734772f03fda.png)
 
-11) Note now that you can cycle through different branches and the contents of: C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts\Age-of-Empires-II-Definitive-Edition----Random-Map-Scripts will change depending on which branch you have selected. The disappearing files were not deleted or moved, they were simply hidden. Using branches allows us to customize what appears in the folder, and what is stashed in the cloud. The appearance and disappearance of files from this location also impacts your locally installed copy of the game. The branch you select through Github Desktop determines the visibility of random maps scripts in the scenario editor:
+11) Click "Publish Branch" to share this change with the rest of the collaborators for the repository:
+![image](https://user-images.githubusercontent.com/115369420/196504352-57e2de17-39ad-4021-aba8-135cd02d54aa.png)
+
+12) Note now that you can cycle through different branches and the contents of: C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts\Age-of-Empires-II-Definitive-Edition----Random-Map-Scripts will change depending on which branch you have selected. The disappearing files were not deleted or moved, they were simply hidden. Using branches allows us to customize what appears in the folder, and what is stashed in the cloud. The appearance and disappearance of files from this location also impacts your locally installed copy of the game. The branch you select through Github Desktop determines the visibility of random maps scripts in the scenario editor:
 ![image](https://user-images.githubusercontent.com/115369420/195188704-9df23df3-3f3d-45f6-8793-ebef0d36fb38.png) 
 or in lobby custom map selection:
 
