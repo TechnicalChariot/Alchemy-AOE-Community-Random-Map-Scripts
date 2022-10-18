@@ -1,0 +1,706 @@
+#const FORTRESS1 33
+#const FUNGUSROAD 75
+#const MUD 76
+#const CITY_WALL 370
+#const BANDIT 299
+#const LOOT 472
+#const PH_GENERIC_OFF 651
+#const TENT 1099
+#const PH_GENERIC_ON 1613
+
+
+
+<PLAYER_SETUP>
+direct_placement
+behavior_version 1
+
+
+effect_amount SET_ATTRIBUTE SHORE_FISH ATTR_TERRAIN_ID 0
+effect_amount UPGRADE_UNIT DLC_ACACIATREE OAKTREE 0  
+
+
+
+<LAND_GENERATION>
+
+base_terrain GRASS3
+
+create_land {
+
+terrain_type FOREST
+right_border 60
+top_border -5
+bottom_border -5
+
+}
+
+create_land {
+
+terrain_type MUD
+right_border 28
+left_border 42
+top_border -5
+bottom_border -5
+
+land_percent 100
+border_fuzziness 30
+}
+
+create_land {
+
+terrain_type SHALLOW
+left_border 75
+top_border 30
+bottom_border 30
+}
+
+create_land {
+
+terrain_type DLC_MOORLAND
+land_position 10 10
+base_size 5
+number_of_tiles 200
+assign_to_player 1
+base_elevation 5
+}
+
+create_land {
+
+terrain_type DLC_MOORLAND
+land_position 10 90
+base_size 5
+number_of_tiles 200
+assign_to_player 2
+base_elevation 5
+}
+
+start_random
+    percent_chance 33 #define JONSLOW
+    percent_chance 33 #define DARKNOOB
+    percent_chance 34 #define LIZARD
+end_random    
+
+create_land {
+
+
+if JONSLOW
+terrain_type DLC_MOORLAND
+elseif LIZARD
+terrain_type GRASS3
+elseif DARKNOOB 
+terrain_type MUD
+endif	
+
+
+if JONSLOW
+land_position 35 75
+elseif LIZARD
+land_position 90 90
+elseif DARKNOOB 
+land_position 58 35
+endif	
+
+if LIZARD
+base_size 12
+else 
+base_size  10
+endif
+
+number_of_tiles 300
+assign_to_player 1
+land_id 1
+
+if LIZARD
+
+base_elevation 5
+
+endif
+
+}
+
+create_land {
+
+if JONSLOW
+terrain_type DLC_MOORLAND
+elseif LIZARD
+terrain_type GRASS3
+elseif DARKNOOB 
+terrain_type MUD
+endif	
+
+if JONSLOW
+land_position 35 25 
+elseif LIZARD
+land_position 90 10
+elseif DARKNOOB 
+land_position 58 65
+endif	
+
+if LIZARD
+base_size 12
+else 
+base_size  10
+endif
+
+
+number_of_tiles 300
+assign_to_player 2
+land_id 1
+
+if LIZARD
+
+base_elevation 5
+
+endif
+
+
+}
+
+if LIZARD 
+create_land {
+terrain_type DLC_MOORLAND
+land_position 35 75
+number_of_tiles 300
+assign_to_player 1
+land_id 2
+base_size 7
+clumping_factor 40
+} 
+
+elseif DARKNOOB 
+
+create_land { 
+land_position 35 75
+number_of_tiles 300
+assign_to_player 1
+land_id 2
+base_size 7
+terrain_type DLC_MOORLAND
+clumping_factor 40
+} 
+
+endif	
+
+
+if LIZARD 
+create_land {
+terrain_type DLC_MOORLAND
+land_position 35 25
+number_of_tiles 300
+assign_to_player 2
+base_size 7
+land_id 2
+clumping_factor 40
+} 
+
+elseif DARKNOOB 
+
+create_land { 
+land_position 35 25
+number_of_tiles 300
+assign_to_player 2
+land_id 2
+terrain_type DLC_MOORLAND
+clumping_factor 40
+base_size 7
+} 
+
+endif	
+
+
+create_land {
+
+terrain_type DLC_MOORLAND
+land_position 23 50 
+base_size 13
+number_of_tiles 750
+}
+
+
+
+<ELEVATION_GENERATION>
+
+create_elevation 3 {
+number_of_tiles 10000
+number_of_clumps 1000
+spacing 3
+base_terrain DESERT
+spacing_to_other_terrain_types 5
+enable_balanced_elevation
+} 
+
+create_elevation 1 {
+enable_balanced_elevation
+number_of_tiles 1000
+number_of_clumps 100
+spacing 1
+base_terrain MUD
+spacing_to_other_terrain_types 3
+} 
+
+
+create_elevation 5 {
+number_of_tiles 10000
+number_of_clumps 1000
+spacing 1
+base_terrain GRASS3
+spacing_to_other_terrain_types 5
+enable_balanced_elevation
+} 
+
+
+
+
+<CONNECTION_GENERATION>
+
+create_connect_all_players_land {
+
+default_terrain_replacement DLC_MOORLAND
+terrain_size DLC_MOORLAND 3 0
+terrain_cost GRASS3 0
+terrain_cost MUD 0
+terrain_cost BEACH 0
+terrain_cost SHALLOW 0
+}
+
+<TERRAIN_GENERATION>
+
+create_terrain LEAVES {
+
+base_terrain DLC_ACACIAFOREST
+terrain_mask 1
+land_percent 100
+number_of_clumps 100
+} 
+/*
+
+create_terrain SHALLOW {
+
+base_terrain DESERT
+spacing_to_other_terrain_types 2
+land_percent 100
+} 
+*/
+
+create_terrain GRASS {
+
+base_terrain SHALLOW 
+spacing_to_other_terrain_types 5
+land_percent 100
+} 
+
+create_terrain SHALLOW {
+
+base_terrain GRASS 
+terrain_mask 1
+land_percent 100
+number_of_clumps 100
+spacing_to_other_terrain_types 2
+} 
+
+create_terrain WATER {
+
+base_terrain SHALLOW
+terrain_mask 1
+land_percent 100
+} 
+
+create_terrain MUD {
+
+base_terrain GRASS3 
+land_percent 100
+height_limits 0 4
+terrain_mask 1
+number_of_clumps 100
+} 
+
+
+create_terrain DLC_MANGROVESHALLOW {
+
+base_terrain MUD 
+terrain_mask 1
+land_percent 5
+spacing_to_other_terrain_types 2
+number_of_clumps 25
+} 
+
+create_terrain DLC_BOGLAND  {
+
+base_terrain MUD 
+land_percent 6
+spacing_to_other_terrain_types 2
+number_of_clumps 20
+clumping_factor 500
+set_avoid_player_start_areas 15
+terrain_mask 1
+} 
+
+create_terrain DLC_FORESTAUTUMN   {
+
+base_terrain MUD 
+terrain_mask 2
+land_percent 3
+spacing_to_other_terrain_types 2
+number_of_clumps 35
+set_avoid_player_start_areas
+} 
+create_terrain SHALLOW {
+
+base_terrain MUD 
+terrain_mask 1
+land_percent 50
+spacing_to_other_terrain_types 2
+number_of_clumps 25
+} 
+
+
+create_terrain DEEP_WATER {
+
+base_terrain SHALLOW
+land_percent 100
+spacing_to_other_terrain_types 1
+terrain_mask 1
+} 
+
+create_terrain DEEP_WATER {
+
+base_terrain SHALLOW
+land_percent 100
+spacing_to_other_terrain_types 1
+terrain_mask 1
+}
+
+create_terrain MUDDY_SHALLOW {
+
+base_terrain MUD
+land_percent 100
+spacing_to_other_terrain_types 1
+terrain_mask 1
+number_of_clumps 1000
+}
+
+create_terrain BIRCH_FOREST {
+
+base_terrain GRASS3
+land_percent 1
+spacing_to_other_terrain_types 1
+terrain_mask 2
+number_of_clumps 20
+set_avoid_player_start_areas 10
+}
+
+create_terrain LEAVES {
+
+base_terrain GRASS3
+land_percent 2
+height_limits 4 5 
+terrain_mask 1
+number_of_clumps 5
+}
+
+create_terrain SHALLOW {
+
+base_terrain GRASS3
+land_percent 1
+height_limits 4 5 
+terrain_mask 1
+number_of_clumps 10
+}
+
+create_terrain DLC_NEWSHALLOW {
+
+base_terrain SHALLOW
+spacing_to_other_terrain_types 2
+number_of_tiles 10000
+number_of_clumps 1000
+}
+
+
+
+<OBJECTS_GENERATION>
+
+create_actor_area 27 60 1 11
+create_actor_area 27 60 2 10
+
+create_actor_area 118 60 3 0
+create_actor_area 118 60 4 5
+create_actor_area 118 60 5 6
+create_actor_area 118 60 6 15
+create_actor_area 118 60 7 16
+
+
+create_object FORTRESS1 {
+
+actor_area_to_place_in  3
+set_gaia_object_only
+set_gaia_unconvertible
+
+}
+
+create_object CITY_WALL {
+number_of_objects 9999
+actor_area_to_place_in 5
+avoid_actor_area 4
+set_gaia_object_only
+set_gaia_unconvertible
+actor_area 102
+actor_area_radius 2
+}
+
+
+create_object PH_GENERIC_OFF
+{
+	second_object TOWN_CENTER
+	set_place_for_every_player
+	
+	min_distance_to_players 0
+	max_distance_to_players 0
+	place_on_specific_land_id 1
+	actor_area 105
+	actor_area_radius 10
+}
+
+
+
+create_object VILLAGER {
+
+number_of_objects 3
+set_place_for_every_player
+min_distance_to_players 8
+	max_distance_to_players 10
+	place_on_specific_land_id 1
+}
+
+create_object GOLD {
+
+number_of_objects 3
+number_of_groups 2
+temp_min_distance_group_placement 10
+set_place_for_every_player
+set_gaia_object_only
+set_tight_grouping
+avoid_forest_zone 3
+min_distance_to_players 10
+	max_distance_to_players 12
+	place_on_specific_land_id 1
+	min_distance_to_map_edge 3
+	actor_area 1000
+	actor_area_radius 3
+}
+
+create_object FORAGE {
+
+number_of_objects 7
+temp_min_distance_group_placement 10
+set_place_for_every_player
+set_gaia_object_only
+set_tight_grouping
+min_distance_to_players 8
+max_distance_to_players 12
+place_on_specific_land_id 1
+avoid_actor_area 1000
+avoid_forest_zone 3
+actor_area 1001
+actor_area_radius 3
+min_distance_to_map_edge 3
+} 
+
+create_object SHEEP {
+
+number_of_objects 4
+set_place_for_every_player
+set_gaia_object_only
+set_tight_grouping
+min_distance_to_players 6
+max_distance_to_players 7
+place_on_specific_land_id 1
+} 
+
+create_object STONE {
+
+number_of_objects 2
+number_of_groups 2
+temp_min_distance_group_placement 8
+set_place_for_every_player
+set_gaia_object_only
+set_tight_grouping
+avoid_forest_zone 3
+min_distance_to_players 9
+max_distance_to_players 13
+place_on_specific_land_id 1
+min_distance_to_map_edge 2
+avoid_actor_area  1000
+avoid_actor_area 1001
+} 
+
+create_object DLC_FENCE {
+number_of_objects 9999
+actor_area_to_place_in 1
+avoid_actor_area 2
+actor_area 101 
+actor_area_radius 5
+set_gaia_object_only
+set_gaia_unconvertible
+}  
+
+create_object DLC_FENCE {
+
+number_of_objects 9999
+actor_area_to_place_in 7
+avoid_actor_area 6
+set_gaia_object_only
+actor_area 103
+actor_area_radius 2
+} 
+
+
+create_object GOLD {
+
+number_of_objects 3
+number_of_groups 6
+set_tight_grouping
+temp_min_distance_group_placement 2
+actor_area_to_place_in 1
+second_object LOOT
+avoid_actor_area 101
+
+ } 
+ 
+
+create_object GOLD {
+
+number_of_objects 4
+number_of_groups 10
+set_tight_grouping
+avoid_actor_area 5
+actor_area_to_place_in 7
+temp_min_distance_group_placement 6
+terrain_to_place_on GRASS
+
+avoid_actor_area 102
+avoid_actor_area 103
+} 
+
+create_object PH_GENERIC_ON {
+
+terrain_to_place_on DLC_NEWSHALLOW
+number_of_objects 1
+number_of_groups 100
+temp_min_distance_group_placement 3
+second_object SHORE_FISH
+} 
+
+create_object STONE {
+
+terrain_to_place_on MUD
+set_tight_grouping
+number_of_objects 3
+number_of_groups 20
+temp_min_distance_group_placement 20
+avoid_forest_zone 3
+min_distance_to_players 15
+min_distance_to_map_edge 5
+} 
+
+create_object RELIC {
+
+terrain_to_place_on MUD
+set_tight_grouping
+number_of_objects 1
+number_of_groups 5
+temp_min_distance_group_placement 15
+avoid_forest_zone 3
+min_distance_to_players 20
+min_distance_to_map_edge 5
+
+} 
+
+
+ 
+
+create_object DEER {
+
+number_of_objects 6
+set_place_for_every_player
+set_gaia_object_only
+
+if JONSLOW
+
+max_distance_to_players 0
+
+else max_distance_to_players 13
+endif
+
+if JONSLOW
+min_distance_to_players 0
+else 
+min_distance_to_players 10
+endif	
+
+if LIZARD 
+place_on_specific_land_id 1
+elseif DARKNOOB
+place_on_specific_land_id 1
+endif	
+
+set_loose_grouping 
+
+} 
+
+create_object BOAR {
+
+number_of_objects 2
+set_place_for_every_player
+set_gaia_object_only
+max_distance_to_players 2
+set_loose_grouping 
+} 
+
+create_object SHEEP {
+
+number_of_objects 4
+set_place_for_every_player
+set_gaia_object_only
+max_distance_to_players 4
+set_loose_grouping 
+} 
+
+if LIZARD
+
+create_object SHEEP {
+
+number_of_objects 2
+number_of_groups 2
+set_place_for_every_player
+set_gaia_object_only
+max_distance_to_players 10
+max_distance_to_players 14 
+set_loose_grouping 
+place_on_specific_land_id 1
+temp_min_distance_group_placement 10
+} 
+
+elseif DARKNOOB
+
+create_object SHEEP {
+
+number_of_objects 2
+number_of_groups 2
+set_place_for_every_player
+set_gaia_object_only
+max_distance_to_players 10
+max_distance_to_players 14 
+set_loose_grouping 
+place_on_specific_land_id 1
+temp_min_distance_group_placement 10
+} 
+
+endif
+
+create_object SCOUT {
+
+number_of_objects 1
+set_place_for_every_player
+max_distance_to_players 8
+min_distance_to_players 7
+place_on_specific_land_id 1
+} 
