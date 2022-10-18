@@ -104,8 +104,13 @@ How to Publish Scripts to the "Entire-Library":
 
 1) Change current branch to "Entire-Library".
 
-2) Hit ctrl + shift + M, and a popup will appear. Select your branch (1), in our case "Example-Script", and hit "Create a merge commit" (2): 
-![image](https://user-images.githubusercontent.com/115369420/196483354-108c22b0-672b-49b6-b1fb-ca25ccedb15b.png)
+2) Click on "Create Pull Request": ![image](https://user-images.githubusercontent.com/115369420/196517410-7eda0b90-6b43-48b0-8723-ac92fa14c4e2.png)
 
-3) Note that your script folder (in course case, "Example_Script") now appears in the main library:
+3) A webpage will pop up. Click on the following button:
+![image](https://user-images.githubusercontent.com/115369420/196517652-191a729e-8add-40ef-8bf0-758d2d8940f7.png)
+
+4) The screen will change to resemble the following image, confirming the pull request and notifying that it must be approved by another collaborator prior to merging into the Entire Library. Click on the auto-merge button, confirming that after the request to merge is approved, this folder will be synchronized with the main:
+![image](https://user-images.githubusercontent.com/115369420/196519203-d25b8242-6979-492a-8b38-759e309bd258.png)
+
+5) Note that your script folder (in course case, "Example_Script") now appears in the main library:
 ![image](https://user-images.githubusercontent.com/115369420/196483390-c4749401-4076-4616-8d32-fa1d410f054d.png)
