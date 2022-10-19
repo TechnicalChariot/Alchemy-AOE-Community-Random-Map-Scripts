@@ -64,6 +64,7 @@ else
 effect_amount SET_ATTRIBUTE OTISCO_SCOUT ATTR_HITPOINTS 5    /* Defining Starting Scout Hitpoints */
 effect_amount SET_ATTRIBUTE OTISCO_SCOUT ATTR_LINE_OF_SIGHT 2
 endif
+/* Artifact Notes */
 /* #const OX_CART  1271
 #const DEAD_OX_CART 1271
 effect_amount SET_ATTRIBUTE OX_CART ATTR_DEAD_ID 854
