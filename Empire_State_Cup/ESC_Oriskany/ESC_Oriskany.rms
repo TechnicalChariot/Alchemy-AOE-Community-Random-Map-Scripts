@@ -15,6 +15,7 @@ direct_placement
 #const M 76
 #const REED_FOREST 92
 #const Y 100
+/* Player Land Declarations */
 #const PT1 9
 #const PT2 9
 #const PT3 9
