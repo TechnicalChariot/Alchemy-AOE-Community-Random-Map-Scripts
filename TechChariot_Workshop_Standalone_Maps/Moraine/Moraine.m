@@ -1,5 +1,5 @@
 %Moraine Land Generation
-%ThorsChariot
+%TechChariot
 %2.15.21
 
 clear all
@@ -23,7 +23,7 @@ for k = 1:22
 y(k) = {@(x) -0.025*x.^2 - 16.5 + k};
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation,Angle,thk,[-30 30],[-200 200]);
 if k == 1
-Sand_Deposit = STRUC(k).XY; 
+Sand_Deposit = STRUC(k).XY;
 else
 Sand_Deposit = [Sand_Deposit; STRUC(k).XY];
 end
@@ -42,7 +42,7 @@ for k = 1:length(base_elevation)
 y(k) = {@(x) 225*exp(-x.^2/100) + 0.423*(k-1)-34};
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation(k,1),Angle,thk,[-100 100],[-200 200]);
 if k == 1
-Slopes = STRUC(k).XY; 
+Slopes = STRUC(k).XY;
 else
 Slopes = [Slopes; STRUC(k).XY];
 end
@@ -61,7 +61,7 @@ for k = 1:70
 y(k) = {@(x) -100*cos(2*pi*x/150) + k + 102};
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation,Angle,thk,[-12 12],[-1500 1500]);
 if k == 1
-Glacier = STRUC(k).XY; 
+Glacier = STRUC(k).XY;
 else
 Glacier = [Glacier; STRUC(k).XY];
 end
@@ -78,7 +78,7 @@ for k = 1:11
 y(k) = {@(x) -100*cos(2*pi*x/200) + 0.5*k + 97.5};
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation,Angle,thk,[-12 12],[-1500 1500]);
 if k == 1
-Meltpool = STRUC(k).XY; 
+Meltpool = STRUC(k).XY;
 else
 Meltpool = [Meltpool; STRUC(k).XY];
 end
