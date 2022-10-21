@@ -10,9 +10,12 @@ clc
 tic
 disp(["Run Executed " datestr(clock) "..."])
 
+%addpath('C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts\My_Workshop')
 
-str = pwd; str = str(1:102); addpath(str)
+%str = pwd; str = str(1:102); addpath(str)
 [filename] = Load_Library();
+
+
 
 
 [Preface,LPM_exp,SigComb] = RMS_Manual_Land(filename);
