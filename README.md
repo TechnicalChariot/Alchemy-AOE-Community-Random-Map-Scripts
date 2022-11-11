@@ -20,7 +20,7 @@ How to Configure Github Repository on Your PC:
 2) Configure Github to your desktop by going to the following website: https://desktop.github.com/ and clicking on the button below:
 ![image](https://user-images.githubusercontent.com/115369420/194990520-1cbc95de-5c1d-4797-9a88-ccd5df84eebb.png)
 
-3) Visit the working directory for AOE2 map scripts: C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources_common\random-map-scripts
+3) Visit the working directory for AOE2 map scripts: C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts
 In its unmodified state, this directory will contain the original Ensemble Studios map scripts:
 ![image](https://user-images.githubusercontent.com/115369420/194990628-ddad0474-db8e-466c-9363-1116ea14971a.png)
 Move these scripts to their own subfolder or delete them:
