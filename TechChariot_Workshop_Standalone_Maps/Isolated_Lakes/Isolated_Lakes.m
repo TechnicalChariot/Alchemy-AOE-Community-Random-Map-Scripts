@@ -11,7 +11,7 @@ tic
 disp(["Run Executed " datestr(clock) "..."])
 filestruc = dir; %Extract a structure of the files in this directory
 path = filestruc.folder; path = path(1:102); addpath(path) %Adding functions in main folder to the path
-files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms'); 
+files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
 
@@ -40,9 +40,9 @@ MLP                   = [('create_player_lands'); ...
                         {'elseif GIGANTIC_MAP'}; ...
                         {'base_size 10'}; ...
                         {'land_percent 11'}; ...
-                        {'else'}; ...                  
-                        {'endif'}; ...                    
-                        {'}'}];              
+                        {'else'}; ...
+                        {'endif'}; ...
+                        {'}'}];
 
 
 MLA = [('create_land'); ...
@@ -52,23 +52,10 @@ MLA = [('create_land'); ...
        {'base_elevation 0'}; ...
        {'clumping_factor 30'}; ...
        {'land_percent 100'}; ...
-       {'}'}];         
-       
-%NL = 100;
-%for i = 1:NL
-%MLA =   [MLA; ...
-%        ('create_land'); ...
-%        {'{'}; ...
-%        {'terrain_type DLC_WATER5'}; ...
-%        {'base_size 1'}; ...
-%        {'number_of_tiles 1'}; ...
-%        {'min_placement_distance 9'}; ...
-%        {'percent_chance 11 top_border 40 botttom_border 40 left_border 40 right_border 40'}; ...
-%        {'}'}];
-%end
-%                 
-Config = [{1}];
+       {'}'}];
 
+
+Config = [{1}];
 
 Ro = 18;
 Ao = 2*Ro;
@@ -82,11 +69,11 @@ As = 2*Rs;
 Y = 1;
 NF = 16;
 
-k = 1; 
-for i = 1:length(Config)       
+k = 1;
+for i = 1:length(Config)
 %[cpl] = RMS_CPL_V6({0},{16},{1},[44 44.5 45 45.5 46],[178 179 180 181 182],[0 15 30 60 75 90],[-0.11],[40],0.7); %creating player lands
 
-PC = [Rounded_Rectangle({As},{Y},{Rs},[{'GB'}],{0},{0})]; 
+PC = [Rounded_Rectangle({As},{Y},{Rs},[{'GB'}],{0},{0})];
 %[nxPC,~] = size(PC); IOI = round([1:nxPC/NF:nxPC]);
 %LPM_FP = LPM_exp;
 %for j = IOI
@@ -99,14 +86,14 @@ PC = [Rounded_Rectangle({As},{Y},{Rs},[{'GB'}],{0},{0})];
 DFM = []
 for j = 1:6
 DFM = [DFM; LandScribeV5([{'DLC_WATER5'}],[{0}],{00 00},{60*(j-1)},{'0*x'},{1},{0},[-10 -9])];
-end                 
+end
 
 
 [COMMAND(k).XY] = [RMS_Processor_Random_Coord([Rounded_Rectangle({Ao},{Y},{Ro},[{'GB'}],{0},{0})],LPM_exp,2); ...
                     RMS_Processor_Random_Coord([Rounded_Rectangle({Ai},{Y},{Ri},[{'GB'}],{0},{0})],LPM_exp,1); ...
                     RMS_Processor_V4([DFM; PC],LPM_exp)];
 
-                               
+
 k = k + 1;
 end
 %
