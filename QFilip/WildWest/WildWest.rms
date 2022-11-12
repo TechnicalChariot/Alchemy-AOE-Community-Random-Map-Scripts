@@ -1,0 +1,73 @@
+/* Compatibility: Definitive Edition */
+
+<PLAYER_SETUP>
+
+
+<LAND_GENERATION>
+base_terrain ROAD
+#const PLACEHOLDER 278
+#const TERRAIN_BLOCKER 1613
+
+create_player_lands { 
+    terrain_type GRASS 
+    circle_radius 40
+    other_zone_avoidance_distance 10
+}
+
+create_land {
+    terrain_type DIRT2 
+    land_position 50 50
+    land_percent 0
+    base_size 10
+    clumping_factor 25
+
+}
+
+
+
+<TERRAIN_GENERATION>
+
+
+<CONNECTION_GENERATION>
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    min_distance_to_players 0 
+    max_distance_to_players 0
+    actor_area 1
+    actor_area_radius 0
+}
+
+create_object HOUSE {
+    number_of_objects 9999
+    terrain_to_place_on DIRT2
+}
+
+create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+create_object SCOUT { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 2 actor_area_radius 8 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 3 actor_area_radius 11 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 4 actor_area_radius 12 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 5 actor_area_radius 15 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 6 actor_area_radius 20 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 7 actor_area_radius 40 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 8 actor_area_radius 10 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 9 actor_area_radius 12 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 11 actor_area_radius 23 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 50 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 14 actor_area_radius 20 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 15 actor_area_radius 12 }
+
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 16 actor_area_radius 30 }
+create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 17 actor_area_radius 50 }
+
+
+<ELEVATION_GENERATION>
