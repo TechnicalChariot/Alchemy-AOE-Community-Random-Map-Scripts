@@ -1,13 +1,13 @@
 /* Compatibility: Definitive Edition */
 
 <PLAYER_SETUP>
-
+#const PLACEHOLDER 278
+effect_amount SET_ATTRIBUTE PLACEHOLDER ATTR_STORAGE_VALUE 0
 
 <LAND_GENERATION>
 base_terrain ROAD
-#const PLACEHOLDER 278
-#const TERRAIN_BLOCKER 1613
 
+#const TERRAIN_BLOCKER 1613
 create_player_lands { 
     terrain_type GRASS 
     other_zone_avoidance_distance 15
@@ -144,6 +144,8 @@ create_object TOWN_CENTER {
 
 create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
 create_object SCOUT { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
+
+if REGICIDE create_object KING { set_place_for_every_player find_closest } else endif
 
 create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 2 actor_area_radius 8 }
 create_object PLACEHOLDER { set_place_for_every_player actor_area_to_place_in 1 actor_area 3 actor_area_radius 11 }
