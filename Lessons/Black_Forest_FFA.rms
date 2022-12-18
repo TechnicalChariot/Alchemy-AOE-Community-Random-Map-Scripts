@@ -1,0 +1,78 @@
+/* Black Forest FFA */
+/* 11/27/22 */
+/* A ScriptChat Lesson */
+
+<PLAYER_SETUP>
+behavior_version 1
+
+<ELEVATION_GENERATION>
+
+/* create_elevation 5 { base_terrain DIRT number_of_clumps 9320 number_of_tiles 1000000 set_scale_by_size enable_balanced_elevation } */
+
+<TERRAIN_GENERATION>
+
+create_terrain DLC_ROCK { base_terrain GRASS2 number_of_clumps 1 land_percent 100 spacing_to_other_terrain_types 12 }
+
+create_terrain LEAVES { base_terrain GRASS2 number_of_clumps 20 land_percent 1 spacing_to_other_terrain_types 2 }
+
+
+create_terrain DLC_RAINFOREST { base_terrain LEAVES number_of_clumps 9320 land_percent 100 spacing_to_other_terrain_types 1 set_scale_by_size }
+create_terrain DLC_RAINFOREST { base_terrain LEAVES number_of_clumps 9320 land_percent 100 spacing_to_other_terrain_types 1 set_scale_by_size }
+create_terrain DLC_RAINFOREST { base_terrain LEAVES number_of_clumps 9320 land_percent 100 spacing_to_other_terrain_types 1 set_scale_by_size }
+create_terrain DLC_RAINFOREST { base_terrain LEAVES number_of_clumps 9320 land_percent 100 spacing_to_other_terrain_types 1 set_scale_by_size }
+
+
+
+create_terrain DLC_RAINFOREST { base_terrain JUNGLE number_of_clumps 9320 land_percent 100 set_scale_by_size spacing_to_other_terrain_types 10 }
+
+
+create_terrain GRASS { base_terrain JUNGLE number_of_clumps 240 land_percent 24 set_scale_by_size spacing_to_other_terrain_types 2 }
+
+
+
+
+<CONNECTION_GENERATION>
+/* accululate_connections */
+create_connect_to_nonplayer_land
+{
+replace_terrain JUNGLE DLC_JUNGLEROAD
+replace_terrain DLC_RAINFOREST DLC_JUNGLEROAD
+replace_terrain GRASS DLC_JUNGLEROAD
+replace_terrain GRASS2 DLC_JUNGLEROAD
+terrain_cost    JUNGLE          3
+terrain_cost    DLC_RAINFOREST  2
+terrain_cost    GRASS           4 
+terrain_cost    GRASS2          3
+terrain_size    JUNGLE          1 0
+terrain_size    DLC_RAINFOREST  1 0
+terrain_size    GRASS           1 0
+terrain_size    GRASS2          1 0
+}
+
+<OBJECTS_GENERATION>
+if TINY_MAP
+create_actor_area 60 60 9998 0
+elseif SMALL_MAP
+create_actor_area 72 72 9998 0
+elseif MEDIUM_MAP
+create_actor_area 84 84 9998 0
+elseif LARGE_MAP
+create_actor_area 100 100 9998 0
+elseif HUGE_MAP
+create_actor_area 110 110 9998 0
+elseif GIGANTIC_MAP
+create_actor_area 120 120 9998 0
+endif
+
+
+create_object MONUMENT { set_gaia_object_only actor_area_to_place_in 9998 actor_area 9999 actor_area_radius 20 }
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+
+
+create_object FLAG_A { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size temp_min_distance_group_placement 4 avoid_actor_area 9999 actor_area 10000 actor_area_radius 6 }
+create_object MAP_REVEALER { set_place_for_every_player number_of_groups 10000 temp_min_distance_group_placement 4 avoid_actor_area 10000 }
+
+<LAND_GENERATION>
+base_terrain JUNGLE
+create_player_lands { terrain_type GRASS land_percent 28 base_size 12 circle_radius 36 0 clumping_factor 30 other_zone_avoidance_distance 18 }
+create_land { terrain_type GRASS2 land_percent 100 bottom_border 40 top_border 40 left_border 40 right_border 40 border_fuzziness 100 }

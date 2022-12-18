@@ -1,0 +1,44 @@
+/* Lake Demonstration */
+/* 11/13/22 */
+/* A ScriptChat Lesson */
+
+<PLAYER_SETUP>
+behavior_version 1
+
+
+<ELEVATION_GENERATION>
+
+create_elevation 5 { base_terrain DIRT number_of_clumps 9320 number_of_tiles 1000000 set_scale_by_size enable_balanced_elevation }
+create_elevation 7 { base_terrain DIRT number_of_clumps 30 number_of_tiles 1000 set_scale_by_size enable_balanced_elevation }
+
+
+<TERRAIN_GENERATION>
+
+create_terrain WATER { base_terrain DLC_GRAVELBEACH number_of_clumps 9320 land_percent 100 spacing_to_other_terrain_types 1 set_scale_by_size }
+
+
+create_terrain DLC_CRACKED { base_terrain DIRT number_of_clumps 9320 land_percent 100 height_limits 0 4 set_avoid_player_start_areas 15 set_scale_by_size }
+
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+create_object BOAR { set_place_for_every_player set_gaia_object_only min_distance_to_players 6 max_distance_to_players 7 terrain_to_place_on GRASS }
+create_object FISH { set_place_for_every_player set_gaia_object_only number_of_groups 12 temp_min_distance_group_placement 4 min_distance_to_players 6 max_distance_to_players 7 terrain_to_place_on WATER }
+
+
+<LAND_GENERATION>
+base_terrain DIRT
+
+create_land { land_position 50 50 terrain_type DLC_CRACKED land_percent 100 top_border 43 bottom_border 43 left_border 43 right_border 43 }
+
+create_land { terrain_type DLC_GRAVELBEACH base_elevation 5  land_position 1 99  base_size 20  land_percent 6 }
+create_land { terrain_type DLC_GRAVELBEACH base_elevation 5  land_position 1 1   base_size 20  land_percent 6 }
+create_land { terrain_type DLC_GRAVELBEACH base_elevation 5  land_position 99 99 base_size 20  land_percent 6 }
+create_land { terrain_type DLC_GRAVELBEACH base_elevation 5  land_position 99 1  base_size 20  land_percent 6 }
+create_player_lands { circle_radius 30 0 base_size 9 land_percent 0 terrain_type DIRT base_elevation 5 }
+
+
+
+/* create_player_lands { circle_radius 35 0 base_size 8 land_percent 10 terrain_type GRASS }
+create_player_lands { circle_radius 35 0 base_size 8 land_percent 10 terrain_type WATER } */

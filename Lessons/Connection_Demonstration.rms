@@ -1,0 +1,51 @@
+/* Connection Demonstration by TechChariot 11/20/22 */
+
+<PLAYER_SETUP>
+random_placement
+behavior_version 1
+
+#const GRAVEL 70
+#const MUD 76
+<LAND_GENERATION>
+base_terrain MUD
+
+
+create_player_lands { terrain_type GRASS base_elevation 1 base_size 16 land_percent 100 circle_radius 40 0 other_zone_avoidance_distance 10 set_zone_by_team }
+
+<ELEVATION_GENERATION>
+/* create_elevation 5 { base_terrain GRASS number_of_tiles 300 number_of_clumps 12 set_scale_by_groups enable_balanced_elevation }
+create_elevation 7 { base_terrain FOREST number_of_tiles 6000 number_of_clumps 2400 set_scale_by_groups enable_balanced_elevation } */
+
+<TERRAIN_GENERATION>
+create_terrain DLC_GRAVELBEACH { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 1 set_flat_terrain_only }
+create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_size spacing_to_other_terrain_types 1 }
+create_terrain FOREST { base_terrain GRASS land_percent 20 number_of_clumps 40 set_scale_by_groups spacing_to_other_terrain_types 4 set_avoid_player_start_areas 16 }
+
+<CONNECTION_GENERATION>
+
+
+
+/* create_connect_to_nonplayer_land
+{
+  replace_terrain FOREST GRASS
+  replace_terrain GRAVEL DIRT
+  terrain_cost    FOREST 1
+} */
+
+/* create_connect_teams_lands
+{
+  replace_terrain GRASS	ROAD
+  terrain_cost    GRASS	3
+  terrain_cost    FOREST 15
+} */
+
+create_connect_all_lands
+{
+    replace_terrain WATER SHALLOW
+    terrain_cost WATER 3
+    terrain_size SHALLOW 2 0
+}
+
+
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
