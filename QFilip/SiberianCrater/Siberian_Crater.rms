@@ -5,79 +5,80 @@
 base_terrain DIRT
 
 create_land { terrain_type GRASS_SNOW base_elevation 7 land_id 1 land_position 1 1 }
-create_land { terrain_type SNOW land_position 81 51 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 59 22 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 25 34 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 28 70 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 63 78 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 80 47 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 55 21 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 23 38 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 30 73 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 66 76 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 79 43 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 51 21 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 22 41 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 34 75 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 69 74 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 78 39 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 47 21 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 21 45 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 37 77 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 72 71 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 76 35 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 43 21 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 21 49 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 41 79 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 75 68 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 74 32 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 39 23 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 21 53 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 45 80 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 77 65 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 71 29 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 36 24 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 21 57 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 49 80 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 79 61 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 68 26 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 33 26 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 22 61 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 52 80 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 80 57 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 65 24 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 30 29 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 24 65 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 56 80 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 80 53 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 62 23 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 27 32 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 26 68 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 60 79 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 80 49 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 58 21 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 25 35 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 29 71 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 64 77 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 80 45 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 54 21 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 23 39 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 31 74 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 67 75 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 79 41 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 50 21 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 22 43 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 35 76 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 71 73 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 78 38 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 46 21 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 21 47 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 38 78 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 73 70 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 76 34 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 42 22 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 21 50 base_size 4 land_percent 0  }
-create_land { terrain_type SNOW land_position 42 79 base_size 4 land_percent 0  }
+
+create_land { terrain_type GRASS2 land_position 81 51 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 59 22 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 25 34 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 28 70 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 63 78 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 80 47 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 55 21 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 23 38 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 30 73 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 66 76 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 79 43 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 51 21 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 22 41 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 34 75 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 69 74 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 78 39 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 47 21 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 21 45 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 37 77 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 72 71 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 76 35 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 43 21 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 21 49 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 41 79 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 75 68 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 74 32 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 39 23 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 21 53 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 45 80 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 77 65 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 71 29 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 36 24 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 21 57 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 49 80 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 79 61 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 68 26 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 33 26 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 22 61 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 52 80 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 80 57 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 65 24 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 30 29 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 24 65 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 56 80 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 80 53 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 62 23 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 27 32 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 26 68 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 60 79 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 80 49 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 58 21 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 25 35 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 29 71 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 64 77 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 80 45 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 54 21 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 23 39 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 31 74 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 67 75 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 79 41 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 50 21 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 22 43 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 35 76 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 71 73 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 78 38 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 46 21 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 21 47 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 38 78 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 73 70 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 76 34 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 42 22 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 21 50 base_size 4 land_percent 0  }
+create_land { terrain_type GRASS2 land_position 42 79 base_size 4 land_percent 0  }
 
 #const SNOW_UNDERBRUSH 72
 
@@ -362,10 +363,17 @@ create_terrain WATER {
 }
 
 create_terrain DLC_ROCK {
-    base_terrain SNOW
+    base_terrain GRASS2
     number_of_tiles 10000
     number_of_clumps 9320
-    height_limits 2 6
+}
+
+create_terrain SNOW {
+    base_terrain DLC_ROCK
+    number_of_tiles 10000
+    number_of_clumps 9320
+    height_limits 0 1
+    set_scale_by_size
 }
 
 create_terrain SNOW {
