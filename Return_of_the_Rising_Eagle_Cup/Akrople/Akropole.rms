@@ -1539,6 +1539,8 @@ actor_area_to_place_in 15
 endif
 /* END_OBJECTS_AUTOSCRIBE */
 
+if REGICIDE  create_object KING { set_place_for_every_player find_closest } else endif
+
 <LAND_GENERATION>
 base_terrain K
 L { terrain_type NNRB base_elevation 0 land_position 50 50 base_size 3 number_of_tiles 121 clumping_factor 30 zone 1 }
