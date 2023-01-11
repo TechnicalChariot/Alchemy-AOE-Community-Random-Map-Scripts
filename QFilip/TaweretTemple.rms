@@ -61,10 +61,10 @@ start_random
 end_random
 
 create_land {
-	terrain_type DLC_SAVANNAH
-	land_position 20 rnd(60,80)
-	base_size 5
+	terrain_type DIRT
+	land_position 33 rnd(60,80)
 	land_percent 0
+	base_size 20
 	if PLAYER_ONE_RIGHT
 		assign_to_player 1
 	else 
@@ -73,18 +73,54 @@ create_land {
 }
 
 create_land {
-	terrain_type DLC_SAVANNAH
-	land_position 20 rnd(20,40)
-	base_size 5
+	terrain_type DIRT
+	land_position 33 rnd(20,40)
 	land_percent 0
+	base_size 20
 	if PLAYER_ONE_RIGHT
 		assign_to_player 2
 	else 
 		assign_to_player 1
 	endif
+
+}
+
+create_land {
+	terrain_type DIRT2
+	land_position 0 50
+	right_border 95
+	border_fuzziness 15
 }
 
 <TERRAIN_GENERATION>
+
+create_terrain DLC_SAVANNAH {
+	number_of_clumps 1
+	land_percent 100
+	base_terrain DIRT
+	set_avoid_player_start_areas 20
+}
+
+create_terrain DLC_SAVANNAH {
+	number_of_clumps 1
+	land_percent 100
+	base_terrain DIRT
+	set_avoid_player_start_areas 20
+}
+
+create_terrain PINE_FOREST {
+	number_of_clumps 10
+	base_terrain DIRT
+	set_avoid_player_start_areas 15
+	number_of_tiles 200
+}
+
+
+create_terrain DLC_SAVANNAH {
+	number_of_clumps 9999
+	number_of_tiles 9999
+	base_terrain DIRT
+}
 
 create_terrain FARM_33 { 
     base_terrain DESERT
@@ -186,13 +222,22 @@ create_terrain ROAD {
 	height_limits 2 7
 }
 
-create_terrain WATER { 
+create_terrain PALM_DESERT { 
     base_terrain DLC_SAVANNAH
-    number_of_tiles 120
-	number_of_clumps 30
+    number_of_tiles 600
+	number_of_clumps 20
 	height_limits 0 0
 	set_flat_terrain_only
 	spacing_to_other_terrain_types 1
+	set_avoid_player_start_areas 20
+}
+
+create_terrain WATER { 
+    base_terrain PALM_DESERT
+    number_of_tiles 90
+	number_of_clumps 20
+	height_limits 0 0
+	set_flat_terrain_only
 	set_avoid_player_start_areas 15
 }
 
@@ -212,11 +257,73 @@ create_terrain DESERT {
 
 create_terrain DLC_DESERTGRAVEL { 
     base_terrain DLC_SAVANNAH
-    number_of_tiles 1000
+    number_of_tiles 1200
 	number_of_clumps 200
 	terrain_mask 1
 	set_avoid_player_start_areas
 }
+
+#const GREEN_WATER 95
+
+create_terrain GREEN_WATER {
+	base_terrain DIRT2
+	number_of_clumps 9999
+	number_of_tiles 9999
+	spacing_to_other_terrain_types 3
+}
+
+create_terrain MED_WATER {
+	base_terrain GREEN_WATER
+	number_of_clumps 9999
+	number_of_tiles 9999
+	terrain_mask 2
+}
+
+create_terrain PALM_DESERT {
+	base_terrain DIRT2
+	number_of_clumps 9999
+	number_of_tiles 9999
+	spacing_to_other_terrain_types 1
+}
+
+create_terrain PALM_DESERT {
+	base_terrain PINE_FOREST
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DLC_BAOBABFOREST { 
+    base_terrain PALM_DESERT
+    number_of_tiles 120
+	number_of_clumps 10
+	height_limits 0 0
+	set_flat_terrain_only
+	spacing_to_other_terrain_types 1
+	set_avoid_player_start_areas 15
+}
+
+create_terrain DLC_ACACIAFOREST { 
+    base_terrain PALM_DESERT
+    number_of_tiles 120
+	number_of_clumps 9
+	height_limits 0 0
+	set_flat_terrain_only
+	spacing_to_other_terrain_types 1
+	set_avoid_player_start_areas 15
+}
+
+create_terrain DLC_SAVANNAH {
+	base_terrain DIRT2
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
+create_terrain DLC_SAVANNAH {
+	base_terrain DIRT2
+	number_of_clumps 9999
+	number_of_tiles 9999
+}
+
 
 <ELEVATION_GENERATION>
 create_elevation 7 {
@@ -239,22 +346,22 @@ create_elevation 3 {
 
 <OBJECTS_GENERATION>
 
-create_object PLACEHOLDER {
+create_object SHORE_FISH {
 	number_of_groups 9999
-	number_of_objects 1
+	number_of_objects 3
+	temp_min_distance_group_placement 7
 	terrain_to_place_on WATER
-	actor_area 30
+	actor_area 39
 	actor_area_radius 3
 }
 
 create_object SHORE_FISH {
 	number_of_groups 9999
-	number_of_objects 3
-	temp_min_distance_group_placement 10
-	terrain_to_place_on WATER
-	actor_area 39
-	actor_area_radius 4
+	number_of_objects 1
+	temp_min_distance_group_placement 1
+	terrain_to_place_on MED_WATER
 }
+
 
 create_object PYRAMID {
 	number_of_groups 2
@@ -384,70 +491,6 @@ create_object DLC_WILD_CAMEL {
 	temp_min_distance_group_placement 20
 	avoid_actor_area 32
 	min_distance_to_map_edge 4
-	set_gaia_object_only
-	set_gaia_unconvertible
-}
-
-create_object PALMTREE {
-	set_tight_grouping
-	number_of_groups 9999
-	number_of_objects 20
-	temp_min_distance_group_placement 7
-	actor_area_to_place_in 30
-	avoid_actor_area 32
-	actor_area 44
-	actor_area_radius 2
-}
-
-create_object DLC_BAOBABTREE {
-	set_tight_grouping
-	number_of_groups 10
-	number_of_objects 5
-	temp_min_distance_group_placement 7
-	actor_area_to_place_in 44
-	avoid_actor_area 32
-	actor_area 45
-	actor_area_radius 2
-}
-
-create_object DLC_ACACIATREE {
-	set_tight_grouping
-	number_of_groups 7
-	number_of_objects 3
-	temp_min_distance_group_placement 7
-	actor_area_to_place_in 44
-	avoid_actor_area 32
-	actor_area 46
-	actor_area_radius 2
-}
-
-create_object PAVILION3 {
-	set_loose_grouping
-	number_of_groups 5
-	number_of_objects 1
-	temp_min_distance_group_placement 7
-	actor_area_to_place_in 39
-	actor_area 38
-	actor_area_radius 4
-	set_gaia_object_only
-	set_gaia_unconvertible
-}
-
-create_object DLC_CROCODILE {
-	number_of_groups 5
-	number_of_objects 1
-	temp_min_distance_group_placement 7
-	actor_area_to_place_in 39
-	avoid_actor_area 36
-}
-
-create_object PAVILION2 {
-	set_loose_grouping
-	number_of_groups 3
-	number_of_objects 1
-	temp_min_distance_group_placement 7
-	actor_area_to_place_in 38
-	avoid_actor_area 32
 	set_gaia_object_only
 	set_gaia_unconvertible
 }
@@ -611,7 +654,7 @@ create_object PH_PLAYER_OFF { second_object LAZY_VILLAGER set_place_for_every_pl
 	actor_area_to_place_in 20 actor_area 2 actor_area_radius 0 avoid_actor_area 2 avoid_actor_area 5101 avoid_actor_area 5104 }
 
 /* this straggler will have 3 villagers near it */
-create_object PALMTREE
+create_object DLC_BAOBABTREE
 {
 	set_place_for_every_player
 	set_gaia_object_only
@@ -647,6 +690,7 @@ create_object HOUSE
 }
 
 create_object GOLD {
+	avoid_forest_zone 2
 	set_tight_grouping
 	set_place_for_every_player
 	set_gaia_object_only
@@ -663,6 +707,7 @@ create_object GOLD {
 }
 
 create_object STONE {
+	avoid_forest_zone 2
 	set_tight_grouping
 	set_place_for_every_player
 	set_gaia_object_only
@@ -678,12 +723,13 @@ create_object STONE {
 }
 
 create_object DLC_ELEPHANT {
+	avoid_forest_zone 2
 	set_place_for_every_player
 	set_gaia_object_only
 	number_of_objects 1
 	avoid_actor_area 55
 	min_distance_to_players 16
-	max_distance_to_players 18
+	max_distance_to_players 18	
 	avoid_actor_area 44
 	avoid_actor_area 45
 	avoid_actor_area 46
@@ -694,6 +740,7 @@ create_object DLC_ELEPHANT {
 }
 
 create_object DLC_RHINO {
+	avoid_forest_zone 2
 	set_place_for_every_player
 	set_gaia_object_only
 	number_of_objects 1
@@ -713,14 +760,15 @@ create_object HAWK {
 }
 
 create_object GOLD {
+	avoid_forest_zone 2
 	set_tight_grouping
 	set_place_for_every_player
 	set_gaia_object_only
-	number_of_objects 4
-	number_of_groups 2
+	number_of_objects 3
+	number_of_groups 3
 	avoid_actor_area 55
 	min_distance_to_players 25
-	max_distance_to_players 35
+	max_distance_to_players 32
 	avoid_actor_area 44
 	avoid_actor_area 45
 	avoid_actor_area 46
@@ -733,6 +781,7 @@ create_object GOLD {
 }
 
 create_object STONE {
+	avoid_forest_zone 2
 	set_tight_grouping
 	set_place_for_every_player
 	set_gaia_object_only
@@ -747,8 +796,9 @@ create_object STONE {
 	avoid_actor_area 67
 	avoid_actor_area 39
 	temp_min_distance_group_placement 20
-	min_distance_to_map_edge 2
+	min_distance_to_map_edge 4
 	set_circular_placement
+	find_closest_to_map_edge
 }
 
 create_object DLC_VASES {
@@ -759,5 +809,37 @@ create_object DLC_VASES {
 	terrain_to_place_on DLC_SAVANNAH
 }
 
+create_object PAVILION3 {
+	set_loose_grouping
+	number_of_groups 5
+	number_of_objects 1
+	temp_min_distance_group_placement 7
+	actor_area_to_place_in 39
+	actor_area 38
+	actor_area_radius 4
+	set_gaia_object_only
+	set_gaia_unconvertible
+	avoid_actor_area 67
+}
+
+create_object DLC_CROCODILE {
+	number_of_groups 5
+	number_of_objects 1
+	temp_min_distance_group_placement 7
+	actor_area_to_place_in 39
+	avoid_actor_area 36
+}
+
+create_object PAVILION2 {
+	set_loose_grouping
+	number_of_groups 3
+	number_of_objects 1
+	temp_min_distance_group_placement 7
+	actor_area_to_place_in 38
+	avoid_actor_area 32
+	set_gaia_object_only
+	set_gaia_unconvertible
+	avoid_actor_area 67
+}
 
 <CONNECTION_GENERATION>
