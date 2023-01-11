@@ -823,8 +823,12 @@ create_object PAVILION3 {
 }
 
 create_object DLC_CROCODILE {
-	number_of_groups 5
+	set_gaia_object_only
+	set_place_for_every_player
+	number_of_groups 2
 	number_of_objects 1
+	min_distance_to_players 25
+	max_distance_to_players  35
 	temp_min_distance_group_placement 7
 	actor_area_to_place_in 39
 	avoid_actor_area 36
