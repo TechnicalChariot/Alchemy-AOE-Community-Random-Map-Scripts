@@ -1,0 +1,45 @@
+/* Bluegill */
+/* Dedicated to a Dear Friend of the AOE Community Whom We Lost 1/14/23 */
+/* 01.15.23 */
+
+/* Defining Land Generation */
+#const L 32     
+
+<PLAYER_SETUP>
+#const B 81
+
+<ELEVATION_GENERATION>
+create_elevation 1
+{
+  base_terrain DIRT
+  number_of_clumps 9320
+  number_of_tiles  100000
+  set_scale_by_size	
+  enable_balanced_elevation
+}
+<TERRAIN_GENERATION>
+create_terrain DLC_NEWSHALLOW
+{
+  base_terrain B
+  spacing_to_other_terrain_types 1
+  number_of_clumps 10000
+  land_percent 100
+}
+create_terrain DLC_WATER5
+{
+  base_terrain DLC_NEWSHALLOW
+  terrain_mask 1
+  spacing_to_other_terrain_types 1
+  number_of_clumps 100000
+  land_percent 2
+}
+
+<OBJECTS_GENERATION>
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+/* END_OBJECTS_AUTOSCRIBE */
+<LAND_GENERATION>
+base_terrain DIRT
+/* Manually Specified Lands */
+
+	
+/* LAND_AUTOSCRIBE */
