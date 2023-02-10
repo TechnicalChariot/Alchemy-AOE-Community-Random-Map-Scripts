@@ -1181,27 +1181,7 @@ avoid_actor_area 9
 find_closest
 }
 /* END_OBJECTS_AUTOSCRIBE */
-
-
-create_object SABOTEUR
-{
-set_place_for_every_player
-number_of_groups 10
-set_scaling_to_map_size
-terrain_to_place_on MED_WATER
-temp_min_distance_group_placement 12
-avoid_actor_area 26
-}
-create_object SABOTEUR
-{
-set_place_for_every_player
-number_of_groups 8
-set_scaling_to_map_size
-terrain_to_place_on DEEP_WATER
-temp_min_distance_group_placement 12
-avoid_actor_area 26
-}
-
+if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 <LAND_GENERATION>
 base_terrain NNRB
 
