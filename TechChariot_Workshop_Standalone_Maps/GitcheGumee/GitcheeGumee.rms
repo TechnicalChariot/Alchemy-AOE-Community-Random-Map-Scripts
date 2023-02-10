@@ -1181,7 +1181,7 @@ avoid_actor_area 9
 find_closest
 }
 /* END_OBJECTS_AUTOSCRIBE */
-if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
+if REGICIDE create_object KING { set_place_for_every_player find_closest avoid_forest_zone 3 } endif
 <LAND_GENERATION>
 base_terrain NNRB
 
