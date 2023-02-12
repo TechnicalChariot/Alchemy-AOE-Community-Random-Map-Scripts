@@ -1,0 +1,40 @@
+/* Border Demonstration */
+/* 2/12/22 */
+/* A ScriptChat Lesson */
+
+<PLAYER_SETUP>
+behavior_version 1
+
+
+<ELEVATION_GENERATION>
+
+/* create_elevation 5 { base_terrain DIRT number_of_clumps 9320 number_of_tiles 1000000 set_scale_by_size enable_balanced_elevation } */
+
+
+
+<TERRAIN_GENERATION>
+
+
+
+<OBJECTS_GENERATION>
+
+create_object TOWN_CENTER { set_place_for_every_player find_closest }
+
+
+<LAND_GENERATION>
+base_terrain WATER
+
+/* create_land { terrain_type ICE land_percent 100 bottom_border 20 right_border 20 top_border 20 left_border 20 border_fuzziness 0 } */
+
+
+/* create_land { terrain_type DLC_GRAVELBEACH base_elevation 5  land_position 1 99  base_size 20  land_percent 6 } */
+/* create_land { terrain_type DLC_GRAVELBEACH base_elevation 5  land_position 1 1   base_size 20  land_percent 6 } */
+/* create_land { terrain_type DLC_GRAVELBEACH base_elevation 5  land_position 99 99 base_size 20  land_percent 6 } */
+/* create_land { terrain_type DLC_GRAVELBEACH base_elevation 5  land_position 99 1  base_size 20  land_percent 6 } */
+/* create_player_lands { circle_radius 30 0 base_size 9 land_percent 0 terrain_type DIRT base_elevation 5 } */
+
+
+
+create_player_lands { base_size 8 land_percent 100 terrain_type ICE bottom_border 20 right_border 20 top_border 20 left_border 20 other_zone_avoidance_distance 4 border_fuzziness 1 }
+
+/* create_player_lands { circle_radius 35 0 base_size 8 land_percent 10 terrain_type WATER } */
