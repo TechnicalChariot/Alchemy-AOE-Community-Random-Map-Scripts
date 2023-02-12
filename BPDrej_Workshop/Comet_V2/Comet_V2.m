@@ -24,8 +24,9 @@ y(i,1) = r(i,1)*sind(i);
 end
 %
 M = [x y]; CC = [62 62];
-%tail = LandScribeV5([{'GRASS'}],[{0}],{[0 -30]},{-45},{'0*x'},{1},{60},[-20 20;-50 50]);
-TL = LandScribeV5([{'DIRT'}],[{1}],{CC},{45},{M},{1});
+tail1 = LandScribeV5([{'GRASS'}],[{0}],{[0 -20]},{45},{'0*x'},{1},{1},[-60 -9]);
+tail2 = LandScribeV5([{'GRASS'}],[{0}],{[0 20]},{45},{'0*x'},{1},{1},[-60 -9]);
+TL = LandScribeV5([{'DIRT'}],[{0}],{CC},{45},{M},{1});
 tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 
 %% -- CPL_V9 INPUT FORMAT -- %%
@@ -44,13 +45,13 @@ tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 %      {Linear Slop};
 %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
-G = [{30}; {45}; {180}; {45}; {[0.3]}; {0.6}; {[CC; CC]}];
+G = [{30}; {45}; {180}; {45}; {[0.15]}; {0.6}; {[CC; CC]}];
 C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
 
 [create_player_lands] = RMS_CPL_V9(G,C);
 
 
-COMMAND = [RMS_Processor_V4([TL],LPM_exp); create_player_lands];
+COMMAND = [RMS_Processor_V4([TL; tail1; tail2],LPM_exp); create_player_lands];
 
 MLA = [];
 
