@@ -1,0 +1,44 @@
+/* Tidal_Locked_V2 */
+/* A Random Map Script by BPDrej */
+/* 2.11.23 */
+<PLAYER_SETUP>
+direct_placement
+#const L 32
+/* Defining Terrains */
+#const G 0
+#const WNI  15
+#const URB  40
+#const GRV  70
+#const BNN  79
+#const NNRB 82
+#const GW   95
+#const SOC 111
+#const ON_GRID 278
+/* Defining Player Terrain Types */
+#const PT1 6
+#const PT2 6
+#const PT3 6
+#const PT4 6
+#const PT5 6
+#const PT6 6
+#const PT7 6
+#const PT8 6
+/* Remove Visual Effect of Dead Fish Trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+<ELEVATION_GENERATION>
+
+<TERRAIN_GENERATION>
+
+<OBJECTS_GENERATION>
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	find_closest
+}
+/* END_OBJECTS_AUTOSCRIBE */
+
+<LAND_GENERATION>
+base_terrain NNRB
+/* LAND_AUTOSCRIBE */

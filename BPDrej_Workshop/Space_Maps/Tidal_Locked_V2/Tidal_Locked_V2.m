@@ -1,4 +1,3 @@
-# Created by Octave 7.3.0, Sat Feb 11 13:29:42 2023 GMT <unknown@DESKTOP-M4PLKCK>
 %Tidal_Locked_V2 Land Generation
 %BPDrej
 %2.11.23
@@ -59,11 +58,11 @@ tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
 %G = [{52}; {45}; {180}; {90}; {[0.05]}; {0.6}; {[-12 50; 112 50]}];
-G = [{52}; {45}; {180}; {90}; {[0.4]}; {0.6}; {[-32 50; 132 50]}];
+%G = [{52}; {45}; {180}; {90}; {[0.3]}; {0.6}; {[-28 50; 128 50]}];
 
-C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
+%C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
 
-[create_player_lands] = RMS_CPL_V9(G,C);
+%[create_player_lands] = RMS_CPL_V9(G,C);
 
 
 COMMAND = [RMS_Processor_V4([TL; RP; LP],LPM_exp); create_player_lands];

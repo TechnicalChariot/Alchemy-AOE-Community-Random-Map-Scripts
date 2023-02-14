@@ -1,7 +1,6 @@
-# Created by Octave 7.3.0, Sat Feb 11 13:29:42 2023 GMT <unknown@DESKTOP-M4PLKCK>
-%Tidal_Locked_V2 Land Generation
+%Comet_V2 Land Generation
 %BPDrej
-%2.11.23
+%1.31.23
 
 clear all
 close all
@@ -16,30 +15,18 @@ files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
-b = 22;
-ecc = 0.91;
-for ri=1:180
-rr(ri,1) = b/sqrt(1-(ecc*cosd(ri))^2);
-rx(ri,1) = rr(ri,1)*cosd(ri);
-ry(ri,1) = rr(ri,1)*sind(ri);
-end
-%
-RM = [rx ry]; RC = [86 50]; LC = [13 50];
-RP = LandScribeV5([{'GRASS'}],[{1}],{RC},{90},{RM},{1});
-LP = LandScribeV5([{'GRASS'}],[{1}],{LC},{270},{RM},{1});
-
-b = 13;
-ecc = 0;
+b = 30;
+ecc = 0.30;
 for i=1:360
 r(i,1) = b/sqrt(1-(ecc*cosd(i))^2);
 x(i,1) = r(i,1)*cosd(i);
 y(i,1) = r(i,1)*sind(i);
 end
 %
-M = [x y]; CC = [50 50];
-%tail = LandScribeV5([{'GRASS'}],[{0}],{[0 -30]},{-45},{'0*x'},{1},{60},[-20 20;-50 50]);
-TL = LandScribeV5([{'GRV'}],[{1}],{CC},{45},{M},{1});
-
+M = [x y]; CC = [62 62];
+tail1 = LandScribeV5([{'GRASS'}],[{0}],{[0 -20]},{45},{'0*x'},{1},{1},[-60 -9]);
+tail2 = LandScribeV5([{'GRASS'}],[{0}],{[0 20]},{45},{'0*x'},{1},{1},[-60 -9]);
+TL = LandScribeV5([{'DIRT'}],[{0}],{CC},{45},{M},{1});
 tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 
 %% -- CPL_V9 INPUT FORMAT -- %%
@@ -58,15 +45,13 @@ tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 %      {Linear Slop};
 %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
-%G = [{52}; {45}; {180}; {90}; {[0.05]}; {0.6}; {[-12 50; 112 50]}];
-G = [{52}; {45}; {180}; {90}; {[0.4]}; {0.6}; {[-32 50; 132 50]}];
-
+G = [{30}; {45}; {180}; {45}; {[0.15]}; {0.6}; {[CC; CC]}];
 C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
 
 [create_player_lands] = RMS_CPL_V9(G,C);
 
 
-COMMAND = [RMS_Processor_V4([TL; RP; LP],LPM_exp); create_player_lands];
+COMMAND = [RMS_Processor_V4([TL; tail1; tail2],LPM_exp); create_player_lands];
 
 MLA = [];
 
@@ -77,3 +62,4 @@ RMS_ForgeV4(filename,CODE);
 
 disp(["Run Completed " datestr(clock) "..."])
 toc
+
