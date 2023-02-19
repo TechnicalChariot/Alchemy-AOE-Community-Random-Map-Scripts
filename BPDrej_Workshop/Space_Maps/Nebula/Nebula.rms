@@ -1,0 +1,565 @@
+/*NEBULA (8/21/22) by BPDrej
+Changelog:
+(8/29/22)
+- DLC_BLACK mask over all mangrove shallows
+- Dots of beach across whole map for easy docking
+- Increased neutral gold/stone density
+*/
+
+#const GRAVEL1 70
+#const MUD 76
+#const F 69
+#const WRB 82
+
+#const DOLPHIN 61
+#const TRAP 278
+#const ROCK2 1323
+#const ROCK3 389
+#const ROCK4 396
+
+<PLAYER_SETUP>
+random_placement
+nomad_resources
+ai_info_map_type NOMAD 1 0 1
+
+behavior_version 1
+
+<LAND_GENERATION>
+base_terrain DLC_MANGROVESHALLOW
+
+enable_waves 0
+
+create_player_lands
+{
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 0
+	base_size 0
+	other_zone_avoidance_distance 12
+}
+if TINY_MAP
+start_random
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 29 29 }
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 71 71 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 29 71 }
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 71 29 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 20 50 }
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 80 50 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 50 20 }
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 50 80 }
+end_random
+elseif SMALL_MAP
+start_random
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 29 29 }
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 71 71 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 29 71 }
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 71 29 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 20 50 }
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 80 50 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 50 20 }
+create_land
+{ terrain_type GRAVEL1 base_size 5 number_of_tiles 300 clumping_factor 30 land_position 50 80 }
+end_random
+elseif MEDIUM_MAP
+start_random
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 40 20 }
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 80 60 }
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 25 75 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 20 40 }
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 60 80 }
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 75 25 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 40 80 }
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 80 40 }
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 25 25 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 60 20 }
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 20 60 }
+create_land
+{ terrain_type GRAVEL1 base_size 7 number_of_tiles 400 clumping_factor 30 land_position 75 75 }
+end_random
+elseif LARGE_MAP
+start_random
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 40 20 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 80 60 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 25 75 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 20 40 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 60 80 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 75 25 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 40 80 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 80 40 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 25 25 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 60 20 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 20 60 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 75 75 }
+end_random
+elseif HUGE_MAP
+start_random
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 27 73 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 73 27 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 27 27 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 73 73 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 18 50 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 50 18 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 82 50 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 50 82 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 61 80 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 39 20 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 20 61 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 80 39 }
+percent_chance 25
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 20 39 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 80 61 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 39 80 }
+create_land
+{ terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 61 20 }
+end_random
+endif
+
+<ELEVATION_GENERATION>
+if TINY_MAP
+create_elevation 2
+{ base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+elseif SMALL_MAP
+create_elevation 2
+{ base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+elseif MEDIUM_MAP
+create_elevation 3
+{ base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+elseif LARGE_MAP
+create_elevation 3
+{ base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+elseif HUGE_MAP
+create_elevation 3
+{ base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+endif
+
+<TERRAIN_GENERATION>
+create_terrain DLC_ROCK
+{ base_terrain GRAVEL1 land_percent 100 number_of_clumps 100 terrain_mask 1 }
+create_terrain DLC_ROCK
+{ base_terrain GRAVEL1 land_percent 100 number_of_clumps 100 terrain_mask 1 }
+create_terrain DLC_MANGROVEFOREST
+{
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 14
+	number_of_clumps 30
+	clumping_factor 10
+	set_scale_by_size
+	spacing_to_other_terrain_types 8
+}
+/* Water */
+create_terrain DLC_WATER5
+{
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 3
+	number_of_clumps 18
+	clumping_factor 30
+	set_scale_by_size
+	spacing_to_other_terrain_types 6
+	height_limits 0 0
+	set_avoid_player_start_areas 10
+}
+if TINY_MAP
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
+endif
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
+create_terrain BEACH
+{
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 7
+	number_of_clumps 5
+	clumping_factor -10
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain GRASS
+{
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 4
+	number_of_clumps 6
+	clumping_factor -10
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain DLC_BOGLAND
+{
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 4
+	number_of_clumps 6
+	clumping_factor -10
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain DLC_WETROCKBEACH
+{
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 3
+	number_of_clumps 150
+	set_scale_by_groups
+}
+create_terrain DLC_WETROCKBEACH
+{
+	base_terrain BEACH
+	land_percent 100
+	number_of_clumps 100
+	set_scale_by_groups
+}
+/* Space Masking */
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain DLC_BLACK
+{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+
+create_terrain F
+{ base_terrain BEACH land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain BEACH land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain BEACH land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+
+create_terrain F
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+
+create_terrain F
+{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F
+{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+
+<OBJECTS_GENERATION>
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+endif
+create_object VILLAGER
+{
+	set_place_for_every_player
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object TRANSPORT_SHIP
+{
+	set_place_for_every_player
+	avoid_forest_zone 3
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object FORAGE
+{
+	number_of_objects 3
+	number_of_groups 99
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 4
+	temp_min_distance_group_placement 30
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object GOLD 
+{
+	number_of_objects 4
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	if TINY_MAP
+		temp_min_distance_group_placement 30
+	elseif SMALL_MAP
+		temp_min_distance_group_placement 30
+	elseif MEDIUM_MAP
+		temp_min_distance_group_placement 33
+	elseif LARGE_MAP
+		temp_min_distance_group_placement 35
+	elseif HUGE_MAP
+		temp_min_distance_group_placement 38
+	endif
+	min_distance_group_placement 5
+	avoid_forest_zone 3
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object STONE
+{
+	number_of_objects 4
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	if TINY_MAP
+		temp_min_distance_group_placement 30
+	elseif SMALL_MAP
+		temp_min_distance_group_placement 30
+	elseif MEDIUM_MAP
+		temp_min_distance_group_placement 33
+	elseif LARGE_MAP
+		temp_min_distance_group_placement 35
+	elseif HUGE_MAP
+		temp_min_distance_group_placement 38
+	endif
+	min_distance_group_placement 8
+	avoid_forest_zone 3
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object RELIC 
+{
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 3
+		temp_min_distance_group_placement 35
+	elseif MEDIUM_MAP
+		number_of_objects 2
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 4
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 4
+		temp_min_distance_group_placement 52
+	endif
+	avoid_forest_zone 3
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object DOLPHIN
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 4
+	terrain_to_place_on WATER
+}
+create_object DORADO
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 4
+	terrain_to_place_on WATER
+}
+create_object DLC_WATERBUFFALO
+{
+	number_of_objects 2
+	number_of_groups 1000
+	set_loose_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 25
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object TRAP
+{
+	number_of_objects 2
+	number_of_groups 1000
+	set_scaling_to_map_size
+	set_gaia_object_only
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 14
+	ignore_terrain_restrictions
+	second_object DLC_BOXTURTLE
+	avoid_forest_zone 3
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+
+/* Star Resources */
+create_object GOLD 
+{
+	number_of_objects 3
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 6
+	terrain_to_place_on GRAVEL1
+}
+create_object STONE
+{
+	number_of_objects 3
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 10
+	min_distance_group_placement 5
+	terrain_to_place_on GRAVEL1
+}
+create_object RELIC 
+{
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 2
+		temp_min_distance_group_placement 35
+	elseif MEDIUM_MAP
+		number_of_objects 3
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 3
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 4
+		temp_min_distance_group_placement 52
+	endif
+	terrain_to_place_on GRAVEL1
+}
+/* Aesthetic Objects */
+create_object ROCK
+{
+	number_of_objects 1
+	number_of_groups 99
+	set_scaling_to_map_size
+	min_distance_group_placement 5
+	temp_min_distance_group_placement 25
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object ROCK3
+{
+	number_of_objects 1
+	number_of_groups 99
+	set_scaling_to_map_size
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 25
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
+create_object ROCK4
+{
+	number_of_objects 1
+	number_of_groups 99
+	set_scaling_to_map_size
+	min_distance_group_placement 3
+	temp_min_distance_group_placement 25
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}

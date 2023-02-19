@@ -42,3 +42,1152 @@ create_object TOWN_CENTER
 <LAND_GENERATION>
 base_terrain NNRB
 /* LAND_AUTOSCRIBE */
+L { land_percent 0 land_position 10 2 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 85 8 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 58 40 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 16 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 89 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 26 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 73 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 74 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 86 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 89 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 17 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 10 99 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 45 63 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 54 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 75 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 56 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 41 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 35 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 60 40 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 9 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 91 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 40 58 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 43 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 75 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 50 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 49 36 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 71 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 50 63 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 60 57 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 43 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 43 40 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 52 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 9 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 88 96 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 87 97 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 36 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 77 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 44 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 87 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 54 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 67 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 84 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 48 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 91 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 48 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 54 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 44 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 82 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 88 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 58 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 57 40 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 58 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 87 4 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 40 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 41 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 9 100 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 55 63 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 52 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 60 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 40 43 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 91 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 41 58 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 86 6 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 66 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 35 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 83 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 32 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 85 94 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 24 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 28 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 19 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 48 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 14 7 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 34 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 53 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 54 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 8 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 57 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 86 93 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 47 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 55 62 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 55 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 18 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 81 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 85 6 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 44 61 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 43 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 56 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 53 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 85 7 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 15 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 55 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 93 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 56 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 18 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 73 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 42 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 87 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 19 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 74 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 54 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 80 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 82 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 30 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 53 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 56 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 82 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 58 59 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 46 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 43 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 70 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 28 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 58 39 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 14 95 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 48 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 16 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 11 1 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 55 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 60 42 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 53 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 81 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 40 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 10 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 53 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 71 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 34 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 13 5 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 73 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 17 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 9 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 32 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 18 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 55 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 34 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 78 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 11 2 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 45 38 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 47 63 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 54 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 58 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 56 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 58 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 42 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 85 92 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 72 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 83 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 51 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 58 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 52 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 55 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 33 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 57 60 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 22 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 82 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 36 51 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 56 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 60 43 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 51 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 31 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 70 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 13 4 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 72 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 47 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 53 37 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 59 40 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 56 37 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 57 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 15 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 49 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 17 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 52 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 41 59 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 88 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 50 64 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 59 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 47 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 14 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 28 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 10 1 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 85 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 86 95 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 21 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 35 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 53 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 12 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 56 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 42 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 91 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 67 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 12 98 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 54 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 90 98 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 7 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 65 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 70 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 14 96 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 10 100 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 64 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 88 2 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 41 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 16 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 59 41 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 9 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 66 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 86 4 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 92 100 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 70 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 85 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 79 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 57 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 12 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 43 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 56 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 47 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 66 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 85 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 59 59 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 43 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 80 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 28 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 53 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 56 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 22 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 45 39 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 81 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 54 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 40 57 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 41 40 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 72 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 31 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 62 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 41 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 51 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 45 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 50 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 49 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 59 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 54 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 48 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 80 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 50 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 57 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 16 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 64 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 52 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 36 50 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 86 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 47 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 76 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 53 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 58 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 29 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 51 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 53 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 49 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 56 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 41 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 79 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 12 97 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 57 61 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 59 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 14 93 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 22 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 13 3 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 57 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 69 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 13 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 71 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 89 2 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 14 4 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 90 99 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 45 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 52 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 29 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 45 61 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 58 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 11 99 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 42 41 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 90 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 76 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 14 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 65 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 31 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 42 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 14 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 53 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 12 96 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 58 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 55 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 25 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 78 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 24 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 48 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 52 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 57 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 50 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 26 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 45 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 27 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 83 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 92 0 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 15 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 88 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 40 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 48 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 88 3 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 20 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 87 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 66 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 89 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 60 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 25 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 92 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 78 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 54 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 87 96 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 52 37 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 46 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 72 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 40 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 12 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 59 39 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 43 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 13 97 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 88 4 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 81 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 90 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 50 38 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 57 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 46 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 50 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 74 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 56 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 17 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 48 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 40 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 9 0 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 40 59 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 36 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 60 59 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 59 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 54 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 89 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 43 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 15 6 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 57 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 83 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 26 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 91 0 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 27 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 14 6 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 42 59 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 11 98 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 51 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 44 62 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 46 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 77 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 43 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 66 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 90 2 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 65 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 55 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 21 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 75 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 52 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 42 58 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 10 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 36 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 84 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 51 62 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 48 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 68 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 90 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 49 64 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 53 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 87 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 47 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 65 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 69 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 35 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 40 41 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 47 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 21 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 12 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 68 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 59 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 78 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 11 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 86 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 23 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 66 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 13 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 47 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 41 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 85 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 34 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 14 94 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 65 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 86 5 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 77 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 45 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 35 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 40 40 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 31 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 55 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 59 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 50 36 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 67 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 54 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 58 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 19 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 89 98 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 52 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 13 95 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 33 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 54 62 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 56 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 60 41 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 32 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 11 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 54 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 12 3 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 39 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 32 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 86 96 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 93 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 20 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 25 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 48 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 16 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 24 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 20 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 91 100 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 47 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 26 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 34 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 18 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 50 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 86 7 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 84 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 83 10 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 56 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 55 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 55 37 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 53 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 30 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 44 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 58 58 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 51 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 89 1 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 47 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 81 84 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 41 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 58 41 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 11 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 64 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 15 7 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 74 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 50 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 52 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 33 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 52 63 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 60 58 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 55 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 16 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 22 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 59 58 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 51 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 54 39 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 49 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 56 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 13 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 55 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 14 5 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 84 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 76 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 10 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 43 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 8 0 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 24 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 90 0 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 85 93 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 51 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 28 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 41 60 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 45 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 59 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 29 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 51 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 49 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 45 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 23 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 87 5 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 57 38 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 50 62 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 54 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 69 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 55 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 64 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 42 40 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 56 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 90 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 30 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 44 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 73 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 72 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 48 63 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 46 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 48 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 76 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 89 99 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 28 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 10 0 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 50 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 40 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 10 98 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 19 14 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 21 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 72 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 64 51 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 69 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 56 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 57 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 17 13 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 90 1 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 77 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 88 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 50 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 43 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 51 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 34 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 41 41 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 52 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 20 19 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 13 96 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 48 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 15 94 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 56 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 68 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 75 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 53 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 27 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 64 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 51 38 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 47 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 29 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 33 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 15 93 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 46 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 27 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 79 23 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 61 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 86 94 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 52 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 78 71 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 79 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 41 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 36 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 55 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 68 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 57 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 25 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 36 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 54 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 86 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 55 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 49 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 46 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 47 62 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 15 92 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 46 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 63 46 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 12 2 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 15 8 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 30 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 18 84 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 90 100 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 24 37 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 92 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 8 100 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 51 64 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 20 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 43 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 25 50 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 41 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 88 98 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 21 79 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 62 48 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 46 38 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 47 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 44 39 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 44 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 82 15 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 37 55 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 64 50 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 61 59 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 84 11 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 54 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 38 50 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 51 36 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 87 3 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 7 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 75 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 12 4 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 23 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 39 43 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 88 97 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 76 51 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 87 95 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 59 42 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 23 65 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 67 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 16 8 base_elevation 1 base_size 1 }
+L { terrain_type GRV land_percent 0 land_position 51 63 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 22 35 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 77 44 base_elevation 1 base_size 1 }
+L { land_percent 0 land_position 80 80 base_elevation 1 base_size 1 }
+if 1_PLAYER_GAME
+#define P2
+elseif 2_PLAYER_GAME
+#define P2
+elseif 3_PLAYER_GAME
+#define P4
+elseif 4_PLAYER_GAME
+#define P4
+elseif 5_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 6_PLAYER_GAME
+#define P6
+if TEAM_POSITIONS
+#define TP_6PG
+endif
+elseif 7_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+elseif 8_PLAYER_GAME
+#define P8
+if TEAM_POSITIONS
+#define TP_8PG
+endif
+endif
+if TP_8PG
+start_random
+percent_chance 25 #define C8P1
+percent_chance 25 #define C8P2
+percent_chance 25 #define C8P3
+percent_chance 25 #define C8P4
+end_random
+elseif TP_6PG
+start_random
+percent_chance 25 #define C6P1
+percent_chance 25 #define C6P2
+percent_chance 25 #define C6P3
+percent_chance 25 #define C6P4
+end_random
+endif
+start_random
+percent_chance 100  #define S1
+end_random
+L
+{
+terrain_type PT1
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 1 0 0
+elseif C8P2
+assign_to AT_COLOR 7 0 0
+elseif C8P3
+assign_to AT_COLOR 7 0 0
+elseif C8P4
+assign_to AT_COLOR 1 0 0
+elseif C6P1
+assign_to AT_COLOR 1 0 0
+elseif C6P2
+assign_to AT_COLOR 5 0 0
+elseif C6P3
+assign_to AT_COLOR 1 0 0
+elseif C6P4
+assign_to AT_COLOR 5 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(99,99) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(85,85) rnd(75,75)
+endif
+elseif P6
+if S1
+land_position rnd(89,89) rnd(85,85)
+endif
+else
+if S1
+land_position rnd(92,92) rnd(90,90)
+endif
+endif
+}
+L
+{
+terrain_type PT2
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 2 0 0
+elseif C8P2
+assign_to AT_COLOR 2 0 0
+elseif C8P3
+assign_to AT_COLOR 8 0 0
+elseif C8P4
+assign_to AT_COLOR 8 0 0
+elseif C6P1
+assign_to AT_COLOR 4 0 0
+elseif C6P2
+assign_to AT_COLOR 4 0 0
+elseif C6P3
+assign_to AT_COLOR 4 0 0
+elseif C6P4
+assign_to AT_COLOR 4 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(1,1) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(15,15) rnd(25,25)
+endif
+elseif P6
+if S1
+land_position rnd(19,19) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(8,8) rnd(10,10)
+endif
+endif
+}
+L
+{
+terrain_type PT3
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 5 0 0
+elseif C8P2
+assign_to AT_COLOR 3 0 0
+elseif C8P3
+assign_to AT_COLOR 3 0 0
+elseif C8P4
+assign_to AT_COLOR 5 0 0
+elseif C6P1
+assign_to AT_COLOR 5 0 0
+elseif C6P2
+assign_to AT_COLOR 1 0 0
+elseif C6P3
+assign_to AT_COLOR 5 0 0
+elseif C6P4
+assign_to AT_COLOR 1 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(1,1) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(85,85) rnd(25,25)
+endif
+elseif P6
+if S1
+land_position rnd(89,89) rnd(15,15)
+endif
+else
+if S1
+land_position rnd(82,82) rnd(38,38)
+endif
+endif
+}
+L
+{
+terrain_type PT4
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 6 0 0
+elseif C8P2
+assign_to AT_COLOR 6 0 0
+elseif C8P3
+assign_to AT_COLOR 4 0 0
+elseif C8P4
+assign_to AT_COLOR 4 0 0
+elseif C6P1
+assign_to AT_COLOR 2 0 0
+elseif C6P2
+assign_to AT_COLOR 2 0 0
+elseif C6P3
+assign_to AT_COLOR 6 0 0
+elseif C6P4
+assign_to AT_COLOR 6 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(1,1) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(15,15) rnd(75,75)
+endif
+elseif P6
+if S1
+land_position rnd(11,11) rnd(15,15)
+endif
+else
+if S1
+land_position rnd(18,18) rnd(62,62)
+endif
+endif
+}
+L
+{
+terrain_type PT5
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 3 0 0
+elseif C8P2
+assign_to AT_COLOR 5 0 0
+elseif C8P3
+assign_to AT_COLOR 5 0 0
+elseif C8P4
+assign_to AT_COLOR 3 0 0
+elseif C6P1
+assign_to AT_COLOR 3 0 0
+elseif C6P2
+assign_to AT_COLOR 3 0 0
+elseif C6P3
+assign_to AT_COLOR 3 0 0
+elseif C6P4
+assign_to AT_COLOR 3 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(1,1) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(15,15) rnd(75,75)
+endif
+elseif P6
+if S1
+land_position rnd(81,81) rnd(50,50)
+endif
+else
+if S1
+land_position rnd(82,82) rnd(62,62)
+endif
+endif
+}
+L
+{
+terrain_type PT6
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 4 0 0
+elseif C8P2
+assign_to AT_COLOR 4 0 0
+elseif C8P3
+assign_to AT_COLOR 6 0 0
+elseif C8P4
+assign_to AT_COLOR 6 0 0
+elseif C6P1
+assign_to AT_COLOR 6 0 0
+elseif C6P2
+assign_to AT_COLOR 6 0 0
+elseif C6P3
+assign_to AT_COLOR 2 0 0
+elseif C6P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(1,1) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(15,15) rnd(75,75)
+endif
+elseif P6
+if S1
+land_position rnd(11,11) rnd(85,85)
+endif
+else
+if S1
+land_position rnd(18,18) rnd(38,38)
+endif
+endif
+}
+L
+{
+terrain_type PT7
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 7 0 0
+elseif C8P2
+assign_to AT_COLOR 1 0 0
+elseif C8P3
+assign_to AT_COLOR 1 0 0
+elseif C8P4
+assign_to AT_COLOR 7 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 3 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM 1 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(1,1) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(15,15) rnd(75,75)
+endif
+elseif P6
+if S1
+land_position rnd(11,11) rnd(85,85)
+endif
+else
+if S1
+land_position rnd(92,92) rnd(10,10)
+endif
+endif
+}
+L
+{
+terrain_type PT8
+base_size 0
+base_elevation 1
+number_of_tiles 14400
+clumping_factor 30
+   
+if C8P1
+assign_to AT_COLOR 8 0 0
+elseif C8P2
+assign_to AT_COLOR 8 0 0
+elseif C8P3
+assign_to AT_COLOR 2 0 0
+elseif C8P4
+assign_to AT_COLOR 2 0 0
+else
+if 4_TEAM_GAME
+assign_to AT_TEAM 4 0 0
+elseif 3_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 2_TEAM_GAME
+assign_to AT_TEAM 2 0 0
+elseif 1_TEAM_GAME
+assign_to AT_TEAM -10 0 0
+else
+assign_to AT_TEAM -10 0 0
+endif
+endif
+if P2
+if S1
+land_position rnd(1,1) rnd(50,50)
+endif
+elseif P4
+if S1
+land_position rnd(15,15) rnd(75,75)
+endif
+elseif P6
+if S1
+land_position rnd(11,11) rnd(85,85)
+endif
+else
+if S1
+land_position rnd(8,8) rnd(90,90)
+endif
+endif
+}

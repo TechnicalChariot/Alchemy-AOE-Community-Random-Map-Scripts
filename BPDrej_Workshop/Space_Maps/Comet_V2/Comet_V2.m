@@ -53,7 +53,7 @@ C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
 
 COMMAND = [RMS_Processor_V4([TL; tail1; tail2],LPM_exp); create_player_lands];
 
-MLA = [];
+MLA = [{'L { terrain_type GRASS land_position 1 1 base_size 0 number_of_tiles 12000 }'}];
 
 
 %ObjectAutoscribeV8('ObjectDatabase.ods')

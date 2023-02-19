@@ -57,12 +57,11 @@ tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 %      {Linear Slop};
 %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
-%G = [{52}; {45}; {180}; {90}; {[0.05]}; {0.6}; {[-12 50; 112 50]}];
-%G = [{52}; {45}; {180}; {90}; {[0.3]}; {0.6}; {[-28 50; 128 50]}];
+G = [{52}; {45}; {180}; {90}; {[0.05]}; {0.6}; {[-12 50; 112 50]}];
 
-%C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
+C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
 
-%[create_player_lands] = RMS_CPL_V9(G,C);
+[create_player_lands] = RMS_CPL_V9(G,C);
 
 
 COMMAND = [RMS_Processor_V4([TL; RP; LP],LPM_exp); create_player_lands];
