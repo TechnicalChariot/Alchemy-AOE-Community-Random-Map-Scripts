@@ -1,5 +1,7 @@
 /* Acropolis Was Developed by Scripter64 a Long Time Ago for the Age of Conquerors Expansion */
+
 /* Remastered with Greek Theming and Named "Akropole" by TechChariot 10/04/22 */
+
 
 <PLAYER_SETUP>
 random_placement
@@ -51,6 +53,7 @@ effect_amount SET_ATTRIBUTE CENTURION ATTR_ARMOR 196610
 effect_amount SET_ATTRIBUTE CENTURION ATTR_ARMOR 524288
 /* Centurion Population Space */
 effect_amount SET_ATTRIBUTE CENTURION ATTR_POPULATION 0
+
 #const TREE_REED 1350
 #const ROCK2 1323
 if DEATH_MATCH
@@ -87,6 +90,7 @@ effect_amount SET_ATTRIBUTE CENTURION ATTR_LINE_OF_SIGHT 5
 /* Centurion Base Attack Set to Three */
 effect_amount SET_ATTRIBUTE CENTURION ATTR_ATTACK 262147
 endif
+
 
 /* Remove Gurjaran Ability to Garrison Mills */
 effect_amount SET_ATTRIBUTE MILL ATTR_GARRISON_CAPACITY 0
