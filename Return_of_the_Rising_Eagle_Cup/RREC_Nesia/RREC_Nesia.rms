@@ -80,11 +80,11 @@ effect_amount GAIA_SET_ATTRIBUTE DLC_ZEBRA ATTR_TERRAIN_ID 0
 /* Setting Tree Wood Storage to 350  */
 effect_amount GAIA_SET_ATTRIBUTE TREE_CLASS ATTR_STORAGE_VALUE 350
 
-/* Giving All Docks Garrison Space */
-effect_amount SET_ATTRIBUTE DOCK ATTR_GARRISON_CAPACITY 10 /* Give All Dark-Age Docks 10 Garrison Space */
-effect_amount SET_ATTRIBUTE DOCK_F ATTR_GARRISON_CAPACITY 10 /* Give all Feudal-Age Docks 10 Garrison Space */
-effect_amount SET_ATTRIBUTE DOCK_C ATTR_GARRISON_CAPACITY 10 /* Give all Castle-Age Docks 10 Garrison Space */
-effect_amount SET_ATTRIBUTE DOCK_I ATTR_GARRISON_CAPACITY 10 /* Give all Imperial-Age Docks 10 Garrison Space */
+/* Giving All Docks Ten Garrison Space */
+effect_amount SET_ATTRIBUTE DOCK ATTR_GARRISON_TYPE 64 /* Change Garrison Type for Dock */
+effect_amount SET_ATTRIBUTE DOCK_F ATTR_GARRISON_TYPE 64 /* Change Garrison Type for Dock */
+effect_amount SET_ATTRIBUTE DOCK_C ATTR_GARRISON_TYPE 64 /* Change Garrison Type for Dock */
+effect_amount SET_ATTRIBUTE DOCK_I ATTR_GARRISON_TYPE 64 /* Change Garrison Type for Dock */
 
 /* Remove Gurjaran Ability to Garrison Mills */
 effect_amount SET_ATTRIBUTE MILL ATTR_GARRISON_CAPACITY 0
