@@ -165,6 +165,13 @@ create_object D_DEER
     set_gaia_object_only
     temp_min_distance_group_placement 2
 } 
+effect_amount SET_ATTRIBUTE MAP_REVEALER ATTR_HITPOINTS 0
+create_object MAP_REVEALER
+{
+    terrain_to_place_on GRASS2
+    set_place_for_every_player
+    number_of_objects 100
+} 
 
 create_object TOWN_CENTER 
 {  
