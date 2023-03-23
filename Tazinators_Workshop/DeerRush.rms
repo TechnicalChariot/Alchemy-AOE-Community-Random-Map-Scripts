@@ -63,7 +63,8 @@ create_player_lands
 }
 
 <TERRAIN_GENERATION>
-create_terrain FOREST
+/* OUTER FOREST */
+/* create_terrain OAK_FOREST
 {
     base_terrain GRASS3
     set_avoid_player_start_areas
@@ -72,21 +73,31 @@ create_terrain FOREST
     set_scale_by_groups
     height_limits 0 1
     spacing_to_other_terrain_types 4
-}
+} */
 
 create_terrain FOREST
 {
     base_terrain GRASS
+    spacing_to_other_terrain_types 8 /* AVOID MID */
     set_avoid_player_start_areas
     land_percent 5
     number_of_clumps 12
     set_scale_by_groups
 }
-create_terrain OAK_FOREST
+create_terrain FOREST
 {
     base_terrain GRASS
+    spacing_to_other_terrain_types 2 /* AVOID MID */
     set_avoid_player_start_areas
-    land_percent 2
+    land_percent 8
+    number_of_clumps 18
+    set_scale_by_groups
+}
+create_terrain PINE_FOREST
+{
+    base_terrain FOREST
+    set_avoid_player_start_areas
+    land_percent 8
     number_of_clumps 18
     set_scale_by_groups
 }
@@ -133,24 +144,15 @@ create_object FALCON
    number_of_objects  2
    set_gaia_object_only
 }
-create_object D_DEER
-{
-    terrain_to_place_on GRASS2
-    number_of_groups 20
-    number_of_objects 2
-    group_variance 1
-    set_scaling_to_map_size
-    set_tight_grouping
-    set_gaia_object_only
-    temp_min_distance_group_placement 2
-} 
+
+/*
 effect_amount SET_ATTRIBUTE MAP_REVEALER ATTR_HITPOINTS 0
 create_object MAP_REVEALER
 {
     terrain_to_place_on GRASS2
     set_place_for_every_player
     number_of_objects 100
-} 
+} */
 
 create_object TOWN_CENTER 
 {  
@@ -158,6 +160,92 @@ create_object TOWN_CENTER
     max_distance_to_players   0
     set_place_for_every_player
 }
+
+/* MIDDLE FOOD */
+/* create_object BLANKOBJECT
+{
+    terrain_to_place_on GRASS2
+    set_place_for_every_player
+    find_closest
+    actor_area 1111
+    actor_area_radius 8
+} */
+create_object MILL
+{
+    terrain_to_place_on GRASS2
+    set_place_for_every_player
+    find_closest
+    actor_area 7334
+    actor_area_radius 4
+} 
+create_object VILLAGER
+{
+    set_place_for_every_player
+    terrain_to_place_on GRASS2
+    number_of_objects 4
+    avoid_actor_area 1111
+    actor_area_to_place_in 7334 /* dead deer */
+    actor_area 94
+    actor_area_radius 6
+    force_placement
+    find_closest
+}
+
+create_object DEER
+{
+    terrain_to_place_on GRASS2
+    number_of_groups 10
+    number_of_objects 6
+    group_variance 1
+    set_tight_grouping
+    set_gaia_object_only
+    actor_area 1
+    actor_area_radius 2
+    avoid_actor_area 7334
+    avoid_actor_area 94
+    avoid_actor_area 1
+    avoid_actor_area 2
+    avoid_actor_area 3
+    avoid_actor_area 4
+    avoid_actor_area 5
+    avoid_actor_area 6
+    avoid_actor_area 7
+    avoid_actor_area 8
+    avoid_actor_area 9
+} 
+create_object FORAGE
+{
+    terrain_to_place_on GRASS2
+    number_of_groups 10
+    number_of_objects 6
+    group_variance 1
+    set_tight_grouping
+    set_gaia_object_only
+    actor_area 2
+    actor_area_radius 2
+    avoid_actor_area 7334
+    avoid_actor_area 94
+    avoid_actor_area 1
+    avoid_actor_area 2
+    avoid_actor_area 3
+    avoid_actor_area 4
+    avoid_actor_area 5
+    avoid_actor_area 6
+    avoid_actor_area 7
+    avoid_actor_area 8
+    avoid_actor_area 9
+} 
+
+create_object DLC_ELEPHANT
+{
+    terrain_to_place_on GRASS2
+    number_of_objects 99
+    set_gaia_object_only
+    temp_min_distance_group_placement 7
+    min_distance_to_players 25
+} 
+
+/* HOME BERRIES */
 create_object FORAGE
 {
     number_of_objects 6
@@ -207,26 +295,6 @@ create_object RELIC {
     endif
 }
 
-if EMPIRE_WARS
-create_object MILL
-{
-    set_place_for_every_player
-    actor_area_to_place_in 14 /* dead deer */
-    find_closest
-    actor_area 40
-    actor_area_radius 6
-}
-create_object VILLAGER
-{
-    set_place_for_every_player
-    number_of_objects 4
-    actor_area_to_place_in 14 /* dead deer */
-    actor_area 94
-    actor_area_radius 6
-    force_placement
-    find_closest
-}
-endif
 
 
 /* idle villagers under the TC - this code is required to prevent them from going to a resource */
