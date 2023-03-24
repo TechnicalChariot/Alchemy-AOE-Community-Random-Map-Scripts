@@ -1,11 +1,4 @@
-/*NEBULA (8/21/22) by BPDrej
-Changelog:
-(8/29/22)
-- DLC_BLACK mask over all mangrove shallows
-- Dots of beach across whole map for easy docking
-- Increased neutral gold/stone density
-*/
-
+/*NEBULA_V2 (3/24/23) by BPDrej */
 #const GRAVEL1 70
 #const MUD 76
 #const F 69
@@ -25,13 +18,13 @@ ai_info_map_type NOMAD 1 0 1
 behavior_version 1
 
 <LAND_GENERATION>
-base_terrain DLC_MANGROVESHALLOW
+base_terrain DLC_JUNGLELEAVES
 
 enable_waves 0
 
 create_player_lands
 {
-	base_terrain DLC_MANGROVESHALLOW
+	base_terrain DLC_JUNGLELEAVES
 	land_percent 0
 	base_size 0
 	other_zone_avoidance_distance 12
@@ -203,20 +196,102 @@ create_elevation 3
 { base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
 endif
 
+create_elevation 1
+{
+	base_terrain DLC_JUNGLELEAVES
+if TINY_MAP
+	number_of_tiles 2500
+	number_of_clumps 50
+elseif MEDIUM_MAP
+	number_of_tiles 6500
+	number_of_clumps 45
+elseif LARGE_MAP
+	number_of_tiles 9000
+	number_of_clumps 40
+elseif HUGE_MAP
+	number_of_tiles 11000
+	number_of_clumps 45
+endif
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+create_elevation 2
+{
+	base_terrain DLC_JUNGLELEAVES
+if TINY_MAP
+	number_of_tiles 500
+	number_of_clumps 10
+elseif MEDIUM_MAP
+	number_of_tiles 1000
+	number_of_clumps 10
+elseif LARGE_MAP
+	number_of_tiles 1250
+	number_of_clumps 10
+elseif HUGE_MAP
+	number_of_tiles 1600
+	number_of_clumps 12
+endif
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+create_elevation 3
+{
+	base_terrain DLC_JUNGLELEAVES
+if TINY_MAP
+	number_of_tiles 250
+	number_of_clumps 10
+elseif MEDIUM_MAP
+	number_of_tiles 500
+	number_of_clumps 10
+elseif LARGE_MAP
+	number_of_tiles 700
+	number_of_clumps 10
+elseif HUGE_MAP
+	number_of_tiles 1000
+	number_of_clumps 12
+endif
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+
+
 <TERRAIN_GENERATION>
 create_terrain DLC_ROCK
 { base_terrain GRAVEL1 land_percent 100 number_of_clumps 100 terrain_mask 1 }
 create_terrain DLC_ROCK
 { base_terrain GRAVEL1 land_percent 100 number_of_clumps 100 terrain_mask 1 }
-create_terrain DLC_MANGROVEFOREST
+
+create_terrain DLC_MANGROVESHALLOW
+{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW
+{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW
+{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW
+{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW
+{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW
+{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW
+{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+
+create_terrain DLC_RAINFOREST
 {
-	base_terrain DLC_MANGROVESHALLOW
-	land_percent 14
-	number_of_clumps 30
-	clumping_factor 10
-	set_scale_by_size
-	spacing_to_other_terrain_types 8
+	base_terrain DLC_JUNGLELEAVES
+	land_percent 9
+	number_of_clumps 15
+	set_scale_by_groups
+	spacing_to_other_terrain_types 1
 }
+
+create_terrain GRASS
+{ base_terrain DLC_JUNGLELEAVES land_percent 5 clumping_factor -10 number_of_clumps 14 set_scale_by_groups }
+create_terrain GRASS2
+{ base_terrain DLC_JUNGLELEAVES land_percent 5 clumping_factor -10 number_of_clumps 14 set_scale_by_groups }
+create_terrain DLC_BOGLAND
+{ base_terrain DLC_JUNGLELEAVES land_percent 6 clumping_factor 5 number_of_clumps 10 set_scale_by_groups terrain_mask 1 }
+
 /* Water */
 create_terrain DLC_WATER5
 {
@@ -225,9 +300,16 @@ create_terrain DLC_WATER5
 	number_of_clumps 18
 	clumping_factor 30
 	set_scale_by_size
-	spacing_to_other_terrain_types 6
+if TINY_MAP
+	spacing_to_other_terrain_types 5
+elseif MEDIUM_MAP
+	spacing_to_other_terrain_types 5
+elseif LARGE_MAP
+	spacing_to_other_terrain_types 4
+elseif HUGE_MAP
+	spacing_to_other_terrain_types 4
+endif
 	height_limits 0 0
-	set_avoid_player_start_areas 10
 }
 if TINY_MAP
 create_terrain WATER
@@ -236,54 +318,15 @@ create_terrain WATER
 { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
 create_terrain WATER
 { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
+else
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
+create_terrain WATER
+{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
 endif
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
-create_terrain BEACH
-{
-	base_terrain DLC_MANGROVESHALLOW
-	land_percent 7
-	number_of_clumps 5
-	clumping_factor -10
-	set_scale_by_groups
-	terrain_mask 1
-}
-create_terrain GRASS
-{
-	base_terrain DLC_MANGROVESHALLOW
-	land_percent 4
-	number_of_clumps 6
-	clumping_factor -10
-	set_scale_by_groups
-	terrain_mask 1
-}
-create_terrain DLC_BOGLAND
-{
-	base_terrain DLC_MANGROVESHALLOW
-	land_percent 4
-	number_of_clumps 6
-	clumping_factor -10
-	set_scale_by_groups
-	terrain_mask 1
-}
-create_terrain DLC_WETROCKBEACH
-{
-	base_terrain DLC_MANGROVESHALLOW
-	land_percent 3
-	number_of_clumps 150
-	set_scale_by_groups
-}
-create_terrain DLC_WETROCKBEACH
-{
-	base_terrain BEACH
-	land_percent 100
-	number_of_clumps 100
-	set_scale_by_groups
-}
+
 /* Space Masking */
 create_terrain DLC_BLACK
 { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
@@ -316,11 +359,7 @@ create_terrain DLC_BLACK
 { base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
 
 create_terrain F
-{ base_terrain BEACH land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain BEACH land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain BEACH land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+{ base_terrain DLC_MANGROVEFOREST land_percent 6 number_of_clumps 10 terrain_mask 1 set_scale_by_groups }
 
 create_terrain F
 { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
@@ -371,7 +410,7 @@ create_object TRANSPORT_SHIP
 {
 	set_place_for_every_player
 	avoid_forest_zone 3
-	terrain_to_place_on DLC_MANGROVESHALLOW
+	terrain_to_place_on WATER
 }
 create_object FORAGE
 {
@@ -380,10 +419,12 @@ create_object FORAGE
 	group_placement_radius 3
 	set_tight_grouping
 	set_gaia_object_only
-	min_distance_group_placement 4
 	temp_min_distance_group_placement 30
+	avoid_actor_area 66
+    avoid_actor_area 67
+	actor_area_radius 2
 	avoid_forest_zone 2
-	terrain_to_place_on DLC_MANGROVESHALLOW
+	terrain_to_place_on DLC_JUNGLELEAVES
 }
 create_object GOLD 
 {
@@ -399,13 +440,14 @@ create_object GOLD
 	elseif MEDIUM_MAP
 		temp_min_distance_group_placement 33
 	elseif LARGE_MAP
-		temp_min_distance_group_placement 35
+		temp_min_distance_group_placement 40
 	elseif HUGE_MAP
-		temp_min_distance_group_placement 38
+		temp_min_distance_group_placement 44
 	endif
-	min_distance_group_placement 5
-	avoid_forest_zone 3
-	terrain_to_place_on DLC_MANGROVESHALLOW
+	actor_area 66
+    actor_area_radius 4
+    avoid_forest_zone 2
+	terrain_to_place_on DLC_JUNGLELEAVES
 }
 create_object STONE
 {
@@ -421,13 +463,25 @@ create_object STONE
 	elseif MEDIUM_MAP
 		temp_min_distance_group_placement 33
 	elseif LARGE_MAP
-		temp_min_distance_group_placement 35
+		temp_min_distance_group_placement 40
 	elseif HUGE_MAP
-		temp_min_distance_group_placement 38
+		temp_min_distance_group_placement 44
 	endif
-	min_distance_group_placement 8
-	avoid_forest_zone 3
-	terrain_to_place_on DLC_MANGROVESHALLOW
+    actor_area 67
+    actor_area_radius 3
+	avoid_actor_area 66
+    avoid_forest_zone 2
+	terrain_to_place_on DLC_JUNGLELEAVES
+}
+create_object JUNGLETREE
+{
+    number_of_objects 15
+    set_gaia_object_only
+    set_scaling_to_map_size
+    avoid_actor_area 66
+    avoid_actor_area 67
+    avoid_forest_zone 2
+	terrain_to_place_on DLC_JUNGLELEAVES
 }
 create_object RELIC 
 {
@@ -440,13 +494,13 @@ create_object RELIC
 		temp_min_distance_group_placement 38
 	elseif LARGE_MAP
 		number_of_objects 4
-		temp_min_distance_group_placement 48
+		temp_min_distance_group_placement 65
 	elseif HUGE_MAP
 		number_of_objects 4
-		temp_min_distance_group_placement 52
+		temp_min_distance_group_placement 75
 	endif
 	avoid_forest_zone 3
-	terrain_to_place_on DLC_MANGROVESHALLOW
+	terrain_to_place_on DLC_JUNGLELEAVES
 }
 create_object DOLPHIN
 {
@@ -475,17 +529,18 @@ create_object DLC_WATERBUFFALO
 	set_loose_grouping
 	set_gaia_object_only
 	set_scaling_to_map_size
-	temp_min_distance_group_placement 25
-	terrain_to_place_on DLC_MANGROVESHALLOW
+	temp_min_distance_group_placement 20
+	terrain_to_place_on DLC_JUNGLELEAVES
 }
 create_object TRAP
 {
 	number_of_objects 2
 	number_of_groups 1000
+	set_tight_grouping
 	set_scaling_to_map_size
 	set_gaia_object_only
 	min_distance_group_placement 3
-	temp_min_distance_group_placement 14
+	temp_min_distance_group_placement 10
 	ignore_terrain_restrictions
 	second_object DLC_BOXTURTLE
 	avoid_forest_zone 3
