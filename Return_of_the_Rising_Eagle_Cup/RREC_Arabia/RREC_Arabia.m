@@ -16,31 +16,31 @@ path = filestruc.folder; path = path(1:90); addpath(genpath(path)) %Adding funct
 files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
-##L = 'C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts\Age-of-Empires-II-Definitive-Edition----Random-Map-Scripts\Return_of_the_Rising_Eagle_Cup\RREC_Arabia\eagle.png'
-L = 'C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts\Age-of-Empires-II-Definitive-Edition----Random-Map-Scripts\Return_of_the_Rising_Eagle_Cup\RREC_Arabia\eaglerot.png'
-f = 1;
-M = ImagetoLands(f,L);
-C = [50 50];
-MLA = [{['L { terrain_type DIRT base_size 0 land_position ' num2str(C(1)) ' ' num2str(C(2)) ' } ']}];
-##B = LandScribeV5([{'DIRT'}],[{0}],{[45 55]},{135},{M},{0});
-B = LandScribeV5([{'DIRT'}],[{0}],{C},{0},{M},{0});
+
+%load 'Eagle_Points_M14'
+%load 'Eagle_Points_M15'
+%load 'Eagle_Points_M16'
+load 'Eagle_Points_M18'
+
+C = [55 45]; MLA = [{['L { terrain_type DLC_BLACK base_size 0 land_position ' num2str(C(1)) ' ' num2str(C(2)) ' } ']}];
+B = LandScribeV5([{'GRASS'}],[{0}],{C},{0},{M},{0});
 COMMAND = RMS_Processor_V4(B,LPM_exp);
-##LPM_exp = LPM_Shadow(LPM_exp,5);
 
 % G = [{Vector of Radii}; ...
 %      {Vector of Angular Offsets Between Flank and Pocket}; ...
 %      {Vector of Angular Distance to Centroid of Teams}; ...
 %      {Vector of Clocking "Seed Angles"}; ...
 %      {Vector of Team Biases}; ...
-%      {Vector of Eccentricities}] (geometric inputs)
-
+%      {Vector of Eccentricities}]; (geometric inputs)
+%
 % C = [{Base Elevation}; ...
 %      {Base Size}; ...
 %      {Land Percent}; ...
 %      {Zone Avoidance}; ...
-%      {Linear Slop}]  (characteristic inputs)
+%      {Linear Slop}];  (characteristic inputs)
 
-%[PL] = RMS_CPL_V7([{[28 30 32]}; {[43 45 47]}; {[170 180 190]}; {[-45]}; {[0 0.05]}; {[1]}],[{0}; {0}; {0}; {0}]);
+[PL] = RMS_CPL_V7([{[28 30 32]}; {[43 45 47]}; {[170 175 180 185 190]}; {[-45 -30 -15 0 15 30 45]}; {[0 0.05]}; {[1]}],[{0}; {0}; {0}; {0}; {0}]);
+%[PL] = RMS_CPL_V7([{[28 30 32]}; {[43 45 47]}; {[170 180 190]}; {[0]}; {[0 0.05]}; {[1]}],[{0}; {0}; {0}; {0}; {0}]);
 
 
 %for j = 1:length(O)
@@ -55,10 +55,10 @@ COMMAND = RMS_Processor_V4(B,LPM_exp);
 
 
 %
-%ObjectAutoscribeV8('ObjectDatabase.ods')
+%ObjectAutoscribeV8('RREC_Arabia.ods')
 %CODE = [Preface; Size_List; MLA]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 
-CODE = [Preface; COMMAND; MLA];
+CODE = [Preface; PL; COMMAND; MLA;];
 RMS_ForgeV4(filename,CODE);
 
 disp(["Run Completed " datestr(clock) "..."])
