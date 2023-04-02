@@ -34,18 +34,29 @@ CODE = Preface;
 %      {Linear Slop};
 %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
-size_prefix = [{'if TINY_MAP'} {'elseif SMALL_MAP'} {'elseif MEDIUM_MAP'} {'elseif LARGE_MAP'} {'elseif HUGE_MAP'} {'elseif GIGANTIC_MAP'} {'endif'}];
+size_prefix = [{'if P12'} {'elseif P34'} {'elseif P56'} {'elseif P78'} {'endif'}];
 
 
-for i = 1:7
-if i == 7
+for i = 1:5
 CODE = [CODE; size_prefix(i)];
+if i == 1
+[PLB] = RMS_CPL_V9([{[20]}; {[45]}; {[170 180 190]}; {[0 45 90]}],[{0}; {0}; {0}; {8}; {0}]); %Player-Land-Base (Town Center)
+[PLP] = RMS_CVL_V2([{[07]}; {[45]}; {[170 180 190]}; {[0 45 90]}],[{7}; {0}; {0}; {0}; {0}]); %Circular Variable Land (Castle)
+elseif i == 2
+[PLB] = RMS_CPL_V9([{[19]}; {[45]}; {[180]}; {[0 45]}],[{0}; {0}; {0}; {8}; {0}]); %Player-Land-Base (Town Center)
+[PLP] = RMS_CVL_V2([{[08]}; {[45]}; {[180]}; {[0 45]}],[{7}; {0}; {0}; {0}; {0}]); %Circular Variable Land (Castle)
+elseif i == 3
+[PLB] = RMS_CPL_V9([{[18]}; {[45]}; {[180]}; {[0 45 90]}],[{0}; {0}; {0}; {8}; {0}]); %Player-Land-Base (Town Center)
+[PLP] = RMS_CVL_V2([{[09]}; {[45]}; {[180]}; {[0 45 90]}],[{7}; {0}; {0}; {0}; {0}]); %Circular Variable Land (Castle)
+elseif i == 4
+[PLB] = RMS_CPL_V9([{[18]}; {[45]}; {[180]}; {[0 45 90]}],[{0}; {0}; {0}; {8}; {0}]); %Player-Land-Base (Town Center)
+[PLP] = RMS_CVL_V2([{[11]}; {[45]}; {[180]}; {[0 45 90]}],[{7}; {0}; {0}; {0}; {0}]); %Circular Variable Land (Castle)
+elseif i == 5
+PLB = []; PLP = [];
 else
 end
 %
-[PLB] = RMS_CPL_V9([{[21]}; {[45]}; {[180]}; {[0]}],[{0}; {0}; {0}; {8}; {0}]); %Player-Land-Base
-[PLP] = Circular_Variable_Lands_V2([{[11]}; {[45]}; {[180]}; {[0]}],[{7}; {0}; {0}; {0}; {0}]); %Circular Variable Land, Following Player Lands
-CODE = [CODE; size_prefix(i); PLB; PLP];
+CODE = [CODE; PLB; PLP];
 end
 %
 
