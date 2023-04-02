@@ -36,7 +36,6 @@ CODE = Preface;
 
 size_prefix = [{'if P12'} {'elseif P34'} {'elseif P56'} {'elseif P78'} {'endif'}];
 
-
 for i = 1:5
 CODE = [CODE; size_prefix(i)];
 if i == 1
