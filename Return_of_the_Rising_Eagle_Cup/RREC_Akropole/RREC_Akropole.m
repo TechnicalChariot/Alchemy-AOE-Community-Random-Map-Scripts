@@ -10,46 +10,64 @@ clc
 tic
 disp(["Run Executed " datestr(clock) "..."])
 
-str = pwd; str = str(1:102); addpath(str)
-[filename] = Load_Library();
+filestruc = dir; %Extract a structure of the files in this directory
+path = filestruc.folder; path = path(1:90); addpath(genpath(path)) %Adding functions in main folder to the path
+files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
-MLP = []; MLA = [];
 
-%Terrain Painting -- Glacial Sand Deposit
-Span = [{1}];
-Cent = [{0 0};];
-Angle = [{0} {45} {90}];
-%f = [{'50*sin(2*pi*x/22)'} {'50*sin(2*pi*x/29)'} {'50*sin(2*pi*x/40)'}];
+MLP = [{'L { terrain_type NNRB base_elevation 0 land_position 50 50 base_size 3 number_of_tiles 121 clumping_factor 30 zone 1 }'}];
 
-f = [{'50*sin(2*pi*x/22)'}];
+MLA = [{'create_player_lands'};
+       {'{'};
+       {'terrain_type K'};
+       {'base_elevation 7'};
+       {'clumping_factor 30'};
+       {'set_zone_by_team'};
+       {'clumping_factor 30'};
+       {'border_fuzziness 6'};
+       {'if TINY_MAP'};
+       {'base_size 12'};
+       {'circle_radius 34 0'};
+       {'land_percent 20'};
+       {'other_zone_avoidance_distance 18'};
+       {'top_border 16 bottom_border 16 right_border 16 left_border 16'};
+       {'elseif SMALL_MAP'};
+       {'base_size 13'};
+       {'circle_radius 36 0'};
+       {'land_percent 33'};
+       {'other_zone_avoidance_distance 21'};
+       {'top_border 15 bottom_border 15 right_border 15 left_border 15'};
+       {'elseif MEDIUM_MAP'};
+       {'base_size 14'};
+       {'circle_radius 37 0'};
+       {'land_percent 46'};
+       {'other_zone_avoidance_distance 24'};
+       {'top_border 14 bottom_border 14 right_border 14 left_border 14'};
+       {'elseif LARGE_MAP'};
+       {'base_size 15'};
+       {'circle_radius 38 0'};
+       {'land_percent 48'};
+       {'other_zone_avoidance_distance 24'};
+       {'top_border 12 bottom_border 12 right_border 12 left_border 12'};
+       {'elseif HUGE_MAP'};
+       {'base_size 16'};
+       {'circle_radius 39 0'};
+       {'land_percent 50'};
+       {'other_zone_avoidance_distance 24'};
+       {'top_border 11 bottom_border 11 right_border 11 left_border 11'};
+       {'elseif GIGANTIC_MAP'};
+       {'base_size 18'};
+       {'circle_radius 39 0'};
+       {'land_percent 52'};
+       {'other_zone_avoidance_distance 24'};
+       {'top_border 10 bottom_border 10 right_border 10 left_border 10'};
+       {'else'};
+       {'endif'};
+       {'}'}];
 
-
-[nSpan] = length(Span);
-[nCent,~] = size(Cent);
-[~,nAngl] = size(Angle);
-[~,nfunc] = size(f);
-
-%SigMath = [{270} {0.2} {0.71} {[0 0]}]; %Signature Mathematical Parameters (necessary for any signature type) [Angular Orientation,Scale,Thickness,[x_center,y_center]]
-%SigScpt = [{'DIRT'} {3}];                 %Signature Map Parameters (necessary for positive space signature) [Terrain Type, Base Elevation]
-
-k = 0;
-for i4 = 1:nSpan
-for i3 = 1:nCent
-for i2 = 1:nAngl
-for i1 = 1:nfunc
-[Preface,LPM_exp,SigComb] = RMS_Manual_Land(filename);
-[River] = LandScribeV5({'NNRB'},{0},Cent(i3,:),Angle(i2),f(i1),{1},Span(i4),[-50 50]);
-k = k + 1;
-RawLand(k).XY = [River];
-COMMAND(k).XY = RMS_Processor_V4(RawLand(k).XY,LPM_exp);
-end
-end
-end
-end
-%
-
-[List] = RMS_RS_V2(f,Angle,{'C'},COMMAND);
+List = [];
+%[List] = RMS_RS_V2(f,Angle,{'C'},COMMAND);
 CODE = [Preface; MLP; List; MLA; ]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 
 RMS_ForgeV4(filename,CODE);
