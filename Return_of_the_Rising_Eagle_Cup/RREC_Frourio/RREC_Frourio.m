@@ -10,8 +10,9 @@ clc
 tic
 disp(["Run Executed " datestr(clock) "..."])
 
-str = pwd; str = str(1:102); addpath(str)
-[filename] = Load_Library();
+filestruc = dir; %Extract a structure of the files in this directory
+path = filestruc.folder; path = path(1:90); addpath(genpath(path)) %Adding functions in main folder to the path
+files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
 MLP = []; MLA = [];

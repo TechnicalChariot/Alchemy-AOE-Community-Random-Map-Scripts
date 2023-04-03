@@ -3049,6 +3049,7 @@ endif
 /* END_OBJECTS_AUTOSCRIBE */
 if LOW_RESOURCES else  create_object WALL { set_place_for_every_player min_distance_to_players 19 max_distance_to_players 19 } endif
 
+
 <LAND_GENERATION>
 base_terrain G
 /* LAND_AUTOSCRIBE */
