@@ -1555,7 +1555,7 @@ actor_area_to_place_in 13
 avoid_actor_area 5
 avoid_actor_area 56
 }
-create_object CENTURION
+create_object SCOUT
 {
 set_place_for_every_player
 avoid_forest_zone 1
@@ -1572,7 +1572,7 @@ actor_area_to_place_in 15
 }
 endif
 /* END_OBJECTS_AUTOSCRIBE */
-if REGICIDE  create_object KING { set_place_for_every_player find_closest } else endif
+if REGICIDE create_object KING { set_place_for_every_player find_closest } else endif
 if LOW_RESOURCES create_object VILLAGER { set_place_for_every_player terrain_to_place_on G3 min_distance_group_placement 8 } else endif
 <LAND_GENERATION>
 base_terrain K
