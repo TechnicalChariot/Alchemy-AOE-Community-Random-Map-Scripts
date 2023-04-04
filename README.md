@@ -112,3 +112,7 @@ How to Publish Scripts to the "Entire-Library":
 ![image](https://user-images.githubusercontent.com/115369420/196483390-c4749401-4076-4616-8d32-fa1d410f054d.png)
 
 Updating the files in "Entire-Library" is simple: repeat steps 1-3 with the new files.
+
+_____________________________________________________________________________________________________________________________________________________________
+
+Map Summary (refer to the template in this folder) are recommended for all maps you upload. This will help people looking for maps know that what you've created will work for their application!
