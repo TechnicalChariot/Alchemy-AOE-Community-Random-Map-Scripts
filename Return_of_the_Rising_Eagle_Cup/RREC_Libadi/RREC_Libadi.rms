@@ -518,7 +518,7 @@ create_object PH4_1
 {
 set_place_for_every_player
 actor_area 5
-actor_area_radius 36
+actor_area_radius 32
 actor_area_to_place_in 3
 force_placement
 find_closest
@@ -920,13 +920,55 @@ find_closest
 create_object RELIC
 {
 set_gaia_object_only
-number_of_groups 4
+number_of_groups 1
 set_scaling_to_map_size
 terrain_to_place_on DIRT
 avoid_forest_zone 1
 min_distance_group_placement 3
-temp_min_distance_group_placement 36
+temp_min_distance_group_placement 24
+actor_area 31
+actor_area_radius 24
 avoid_actor_area 5
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 1
+terrain_to_place_on DIRT
+avoid_forest_zone 1
+min_distance_group_placement 3
+actor_area 32
+actor_area_radius 24
+avoid_actor_area 5
+avoid_actor_area 31
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 1
+terrain_to_place_on DIRT
+avoid_forest_zone 1
+min_distance_group_placement 3
+actor_area 33
+actor_area_radius 24
+avoid_actor_area 5
+avoid_actor_area 31
+avoid_actor_area 32
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 1
+terrain_to_place_on DIRT
+avoid_forest_zone 1
+min_distance_group_placement 3
+avoid_actor_area 5
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
 find_closest
 }
 create_object DLC_ORANGEBUSH
@@ -940,7 +982,7 @@ terrain_to_place_on DIRT
 max_distance_to_other_zones 2
 avoid_forest_zone 2
 temp_min_distance_group_placement 24
-actor_area 31
+actor_area 34
 actor_area_radius 6
 }
 create_object GOLD
@@ -953,9 +995,9 @@ set_scaling_to_map_size
 max_distance_to_other_zones 2
 avoid_forest_zone 2
 temp_min_distance_group_placement 24
-actor_area 32
+actor_area 35
 actor_area_radius 6
-avoid_actor_area 31
+avoid_actor_area 34
 find_closest
 }
 create_object STONE
@@ -968,10 +1010,10 @@ set_scaling_to_map_size
 max_distance_to_other_zones 2
 avoid_forest_zone 2
 temp_min_distance_group_placement 24
-actor_area 33
+actor_area 36
 actor_area_radius 6
-avoid_actor_area 31
-avoid_actor_area 32
+avoid_actor_area 34
+avoid_actor_area 35
 find_closest
 }
 create_object DEER
@@ -984,11 +1026,11 @@ set_scaling_to_map_size
 max_distance_to_other_zones 2
 avoid_forest_zone 2
 temp_min_distance_group_placement 24
-actor_area 34
+actor_area 37
 actor_area_radius 6
-avoid_actor_area 31
-avoid_actor_area 32
-avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
 find_closest
 }
 create_object SHEEP
@@ -1001,10 +1043,10 @@ set_scaling_to_map_size
 max_distance_to_other_zones 2
 avoid_forest_zone 2
 temp_min_distance_group_placement 24
-avoid_actor_area 31
-avoid_actor_area 32
-avoid_actor_area 33
 avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
 find_closest
 }
 create_object HAWK
@@ -1025,6 +1067,7 @@ number_of_groups 3
 avoid_forest_zone 1
 min_distance_group_placement 15
 avoid_actor_area 2
+find_closest
 }
 else
 #const BUSH_GREEN 1360
@@ -1631,13 +1674,55 @@ find_closest
 create_object RELIC
 {
 set_gaia_object_only
-number_of_groups 3
+number_of_groups 1
 set_scaling_to_map_size
 terrain_to_place_on DIRT
 avoid_forest_zone 1
 min_distance_group_placement 3
 temp_min_distance_group_placement 24
+actor_area 45
+actor_area_radius 24
 avoid_actor_area 6
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 1
+terrain_to_place_on DIRT
+avoid_forest_zone 1
+min_distance_group_placement 3
+actor_area 46
+actor_area_radius 24
+avoid_actor_area 6
+avoid_actor_area 45
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 1
+terrain_to_place_on DIRT
+avoid_forest_zone 1
+min_distance_group_placement 3
+actor_area 47
+actor_area_radius 24
+avoid_actor_area 6
+avoid_actor_area 45
+avoid_actor_area 46
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 1
+terrain_to_place_on DIRT
+avoid_forest_zone 1
+min_distance_group_placement 3
+avoid_actor_area 6
+avoid_actor_area 45
+avoid_actor_area 46
+avoid_actor_area 47
 find_closest
 }
 create_object DLC_ORANGEBUSH
@@ -1650,30 +1735,30 @@ set_scaling_to_map_size
 terrain_to_place_on DIRT
 avoid_forest_zone 2
 temp_min_distance_group_placement 24
-actor_area 45
+actor_area 48
 actor_area_radius 1
 avoid_actor_area 7
 find_closest
 }
-#const PH45_4 647
-create_object PH45_4
+#const PH48_4 647
+create_object PH48_4
 {
 number_of_groups 37280
 set_scaling_to_map_size
-actor_area 46
+actor_area 49
 actor_area_radius 8
-actor_area_to_place_in 45
+actor_area_to_place_in 48
 force_placement
 find_closest
 }
-#const PH46_4 647
-create_object PH46_4
+#const PH49_4 647
+create_object PH49_4
 {
 number_of_groups 37280
 set_scaling_to_map_size
-actor_area 47
+actor_area 50
 actor_area_radius 12
-actor_area_to_place_in 45
+actor_area_to_place_in 48
 force_placement
 find_closest
 }
@@ -1687,10 +1772,10 @@ set_scaling_to_map_size
 terrain_to_place_on DIRT
 avoid_forest_zone 2
 temp_min_distance_group_placement 24
-actor_area 48
+actor_area 51
 actor_area_radius 8
 avoid_actor_area 7
-avoid_actor_area 46
+avoid_actor_area 49
 find_closest
 }
 create_object STONE
@@ -1703,11 +1788,11 @@ set_scaling_to_map_size
 terrain_to_place_on DIRT
 avoid_forest_zone 2
 temp_min_distance_group_placement 24
-actor_area 49
+actor_area 52
 actor_area_radius 8
 avoid_actor_area 7
-avoid_actor_area 46
-avoid_actor_area 48
+avoid_actor_area 49
+avoid_actor_area 51
 find_closest
 }
 create_object DEER
@@ -1721,9 +1806,9 @@ terrain_to_place_on Y
 avoid_forest_zone 2
 temp_min_distance_group_placement 12
 avoid_actor_area 6
-avoid_actor_area 47
-avoid_actor_area 48
-avoid_actor_area 49
+avoid_actor_area 50
+avoid_actor_area 51
+avoid_actor_area 52
 find_closest
 }
 create_object HAWK
@@ -1765,7 +1850,7 @@ number_of_objects 6
 group_placement_radius 3
 set_tight_grouping
 avoid_forest_zone 3
-actor_area 50
+actor_area 53
 actor_area_radius 12
 actor_area_to_place_in 13
 avoid_actor_area 2
@@ -1779,12 +1864,12 @@ number_of_objects 3
 group_placement_radius 3
 set_tight_grouping
 avoid_forest_zone 2
-actor_area 51
+actor_area 54
 actor_area_radius 12
 actor_area_to_place_in 15
 avoid_actor_area 2
 avoid_actor_area 14
-avoid_actor_area 50
+avoid_actor_area 53
 }
 create_object GOLD
 {
@@ -1794,13 +1879,13 @@ number_of_objects 3
 group_placement_radius 3
 set_tight_grouping
 avoid_forest_zone 2
-actor_area 52
+actor_area 55
 actor_area_radius 12
 actor_area_to_place_in 16
 avoid_actor_area 2
 avoid_actor_area 15
-avoid_actor_area 50
-avoid_actor_area 51
+avoid_actor_area 53
+avoid_actor_area 54
 }
 create_object STONE
 {
@@ -1815,9 +1900,9 @@ temp_min_distance_group_placement 20
 actor_area_to_place_in 16
 avoid_actor_area 2
 avoid_actor_area 15
-avoid_actor_area 50
-avoid_actor_area 51
-avoid_actor_area 52
+avoid_actor_area 53
+avoid_actor_area 54
+avoid_actor_area 55
 }
 create_object SHEEP
 {
@@ -1825,30 +1910,30 @@ set_place_for_every_player
 number_of_objects 2
 set_tight_grouping
 avoid_forest_zone 1
-actor_area 53
+actor_area 56
 actor_area_radius 1
 actor_area_to_place_in 17
 avoid_actor_area 10
 }
-#const PH53_5 647
-create_object PH53_5
+#const PH56_5 647
+create_object PH56_5
 {
 set_place_for_every_player
 number_of_groups 4
-actor_area 54
+actor_area 57
 actor_area_radius 9
-actor_area_to_place_in 53
+actor_area_to_place_in 56
 force_placement
 find_closest
 }
-#const PH54_5 647
-create_object PH54_5
+#const PH57_5 647
+create_object PH57_5
 {
 set_place_for_every_player
 number_of_groups 4
-actor_area 55
+actor_area 58
 actor_area_radius 6
-actor_area_to_place_in 53
+actor_area_to_place_in 56
 force_placement
 find_closest
 }
@@ -1863,7 +1948,7 @@ avoid_forest_zone 1
 temp_min_distance_group_placement 6
 actor_area_to_place_in 13
 avoid_actor_area 18
-avoid_actor_area 54
+avoid_actor_area 57
 }
 create_object SHEEP
 {
@@ -1883,11 +1968,11 @@ set_place_for_every_player
 number_of_objects 2
 set_tight_grouping
 avoid_forest_zone 1
-actor_area 56
+actor_area 59
 actor_area_radius 6
 actor_area_to_place_in 17
 avoid_actor_area 10
-avoid_actor_area 55
+avoid_actor_area 58
 }
 create_object VILLAGER_BASE_F
 {
@@ -1895,8 +1980,8 @@ set_place_for_every_player
 avoid_forest_zone 1
 actor_area_to_place_in 17
 avoid_actor_area 10
-avoid_actor_area 55
-avoid_actor_area 56
+avoid_actor_area 58
+avoid_actor_area 59
 }
 create_object SCOUT
 {
