@@ -131,17 +131,17 @@ if PLAYER_LAKE_COLLAPSE
 		number_of_clumps 9320
 		set_scaling_by_groups
 		if TINY_MAP
-		spacing_to_other_terrain_types 4
+		spacing_to_other_terrain_types 3
 		elseif SMALL_MAP
-		spacing_to_other_terrain_types 5
+		spacing_to_other_terrain_types 4
 		elseif MEDIUM_MAP
-		spacing_to_other_terrain_types 6
+		spacing_to_other_terrain_types 5
 		elseif LARGE_MAP
-		spacing_to_other_terrain_types 7
+		spacing_to_other_terrain_types 6
 		elseif HUGE_MAP
-		spacing_to_other_terrain_types 8
+		spacing_to_other_terrain_types 7
 		elseif GIGANTIC_MAP
-		spacing_to_other_terrain_types 8
+		spacing_to_other_terrain_types 7
 		else
 		endif
 	 }
