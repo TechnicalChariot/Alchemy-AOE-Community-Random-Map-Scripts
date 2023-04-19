@@ -557,9 +557,9 @@ set_scaling_to_map_size
 terrain_to_place_on LEAVES
 avoid_forest_zone 1
 min_distance_group_placement 3
-temp_min_distance_group_placement 24
+if TINY_MAP temp_min_distance_group_placement 24 elseif SMALL_MAP temp_min_distance_group_placement 31 elseif MEDIUM_MAP temp_min_distance_group_placement 38 elseif LARGE_MAP temp_min_distance_group_placement 46 elseif HUGE_MAP temp_min_distance_group_placement 53 else temp_min_distance_group_placement 60 endif
 actor_area 22
-actor_area_radius 24
+if TINY_MAP actor_area_radius 24 elseif SMALL_MAP actor_area_radius 31 elseif MEDIUM_MAP actor_area_radius 38 elseif LARGE_MAP actor_area_radius 46 elseif HUGE_MAP actor_area_radius 53 else actor_area_radius 60 endif
 avoid_actor_area 6
 avoid_actor_area 7
 find_closest
@@ -568,13 +568,12 @@ create_object RELIC
 {
 set_gaia_object_only
 number_of_groups 1
-set_scaling_to_map_size
 terrain_to_place_on LEAVES
 avoid_forest_zone 1
 min_distance_group_placement 3
 temp_min_distance_group_placement 24
 actor_area 23
-actor_area_radius 24
+if TINY_MAP actor_area_radius 24 elseif SMALL_MAP actor_area_radius 31 elseif MEDIUM_MAP actor_area_radius 38 elseif LARGE_MAP actor_area_radius 46 elseif HUGE_MAP actor_area_radius 53 else actor_area_radius 60 endif
 avoid_actor_area 6
 avoid_actor_area 7
 avoid_actor_area 22
@@ -588,7 +587,7 @@ terrain_to_place_on LEAVES
 avoid_forest_zone 1
 min_distance_group_placement 3
 actor_area 24
-actor_area_radius 24
+if TINY_MAP actor_area_radius 24 elseif SMALL_MAP actor_area_radius 31 elseif MEDIUM_MAP actor_area_radius 38 elseif LARGE_MAP actor_area_radius 46 elseif HUGE_MAP actor_area_radius 53 else actor_area_radius 60 endif
 avoid_actor_area 6
 avoid_actor_area 7
 avoid_actor_area 22
@@ -603,7 +602,7 @@ terrain_to_place_on LEAVES
 avoid_forest_zone 1
 min_distance_group_placement 3
 actor_area 25
-actor_area_radius 24
+if TINY_MAP actor_area_radius 24 elseif SMALL_MAP actor_area_radius 31 elseif MEDIUM_MAP actor_area_radius 38 elseif LARGE_MAP actor_area_radius 46 elseif HUGE_MAP actor_area_radius 53 else actor_area_radius 60 endif
 avoid_actor_area 6
 avoid_actor_area 7
 avoid_actor_area 22
@@ -1239,9 +1238,9 @@ set_scaling_to_map_size
 terrain_to_place_on LEAVES
 avoid_forest_zone 1
 min_distance_group_placement 3
-temp_min_distance_group_placement 24
+if TINY_MAP temp_min_distance_group_placement 24 elseif SMALL_MAP temp_min_distance_group_placement 31 elseif MEDIUM_MAP temp_min_distance_group_placement 38 elseif LARGE_MAP temp_min_distance_group_placement 46 elseif HUGE_MAP temp_min_distance_group_placement 53 else temp_min_distance_group_placement 60 endif
 actor_area 39
-actor_area_radius 24
+if TINY_MAP actor_area_radius 24 elseif SMALL_MAP actor_area_radius 31 elseif MEDIUM_MAP actor_area_radius 38 elseif LARGE_MAP actor_area_radius 46 elseif HUGE_MAP actor_area_radius 53 else actor_area_radius 60 endif
 avoid_actor_area 5
 avoid_actor_area 22
 avoid_actor_area 23
@@ -1255,7 +1254,7 @@ terrain_to_place_on LEAVES
 avoid_forest_zone 1
 min_distance_group_placement 3
 actor_area 40
-actor_area_radius 24
+if TINY_MAP actor_area_radius 24 elseif SMALL_MAP actor_area_radius 31 elseif MEDIUM_MAP actor_area_radius 38 elseif LARGE_MAP actor_area_radius 46 elseif HUGE_MAP actor_area_radius 53 else actor_area_radius 60 endif
 avoid_actor_area 5
 avoid_actor_area 22
 avoid_actor_area 23
@@ -1270,7 +1269,7 @@ terrain_to_place_on LEAVES
 avoid_forest_zone 1
 min_distance_group_placement 3
 actor_area 41
-actor_area_radius 24
+if TINY_MAP actor_area_radius 24 elseif SMALL_MAP actor_area_radius 31 elseif MEDIUM_MAP actor_area_radius 38 elseif LARGE_MAP actor_area_radius 46 elseif HUGE_MAP actor_area_radius 53 else actor_area_radius 60 endif
 avoid_actor_area 5
 avoid_actor_area 22
 avoid_actor_area 23
@@ -1286,7 +1285,7 @@ terrain_to_place_on LEAVES
 avoid_forest_zone 1
 min_distance_group_placement 3
 actor_area 42
-actor_area_radius 24
+if TINY_MAP actor_area_radius 24 elseif SMALL_MAP actor_area_radius 31 elseif MEDIUM_MAP actor_area_radius 38 elseif LARGE_MAP actor_area_radius 46 elseif HUGE_MAP actor_area_radius 53 else actor_area_radius 60 endif
 avoid_actor_area 5
 avoid_actor_area 22
 avoid_actor_area 23
@@ -1691,6 +1690,7 @@ create_object OFF_GRID
 set_place_for_every_player
 set_gaia_object_only
 second_object DLC_VASES
+find_closest
 actor_area_to_place_in 19
 }
 endif
