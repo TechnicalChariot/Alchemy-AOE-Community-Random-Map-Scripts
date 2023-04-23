@@ -67,7 +67,7 @@ CB.X = [CB1X; CB2X]; CB.Y = [CB1Y; CB2Y];
 
 %Setting Window-Panes
 WP.TT = [{'WPT1'} {'WPT2'}; {'WPT3'} {'WPT4'}];
-WP.BS = 6;
+WP.BS = 2;
 WP.BE = 1;
 WP.PC   = [1 4; 3 2];                                                     %Setting Player Color Assignment
 s = 13;
@@ -76,9 +76,9 @@ s = 13;
 
 %Setting Outlying Islands
 OI.TT  = [{'OI1'} {'OI2'}; {'OI3'} {'OI4'}];
-OI.BS  = 8;
+OI.BS  = 2;
 OI.BE  = 1;
-OI.OZA = 6;
+OI.OZA = 7;
 OI.PC  = [5 8; 7 6];                                                     %Setting Player Color Assignment
 OI.Z   = [1];
 OI.NT = 1000;
