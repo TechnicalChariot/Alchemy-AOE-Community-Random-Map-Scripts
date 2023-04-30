@@ -11,7 +11,8 @@ ai_info_map_type ISLANDS 0 0 0
 #const L 32
 
 /* Defining Terrains */
-#const BT 81
+/* #const BT 81 */
+#const BT 79
 #const EOT 70 
 #const EIT 81
 
@@ -34,7 +35,7 @@ ai_info_map_type ISLANDS 0 0 0
 /* Outside Island Terrains */
 #const OI1 0
 #const OI2 0
-#const OI3 0
+#const OI3 32
 #const OI4 0
 
 /* Removing Visual Effect of Dead Gaia Fish Trap */
@@ -71,6 +72,12 @@ create_elevation 1 { base_terrain CBT_4B number_of_clumps 9320 set_scale_by_grou
 
 /* create_elevation 1 { base_terrain GRASS number_of_clumps 24 set_scale_by_groups if TINY_MAP number_of_tiles 200 elseif SMALL_MAP number_of_tiles 240 elseif MEDIUM_MAP number_of_tiles 280 elseif LARGE_MAP number_of_tiles 333 elseif HUGE_MAP number_of_tiles 367 else number_of_tiles 400 endif enable_balanced_elevation } */
 
+
+/* create_elevation 4 { base_terrain OI3 number_of_clumps 24 set_scale_by_groups if TINY_MAP number_of_tiles 200 elseif SMALL_MAP number_of_tiles 240 elseif MEDIUM_MAP number_of_tiles 280 elseif LARGE_MAP number_of_tiles 333 elseif HUGE_MAP number_of_tiles 367 else number_of_tiles 400 endif enable_balanced_elevation } */
+
+create_elevation 7 { base_terrain OI3 number_of_clumps 1 set_scale_by_groups  number_of_tiles 4000  enable_balanced_elevation }
+
+
 <TERRAIN_GENERATION>
 
 #define OUTLYING_ISLAND_CLEANUP
@@ -100,16 +107,59 @@ endif
 #define WATER_LAYERING
 if WATER_LAYERING
   /* Putting Down Gravelbeach */
+  /* create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
   create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
   create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-  create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-  create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain DLC_GRAVELBEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 } */
+  create_terrain BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
   /* Putting Down Water */
+  /* create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
   create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
   create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-  create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-  create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain DLC_GRAVELBEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 } */
+  create_terrain WATER { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+  create_terrain WATER { base_terrain BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
 endif
+
+
+
+#define ISLAND_MASKING
+if ISLAND_MASKING
+  /* Masking some non-navigable beach with the snow */
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+  create_terrain BT { base_terrain OI3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
+
+
+
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+  create_terrain OI3 { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+  create_terrain DLC_FORESTSNOWAUTUMN { base_terrain OI3 land_percent 1 number_of_clumps 6 set_scale_by_groups set_avoid_player_start_areas 13 }
+  create_terrain SNOW_FOREST { base_terrain DLC_FORESTSNOWAUTUMN land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 5 7 }
+
+  create_terrain GRASS3 { base_terrain SNOW land_percent 1 number_of_clumps 9320 set_scale_by_groups height_limits 4 7 terrain_mask 1 }
+
+
+endif
+
+
+create_terrain SNOW { base_terrain DIRT land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+
+
 
 /* #define ISLAND_CAPS */
 if ISLAND_CAPS
@@ -202,6 +252,12 @@ if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 
 <LAND_GENERATION>
 base_terrain BT
+if 6_PLAYER_GAME
+L {  terrain_type  OI3 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 86 14  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 border_fuzziness 90 }
+L {  terrain_type  OI2 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 14 86  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 }
+endif
+
+
 
 /* LAND_AUTOSCRIBE */
 L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 39 15  }
@@ -415,7 +471,7 @@ L {  terrain_type  WPT4 base_size 2 number_of_tiles 0 land_position 53 79  }
 L {  terrain_type  WPT3 base_size 2 number_of_tiles 0 land_position 70 38  }
 L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 5 49  }
 L {  start_random percent_chance 50 terrain_type CBT_2A percent_chance 50 terrain_type CBT_2B end_random base_elevation 1 base_size 2 number_of_tiles 0 land_position 59 59  }
-L {  terrain_type  OI3 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 86 14  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 if TEAM_POSITIONS assign_to AT_COLOR 7 0 0 else assign_to AT_TEAM -10 0 0 endif }
+L {  terrain_type  OI3 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 86 14  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 border_fuzziness 90 if TEAM_POSITIONS assign_to AT_COLOR 7 0 0 else assign_to AT_TEAM -10 0 0 endif }
 L {  terrain_type  OI4 base_elevation 1 zone 1 other_zone_avoidance_distance 7 base_size 2 land_percent 7 land_position 86 86  left_border 6 right_border 6 top_border 6 bottom_border 6 clumping_factor 30 if TEAM_POSITIONS assign_to AT_COLOR 6 0 0 else assign_to AT_TEAM -10 0 0 endif }
 L {  terrain_type  WPT2 base_size 2 number_of_tiles 0 land_position 30 62  }
 L {  terrain_type  EOT zone 5 number_of_tiles 0 land_position 51 95  }
