@@ -1,0 +1,1 @@
+Players start in their own little oasis amidst a vast, open desert. A few neutral resources are dotted around, and trees sparsely populate the map edges.
