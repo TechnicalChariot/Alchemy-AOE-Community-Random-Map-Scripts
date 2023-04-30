@@ -68,18 +68,10 @@ create_terrain DEEP_WATER
 	land_percent 100
 	number_of_clumps 100
 if TINY_MAP
-	spacing_to_other_terrain_types 6
+	spacing_to_other_terrain_types 5
 else
-	spacing_to_other_terrain_types 8
+	spacing_to_other_terrain_types 6
 endif
-}
-create_terrain DLC_MANGROVESHALLOW
-{ 
-	base_terrain DLC_WATER5
-	land_percent 3
-	number_of_clumps 10
-	set_scale_by_groups
-	clumping_factor -10
 }
 /* TAIL MASKING */
 create_terrain DLC_MANGROVESHALLOW
@@ -162,6 +154,23 @@ create_terrain DIRT_SNOW
 	terrain_mask 1
 }
 
+create_terrain ICE
+{
+	base_terrain DLC_WATER5
+	land_percent 1
+	number_of_clumps 30
+	set_scale_by_groups
+}
+
+create_terrain ICE
+{
+	base_terrain DLC_MANGROVESHALLOW
+	land_percent 3
+	number_of_clumps 15
+	set_scale_by_groups
+}
+
+
 /* SPACE MASK */
 create_terrain DLC_BLACK
 { base_terrain DEEP_WATER land_percent 100 number_of_clumps 1000 terrain_mask 1 }
@@ -189,11 +198,11 @@ create_terrain DLC_BLACK
 create_terrain DLC_BLACK
 { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 1000 terrain_mask 1 }
 
-create_terrain DLC_BLACK
+create_terrain WATER
 { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1000 terrain_mask 1 }
-create_terrain DLC_BLACK
+create_terrain WATER
 { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1000 terrain_mask 1 }
-create_terrain DLC_BLACK
+create_terrain WATER
 { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1000 terrain_mask 1 }
 
 <OBJECTS_GENERATION>
@@ -294,7 +303,7 @@ create_object BOAR
 }
 create_object GOLD 
 {
-	number_of_objects 4
+	number_of_objects 5
 	number_of_groups 2
 	group_placement_radius 2
 	set_tight_grouping
@@ -320,10 +329,24 @@ create_object STONE
 	min_distance_group_placement 7
 	avoid_forest_zone 2
 }
+create_object DEER 
+{
+	number_of_objects 3
+	number_of_groups 1
+	group_placement_radius 3
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 2
+	avoid_actor_area 18
+	max_distance_to_players 22
+	set_circular_placement
+	min_distance_group_placement 2
+}
 /*NEUTRAL RESOURCES*/
 create_object GOLD 
 {
-	number_of_objects 3
+	number_of_objects 4
 	number_of_groups 5
 	set_tight_grouping
 	set_gaia_object_only
@@ -331,26 +354,27 @@ create_object GOLD
 	actor_area 50
 	actor_area_radius 15
 	avoid_actor_area 52
-	min_distance_to_players 30
-	temp_min_distance_group_placement 40
+	min_distance_to_players 26
+	temp_min_distance_group_placement 30
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
 create_object GOLD 
 {
-	number_of_objects 2
+	number_of_objects 3
 	number_of_groups 5
 	set_tight_grouping
 	set_gaia_object_only
 	set_scaling_to_player_number
 	actor_area 52
 	actor_area_radius 15
-	min_distance_to_players 30
-	temp_min_distance_group_placement 20
+	min_distance_to_players 26
+	temp_min_distance_group_placement 18
 	terrain_to_place_on DIRT_SNOW
+	avoid_forest_zone 1
 }
 create_object STONE
 {
-	number_of_objects 2
+	number_of_objects 3
 	number_of_groups 5
 	set_tight_grouping
 	set_gaia_object_only
@@ -358,21 +382,26 @@ create_object STONE
 	actor_area 51
 	avoid_actor_area 50
 	avoid_actor_area 52
-	min_distance_to_players 30
-	temp_min_distance_group_placement 40
+	min_distance_to_players 26
+	temp_min_distance_group_placement 30
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
 create_object TRAP
 {
-	number_of_objects 1
+	number_of_objects 2
 	number_of_groups 99
+	set_tight_grouping
 	set_gaia_object_only
 	set_scaling_to_map_size
 	set_scaling_to_player_number
-	temp_min_distance_group_placement 10
 	second_object DLC_BOXTURTLE
 	terrain_to_place_on DLC_MANGROVESHALLOW
 	ignore_terrain_restrictions
+	if TINY_MAP
+	temp_min_distance_group_placement 8
+else
+	temp_min_distance_group_placement 10
+endif
 }
 create_object DOLPHIN
 {
@@ -383,10 +412,32 @@ create_object DOLPHIN
 	set_scaling_to_player_number
 	terrain_to_place_on DEEP_WATER
 if TINY_MAP
-	temp_min_distance_group_placement 12
+	temp_min_distance_group_placement 8
 else
-	temp_min_distance_group_placement 14
+	temp_min_distance_group_placement 10
 endif
+}
+create_object RELIC
+{
+if TINY_MAP
+	number_of_objects 5
+	temp_min_distance_group_placement 16
+elseif SMALL_MAP
+	number_of_objects 5
+	temp_min_distance_group_placement 18
+elseif MEDIUM_MAP
+	number_of_objects 6
+	temp_min_distance_group_placement 20
+elseif LARGE_MAP
+	number_of_objects 7
+	temp_min_distance_group_placement 22
+elseif HUGE_MAP
+	number_of_objects 8
+	temp_min_distance_group_placement 24
+endif
+	set_gaia_object_only
+	avoid_forest_zone 3
+	min_distance_to_players 20
 }
 /* END_OBJECTS_AUTOSCRIBE */
 
