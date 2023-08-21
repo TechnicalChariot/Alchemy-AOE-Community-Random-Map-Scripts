@@ -1,11 +1,12 @@
+
 /* Hippoasis */
 /* A Reskin of Kharga by TechChariot */
 /* 1.22.23 */
-
 <PLAYER_SETUP>
 direct_placement
 #const L 32  /* Defining Land Creation Command */
 /* Defining Starting Scout */
+
 if REGICIDE
 #const KHARGA_SCOUT        434   /* Kharga Scout is King (434) */
 else

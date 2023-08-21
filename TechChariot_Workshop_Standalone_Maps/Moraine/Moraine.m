@@ -96,7 +96,7 @@ for k = 1:1
 y(k) = {@(x) 0*x };
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation,Angle,thk,[0 30],[-1500 1500]);
 if k == 1
-Drainage_River = STRUC(k).XY;
+Drainage_River = STRUC(k).XY; 
 else
 Drainage_River = [Drainage_River; STRUC(k).XY];
 end
@@ -116,7 +116,7 @@ for k = 1:1
 y(k) = {@(x) 0*x };
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation,Angle,thk,[32 32],[-1500 1500]);
 if k == 1
-Ice_Island = STRUC(k).XY;
+Ice_Island = STRUC(k).XY; 
 else
 Ice_Island = [Ice_Island; STRUC(k).XY];
 end
@@ -136,7 +136,7 @@ for k = 1:29
 y(k) = {@(x) -100*cos(2*pi*x/200) + 37.5 + 0.5*k};
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation,Angle,thk,[-16 16]);
 if k == 1
-Moraine_Creation = STRUC(k).XY;
+Moraine_Creation = STRUC(k).XY; 
 else
 Moraine_Creation = [Drainage_River; STRUC(k).XY];
 end
@@ -153,7 +153,7 @@ for k = 1:50
 y(k) = {@(x) -100*cos(2*pi*x/200) - k + 50};
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation,Angle,thk,[-40 40]);
 if k == 1
-Beach = STRUC(k).XY;
+Beach = STRUC(k).XY; 
 else
 Beach = [Beach; STRUC(k).XY];
 end
@@ -170,7 +170,7 @@ for k = 1:5
 y(k) = {@(x) -100*cos(2*pi*x/200) + 7*k + 45};
 STRUC(k).XY = LandScribeV4(y{k},terrain_type,base_elevation,Angle,thk,[-13 13],[-1500 1500]);
 if k == 1
-Glacial_Lake = STRUC(k).XY;
+Glacial_Lake = STRUC(k).XY; 
 else
 Glacial_Lake = [Glacial_Lake; STRUC(k).XY];
 end
