@@ -42,9 +42,11 @@ ISf = [{'0.01*x.^2'}];
 IS.BE = [1 1 2 2 3 3 4];
 IS.TT = [{'GRASS2'}];
 IS.SS = [3];
-IS.BS = [1];
+IS.BS = [1 1 1 2 2 2 3];
 IS.X = [ISX]; IS.Y = [ISY];
-IS.NT = linspace(50,70,7);
+IS.NT = linspace(40,70,7);
+IS.NT(1,end) = 80;
+IS.Z = 1;
 [LM_IS,IS] = LandScribeV6(IS,[1 1]);
 
 %% -- Section on Lava Flow -- %%
@@ -62,7 +64,9 @@ LF.X = [LFX]; LF.Y = [LFY];
 LF.BS = ones(length(LFX),1);
 LF.BS(1,1) = 3;
 LF.NT = linspace(16,8,length(LFX))';
-LF.NT(1,1) = 64; %giving the last time some extra spillage
+LF.NT(1,1) = 64; %giving the last some extra spillage
+LF.NT(2,1) = 32; %giving the second to last some extra spillage
+LF.Z = 2; %zone declaration
 
 [LM_LF,LF] = LandScribeV6(LF,[1 1]);
 
