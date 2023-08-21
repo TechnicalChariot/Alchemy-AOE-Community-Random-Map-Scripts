@@ -1837,6 +1837,7 @@ force_placement
 }
 /* END_OBJECTS_AUTOSCRIBE */
 if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
+
 <LAND_GENERATION>
 base_terrain DLC_DIRT4
 
