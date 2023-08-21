@@ -412,7 +412,36 @@ assign_to AT_TEAM -10 0 0
 endif
 }
 /* LAND_AUTOSCRIBE */
-L {  terrain_type  WRB base_size 1 number_of_tiles 16 land_position 97 95  }
-L {  terrain_type  WRB base_size 1 number_of_tiles 16 land_position 78 78  }
-L {  terrain_type  WRB base_size 1 number_of_tiles 16 land_position 55 65  }
-L {  terrain_type  WRB base_size 1 number_of_tiles 16 land_position 27 56  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 11 9  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 61 39  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 86 78  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 62 100  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 27 50  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 16 28  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 45 67  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 68 74  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 56 57  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 77 94  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 72 84  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 52 32  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 22 14  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 0 38  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 50 73  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 68 48  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 39 61  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 33 19  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 33 55  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 62 65  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 10 41  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 59 90  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 81 67  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 19 45  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 35 38  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 43 44  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 55 81  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 75 57  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 26 32  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 91 89  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 6 23  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 50 50  }
+L {  terrain_type  WRB number_of_tiles 100 land_position 43 25  }

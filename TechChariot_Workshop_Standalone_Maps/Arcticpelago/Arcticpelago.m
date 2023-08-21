@@ -20,9 +20,12 @@ MLP = []; f = [{'0.005*x.^2'}];
 %f = [{'0*x'}; {'0.010*x.^2'}; {'-0.010*x.^2'}];
 
 
-[IsX,IsY] = function_to_points([f(1); {[50 50]}; {50}],[{[-50 50]}; {5}]);
+[IsX,IsY] = function_to_points_V2([f; {[50 50]}; {45}],[-50 50],[-15 15],[10; 14],[0 0]);
 
-
+%figure(1)
+%plot(IsX,IsY,'x')
+%grid minor
+%axis equal
 
 
 %for i = 1:length(O)
@@ -35,9 +38,9 @@ MLP = []; f = [{'0.005*x.^2'}];
 %end
 %%
 
-Is.TT = [{'WRB'}]; Is.BS = [1];
+Is.TT = [{'WRB'}]; Is.BS = [3];
 Is.X = [IsX]; Is.Y = [IsY];
-Is.NT = 16;
+Is.NT = 100;
 
 [LM_Is,Is] = LandScribeV6(Is,[1 1]); List = [RMS_Processor_V6(LM_Is)];
 
