@@ -795,6 +795,7 @@ actor_area_to_place_in 1
 create_object BUILDING_BLOCKER
 {
 set_gaia_object_only
+set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WETROCKBEACH
@@ -2040,6 +2041,7 @@ actor_area_to_place_in 2
 create_object BUILDING_BLOCKER
 {
 set_gaia_object_only
+set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_WETROCKBEACH
