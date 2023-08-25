@@ -38,7 +38,7 @@ Comment those define commands if you want a normal start:
 random_placement
 /* ai_info_map_type BLACK_FOREST 0 0 0 */
 /* weather_type -3 16 0 -1 */
-effect_amount ADD_ATTRIBUTE TOWER_CLASS ATTR_STONE_COST 274
+effect_amount ADD_ATTRIBUTE TOWER_CLASS ATTR_STONE_COST 76
 effect_amount ADD_ATTRIBUTE FARM_CLASS ATTR_WOOD_COST 10
 
 <LAND_GENERATION>
@@ -606,13 +606,13 @@ endif }
 
 /* outer forests */
 #const FOREST_RAINFOREST 56     create_terrain FOREST_RAINFOREST    { base_terrain GRASS_JUNGLE                                           number_of_clumps 148 set_avoid_player_start_areas spacing_to_other_terrain_types 0
-if     TINY_MAP     land_percent 19
-elseif SMALL_MAP    land_percent 16
-elseif MEDIUM_MAP   land_percent 21
-elseif LARGE_MAP    land_percent 23
-elseif HUGE_MAP     land_percent 27
-elseif GIGANTIC_MAP land_percent 28
-elseif LUDIKRIS_MAP land_percent 32
+if     TINY_MAP     land_percent 17
+elseif SMALL_MAP    land_percent 14
+elseif MEDIUM_MAP   land_percent 19
+elseif LARGE_MAP    land_percent 21
+elseif HUGE_MAP     land_percent 25
+elseif GIGANTIC_MAP land_percent 26
+elseif LUDIKRIS_MAP land_percent 30
 endif }
 /* center forest */
 #const BIRCH_FOREST 110         create_terrain BIRCH_FOREST         { base_terrain GRASS1                                              number_of_clumps 999999 set_avoid_player_start_areas spacing_to_other_terrain_types 0 
@@ -624,27 +624,6 @@ elseif HUGE_MAP     land_percent 2
 elseif GIGANTIC_MAP land_percent 2
 elseif LUDIKRIS_MAP land_percent 2
 endif }
-/*
-#const BIRCH_FOREST 110         create_terrain BIRCH_FOREST         { base_terrain GRASS_JUNGL2                                        number_of_clumps 999999 set_avoid_player_start_areas spacing_to_other_terrain_types 0 
-if     TINY_MAP     number_of_tiles 7
-elseif SMALL_MAP    number_of_tiles 9
-elseif MEDIUM_MAP   number_of_tiles 11
-elseif LARGE_MAP    number_of_tiles 13
-elseif HUGE_MAP     number_of_tiles 15
-elseif GIGANTIC_MAP number_of_tiles 17
-elseif LUDIKRIS_MAP number_of_tiles 19
-endif } */
-
-/*
-#const FOREST_PALM_ON_GRASS 112 create_terrain FOREST_PALM_ON_GRASS { base_terrain GRASS_JUNGLE                                             number_of_clumps 999999 set_avoid_player_start_areas spacing_to_other_terrain_types 0 
-if     TINY_MAP     land_percent 6
-elseif SMALL_MAP    land_percent 7
-elseif MEDIUM_MAP   land_percent 9
-elseif LARGE_MAP    land_percent 10
-elseif HUGE_MAP     land_percent 12
-elseif GIGANTIC_MAP land_percent 13
-elseif LUDIKRIS_MAP land_percent 15
-endif } */
 
 /* JUNGLELEAVES is already a GRASS_JUNGLE layering on UDBRUSH_JUNGLE */
 #const JUNGLELEAVES 62          create_terrain JUNGLELEAVES         { base_terrain GRASS_JUNGLE base_layer GRASS_JUNGLE number_of_tiles 100 number_of_clumps 3                                 spacing_to_other_terrain_types 0 }
@@ -663,7 +642,7 @@ endif } */
 <OBJECTS_GENERATION>
 /* Place starter units and TC. */
 create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
-create_object VILLAGER {                          if NINE_VILLS number_of_objects 9 else number_of_objects 3 endif                         set_place_for_every_player max_distance_to_players 6          min_distance_to_players 6 }
+create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                           set_place_for_every_player max_distance_to_players 6          min_distance_to_players 6 }
 
 if MILITARY_STARTER
     
@@ -674,40 +653,24 @@ if MILITARY_STARTER
     #const QUEEN 1292
     #const MERCHANT 1572
     start_random
-    percent_chance 3 #define HORSE1
-    percent_chance 3 #define HORSE2
-    percent_chance 3 #define HORSE3
-    percent_chance 3 #define HORSE4
-    percent_chance 3 #define HORSE5
-    percent_chance 3 #define HORSE6
-    percent_chance 3 #define HORSE7
-    percent_chance 10 #define HORSE8
-    percent_chance 20 #define HORSE9
-    percent_chance 30 #define HORSE10
-    percent_chance 4 #define HORSE11
-    end_random
-    if     HORSE1 create_object DLC_DROMEDARY
-    elseif HORSE2 create_object CAMEL_2
-    elseif HORSE3 create_object HORSE
-    elseif HORSE4 create_object HORSE_B
-    elseif HORSE5 create_object HORSE_C
-    elseif HORSE6 create_object HORSE_D
-    elseif HORSE7 create_object HORSE_E
-    elseif HORSE8 create_object DONKEY
-    elseif HORSE9 create_object QUEEN
-    elseif HORSE10 create_object MERCHANT
-    elseif HORSE11 create_object VMDL endif {                                                                                              set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    percent_chance 3  create_object DLC_DROMEDARY
+    percent_chance 3  create_object CAMEL_2
+    percent_chance 3  create_object HORSE
+    percent_chance 3  create_object HORSE_B
+    percent_chance 3  create_object HORSE_C
+    percent_chance 3  create_object HORSE_D
+    percent_chance 3  create_object HORSE_E
+    percent_chance 10 create_object DONKEY
+    percent_chance 20 create_object QUEEN
+    percent_chance 30 create_object MERCHANT
+    percent_chance 4  create_object VMDL end_random {                                                                                      set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
     
     /* 2 - The same scout (out of the three normal scout variants) for all players  */
     #const CAMEL_SCOUT 1755
     start_random
-    percent_chance 20 #define SCOUT_1_1
-    percent_chance 20 #define SCOUT_1_2
-    percent_chance 20 #define SCOUT_1_3
-    end_random
-    if     SCOUT_1_1 create_object SCOUT_CAVALRY
-    elseif SCOUT_1_2 create_object EAGLE_WARRIOR /* This is Eagle Scout. The real Eagle Warrior is 753 */
-    elseif SCOUT_1_3 create_object CAMEL_SCOUT endif {                                                                                     set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    percent_chance 20 create_object SCOUT_CAVALRY
+    percent_chance 20 create_object EAGLE_WARRIOR /* This is Eagle Scout. The real Eagle Warrior is 753 */
+    percent_chance 20 create_object CAMEL_SCOUT end_random {                                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
     
     /* 3 - Fancy additional starting units */	
 	#const JUNK 15
@@ -721,36 +684,53 @@ if MILITARY_STARTER
 	#const MONKBOAT 1022
     #const NINJA 1145
 	/* The unit GENITOUR has a Militia skin it's ugly so we use DLC_GENITOUR. */
-    start_random percent_chance 20 #define SCOUT_2_12 end_random if SCOUT_2_12 create_object DLC_SIEGETOWER {                              set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 0  #define SCOUT_2_8  end_random if SCOUT_2_8  create_object ASSAULT_TOWER {                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 10 #define SCOUT_2_11 end_random if SCOUT_2_11 create_object SCORPION {                                    set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-
-    start_random percent_chance 20 #define SCOUT_2_1  end_random if SCOUT_2_1  create_object ARCHER {                                      set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 30 #define SCOUT_2_4  end_random if SCOUT_2_4  create_object AMZ_ARCHER {                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 30 #define SCOUT_2_2  end_random if SCOUT_2_2  create_object SKIRMISHER {                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 20 #define SCOUT_2_3  end_random if SCOUT_2_3  create_object SLINGER {                                     set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 10 #define SCOUT_2_5  end_random if SCOUT_2_5  create_object DLC_GENITOUR {                                set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-
-    start_random percent_chance 30 #define SCOUT_2_6  end_random if SCOUT_2_6  create_object MILITIA {                                     set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 30 #define SCOUT_2_7  end_random if SCOUT_2_7  create_object SPEARMAN {                                    set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 30 #define SCOUT_2_9  end_random if SCOUT_2_9  create_object AMZ_WARRIOR {                                 set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
-    start_random percent_chance 20 #define SCOUT_2_13 end_random if SCOUT_2_13 create_object NINJA {                                       set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } endif
+    start_random percent_chance 20 create_object DLC_SIEGETOWER end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 0  create_object ASSAULT_TOWER  end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 10 create_object SCORPION       end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
 	
-    start_random percent_chance 10 #define SCOUT_2_14 end_random if SCOUT_2_14 create_object MONKBOAT {  ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
-    start_random percent_chance 10 #define SCOUT_2_15 end_random if SCOUT_2_15 create_object TRADE_COG { ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
-    start_random percent_chance 10 #define SCOUT_2_16 end_random if SCOUT_2_16 create_object JUNK {      ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
-    start_random percent_chance 10 #define SCOUT_2_17 end_random if SCOUT_2_17 create_object MONKBOAT1 { ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
-    start_random percent_chance 10 #define SCOUT_2_18 end_random if SCOUT_2_18 create_object MONKBOAT2 { ignore_terrain_restrictions       set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS } endif
+    start_random percent_chance 20 create_object ARCHER         end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 30 create_object AMZ_ARCHER     end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 30 create_object SKIRMISHER     end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 20 create_object SLINGER        end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 10 create_object DLC_GENITOUR   end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+	
+    start_random percent_chance 30 create_object MILITIA        end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 30 create_object SPEARMAN       end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 30 create_object AMZ_WARRIOR    end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 20 create_object NINJA          end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+	
+    start_random percent_chance 10 create_object MONKBOAT       end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
+    start_random percent_chance 10 create_object TRADE_COG      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
+    start_random percent_chance 10 create_object JUNK           end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
+    start_random percent_chance 10 create_object MONKBOAT1      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
+    start_random percent_chance 10 create_object MONKBOAT2      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
 else
 
     /* Normal scout */
+    create_object SCOUT {                                                                                                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
     create_object SCOUT {                                                                                                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
 endif
 
 /* Add some gold and stone quite close around each player to offer a fair start and help walling. */
 create_object GOLD {                                            number_of_objects 2 number_of_groups 3 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 9          min_distance_to_players 7 set_gaia_object_only }
 create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 9          min_distance_to_players 7 set_gaia_object_only }
+
+start_random percent_chance 20 create_object DLC_COW
+             percent_chance 20 create_object DLC_COW_B
+             percent_chance 20 create_object DLC_COW_C
+             percent_chance 20 create_object DLC_COW_D
+             percent_chance 20 create_object DLC_WATERBUFFALO end_random {          number_of_groups 1                                     set_place_for_every_player max_distance_to_players 3        min_distance_to_players 3 set_gaia_object_only }
+start_random percent_chance 20 create_object DLC_GOAT
+             percent_chance 20 create_object DLC_GOOSE
+             percent_chance 20 create_object DLC_PIG
+             percent_chance 20 create_object SHEEP
+             percent_chance 20 create_object TURKEY end_random {                    number_of_groups 1                                     set_place_for_every_player max_distance_to_players 3        min_distance_to_players 3 set_gaia_object_only }
+
 /* Add a thick ring of deer around each player */
+create_object DEER {                                                                number_of_groups 2                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
+create_object DEER {                                                                number_of_groups 2                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
+create_object DEER {                                                                number_of_groups 2                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
+create_object DEER {                                                                number_of_groups 2                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
 create_object DEER {                                                                number_of_groups 2                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
 create_object DEER {                                                                number_of_groups 2                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
 create_object DEER {                                                                number_of_groups 2                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
@@ -758,19 +738,36 @@ create_object DEER {                                                            
 create_object DEER {                                                                number_of_groups 2                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 15 set_gaia_object_only }
 
 /* When either set_scaling_to_map_size or set_scaling_to_player_number is specified, number_of_objects 0 will still spawn a few objects (approx. 6 with 2players, approx. 10 with 8 players, map size doesn't matter). */
+create_object RELIC {              set_scaling_to_player_number number_of_objects 4 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
 /* Fill the glade. */
-#const GAIA_ARCHER 158
-create_object GAIA_ARCHER {        set_scaling_to_player_number number_of_objects 2 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS1       min_distance_to_map_edge 29 min_distance_to_players 16 set_gaia_object_only }
-create_object DEER {               set_scaling_to_map_size     number_of_objects 17 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 min_distance_to_map_edge 11 min_distance_to_players 12 
-                                                                                                                                                 actor_area 51 actor_area_radius 9 }
-																																				 
+create_object RELIC {                                           number_of_objects 2 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 find_closest_to_map_center }
+create_object DEER {               set_scaling_to_map_size     number_of_objects 23 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 min_distance_to_map_edge 11 min_distance_to_players 12 find_closest_to_map_center
+                                                                                                                                           actor_area 51
+                                                                                                                       if     TINY_MAP     actor_area_radius 10
+                                                                                                                       elseif SMALL_MAP    actor_area_radius 13
+                                                                                                                       elseif MEDIUM_MAP   actor_area_radius 16
+                                                                                                                       elseif LARGE_MAP    actor_area_radius 19
+                                                                                                                       elseif HUGE_MAP     actor_area_radius 22
+                                                                                                                       elseif GIGANTIC_MAP actor_area_radius 25
+                                                                                                                       elseif LUDIKRIS_MAP actor_area_radius 28
+                                                                                                                       endif }
+																													   
 /* Add more resources far from all players. */
-create_object GOLD {               set_scaling_to_map_size      number_of_objects 2 number_of_groups 6 group_variance 0 set_tight_grouping avoid_actor_area 51               
-                                               min_distance_to_players 17 }
+create_object GOLD {                                            number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 25 set_gaia_object_only max_distance_to_players 27 }
+create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 24 set_gaia_object_only max_distance_to_players 26 }
+create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 23 set_gaia_object_only max_distance_to_players 25 }
+create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 11 set_gaia_object_only max_distance_to_players 13 }
+
+create_object GOLD {                                            number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only }
+create_object STONE {                                           number_of_objects 1 number_of_groups 3 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only }
+create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only }
+create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 1 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only }
+
+/* 
+create_object GOLD {               set_scaling_to_map_size      number_of_objects 2 number_of_groups 6 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 17 }
 create_object STONE {              set_scaling_to_map_size      number_of_objects 1 number_of_groups 1 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 17 }
 create_object FORAGE {             set_scaling_to_map_size      number_of_objects 1 number_of_groups 9 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 19 }
-create_object DLC_ORANGEBUSH {     set_scaling_to_map_size      number_of_objects 1 number_of_groups 9 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 19 }
-create_object RELIC {              set_scaling_to_player_number number_of_objects 7 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
+create_object DLC_ORANGEBUSH {     set_scaling_to_map_size      number_of_objects 1 number_of_groups 9 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 19 } */
 
 /* Add predators (with a few unconvertible archers to protect the deer in the center). */                                                                                    
 /* create_object DLC_CROCODILE {      set_scaling_to_player_number number_of_objects 0 ignore_terrain_restrictions place_on_specific_land_id 1                                  min_distance_to_map_edge 12 min_distance_to_players 16 set_gaia_object_only } */
@@ -818,6 +815,8 @@ create_object DLC_FENCE {          set_scaling_to_map_size      number_of_object
 
 /* Add scams (These Relics are fake too.). */
 if SCAMS_EVERYWHERE
+ #const GAIA_ARCHER 158
+ create_object GAIA_ARCHER {       set_scaling_to_player_number number_of_objects 2 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS1       min_distance_to_map_edge 29 min_distance_to_players 16 set_gaia_object_only }
   #const FAKE_STONE 248
   #const FAKE_GOLD 252
   #const FAKE_FORAGE 262
@@ -845,27 +844,27 @@ endif
 
 /* Add fish. */
 #const DOLPHIN 61
-create_object DLC_BOXTURTLE {      set_scaling_to_map_size      number_of_objects 1 ignore_terrain_restrictions                              terrain_to_place_on BEACH_WETROCK } /* Does not spawn even if i put 100 */
-create_object DOLPHIN {            set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
-create_object DORADO {             set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
-create_object GREAT_FISH_MARLIN {  set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
-create_object FISH_PERCH {         set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
-create_object SALMON {             set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
-create_object SHORE_FISH {         set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
-create_object SNAPPER {            set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
-create_object TUNA {               set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on SHALLOW }
+create_object DLC_BOXTURTLE {      set_scaling_to_map_size      number_of_objects 2 ignore_terrain_restrictions                              terrain_to_place_on BEACH_WETROCK } /* Does not spawn even if i put 100 */
+create_object DOLPHIN {            set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
+create_object DORADO {             set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
+create_object GREAT_FISH_MARLIN {  set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
+create_object FISH_PERCH {         set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
+create_object SALMON {             set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
+create_object SHORE_FISH {         set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
+create_object SNAPPER {            set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
+create_object TUNA {               set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
 
 /* Add pigeons. */
 #const FALCON 1056
 #const STORMY_DOG 544   /* This one works only 1% of the time. */
 #const STORMY_DOG_2 862 /* This one works fine. */
-create_object FALCON {             set_scaling_to_map_size      number_of_objects 5 }
-create_object HAWK {               set_scaling_to_map_size      number_of_objects 5 }
-create_object MACAW {              set_scaling_to_map_size      number_of_objects 31 }
-create_object DLC_STORK {          set_scaling_to_map_size      number_of_objects 9 }
-create_object STORMY_DOG {         set_scaling_to_map_size      number_of_objects 2 }
-create_object STORMY_DOG_2 {       set_scaling_to_map_size      number_of_objects 2 }
-create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_objects 5 }
+create_object FALCON {             set_scaling_to_map_size      number_of_objects 2 }
+create_object HAWK {               set_scaling_to_map_size      number_of_objects 2 }
+create_object MACAW {              set_scaling_to_map_size      number_of_objects 11 }
+create_object DLC_STORK {          set_scaling_to_map_size      number_of_objects 5 }
+create_object STORMY_DOG {         set_scaling_to_map_size      number_of_objects 1 }
+create_object STORMY_DOG_2 {       set_scaling_to_map_size      number_of_objects 1 }
+create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_objects 2 }
 
 /* Add scenery. */
                           create_object SEA_ROCKS_1 {           number_of_objects 1                                                          terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
