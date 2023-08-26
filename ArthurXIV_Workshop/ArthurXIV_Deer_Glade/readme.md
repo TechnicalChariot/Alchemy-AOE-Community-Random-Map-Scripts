@@ -4,13 +4,11 @@ by ArthurXIV
 ### Map features
 - Circular map:
 
-> $\begin{aligned}
-\text{Center}   &: \text{2 Relics, lots of Deer.} &\\
-\text{1st ring} &: \text{sparse Birch trees.} &\\
-\text{2nd ring} &: \text{Players and Deer. High proximity.} &\\
-\text{3rd ring} &: \text{Wood line and Boars.} &\\
-\text{4th ring} &: \text{Relics, Crocodiles and few fish on Shallow terrain. Allows naval Trade.} &\\
-\end{aligned}$
+>Center: &nbsp; &nbsp; &nbsp; 2 Relics, lots of Deer.  
+>1st ring: &nbsp; &nbsp; &nbsp; sparse Birch trees.  
+>2nd ring: &nbsp; &nbsp; &nbsp; Players and Deer. High proximity.  
+>3rd ring: &nbsp; &nbsp; &nbsp; Wood line and Boars.  
+>4th ring: &nbsp; &nbsp; &nbsp; Relics, Crocodiles and few fish on Shallow terrain. Allows naval Trade.  
 
 - expensive towers (+76 stone)
 - expensive farms (+10 wood)
