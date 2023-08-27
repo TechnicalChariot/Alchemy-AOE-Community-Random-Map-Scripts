@@ -1,45 +1,44 @@
 /* Arcticpelago */
-/* A Random Map Script Developed by TechChariot 4/23/23 */
-
+/* A Random Map Script Developed by TechChariot 8/26/23 */
 
 <PLAYER_SETUP>
 direct_placement
 behavior_version 1
+
+if LOW_RESOURCES
 nomad_resources
+else
+/* ai_info_map_type 42 0 0 0 */
+endif
+
+/* Defining Player Lands */
+#const PT1 82
+#const PT2 82
+#const PT3 82
+#const PT4 82
+#const PT5 82
+#const PT6 82
+#const PT7 82
+#const PT8 82
 
 /* Remove Visual Effect of Dead Fish Trap */
 #const ON_GRID 278
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
-effect_amount SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
-/* Upgrading Regular Bushes to Snowy Bushes */
-#const FB 302
-#const AB 1053
-#const ABS 1054
-effect_amount GAIA_UPGRADE_UNIT FB ABS 0
-effect_amount GAIA_UPGRADE_UNIT AB ABS 0
+/* Making Rock Beach Semi-Transparent */
+effect_amount GAIA_SET_ATTRIBUTE DLC_ROCKBEACH ATTR_OCCLUSION_MODE 2
 
-/* Disallowing Oak Tree Spawn on FOREST, Make it Spawn on Palm Desert Instead */
-#const OFT 411
-effect_amount GAIA_SET_ATTRIBUTE OFT ATTR_TERRAIN_ID 13
+/* Configuring Building Blocker */
+#const BUILDING_BLOCKER 1654
+effect_percent GAIA_SET_ATTRIBUTE BUILDING_BLOCKER ATTR_RADIUS_1 50
+effect_percent GAIA_SET_ATTRIBUTE BUILDING_BLOCKER ATTR_RADIUS_2 50
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_WOOD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_FOOD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_GOLD  ATTR_SET 0
+effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_STONE ATTR_SET 0
 
-/* Reducing Amount of Food in Deep Fish */
-effect_amount GAIA_SET_ATTRIBUTE FISH ATTR_STORAGE_VALUE 150
 
-/* Make Some Non Herd Groups Act Like Herds */
-effect_amount GAIA_UPGRADE_UNIT DLC_ZEBRA DLC_GOOSE 0
-effect_amount GAIA_SET_ATTRIBUTE DLC_ZEBRA ATTR_TERRAIN_ID 0
-
-/* Reducing Radius of Mountains */
-effect_amount GAIA_SET_ATTRIBUTE DLC_MOUNTAIN_6 ATTR_RADIUS_1 1
-effect_amount GAIA_SET_ATTRIBUTE DLC_MOUNTAIN_6 ATTR_RADIUS_2 1
-effect_amount GAIA_SET_ATTRIBUTE DLC_MOUNTAIN_7 ATTR_RADIUS_1 1
-effect_amount GAIA_SET_ATTRIBUTE DLC_MOUNTAIN_7 ATTR_RADIUS_2 1
-effect_amount GAIA_SET_ATTRIBUTE DLC_MOUNTAIN_8 ATTR_RADIUS_1 1
-effect_amount GAIA_SET_ATTRIBUTE DLC_MOUNTAIN_8 ATTR_RADIUS_2 1
-
-/* Modify Player Starting Resources */
-effect_amount MOD_RESOURCE AMOUNT_STARTING_WOOD ATTR_ADD 50
+/* Defining Terrestrial Beast */
 
 
 /* Definitions Regarding Trade Carts and Cogs */
@@ -58,390 +57,274 @@ effect_amount SET_ATTRIBUTE TRADE_COG ATTR_LINE_OF_SIGHT 1
 #const L 32
 
 /* Defining Terrains */
-#const B 2
-#const WNB 15
-#const V 70
-#const SNOW_LIGHT 73
-#const MUD 76
-#const NNGB 81
-#const NNRB 82
-#const BUSH_FOREST 89
-#const WRB 109
+#const BEACHLESS_WATER 15
+
 
 <ELEVATION_GENERATION>
-/* Lake Swells */
-/* create_elevation 1 { base_terrain B number_of_clumps 24 set_scale_by_groups if TINY_MAP number_of_tiles 1000 elseif SMALL_MAP number_of_tiles 600 elseif MEDIUM_MAP  number_of_tiles 1000 elseif LARGE_MAP number_of_tiles 1800 elseif HUGE_MAP number_of_tiles 2600 else number_of_tiles 3200 endif enable_balanced_elevation } */
 
 <TERRAIN_GENERATION>
-/* #define LAKE_SUPERIOR */
-if LAKE_SUPERIOR    
-    /* Smoothing Out Shoreline */
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 set_flat_terrain_only height_limits 0 0 }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 set_flat_terrain_only height_limits 0 0 }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 set_flat_terrain_only height_limits 0 0 }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 set_flat_terrain_only height_limits 0 0 }
-    /* Layer Water Atop Beach */
-    create_terrain WATER { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WATER { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WATER { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WATER { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    /* Replace Base Terrain With Beach (to Connect Default Beach Formed from Above Operation) */
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain B { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    /* Replace Beach Terrain With Actual Desired Beach */
-    create_terrain WRB { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WRB { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WRB { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WRB { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups } 
-    create_terrain WRB { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WRB { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WRB { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain WRB { base_terrain B land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    /* Replace Upland Navigable Beach With Grass, the Player Land Terrain */
-    create_terrain GRASS { base_terrain WRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain GRASS { base_terrain WRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain GRASS { base_terrain WRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain GRASS { base_terrain WRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain GRASS { base_terrain WRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain GRASS { base_terrain WRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain GRASS { base_terrain WRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain GRASS { base_terrain WRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    /* Masking Deeper Water over Water */
-    create_terrain MED_WATER { base_terrain WATER land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain MED_WATER { base_terrain WATER land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    create_terrain DEEP_WATER { base_terrain MED_WATER land_percent 10 number_of_clumps 24 set_scale_by_groups spacing_to_other_terrain_types 2 terrain_mask 2 }
-    create_terrain DLC_WATER4 { base_terrain DEEP_WATER land_percent 1 number_of_clumps 24 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    /* Floating Ice Chunks in Medium Water */
-    create_terrain ICE { base_terrain MED_WATER land_percent 8 number_of_clumps 32 set_scale_by_groups }
-    create_terrain MED_WATER { base_terrain ICE land_percent 4 number_of_clumps 32 set_scale_by_groups }
-    create_terrain SNOW_LIGHT { base_terrain MED_WATER land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    /* Floating Ice Chunks in Deep Water */
-    create_terrain ICE { base_terrain DEEP_WATER land_percent 4 number_of_clumps 32 set_scale_by_groups }
-    create_terrain DEEP_WATER { base_terrain ICE land_percent 2 number_of_clumps 32 set_scale_by_groups }
-    create_terrain SNOW_LIGHT { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    /* Sporadic Ice Along Shore */
-    create_terrain ICE { base_terrain WATER land_percent 2 number_of_clumps 9320 set_scale_by_groups }
+
+/* #define PLAYER_FOREST_ASSIGNMENT */
+if PLAYER_FOREST_ASSIGNMENT
+    
+    if LOW_RESOURCES
+    /* If Nomad Configuration is Selected, Simply Do Main Neutral Forests */
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_MANGROVESHALLOW land_percent 3 number_of_clumps 16 clumping_factor 25 set_scale_by_groups spacing_to_other_terrain_types 6 }
+
+    else
+    /* If Nomad Configuration is Not Selected */
+    start_random
+    percent_chance 50 #define FN2
+    percent_chance 50 #define FN3
+    end_random
+    /* Creating Pockets for Forest in Base Terrain */
+    create_terrain BROWN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups set_avoid_player_start_areas 21 }
+    create_terrain BROWN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups set_avoid_player_start_areas 21 }
+    create_terrain BROWN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups set_avoid_player_start_areas 21 }
+    create_terrain BROWN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups set_avoid_player_start_areas 21 }
+    create_terrain BROWN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups set_avoid_player_start_areas 21 }
+    create_terrain BROWN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups set_avoid_player_start_areas 21 }
+    create_terrain BROWN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups set_avoid_player_start_areas 21 }
+    create_terrain BROWN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups set_avoid_player_start_areas 21 }
+
+    /* First Player Forests */
+    create_terrain GREEN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 }
+    create_terrain DLC_WATER4 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    if FN3
+    create_terrain DLC_WATER5 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    endif
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Second Player Forests */
+    create_terrain GREEN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 }
+    create_terrain DLC_WATER4 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    if FN3
+    create_terrain DLC_WATER5 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    endif
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Third Player Forests */
+    create_terrain GREEN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 }
+    create_terrain DLC_WATER4 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    if FN3
+    create_terrain DLC_WATER5 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    endif
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Fourth Player Forests */
+    create_terrain GREEN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 }
+    create_terrain DLC_WATER4 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    if FN3
+    create_terrain DLC_WATER5 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    endif
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Fifth Player Forests */
+    create_terrain GREEN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 }
+    create_terrain DLC_WATER4 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    if FN3
+    create_terrain DLC_WATER5 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    endif
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Sixth Player Forests */
+    create_terrain GREEN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 }
+    create_terrain DLC_WATER4 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    if FN3
+    create_terrain DLC_WATER5 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    endif
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Seventh Player Forests */
+    create_terrain GREEN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 }
+    create_terrain DLC_WATER4 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    if FN3
+    create_terrain DLC_WATER5 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    endif
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Eighth Player Forests */
+    create_terrain GREEN_WATER { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 1 spacing_to_other_terrain_types 1 }
+    create_terrain DEEP_WATER { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 }
+    create_terrain DLC_WATER4 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    if FN3
+    create_terrain DLC_WATER5 { base_terrain GREEN_WATER clumping_factor 30 set_avoid_player_start_areas 13 number_of_clumps 1 number_of_tiles 40 clumping_factor 25 spacing_to_other_terrain_types 1 }
+    endif
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Reverting Back to Beachless Water */
+    create_terrain DLC_MANGROVESHALLOW { base_terrain BROWN_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups }
+    create_terrain DLC_MANGROVESHALLOW { base_terrain BROWN_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups }
+    create_terrain DLC_MANGROVESHALLOW { base_terrain BROWN_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups }
+    create_terrain DLC_MANGROVESHALLOW { base_terrain BROWN_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups }
+    create_terrain DLC_MANGROVESHALLOW { base_terrain BROWN_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups }
+    create_terrain DLC_MANGROVESHALLOW { base_terrain BROWN_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups }
+    create_terrain DLC_MANGROVESHALLOW { base_terrain BROWN_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups }
+    create_terrain DLC_MANGROVESHALLOW { base_terrain BROWN_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups }
+    create_terrain DLC_NEWSHALLOW { base_terrain BEACHLESS_WATER land_percent 100 number_of_clumps 9320 clumping_factor 25 set_scale_by_groups terrain_mask 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+    create_terrain BROWN_WATER { base_terrain GREEN_WATER land_percent 100 number_of_clumps 1 }
+
+    /* Converting Various Pools to Actual Mangrove Forest */
+    create_terrain DLC_MANGROVEFOREST { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DEEP_WATER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_WATER4 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    if FN3
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain DLC_MANGROVEFOREST { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    endif
+    endif
+    
+    
+
 endif
 
-/* #define ESCARPMENTS */
-if ESCARPMENTS
-    /* Reverting All Grass to Non-Navigable Rock Beach */
-    create_terrain NNRB { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain NNRB { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain NNRB { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain NNRB { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain NNRB { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain NNRB { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain NNRB { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain NNRB { base_terrain GRASS land_percent 100 number_of_clumps 9320 set_scale_by_groups }
-    /* Masking Gravel Over */
-    create_terrain NNGB { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    /* Masking Gravel Underneath Unbuildable Rock */
-    create_terrain V { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    create_terrain V { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    create_terrain V { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    create_terrain V { base_terrain NNRB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    /* Layering Snow Rock Over Gravel */
-    create_terrain SNOW { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain SNOW { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain SNOW { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain SNOW { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    /* Layering Snow Rock Over Gravel */
-    create_terrain DLC_ROCK { base_terrain SNOW land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain DLC_ROCK { base_terrain SNOW land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain DLC_ROCK { base_terrain SNOW land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain DLC_ROCK { base_terrain SNOW land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }       
-    /* Replacing Rock With Gravel */
-    create_terrain V { base_terrain SNOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
-    create_terrain V { base_terrain SNOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
-    create_terrain V { base_terrain SNOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
-    create_terrain V { base_terrain SNOW land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
-endif
-
-/* #define LOWLAND_SEPARATION */
-if LOWLAND_SEPARATION
-    create_terrain MUD { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups if TINY_MAP spacing_to_other_terrain_types 9 elseif SMALL_MAP spacing_to_other_terrain_types 14 elseif MEDIUM_MAP spacing_to_other_terrain_types 18 elseif LARGE_MAP spacing_to_other_terrain_types 21 elseif HUGE_MAP spacing_to_other_terrain_types 23 else spacing_to_other_terrain_types 24 endif }
-    create_terrain MUD { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups if TINY_MAP spacing_to_other_terrain_types 9 elseif SMALL_MAP spacing_to_other_terrain_types 14 elseif MEDIUM_MAP spacing_to_other_terrain_types 18 elseif LARGE_MAP spacing_to_other_terrain_types 21 elseif HUGE_MAP spacing_to_other_terrain_types 23 else spacing_to_other_terrain_types 24 endif }
-    create_terrain MUD { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups if TINY_MAP spacing_to_other_terrain_types 9 elseif SMALL_MAP spacing_to_other_terrain_types 14 elseif MEDIUM_MAP spacing_to_other_terrain_types 18 elseif LARGE_MAP spacing_to_other_terrain_types 21 elseif HUGE_MAP spacing_to_other_terrain_types 23 else spacing_to_other_terrain_types 24 endif }
-    create_terrain MUD { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups if TINY_MAP spacing_to_other_terrain_types 9 elseif SMALL_MAP spacing_to_other_terrain_types 14 elseif MEDIUM_MAP spacing_to_other_terrain_types 18 elseif LARGE_MAP spacing_to_other_terrain_types 21 elseif HUGE_MAP spacing_to_other_terrain_types 23 else spacing_to_other_terrain_types 24 endif }
-
-    create_terrain MUD { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 3 spacing_to_other_terrain_types 4 }
-    create_terrain MUD { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 3 spacing_to_other_terrain_types 4 }
-    create_terrain MUD { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 3 spacing_to_other_terrain_types 4 }
-    create_terrain MUD { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 3 spacing_to_other_terrain_types 4 }
-
-    create_terrain V { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 4 7 }
-    create_terrain V { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 4 7 }
-    create_terrain V { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 4 7 }
-    create_terrain V { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 4 7 }
-endif
-
-/* #define POND_CREATION */
-if POND_CREATION
-    /* Layering Actual Ponds */
-    create_terrain WNB { base_terrain MUD land_percent 1 number_of_clumps 6 set_scale_by_groups height_limits 2 2 spacing_to_other_terrain_types 2 set_flat_terrain_only clumping_factor 40 }
-    /* Masking Ponds with Shallows and Ice */
-    create_terrain SHALLOW { base_terrain WNB land_percent 1 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain ICE { base_terrain WNB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    create_terrain ICE { base_terrain WNB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    create_terrain ICE { base_terrain WNB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-    create_terrain ICE { base_terrain WNB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
-endif
-
-/* #define LOWLAND_LAYERING */
-if LOWLAND_LAYERING
-    /* Masking Pond Border */
-    create_terrain ICE { base_terrain MUD land_percent 20 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain LEAVES { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    /* Replacing With Grass3, Creating Muddy Rings Around Ponds */
-    create_terrain GRASS3 { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }  
-    /* Replacing Elevated/Sloped Mud with Grass3 */
-    create_terrain GRASS3 { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 }
-    create_terrain GRASS3 { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 }
-    create_terrain GRASS3 { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 }
-    create_terrain GRASS3 { base_terrain MUD land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 }
-    /* Layering Forests */
-    create_terrain BUSH_FOREST { base_terrain GRASS3 land_percent 6 number_of_clumps 20 set_scale_by_groups clumping_factor 40 spacing_to_other_terrain_types 2 }
-    create_terrain DLC_FORESTSNOWAUTUMN { base_terrain BUSH_FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
-    create_terrain DLC_FORESTDEAD { base_terrain DLC_FORESTSNOWAUTUMN land_percent 1 number_of_clumps 9320 set_scale_by_groups }
-    create_terrain GRASS3 { base_terrain BUSH_FOREST land_percent 1 number_of_clumps 9320 set_scale_by_groups }
-    /* Terrain Masking */
-    create_terrain MUD { base_terrain GRASS3 land_percent 1 number_of_clumps 9320 set_scale_by_groups height_limits 2 2 terrain_mask 1 }
-    create_terrain ICE { base_terrain GRASS3 land_percent 6 number_of_clumps 9320 set_scale_by_groups height_limits 2 2 terrain_mask 1 }
-    create_terrain LEAVES { base_terrain GRASS3 land_percent 6 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain SNOW { base_terrain GRASS3 land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    /* Touch of Gravel to the Border */
-    create_terrain V { base_terrain GRASS3 land_percent 10 number_of_clumps 9320 set_scale_by_groups height_limits 3 4 terrain_mask 1 }
-endif
-
-/* #define UPLAND_LAYERING */
-if UPLAND_LAYERING
-    /* Masking Snow on Top of Rock */
-    create_terrain SNOW_LIGHT { base_terrain DLC_ROCK land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    /* Masking Snow and Rock Over Gravel */
-    create_terrain SNOW_LIGHT { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
-    create_terrain SNOW_LIGHT { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
-    create_terrain SNOW_LIGHT { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
-    create_terrain SNOW_LIGHT { base_terrain V land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 2 }
-
-    /* Adding Dead and Snowy Pine Forest */
-    create_terrain FOREST { base_terrain SNOW_LIGHT land_percent 4 number_of_clumps 32 clumping_factor 40 set_scale_by_groups height_limits 3 7 spacing_to_other_terrain_types 1 }
-    create_terrain FOREST { base_terrain SNOW_LIGHT land_percent 1 number_of_clumps 9320 set_scale_by_groups height_limits 5 7 }
-
-    create_terrain SNOW { base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain SNOW { base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain SNOW { base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain SNOW { base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain SNOW { base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain SNOW { base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain SNOW { base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-    create_terrain SNOW { base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-endif
 
 <OBJECTS_GENERATION>
-/* BEGIN_OBJECTS_AUTOSCRIBE */
-/* END_OBJECTS_AUTOSCRIBE */
-if REGICIDE create_object KING { set_place_for_every_player find_closest avoid_forest_zone 3 } endif
-<LAND_GENERATION>
-base_terrain WATER
 
-L
-{
-terrain_type ICE
-number_of_tiles 50
-base_size 2
-land_position 85 1
-zone 1 
-other_zone_avoidance_distance 3
-if 4_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-elseif 3_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-elseif 2_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-elseif 1_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-else
-assign_to AT_TEAM -10 0 0
-endif
-}
-L
-{
-terrain_type ICE
-number_of_tiles 50
-base_size 2
-land_position 99 15
-zone 2 
-other_zone_avoidance_distance 3
-if 4_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 3_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 2_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 1_TEAM_GAME
-assign_to AT_TEAM -10 0 0
-else
-assign_to AT_TEAM -10 0 0
-endif
-}
-L
-{
-terrain_type ICE
-number_of_tiles 50
-base_size 2
-land_position 75 1
-zone 3 
-other_zone_avoidance_distance 3
-if 4_TEAM_GAME
-assign_to AT_TEAM 3 0 0
-elseif 3_TEAM_GAME
-assign_to AT_TEAM 3 0 0
-elseif 2_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-elseif 1_TEAM_GAME
-assign_to AT_TEAM -10 0 0
-else
-assign_to AT_TEAM -10 0 0
-endif
-}
-L
-{
-terrain_type ICE
-number_of_tiles 50
-base_size 2
-land_position 99 25
-zone 4 
-other_zone_avoidance_distance 3
-if 4_TEAM_GAME
-assign_to AT_TEAM 4 0 0
-elseif 3_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 2_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 1_TEAM_GAME
-assign_to AT_TEAM -10 0 0
-else
-assign_to AT_TEAM -10 0 0
-endif
-}
-L
-{
-terrain_type ICE
-number_of_tiles 50
-base_size 2
-land_position 65 1
-zone 5
-other_zone_avoidance_distance 3
-if 4_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-elseif 3_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-elseif 2_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-elseif 1_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-else
-assign_to AT_TEAM -10 0 0
-endif
-}
-L
-{
-terrain_type ICE
-number_of_tiles 50
-base_size 2
-land_position 99 35
-zone 6 
-other_zone_avoidance_distance 3
-if 4_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 3_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 2_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 1_TEAM_GAME
-assign_to AT_TEAM -10 0 0
-else
-assign_to AT_TEAM -10 0 0
-endif
-}
-L
-{
-terrain_type ICE
-number_of_tiles 50
-base_size 2
-land_position 55 1
-zone 7 
-other_zone_avoidance_distance 3
-if 4_TEAM_GAME
-assign_to AT_TEAM 3 0 0
-elseif 3_TEAM_GAME
-assign_to AT_TEAM 3 0 0
-elseif 2_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-elseif 1_TEAM_GAME
-assign_to AT_TEAM 1 0 0
-else
-assign_to AT_TEAM -10 0 0
-endif
-}
-L
-{
-terrain_type ICE
-number_of_tiles 50
-base_size 2
-land_position 99 45
-zone 8 
-other_zone_avoidance_distance 3
-if 4_TEAM_GAME
-assign_to AT_TEAM 4 0 0
-elseif 3_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 2_TEAM_GAME
-assign_to AT_TEAM 2 0 0
-elseif 1_TEAM_GAME
-assign_to AT_TEAM -10 0 0
-else
-assign_to AT_TEAM -10 0 0
-endif
-}
+/* BEGIN_OBJECTS_AUTOSCRIBE */
+
+/* END_OBJECTS_AUTOSCRIBE */
+
+
+
+if REGICIDE create_object KING { set_place_for_every_player avoid_forest_zone 2 find_closest } endif
+
+
+<LAND_GENERATION>
+base_terrain BEACHLESS_WATER
+
 /* LAND_AUTOSCRIBE */
-L {  terrain_type  WRB number_of_tiles 100 land_position 11 9  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 61 39  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 86 78  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 62 100  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 27 50  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 16 28  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 45 67  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 68 74  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 56 57  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 77 94  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 72 84  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 52 32  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 22 14  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 0 38  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 50 73  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 68 48  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 39 61  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 33 19  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 33 55  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 62 65  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 10 41  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 59 90  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 81 67  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 19 45  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 35 38  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 43 44  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 55 81  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 75 57  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 26 32  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 91 89  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 6 23  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 50 50  }
-L {  terrain_type  WRB number_of_tiles 100 land_position 43 25  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 53 51  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 58 87  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 89 84  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 84 69  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 77 67  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 42 59  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 41 93  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 17 5  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 80 82  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 56 71  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 57 55  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 3 51  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 13 87  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 27 38  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 96 98  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 9 61  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 7 26  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 36 26  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 31 4  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 11 35  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 86 97  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 36 53  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 3 96  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 24 79  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 4 6  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 42 39  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 15 45  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 16 70  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 91 71  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 70 64  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 51 49  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 49 82  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 97 85  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 20 22  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 31 46  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 72 79  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 40 76  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 63 60  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 32 86  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 20 53  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 24 97  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 23 30  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 18 14  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 15 89  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 98 72  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 49 66  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 5 79  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 23 78  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 5 16  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 76 95  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 67 91  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 33 69  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 33 19  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 64 75  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 47 45  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 31 11  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 6 99  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 26 62  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 39 32  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 51 99  }
+L {  terrain_type  DLC_WETROCKBEACH base_size 1 number_of_tiles 0 land_position 43 60  }
