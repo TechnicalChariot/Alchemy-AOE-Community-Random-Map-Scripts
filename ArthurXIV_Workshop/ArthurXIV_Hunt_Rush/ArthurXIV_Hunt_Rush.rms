@@ -723,7 +723,7 @@ endif }
 <OBJECTS_GENERATION>
 /* Place starter units and TC. */
 create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
-create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                         set_place_for_every_player max_distance_to_players 6          min_distance_to_players 6 }
+create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                         set_place_for_every_player max_distance_to_players 6          min_distance_to_players 6 set_circular_placement }
 
 if MILITARY_STARTER
     
@@ -793,8 +793,8 @@ else
 endif
 
 /* Add some gold and stone quite close around each player to offer a fair start and help walling. */
-create_object GOLD {                                            number_of_objects 2 number_of_groups 3 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 9          min_distance_to_players 7 set_gaia_object_only }
-create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 9          min_distance_to_players 7 set_gaia_object_only }
+create_object GOLD {                                            number_of_objects 2 number_of_groups 3 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 9          min_distance_to_players 7 set_gaia_object_only set_circular_placement }
+create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 9          min_distance_to_players 7 set_gaia_object_only set_circular_placement }
 
 start_random percent_chance 20 create_object DLC_COW
              percent_chance 20 create_object DLC_COW_B
@@ -823,15 +823,15 @@ create_object DLC_ELEPHANT {       set_scaling_to_map_size     number_of_objects
                                                                                                                         endif }
 
 /* Add more resources far from all players. */
-create_object GOLD {                                            number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 27         min_distance_to_players 25 set_gaia_object_only }
-create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 26         min_distance_to_players 24 set_gaia_object_only }
-create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 25         min_distance_to_players 23 set_gaia_object_only }
-create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 13         min_distance_to_players 11 set_gaia_object_only }
+create_object GOLD {                                            number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 27         min_distance_to_players 25 set_gaia_object_only set_circular_placement }
+create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 26         min_distance_to_players 24 set_gaia_object_only set_circular_placement }
+create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 25         min_distance_to_players 23 set_gaia_object_only set_circular_placement }
+create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 13         min_distance_to_players 11 set_gaia_object_only set_circular_placement }
 
-create_object GOLD {                                            number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player                                    min_distance_to_players 40 set_gaia_object_only }
-create_object STONE {                                           number_of_objects 1 number_of_groups 3 group_variance 0 set_tight_grouping set_place_for_every_player                                    min_distance_to_players 40 set_gaia_object_only }
-create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player                                    min_distance_to_players 40 set_gaia_object_only }
-create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 1 group_variance 0 set_tight_grouping set_place_for_every_player                                    min_distance_to_players 40 set_gaia_object_only }
+create_object GOLD {                                            number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player                                    min_distance_to_players 40 set_gaia_object_only set_circular_placement }
+create_object STONE {                                           number_of_objects 1 number_of_groups 3 group_variance 0 set_tight_grouping set_place_for_every_player                                    min_distance_to_players 40 set_gaia_object_only set_circular_placement }
+create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player                                    min_distance_to_players 40 set_gaia_object_only set_circular_placement }
+create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 1 group_variance 0 set_tight_grouping set_place_for_every_player                                    min_distance_to_players 40 set_gaia_object_only set_circular_placement }
 
 /* 
 create_object GOLD {               set_scaling_to_map_size      number_of_objects 2 number_of_groups 6 group_variance 0 set_tight_grouping                                                               min_distance_to_players 17 }
