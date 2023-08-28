@@ -723,7 +723,7 @@ endif }
 <OBJECTS_GENERATION>
 /* Place starter units and TC. */
 create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
-create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                         set_place_for_every_player max_distance_to_players 6          min_distance_to_players 6 set_circular_placement }
+create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                         set_place_for_every_player max_distance_to_players 6          min_distance_to_players 5 set_circular_placement }
 
 if MILITARY_STARTER
     
@@ -788,8 +788,9 @@ if MILITARY_STARTER
 else
 
     /* Normal scout */
-    create_object SCOUT {                                                                                                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    create_object SCOUT {                                                                                                                  set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    create_object SCOUT {                                                                                                                  set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
+    create_object DONKEY {                                                                                                                 set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
+    create_object MERCHANT {                                                                                                               set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
 endif
 
 /* Add some gold and stone quite close around each player to offer a fair start and help walling. */
