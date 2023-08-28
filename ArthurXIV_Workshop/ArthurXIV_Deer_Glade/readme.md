@@ -12,6 +12,12 @@ by ArthurXIV
 
 - expensive towers (+76 stone)
 - expensive farms (+10 wood)
+- Starter:
+
+> 9 or 3 villagers  
+> Scout  
+> Merchant  
+> Donkey (can trade)  
 
 ### Introduction
 This green island located in a swampy area homes a throng of deer. You may find

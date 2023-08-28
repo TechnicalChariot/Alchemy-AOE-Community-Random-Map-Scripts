@@ -329,10 +329,11 @@ create_object DONKEY {                                                          
 #const MERCHANT 1572
 create_object MERCHANT {                                                                                                                   set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
 #const JUNK 15 /* Can trade. */
-create_object JUNK {                                                                                                                      set_place_for_every_player find_closest }
-create_object TRADE_COG {                                                                                                                      set_place_for_every_player find_closest }
-create_object TRANSPORT_SHIP {                                                                                                                      set_place_for_every_player find_closest }
-create_object FISHING_SHIP {                                                                                                                      set_place_for_every_player find_closest }
+#const OFF_GRID 647
+create_object OFF_GRID { second_object JUNK            terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object TRADE_COG       terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object TRANSPORT_SHIP  terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object FISHING_SHIP    terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 
 start_random percent_chance 20 create_object DLC_COW
              percent_chance 20 create_object DLC_COW_B
@@ -513,13 +514,20 @@ elseif GIGANTIC_MAP max_distance_to_players 28
 elseif LUDIKRIS_MAP max_distance_to_players 29
 endif }
 #const DOLPHIN 61
-create_object DOLPHIN {            set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 }
+create_object OFF_GRID { second_object DOLPHIN           terrain_to_place_on WATER set_place_for_every_player number_of_objects 4 set_gaia_object_only max_distance_to_players 40 ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object DORADO            terrain_to_place_on WATER set_place_for_every_player number_of_objects 4 set_gaia_object_only max_distance_to_players 40 ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object GREAT_FISH_MARLIN terrain_to_place_on WATER set_place_for_every_player number_of_objects 4 set_gaia_object_only max_distance_to_players 40 ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object FISH_PERCH        terrain_to_place_on WATER set_place_for_every_player number_of_objects 4 set_gaia_object_only max_distance_to_players 40 ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object SALMON            terrain_to_place_on WATER set_place_for_every_player number_of_objects 4 set_gaia_object_only max_distance_to_players 40 ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object SNAPPER           terrain_to_place_on WATER set_place_for_every_player number_of_objects 4 set_gaia_object_only max_distance_to_players 40 ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object TUNA              terrain_to_place_on WATER set_place_for_every_player number_of_objects 4 set_gaia_object_only max_distance_to_players 40 ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+/* create_object DOLPHIN {            set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 }
 create_object DORADO {             set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 }
 create_object GREAT_FISH_MARLIN {  set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 }
 create_object FISH_PERCH {         set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 }
 create_object SALMON {             set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 }
 create_object SNAPPER {            set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 }
-create_object TUNA {               set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 }
+create_object TUNA {               set_place_for_every_player   number_of_objects 5 set_gaia_object_only max_distance_to_players 40 } */
 
 /* Add pigeons. */
 #const FALCON 1056

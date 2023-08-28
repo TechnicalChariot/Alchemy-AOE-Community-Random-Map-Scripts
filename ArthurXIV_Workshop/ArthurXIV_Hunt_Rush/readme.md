@@ -13,6 +13,13 @@ by ArthurXIV
 - expensive towers (+76 stone)
 - expensive farms (+10 wood)
 
+- Starter:
+
+> 9 or 3 villagers  
+> Scout  
+> Merchant  
+> Donkey (can trade)  
+
 ### Introduction
 This strange island located in a swampy area homes a wild variety of fauna and
 vestige. Far from the coast, the very dry land is occupied only by a few zebra
