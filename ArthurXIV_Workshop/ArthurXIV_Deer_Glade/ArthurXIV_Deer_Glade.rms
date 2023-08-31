@@ -675,6 +675,7 @@ if MILITARY_STARTER
     /* 3 - Fancy additional starting units */	
 	#const JUNK 15
 	#const AA 127
+	#const FLAMETHROWER 188
 	#const MONKBOAT1 535
 	#const MONKBOAT2 536
     #const ASSAULT_TOWER 885
@@ -687,6 +688,7 @@ if MILITARY_STARTER
     start_random percent_chance 20 create_object DLC_SIEGETOWER end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
     start_random percent_chance 0  create_object ASSAULT_TOWER  end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
     start_random percent_chance 10 create_object SCORPION       end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 10 create_object FLAMETHROWER   end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
 	
     start_random percent_chance 20 create_object ARCHER         end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
     start_random percent_chance 30 create_object AMZ_ARCHER     end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
@@ -751,10 +753,10 @@ create_object STONE {                                           number_of_object
 create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 23 set_gaia_object_only max_distance_to_players 25 set_circular_placement }
 create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 11 set_gaia_object_only max_distance_to_players 13 set_circular_placement }
 
-create_object GOLD {                                            number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only set_circular_placement }
-create_object STONE {                                           number_of_objects 1 number_of_groups 3 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only set_circular_placement }
-create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only set_circular_placement }
-create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 1 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only set_circular_placement }
+create_object GOLD {                                            number_of_objects 2 number_of_groups 4 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only set_avoid_player_start_areas }
+create_object STONE {                                           number_of_objects 1 number_of_groups 6 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only set_avoid_player_start_areas }
+create_object FORAGE {                                          number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only set_avoid_player_start_areas }
+create_object DLC_ORANGEBUSH {                                  number_of_objects 2 number_of_groups 1 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 40 set_gaia_object_only set_avoid_player_start_areas }
 
 /* 
 create_object GOLD {               set_scaling_to_map_size      number_of_objects 2 number_of_groups 6 group_variance 0 set_tight_grouping avoid_actor_area 51                                           min_distance_to_players 17 }
@@ -837,15 +839,16 @@ endif
 
 /* Add fish. */
 #const DOLPHIN 61
-create_object DLC_BOXTURTLE {      set_scaling_to_map_size      number_of_objects 2 ignore_terrain_restrictions } /* Does not spawn even if i put 100 */
-create_object DOLPHIN {            set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
-create_object DORADO {             set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
-create_object GREAT_FISH_MARLIN {  set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
-create_object FISH_PERCH {         set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
-create_object SALMON {             set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
-create_object SHORE_FISH {         set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
-create_object SNAPPER {            set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
-create_object TUNA {               set_scaling_to_map_size      number_of_objects 2                                                          terrain_to_place_on SHALLOW }
+#const OFF_GRID 647
+create_object OFF_GRID { second_object DLC_BOXTURTLE number_of_objects 2 set_scaling_to_player_number     ignore_terrain_restrictions        terrain_to_place_on SHALLOW find_closest_to_map_center }
+create_object OFF_GRID { second_object SHORE_FISH    number_of_objects 2 set_scaling_to_player_number     ignore_terrain_restrictions        terrain_to_place_on SHALLOW find_closest_to_map_center }
+create_object DOLPHIN {            set_scaling_to_map_size      number_of_objects 4                                                          terrain_to_place_on SHALLOW }
+create_object GREAT_FISH_MARLIN {  set_scaling_to_map_size      number_of_objects 4                                                          terrain_to_place_on SHALLOW }
+create_object DORADO {             set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on WATER_GREEN }
+create_object FISH_PERCH {         set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on WATER_GREEN }
+create_object SALMON {             set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on WATER_GREEN }
+create_object SNAPPER {            set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on WATER_GREEN }
+create_object TUNA {               set_scaling_to_map_size      number_of_objects 1                                                          terrain_to_place_on WATER_GREEN }
 
 /* Add pigeons. */
 #const FALCON 1056
@@ -873,7 +876,8 @@ create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_object
                           create_object FLOWER_BED {            number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
                           create_object DLC_AFRICANBUSH {       number_of_objects 2                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
                           create_object DLC_FENCE {             number_of_objects 5                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
-                          create_object DLC_MANGROVE_TREE {     number_of_objects 5  ignore_terrain_restrictions                             terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+                          create_object DLC_MANGROVE_TREE {     number_of_objects 24 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
+                          create_object DLC_MANGROVE_TREE {     number_of_objects 24 ignore_terrain_restrictions                             terrain_to_place_on WATER_GREEN                                                            set_gaia_object_only }
                           create_object DLC_ROCKBEACH {         number_of_objects 1                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
                           create_object DLC_ROCKBEACH {         number_of_objects 4  ignore_terrain_restrictions                             terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
                           create_object DLC_ROCKBEACH {         number_of_objects 4  ignore_terrain_restrictions                             terrain_to_place_on WATER_GREEN                                                            set_gaia_object_only }
@@ -896,3 +900,19 @@ create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_object
 #const GRASS_3       1364 create_object GRASS_3 {               number_of_objects 5                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
 #const INDIAN_STATUE 1777 create_object INDIAN_STATUE {         number_of_objects 0                                                          terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
 #const INDIAN_RUIN   1784 create_object INDIAN_RUIN {           number_of_objects 1 number_of_groups 3 group_variance 0 set_tight_grouping   terrain_to_place_on GRASS_JUNGLE                                min_distance_to_players 17 set_gaia_object_only }
+
+                          create_object DLC_FERN_PATCH        { number_of_objects 28 ignore_terrain_restrictions                             terrain_to_place_on WATER_GREEN                                                            set_gaia_object_only }
+#const GRASS_2       1362 create_object GRASS_2               { number_of_objects 20 ignore_terrain_restrictions                             terrain_to_place_on WATER_GREEN                                                            set_gaia_object_only }
+#const GRASS_4        301 create_object GRASS_4               { number_of_objects 12 ignore_terrain_restrictions                             terrain_to_place_on WATER_GREEN                                                            set_gaia_object_only }
+                          create_object DLC_FERN_PATCH        { number_of_objects 70 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on SHALLOWSSHALLOWS                                                       set_gaia_object_only }
+#const GRASS_1       1360 create_object GRASS_1               { number_of_objects 20 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on SHALLOWSSHALLOWS                                                       set_gaia_object_only }
+#const GRASS_3       1364 create_object GRASS_3               { number_of_objects 20 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on SHALLOWSSHALLOWS                                                       set_gaia_object_only }
+#const GRASS_4        301 create_object GRASS_4               { number_of_objects 50 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on SHALLOWSSHALLOWS                                                       set_gaia_object_only }
+#const GRASS_6       1358 create_object GRASS_6               { number_of_objects 20 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on SHALLOWSSHALLOWS                                                       set_gaia_object_only }
+#const GRASS_8       1364 create_object GRASS_8               { number_of_objects 20 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on SHALLOWSSHALLOWS                                                       set_gaia_object_only }
+#const GRASS_1       1360 create_object GRASS_1               { number_of_objects 50 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on GRASS_JUNGLE                                                           set_gaia_object_only }
+#const GRASS_3       1364 create_object GRASS_3               { number_of_objects 50 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on GRASS_JUNGLE                                                           set_gaia_object_only }
+#const GRASS_4        301 create_object GRASS_4               { number_of_objects 50 ignore_terrain_restrictions set_scaling_to_map_size     terrain_to_place_on GRASS_JUNGLE                                                           set_gaia_object_only }
+
+
+
