@@ -234,6 +234,7 @@ endif
 	set_scale_by_groups
 	enable_balanced_elevation
 }
+/*
 create_elevation 3
 {
 	base_terrain DLC_JUNGLELEAVES
@@ -253,7 +254,7 @@ endif
 	set_scale_by_groups
 	enable_balanced_elevation
 }
-
+*/
 
 <TERRAIN_GENERATION>
 create_terrain DLC_ROCK
@@ -329,37 +330,9 @@ endif
 
 /* Space Masking */
 create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-
+{ base_terrain DLC_MANGROVESHALLOW land_percent 3 number_of_clumps 10 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
 create_terrain F
-{ base_terrain DLC_MANGROVEFOREST land_percent 6 number_of_clumps 10 terrain_mask 1 set_scale_by_groups }
+{ base_terrain DLC_MANGROVEFOREST land_percent 3 number_of_clumps 10 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
 
 create_terrain F
 { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
@@ -434,15 +407,15 @@ create_object GOLD
 	set_gaia_object_only
 	set_scaling_to_map_size
 	if TINY_MAP
-		temp_min_distance_group_placement 30
+		temp_min_distance_group_placement 27
 	elseif SMALL_MAP
-		temp_min_distance_group_placement 30
+		temp_min_distance_group_placement 27
 	elseif MEDIUM_MAP
-		temp_min_distance_group_placement 33
+		temp_min_distance_group_placement 30
 	elseif LARGE_MAP
-		temp_min_distance_group_placement 40
+		temp_min_distance_group_placement 32
 	elseif HUGE_MAP
-		temp_min_distance_group_placement 44
+		temp_min_distance_group_placement 35
 	endif
 	actor_area 66
     actor_area_radius 4
@@ -457,15 +430,15 @@ create_object STONE
 	set_gaia_object_only
 	set_scaling_to_map_size
 	if TINY_MAP
-		temp_min_distance_group_placement 30
+		temp_min_distance_group_placement 27
 	elseif SMALL_MAP
-		temp_min_distance_group_placement 30
+		temp_min_distance_group_placement 27
 	elseif MEDIUM_MAP
-		temp_min_distance_group_placement 33
+		temp_min_distance_group_placement 30
 	elseif LARGE_MAP
-		temp_min_distance_group_placement 40
+		temp_min_distance_group_placement 32
 	elseif HUGE_MAP
-		temp_min_distance_group_placement 44
+		temp_min_distance_group_placement 35
 	endif
     actor_area 67
     actor_area_radius 3
@@ -530,13 +503,23 @@ create_object DLC_WATERBUFFALO
 	set_gaia_object_only
 	set_scaling_to_map_size
 	temp_min_distance_group_placement 20
+	avoid_forest_zone 2
+	terrain_to_place_on DLC_JUNGLELEAVES
+}
+create_object BOAR
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_loose_grouping
+	set_gaia_object_only
+	temp_min_distance_group_placement 24
+	avoid_forest_zone 2
 	terrain_to_place_on DLC_JUNGLELEAVES
 }
 create_object TRAP
 {
-	number_of_objects 2
+	number_of_objects 3
 	number_of_groups 1000
-	set_tight_grouping
 	set_scaling_to_map_size
 	set_gaia_object_only
 	min_distance_group_placement 3
