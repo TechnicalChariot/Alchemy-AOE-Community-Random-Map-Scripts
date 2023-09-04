@@ -15,7 +15,7 @@ files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
-b = 30;
+b = 32;
 ecc = 0.30;
 for i=1:360
 r(i,1) = b/sqrt(1-(ecc*cosd(i))^2);
@@ -45,7 +45,7 @@ tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 %      {Linear Slop};
 %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
-G = [{30}; {45}; {180}; {45}; {[0.15]}; {0.6}; {[CC; CC]}];
+G = [{[20 24]}; {45}; {180}; {45}; {[0.15]}; {0.6}; {[CC; CC]}];
 C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
 
 [create_player_lands] = RMS_CPL_V9(G,C);
@@ -56,7 +56,7 @@ COMMAND = [RMS_Processor_V4([TL; tail1; tail2],LPM_exp); create_player_lands];
 MLA = [{'L { terrain_type GRASS land_position 1 1 base_size 0 number_of_tiles 12000 }'}];
 
 
-%ObjectAutoscribeV8('ObjectDatabase.ods')
+##%ObjectAutoscribeV8('Comet_V2.ods')
 CODE = [Preface; COMMAND; MLA]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 RMS_ForgeV4(filename,CODE);
 
