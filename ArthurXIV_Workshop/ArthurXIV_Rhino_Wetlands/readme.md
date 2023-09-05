@@ -10,7 +10,8 @@ by ArthurXIV
 >3rd ring: &nbsp; &nbsp; &nbsp; Shallow connection.  
 >4th ring: &nbsp; &nbsp; &nbsp; Relics and Crocodiles on Shallow terrain.  
 
-- expensive towers (+25 stone)
+- expensive towers (+76 stone)
+- low hp warships (div by 2)
 
 - Starter:
 
