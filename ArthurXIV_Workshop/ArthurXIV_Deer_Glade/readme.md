@@ -11,7 +11,7 @@ by ArthurXIV
 >4th ring: &nbsp; &nbsp; &nbsp; Relics, Crocodiles and few fish on Shallow terrain. Allows naval Trade.  
 
 - expensive towers (+76 stone)
-- expensive farms (+10 wood)
+
 - Starter:
 
 > 9 or 3 villagers  

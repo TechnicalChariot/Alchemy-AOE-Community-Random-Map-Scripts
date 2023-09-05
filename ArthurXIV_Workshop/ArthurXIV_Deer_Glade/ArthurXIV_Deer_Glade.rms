@@ -676,36 +676,48 @@ if MILITARY_STARTER
 	#const JUNK 15
 	#const AA 127
 	#const FLAMETHROWER 188
-	#const MONKBOAT1 535
-	#const MONKBOAT2 536
     #const ASSAULT_TOWER 885
     #const AMZ_ARCHER 850
     #const SLINGER 185
     #const AMZ_WARRIOR 825
-	#const MONKBOAT 1022
+	#const MONKBOAT1 535 /* 200hp */
+	#const MONKBOAT2 536 /* 200hp */
+	#const MONKBOAT 1022 /* 130hp */
     #const NINJA 1145
+	#const Canoe       778  /* 70hp  */
+	#const DemoRaft    1104 /* 45hp  */
+	#const FireGalley  1103 /* 100hp */
+	#const DragonShip1 938  /* 150hp */
+	#const DragonShip2 1302 /* 150hp */
 	/* The unit GENITOUR has a Militia skin it's ugly so we use DLC_GENITOUR. */
-    start_random percent_chance 20 create_object DLC_SIEGETOWER end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 0  create_object ASSAULT_TOWER  end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 10 create_object SCORPION       end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 10 create_object FLAMETHROWER   end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 20 create_object DLC_SIEGETOWER {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 0  create_object ASSAULT_TOWER  {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 5  create_object SCORPION       {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object FLAMETHROWER   {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
 	
-    start_random percent_chance 20 create_object ARCHER         end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 30 create_object AMZ_ARCHER     end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 30 create_object SKIRMISHER     end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 20 create_object SLINGER        end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 10 create_object DLC_GENITOUR   end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 1  create_object ARCHER         {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 50 create_object AMZ_ARCHER     {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object SKIRMISHER     {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object SLINGER        {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object DLC_GENITOUR   {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
 	
-    start_random percent_chance 30 create_object MILITIA        end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 30 create_object SPEARMAN       end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 30 create_object AMZ_WARRIOR    end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 20 create_object NINJA          end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 1  create_object MILITIA        {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object SPEARMAN       {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 50 create_object AMZ_WARRIOR    {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 20 create_object NINJA          {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
 	
-    start_random percent_chance 10 create_object MONKBOAT       end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
-    start_random percent_chance 10 create_object TRADE_COG      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
-    start_random percent_chance 10 create_object JUNK           end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
-    start_random percent_chance 10 create_object MONKBOAT1      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
-    start_random percent_chance 10 create_object MONKBOAT2      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
+    start_random percent_chance 10 create_object TRADE_COG      {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 10 create_object JUNK           {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 10 create_object TRANSPORT_SHIP {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 10 create_object FISHING_SHIP   {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object MONKBOAT1      {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object MONKBOAT2      {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object MONKBOAT       {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object Canoe          {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object DemoRaft       {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object FireGalley     {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object DragonShip1    {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object DragonShip2    {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
 else
 
     /* Normal scout */
@@ -730,22 +742,35 @@ start_random percent_chance 20 create_object DLC_GOAT
              percent_chance 20 create_object TURKEY end_random {                    number_of_groups 1                                     set_place_for_every_player max_distance_to_players 3        min_distance_to_players 3 set_gaia_object_only }
 
 /* Add a thick ring of deer around each player */
-create_object DEER {                                                                number_of_groups 24                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 13 set_gaia_object_only set_loose_grouping set_circular_placement }
+create_object DEER {                                                                number_of_groups 24                                     set_place_for_every_player max_distance_to_players 15        min_distance_to_players 13 set_gaia_object_only set_loose_grouping set_circular_placement
+                                                                                                                            actor_area 49 actor_area_radius 1 }
 
 /* When either set_scaling_to_map_size or set_scaling_to_player_number is specified, number_of_objects 0 will still spawn a few objects (approx. 6 with 2players, approx. 10 with 8 players, map size doesn't matter). */
 create_object RELIC {              set_scaling_to_player_number number_of_objects 4 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
 /* Fill the glade. */
 create_object RELIC {                                           number_of_objects 2 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 find_closest_to_map_center }
+
+
+
+
+
+
+
+
 create_object DEER {               set_scaling_to_map_size     number_of_objects 23 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 min_distance_to_map_edge 11 min_distance_to_players 12 find_closest_to_map_center
-                                                                                                                                           actor_area 51
-                                                                                                                       if     TINY_MAP     actor_area_radius 10
-                                                                                                                       elseif SMALL_MAP    actor_area_radius 13
-                                                                                                                       elseif MEDIUM_MAP   actor_area_radius 16
-                                                                                                                       elseif LARGE_MAP    actor_area_radius 19
-                                                                                                                       elseif HUGE_MAP     actor_area_radius 22
-                                                                                                                       elseif GIGANTIC_MAP actor_area_radius 25
-                                                                                                                       elseif LUDIKRIS_MAP actor_area_radius 28
-                                                                                                                       endif }
+                                                                                                                            actor_area 50 actor_area_radius 1 }
+#const MAPREVEALER 112
+create_object MAPREVEALER {     set_place_for_every_player     number_of_objects 16 ignore_terrain_restrictions actor_area_to_place_in 49 }
+create_object MAPREVEALER {     set_place_for_every_player     number_of_objects 16 ignore_terrain_restrictions actor_area_to_place_in 50
+																																			actor_area 51
+                                                                                                                        if     TINY_MAP     actor_area_radius 10
+                                                                                                                        elseif SMALL_MAP    actor_area_radius 13
+                                                                                                                        elseif MEDIUM_MAP   actor_area_radius 16
+                                                                                                                        elseif LARGE_MAP    actor_area_radius 19
+                                                                                                                        elseif HUGE_MAP     actor_area_radius 22
+                                                                                                                        elseif GIGANTIC_MAP actor_area_radius 25
+                                                                                                                        elseif LUDIKRIS_MAP actor_area_radius 28
+                                                                                                                        endif }
 																													   
 /* Add more resources far from all players. */
 create_object GOLD {                                            number_of_objects 2 number_of_groups 2 group_variance 0 set_tight_grouping avoid_actor_area 51 set_place_for_every_player                min_distance_to_players 25 set_gaia_object_only max_distance_to_players 27 set_circular_placement }
