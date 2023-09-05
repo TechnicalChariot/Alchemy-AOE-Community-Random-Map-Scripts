@@ -16,7 +16,7 @@
 
         /* 20230805 Hunt_Rush by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
 
-
+#includeXS ArthurXIV_towers_stone.xs
 
 /* 
 Comment those define commands if you want a normal start:
@@ -39,7 +39,7 @@ random_placement
 /* ai_info_map_type BLACK_FOREST 0 0 0 */
 /* weather_type -3 16 0 -1 */
 effect_amount ADD_ATTRIBUTE TOWER_CLASS ATTR_STONE_COST 76
-effect_amount ADD_ATTRIBUTE FARM_CLASS ATTR_WOOD_COST 10
+/* effect_amount ADD_ATTRIBUTE FARM_CLASS ATTR_WOOD_COST -10 */
 
 <LAND_GENERATION>
 base_terrain SHALLOWSSHALLOWS
@@ -63,10 +63,10 @@ number_of_tiles
 base_size 
 land_position 1 1
 other_zone_avoidance_distance 
-top_border 
-bottom_border 
-left_border 
-right_border 
+top_border (NW)
+bottom_border (SE)
+left_border (SW)
+right_border (NE)
 base_elevation 1
 border_fuzziness 10
 clumping_factor 100
@@ -114,6 +114,116 @@ else
 	             endif }
 endif
 
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 50 13 number_of_tiles 40
+elseif SMALL_MAP land_position 50 13 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 50 12 number_of_tiles 64.0
+elseif LARGE_MAP land_position 50 12 number_of_tiles 88.0
+elseif HUGE_MAP land_position 50 11 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 50 11 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 50 9 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 50 87 number_of_tiles 40
+elseif SMALL_MAP land_position 50 87 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 50 88 number_of_tiles 64.0
+elseif LARGE_MAP land_position 50 88 number_of_tiles 88.0
+elseif HUGE_MAP land_position 50 89 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 50 89 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 50 91 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 13 50 number_of_tiles 40
+elseif SMALL_MAP land_position 13 50 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 12 50 number_of_tiles 64.0
+elseif LARGE_MAP land_position 12 50 number_of_tiles 88.0
+elseif HUGE_MAP land_position 11 50 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 11 50 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 9 50 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 87 50 number_of_tiles 40
+elseif SMALL_MAP land_position 87 50 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 88 50 number_of_tiles 64.0
+elseif LARGE_MAP land_position 88 50 number_of_tiles 88.0
+elseif HUGE_MAP land_position 89 50 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 89 50 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 91 50 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 70 15 number_of_tiles 40
+elseif SMALL_MAP land_position 70 15 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 71 14 number_of_tiles 64.0
+elseif LARGE_MAP land_position 71 14 number_of_tiles 88.0
+elseif HUGE_MAP land_position 72 13 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 72 13 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 74 11 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 30 15 number_of_tiles 40
+elseif SMALL_MAP land_position 30 15 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 29 14 number_of_tiles 64.0
+elseif LARGE_MAP land_position 29 14 number_of_tiles 88.0
+elseif HUGE_MAP land_position 28 13 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 28 13 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 26 11 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 70 85 number_of_tiles 40
+elseif SMALL_MAP land_position 70 85 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 71 86 number_of_tiles 64.0
+elseif LARGE_MAP land_position 71 86 number_of_tiles 88.0
+elseif HUGE_MAP land_position 72 87 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 72 87 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 74 89 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 30 85 number_of_tiles 40
+elseif SMALL_MAP land_position 30 85 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 29 86 number_of_tiles 64.0
+elseif LARGE_MAP land_position 29 86 number_of_tiles 88.0
+elseif HUGE_MAP land_position 28 87 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 28 87 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 26 89 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 15 70 number_of_tiles 40
+elseif SMALL_MAP land_position 15 70 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 14 71 number_of_tiles 64.0
+elseif LARGE_MAP land_position 14 71 number_of_tiles 88.0
+elseif HUGE_MAP land_position 13 72 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 13 72 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 11 74 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 15 30 number_of_tiles 40
+elseif SMALL_MAP land_position 15 30 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 14 29 number_of_tiles 64.0
+elseif LARGE_MAP land_position 14 29 number_of_tiles 88.0
+elseif HUGE_MAP land_position 13 28 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 13 28 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 11 26 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 85 70 number_of_tiles 40
+elseif SMALL_MAP land_position 85 70 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 86 71 number_of_tiles 64.0
+elseif LARGE_MAP land_position 86 71 number_of_tiles 88.0
+elseif HUGE_MAP land_position 87 72 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 87 72 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 89 74 number_of_tiles 216.0
+endif }
+create_land { base_size 2 terrain_type GRASS_JUNGLE base_elevation 4 border_fuzziness 12
+if TINY_MAP land_position 85 30 number_of_tiles 40
+elseif SMALL_MAP land_position 85 30 number_of_tiles 48.0
+elseif MEDIUM_MAP land_position 86 29 number_of_tiles 64.0
+elseif LARGE_MAP land_position 86 29 number_of_tiles 88.0
+elseif HUGE_MAP land_position 87 28 number_of_tiles 104.0
+elseif GIGANTIC_MAP land_position 87 28 number_of_tiles 136.0
+elseif LUDIKRIS_MAP land_position 89 26 number_of_tiles 216.0
+endif }
+
+
 <ELEVATION_GENERATION>
 /* 
 create_elevation  {
@@ -126,7 +236,7 @@ spacing
 enable_balanced_elevation
 } */
 /* I want to scale both the tiles and clump numbers according to the map size so i have to do it manually instead of using set_scale_by_ */
-create_elevation 4 { base_terrain GRASS_JUNGLE
+/* create_elevation 4 { base_terrain GRASS_JUNGLE
 if     TINY_MAP     number_of_tiles 4333 number_of_clumps 55
 elseif SMALL_MAP    number_of_tiles 6414 number_of_clumps 67
 elseif MEDIUM_MAP   number_of_tiles 8493 number_of_clumps 77
@@ -145,7 +255,7 @@ elseif HUGE_MAP     number_of_tiles 3928 number_of_clumps 60
 elseif GIGANTIC_MAP number_of_tiles 5332 number_of_clumps 70
 elseif LUDIKRIS_MAP number_of_tiles 8331 number_of_clumps 88
 endif enable_balanced_elevation }
- 
+
 create_elevation 6 { base_terrain GRASS_JUNGLE
 if     TINY_MAP     number_of_tiles 1333 number_of_clumps 21
 elseif SMALL_MAP    number_of_tiles 1973 number_of_clumps 26
@@ -154,7 +264,7 @@ elseif LARGE_MAP    number_of_tiles 3272 number_of_clumps 33
 elseif HUGE_MAP     number_of_tiles 3928 number_of_clumps 36
 elseif GIGANTIC_MAP number_of_tiles 5332 number_of_clumps 42
 elseif LUDIKRIS_MAP number_of_tiles 8331 number_of_clumps 52
-endif enable_balanced_elevation }
+endif enable_balanced_elevation } */
 
 /* <CLIFF_GENERATION> */
 
@@ -181,6 +291,23 @@ height_limits
 
 /* Now we're just making the center disks on top of each other, big first small last. */
 /* It is very important to fill the center with BEACH variants because i want the center to allow walls only. */
+
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
+create_terrain GRASS_JUNGLE         { base_terrain SHALLOW land_percent 100 number_of_clumps 99 height_limits 3 6 }
 
 #const BEACH_WETROCK 109
 create_terrain BEACH_WETROCK { base_terrain GRASS_JUNGLE terrain_mask 1 land_percent 100 number_of_clumps 40
@@ -675,7 +802,7 @@ endif }
 
 
 /* JUNGLELEAVES is already a GRASS_JUNGLE layering on UDBRUSH_JUNGLE */
-if 2_PLAYER_GAME else
+/* if 2_PLAYER_GAME else
 #const JUNGLELEAVES 62          create_terrain JUNGLELEAVES         { base_terrain GRASS_JUNGLE base_layer GRASS_JUNGLE number_of_tiles 60 number_of_clumps 1                                 spacing_to_other_terrain_types 5 }
 #const UDBRUSH_JUNGLE 77        create_terrain UDBRUSH_JUNGLE       { base_terrain GRASS_JUNGLE base_layer GRASS_JUNGLE number_of_tiles 60 number_of_clumps 1                                 spacing_to_other_terrain_types 5 }
 #const GRASS_DRY 100            create_terrain GRASS_DRY            { base_terrain GRASS_JUNGLE base_layer GRASS_JUNGLE number_of_tiles 60 number_of_clumps 1                                 spacing_to_other_terrain_types 5 } endif
@@ -694,15 +821,18 @@ if 2_PLAYER_GAME else
                                 create_terrain GRASS2             { base_terrain UDBRUSH_JUNGLE terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
                                 create_terrain GRASS2                  { base_terrain GRASS_DRY terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
                                 create_terrain GRASS2                  { base_terrain GRASS_DRY terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
-                                create_terrain GRASS2                  { base_terrain GRASS_DRY terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 }
+                                create_terrain GRASS2                  { base_terrain GRASS_DRY terrain_mask 1          number_of_tiles 999 number_of_clumps 9                                 spacing_to_other_terrain_types 0 } */
+#const JUNGLELEAVES 62          create_terrain JUNGLELEAVES         { base_terrain GRASS_JUNGLE land_percent 100 number_of_clumps 99                                  height_limits 4 5 }
+#const JUNGLELEAVES 62          create_terrain JUNGLELEAVES         { base_terrain GRASS_JUNGLE land_percent 100 number_of_clumps 99                                  height_limits 4 5 }
+#const JUNGLELEAVES 62          create_terrain JUNGLELEAVES         { base_terrain GRASS_JUNGLE land_percent 100 number_of_clumps 99                                  height_limits 4 5 }
 
 /* Forests */
 #const FOREST_RAINFOREST 56     create_terrain FOREST_RAINFOREST    { base_terrain GRASS_JUNGLE                                             number_of_clumps 999999 set_avoid_player_start_areas spacing_to_other_terrain_types 0
-if     TINY_MAP     land_percent 7
-elseif SMALL_MAP    land_percent 7
-elseif MEDIUM_MAP   land_percent 7
-elseif LARGE_MAP    land_percent 13
-elseif HUGE_MAP     land_percent 15
+if     TINY_MAP     land_percent 9
+elseif SMALL_MAP    land_percent 10
+elseif MEDIUM_MAP   land_percent 12
+elseif LARGE_MAP    land_percent 15
+elseif HUGE_MAP     land_percent 16
 elseif GIGANTIC_MAP land_percent 18
 elseif LUDIKRIS_MAP land_percent 20
 endif }
@@ -758,36 +888,48 @@ if MILITARY_STARTER
 	#const JUNK 15
 	#const AA 127
 	#const FLAMETHROWER 188
-	#const MONKBOAT1 535
-	#const MONKBOAT2 536
     #const ASSAULT_TOWER 885
     #const AMZ_ARCHER 850
     #const SLINGER 185
     #const AMZ_WARRIOR 825
-	#const MONKBOAT 1022
+	#const MONKBOAT1 535 /* 200hp */
+	#const MONKBOAT2 536 /* 200hp */
+	#const MONKBOAT 1022 /* 130hp */
     #const NINJA 1145
+	#const Canoe       778  /* 70hp  */
+	#const DemoRaft    1104 /* 45hp  */
+	#const FireGalley  1103 /* 100hp */
+	#const DragonShip1 938  /* 150hp */
+	#const DragonShip2 1302 /* 150hp */
 	/* The unit GENITOUR has a Militia skin it's ugly so we use DLC_GENITOUR. */
-    start_random percent_chance 20 create_object DLC_SIEGETOWER end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 0  create_object ASSAULT_TOWER  end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 10 create_object SCORPION       end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 10 create_object FLAMETHROWER   end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 20 create_object DLC_SIEGETOWER {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 0  create_object ASSAULT_TOWER  {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 5  create_object SCORPION       {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object FLAMETHROWER   {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
 	
-    start_random percent_chance 20 create_object ARCHER         end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 30 create_object AMZ_ARCHER     end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 30 create_object SKIRMISHER     end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 20 create_object SLINGER        end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 10 create_object DLC_GENITOUR   end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 1  create_object ARCHER         {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 50 create_object AMZ_ARCHER     {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object SKIRMISHER     {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object SLINGER        {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object DLC_GENITOUR   {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
 	
-    start_random percent_chance 30 create_object MILITIA        end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 30 create_object SPEARMAN       end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 30 create_object AMZ_WARRIOR    end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
-    start_random percent_chance 20 create_object NINJA          end_random {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 }
+    start_random percent_chance 1  create_object MILITIA        {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 10 create_object SPEARMAN       {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 50 create_object AMZ_WARRIOR    {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
+    start_random percent_chance 20 create_object NINJA          {                                                               set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 } end_random
 	
-    start_random percent_chance 10 create_object MONKBOAT       end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
-    start_random percent_chance 10 create_object TRADE_COG      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
-    start_random percent_chance 10 create_object JUNK           end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
-    start_random percent_chance 10 create_object MONKBOAT1      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
-    start_random percent_chance 10 create_object MONKBOAT2      end_random {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }
+    start_random percent_chance 10 create_object TRADE_COG      {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 10 create_object JUNK           {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 10 create_object TRANSPORT_SHIP {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 10 create_object FISHING_SHIP   {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object MONKBOAT1      {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object MONKBOAT2      {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object MONKBOAT       {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object Canoe          {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object DemoRaft       {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object FireGalley     {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object DragonShip1    {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
+    start_random percent_chance 1  create_object DragonShip2    {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
 else
 
     /* Normal scout */
@@ -816,7 +958,10 @@ create_object RELIC {              set_scaling_to_player_number number_of_object
 create_object RELIC {                                           number_of_objects 4 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on BEACH_WETWET }
 create_object DLC_ZEBRA {          set_scaling_to_map_size      number_of_objects 2 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on BEACHBEACH   min_distance_to_map_edge 11 min_distance_to_players 12 }
 create_object DLC_ELEPHANT {       set_scaling_to_map_size     number_of_objects 16 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on BEACH_WETWET min_distance_to_map_edge 11 min_distance_to_players 8 find_closest_to_map_center
-                                                                                                                                            actor_area 51
+                                                                                                                            actor_area 50 actor_area_radius 1 }
+#const MAPREVEALER 112
+create_object MAPREVEALER {     set_place_for_every_player     number_of_objects 16 ignore_terrain_restrictions actor_area_to_place_in 50
+																																			actor_area 51
                                                                                                                         if     TINY_MAP     actor_area_radius 10
                                                                                                                         elseif SMALL_MAP    actor_area_radius 13
                                                                                                                         elseif MEDIUM_MAP   actor_area_radius 16
