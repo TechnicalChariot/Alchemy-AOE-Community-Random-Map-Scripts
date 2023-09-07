@@ -92,7 +92,7 @@ create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_
 create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 9 actor_area_radius 17 }
 
 create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 11 actor_area_radius 25 }
-create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 60 }
+create_object PLACEHOLDER { resource_delta -60 set_place_for_every_player actor_area_to_place_in 1 actor_area 13 actor_area_radius 70 }
 
 create_object TERRAIN_BLOCKER { number_of_objects 9999 terrain_to_place_on DLC_BLACK }
 
@@ -150,7 +150,7 @@ create_object STONE {
     avoid_actor_area 10
     set_gaia_object_only 
     terrain_to_place_on DESERT
-    avoid_actor_area 77
+    avoid_actor_area 56
 }
 
 create_object SHEEP {
@@ -175,6 +175,8 @@ create_object SHEEP {
     max_distance_to_other_zones 7 
     terrain_to_place_on DESERT
 }
+
+if REGICIDE create_object KING { set_place_for_every_player find_closest } else endif
 
 create_object BOAR {
     number_of_objects 1
@@ -218,7 +220,7 @@ create_object STONE {
     avoid_actor_area 11
     avoid_actor_area 12
     temp_min_distance_group_placement 10
-    avoid_forest_zone 2
+    avoid_forest_zone 1
     min_distance_to_map_edge 2
     terrain_to_place_on DESERT
     actor_area 79
@@ -251,32 +253,128 @@ create_object DLC_DEADTREE {
 }
 
 create_object SKELETON { terrain_to_place_on DIRT number_of_groups 200 temp_min_distance_group_placement 5 number_of_objects 3 }
-create_object GOLD { avoid_forest_zone 2 actor_area 80 actor_area_radius 3 terrain_to_place_on DIRT number_of_groups 5 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object GOLD { avoid_forest_zone 2 actor_area 80 actor_area_radius 3 terrain_to_place_on DIRT 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object RUBBLE_1_X_1 { terrain_to_place_on DIRT number_of_groups 20 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object ROMAN_RUINS { terrain_to_place_on DIRT number_of_groups 3 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
-create_object WOLF { actor_area 81 actor_area_radius 3 terrain_to_place_on DIRT number_of_groups 4 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object WOLF { actor_area 81 actor_area_radius 3 terrain_to_place_on DIRT 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object RELIC { actor_area 82 actor_area_radius 3 terrain_to_place_on DIRT set_tight_grouping number_of_objects 1 set_gaia_object_only avoid_actor_area 77 }
 
 create_object SKELETON { terrain_to_place_on DIRT2 number_of_groups 200 temp_min_distance_group_placement 5 number_of_objects 3 }
-create_object GOLD { avoid_forest_zone 2 actor_area 83 actor_area_radius 3 terrain_to_place_on DIRT2 number_of_groups 5 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object GOLD { avoid_forest_zone 2 actor_area 83 actor_area_radius 3 terrain_to_place_on DIRT2 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object RUBBLE_1_X_1 { terrain_to_place_on DIRT2 number_of_groups 20 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object ROMAN_RUINS { terrain_to_place_on DIRT2 number_of_groups 3 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
-create_object WOLF { actor_area 84 actor_area_radius 3 terrain_to_place_on DIRT2 number_of_groups 4 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object WOLF { actor_area 84 actor_area_radius 3 terrain_to_place_on DIRT2
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object RELIC { actor_area 85 actor_area_radius 3 terrain_to_place_on DIRT2 set_tight_grouping number_of_objects 1 set_gaia_object_only avoid_actor_area 77 }
 
 
 create_object SKELETON { terrain_to_place_on DLC_DESERTGRAVEL number_of_groups 200 temp_min_distance_group_placement 5 number_of_objects 3 }
-create_object STONE { avoid_forest_zone 2 actor_area 86 actor_area_radius 3 terrain_to_place_on DLC_DESERTGRAVEL number_of_groups 5 number_of_objects 3 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object STONE { avoid_forest_zone 2 actor_area 86 actor_area_radius 3 terrain_to_place_on DLC_DESERTGRAVEL
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 3 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object RUBBLE_1_X_1 { terrain_to_place_on DLC_DESERTGRAVEL number_of_groups 20 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object ROMAN_RUINS { terrain_to_place_on DLC_DESERTGRAVEL number_of_groups 3 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
-create_object WOLF { actor_area 87 actor_area_radius 3 terrain_to_place_on DLC_DESERTGRAVEL number_of_groups 4 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object WOLF { actor_area 87 actor_area_radius 3 terrain_to_place_on DLC_DESERTGRAVEL 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object RELIC { actor_area 88 actor_area_radius 3 terrain_to_place_on DLC_DESERTGRAVEL set_tight_grouping number_of_objects 1 set_gaia_object_only avoid_actor_area 77 }
 
 create_object SKELETON { terrain_to_place_on DLC_SAVANNAH number_of_groups 200 temp_min_distance_group_placement 5 number_of_objects 3 }
-create_object STONE { avoid_forest_zone 2 actor_area 89 actor_area_radius 3 terrain_to_place_on DLC_SAVANNAH number_of_groups 5 number_of_objects 3 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object STONE { avoid_forest_zone 2 actor_area 89 actor_area_radius 3 terrain_to_place_on DLC_SAVANNAH 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 3 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object RUBBLE_1_X_1 { terrain_to_place_on DLC_SAVANNAH number_of_groups 20 number_of_objects 4 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object ROMAN_RUINS { terrain_to_place_on DLC_SAVANNAH number_of_groups 3 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
-create_object WOLF { actor_area 90 actor_area_radius 3 terrain_to_place_on DLC_SAVANNAH number_of_groups 4 number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
+create_object WOLF { actor_area 90 actor_area_radius 3 terrain_to_place_on DLC_SAVANNAH 
+    if TINY_MAP
+        number_of_groups 5
+    elseif SMALL_MAP
+        number_of_groups 5
+    elseif MEDIUM_MAP
+        number_of_groups 7
+    elseif LARGE_MAP
+        number_of_groups 8
+    else
+        number_of_groups 8
+    endif 
+    number_of_objects 1 set_gaia_object_only set_tight_grouping temp_min_distance_group_placement 10 avoid_actor_area 77 }
 create_object RELIC { actor_area 91 actor_area_radius 3 terrain_to_place_on DLC_SAVANNAH set_tight_grouping number_of_objects 1 set_gaia_object_only avoid_actor_area 77 }
 
 #const WELL 1567
@@ -363,6 +461,7 @@ create_terrain PINE_FOREST {
     number_of_tiles 400
     terrain_mask 2
     set_avoid_player_start_areas 20
+    set_scale_by_size
 }
 
 create_terrain PINE_FOREST {
@@ -370,6 +469,7 @@ create_terrain PINE_FOREST {
     number_of_clumps 10
     number_of_tiles 80
     terrain_mask 2
+    set_scale_by_size
 }
 
 create_terrain PINE_FOREST {
@@ -377,6 +477,7 @@ create_terrain PINE_FOREST {
     number_of_clumps 10
     number_of_tiles 80
     terrain_mask 2
+    set_scale_by_size
 }
 
 create_terrain PINE_FOREST {
@@ -384,6 +485,7 @@ create_terrain PINE_FOREST {
     number_of_clumps 10
     number_of_tiles 80
     terrain_mask 2
+    set_scale_by_size
 }
 
 create_terrain PINE_FOREST {
@@ -391,6 +493,7 @@ create_terrain PINE_FOREST {
     number_of_clumps 10
     number_of_tiles 80
     terrain_mask 2
+    set_scale_by_size
 }
 
 
