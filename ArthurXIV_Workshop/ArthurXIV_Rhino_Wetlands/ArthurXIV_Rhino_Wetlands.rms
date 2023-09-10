@@ -14,9 +14,10 @@
 
 
 
-        /* 20230805 Pyrenees by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
+        /* 20230805 Rhino_Wetlands by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
 
-#includeXS ArthurXIV_test_5.xs
+#includeXS ArthurXIV_towers_stone.xs
+#includeXS ArthurXIV_warships_div2.xs
 
 /* 
 Comment those define commands if you want a normal start:
@@ -273,9 +274,9 @@ if     TINY_MAP     set_avoid_player_start_areas 37
 elseif SMALL_MAP    set_avoid_player_start_areas 36
 elseif MEDIUM_MAP   set_avoid_player_start_areas 36
 elseif LARGE_MAP    set_avoid_player_start_areas 39
-elseif HUGE_MAP     set_avoid_player_start_areas 40
-elseif GIGANTIC_MAP set_avoid_player_start_areas 46
-elseif LUDIKRIS_MAP set_avoid_player_start_areas 53
+elseif HUGE_MAP     set_avoid_player_start_areas 46
+elseif GIGANTIC_MAP set_avoid_player_start_areas 58
+elseif LUDIKRIS_MAP set_avoid_player_start_areas 80
 endif }
 
 create_terrain SWAMP_SHALLOWS { base_terrain DLC_RAINFOREST number_of_clumps 100 land_percent 100
@@ -383,7 +384,7 @@ terrain_size DLC_BEACH3 0 0
 terrain_size DLC_MANGROVESHALLOW 0 0
 terrain_size DLC_RAINFOREST 0 0
 terrain_size SWAMP_SHALLOWS 0 0
-if 2_PLAYER_GAME terrain_size WATER 3 0 elseif 3_PLAYER_GAME terrain_size WATER 2 0 else terrain_size WATER 1 0 endif
+if 2_PLAYER_GAME terrain_size WATER 2 0 elseif 3_PLAYER_GAME terrain_size WATER 2 0 else terrain_size WATER 1 0 endif
 if 2_PLAYER_GAME terrain_size WATER_GREEN 3 0 elseif 3_PLAYER_GAME terrain_size WATER_GREEN 2 0 else terrain_size WATER_GREEN 1 0 endif
 if 2_PLAYER_GAME terrain_size WATER_BROWN 3 0 elseif 3_PLAYER_GAME terrain_size WATER_BROWN 2 0 else terrain_size WATER_BROWN 1 0 endif
 }
