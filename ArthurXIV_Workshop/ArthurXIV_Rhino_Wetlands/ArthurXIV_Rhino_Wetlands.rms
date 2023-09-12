@@ -393,6 +393,8 @@ if 2_PLAYER_GAME terrain_size WATER_BROWN 3 0 elseif 3_PLAYER_GAME terrain_size 
 /* Place starter. */
 create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
 create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                           set_place_for_every_player max_distance_to_players 6          min_distance_to_players 5 set_circular_placement }
+if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
+
 create_object SCOUT {                                                                                                                      set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
 #const DONKEY 846 /* Can trade. */
 create_object DONKEY {                                                                                                                     set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
@@ -404,6 +406,7 @@ create_object OFF_GRID { second_object JUNK            terrain_to_place_on WATER
 create_object OFF_GRID { second_object TRADE_COG       terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 create_object OFF_GRID { second_object TRANSPORT_SHIP  terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 create_object OFF_GRID { second_object FISHING_SHIP    terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object WAR_GALLEY    terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 
 start_random percent_chance 20 create_object DLC_COW
              percent_chance 20 create_object DLC_COW_B
