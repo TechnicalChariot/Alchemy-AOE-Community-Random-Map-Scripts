@@ -1,6 +1,22 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* 20230805 Deer_Glade by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
 
-
+#includeXS ArthurXIV_towers_stone.xs */
 
 /* 
 Comment those define commands if you want a normal start:
@@ -23,7 +39,7 @@ random_placement
 /* ai_info_map_type BLACK_FOREST 0 0 0 */
 /* weather_type -3 16 0 -1 */
 effect_amount ADD_ATTRIBUTE TOWER_CLASS ATTR_STONE_COST 76
-effect_amount ADD_ATTRIBUTE FARM_CLASS ATTR_WOOD_COST 10
+/* effect_amount ADD_ATTRIBUTE FARM_CLASS ATTR_WOOD_COST -10 */
 
 <LAND_GENERATION>
 base_terrain SHALLOWSSHALLOWS
@@ -47,10 +63,10 @@ number_of_tiles
 base_size 
 land_position 1 1
 other_zone_avoidance_distance 
-top_border 
-bottom_border 
-left_border 
-right_border 
+top_border (NW)
+bottom_border (SE)
+left_border (SW)
+right_border (NE)
 base_elevation 1
 border_fuzziness 10
 clumping_factor 100
@@ -628,6 +644,7 @@ endif }
 create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
 create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                           set_place_for_every_player max_distance_to_players 6          min_distance_to_players 5 set_circular_placement }
 if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
+
 if MILITARY_STARTER
     
     /* 1 - Pacific scout */
@@ -698,8 +715,6 @@ if MILITARY_STARTER
     start_random percent_chance 1  create_object MONKBOAT2      {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
     start_random percent_chance 1  create_object MONKBOAT       {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
     start_random percent_chance 1  create_object Canoe          {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
-    start_random percent_chance 1  create_object DemoRaft       {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
-    start_random percent_chance 1  create_object FireGalley     {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
     start_random percent_chance 1  create_object DragonShip1    {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
     start_random percent_chance 1  create_object DragonShip2    {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
 else
@@ -733,13 +748,6 @@ create_object DEER {                                                            
 create_object RELIC {              set_scaling_to_player_number number_of_objects 4 ignore_terrain_restrictions                             terrain_to_place_on SHALLOW second_object DLC_CROCODILE }
 /* Fill the glade. */
 create_object RELIC {                                           number_of_objects 2 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 find_closest_to_map_center }
-
-
-
-
-
-
-
 
 create_object DEER {               set_scaling_to_map_size     number_of_objects 23 ignore_terrain_restrictions place_on_specific_land_id 1 terrain_to_place_on GRASS_JUNGL2 min_distance_to_map_edge 11 min_distance_to_players 12 find_closest_to_map_center
                                                                                                                             actor_area 50 actor_area_radius 1 }
@@ -863,13 +871,13 @@ create_object TUNA {               set_scaling_to_map_size      number_of_object
 #const FALCON 1056
 #const STORMY_DOG 544   /* This one works only 1% of the time. */
 #const STORMY_DOG_2 862 /* This one works fine. */
-create_object FALCON {             set_scaling_to_map_size      number_of_objects 2 }
-create_object HAWK {               set_scaling_to_map_size      number_of_objects 2 }
-create_object MACAW {              set_scaling_to_map_size      number_of_objects 11 }
-create_object DLC_STORK {          set_scaling_to_map_size      number_of_objects 5 }
+create_object FALCON {             set_scaling_to_map_size      number_of_objects 1 }
+create_object HAWK {               set_scaling_to_map_size      number_of_objects 1 }
+create_object MACAW {              set_scaling_to_map_size      number_of_objects 7 }
+create_object DLC_STORK {          set_scaling_to_map_size      number_of_objects 3 }
 create_object STORMY_DOG {         set_scaling_to_map_size      number_of_objects 1 }
 create_object STORMY_DOG_2 {       set_scaling_to_map_size      number_of_objects 1 }
-create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_objects 2 }
+create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_objects 1 }
 
 /* Add scenery. */
                           create_object SEA_ROCKS_1 {           number_of_objects 1                                                          terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
