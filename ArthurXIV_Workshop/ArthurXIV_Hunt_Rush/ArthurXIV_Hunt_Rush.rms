@@ -16,7 +16,7 @@
 
         /* 20230805 Hunt_Rush by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
 
-#includeXS ArthurXIV_towers_stone.xs
+#includeXS ArthurXIV_towers_stone.xs */
 
 /* 
 Comment those define commands if you want a normal start:
@@ -855,6 +855,7 @@ endif }
 /* Place starter units and TC. */
 create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
 create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                         set_place_for_every_player max_distance_to_players 6          min_distance_to_players 5 set_circular_placement }
+if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 
 if MILITARY_STARTER
     
@@ -926,8 +927,6 @@ if MILITARY_STARTER
     start_random percent_chance 1  create_object MONKBOAT2      {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
     start_random percent_chance 1  create_object MONKBOAT       {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
     start_random percent_chance 1  create_object Canoe          {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
-    start_random percent_chance 1  create_object DemoRaft       {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
-    start_random percent_chance 1  create_object FireGalley     {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
     start_random percent_chance 1  create_object DragonShip1    {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
     start_random percent_chance 1  create_object DragonShip2    {        ignore_terrain_restrictions                            set_place_for_every_player find_closest terrain_to_place_on SHALLOWSSHALLOWS }            end_random
 else
@@ -1085,13 +1084,13 @@ create_object TUNA {               set_scaling_to_map_size      number_of_object
 #const FALCON 1056
 #const STORMY_DOG 544   /* This one works only 1% of the time. */
 #const STORMY_DOG_2 862 /* This one works fine. */
-create_object FALCON {             set_scaling_to_map_size      number_of_objects 2 }
-create_object HAWK {               set_scaling_to_map_size      number_of_objects 2 }
-create_object MACAW {              set_scaling_to_map_size      number_of_objects 11 }
-create_object DLC_STORK {          set_scaling_to_map_size      number_of_objects 5 }
+create_object FALCON {             set_scaling_to_map_size      number_of_objects 1 }
+create_object HAWK {               set_scaling_to_map_size      number_of_objects 1 }
+create_object MACAW {              set_scaling_to_map_size      number_of_objects 7 }
+create_object DLC_STORK {          set_scaling_to_map_size      number_of_objects 3 }
 create_object STORMY_DOG {         set_scaling_to_map_size      number_of_objects 1 }
 create_object STORMY_DOG_2 {       set_scaling_to_map_size      number_of_objects 1 }
-create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_objects 2 }
+create_object DLC_VULTURE {        set_scaling_to_map_size      number_of_objects 1 }
 
 /* Add scenery. */
                           create_object SEA_ROCKS_1 {           number_of_objects 1                                                          terrain_to_place_on SHALLOW                                                                set_gaia_object_only }
