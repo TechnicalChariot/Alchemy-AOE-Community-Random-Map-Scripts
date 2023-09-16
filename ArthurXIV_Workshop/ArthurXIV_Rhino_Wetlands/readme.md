@@ -1,6 +1,9 @@
 # Rhino Wetlands
 by ArthurXIV
 
+### Map icon
+<img src="ArthurXIV_Rhino_Wetlands.png" alt="Rhino_Wetlands_icon" width="300" height="auto">
+
 ### Map features
 - Circular map:
 
@@ -26,6 +29,3 @@ by ArthurXIV
 
 ### Introduction
 This archipelago is centered around an island covered with a dense forest. Adventurers who managed to penetrate this forest distinctly remember facing a throng of rhinos and fleeing by boat immediately.
-
-### Map icon
-<img src="ArthurXIV_Rhino_Wetlands.png" alt="Rhino_Wetlands_icon" width="300" height="auto">

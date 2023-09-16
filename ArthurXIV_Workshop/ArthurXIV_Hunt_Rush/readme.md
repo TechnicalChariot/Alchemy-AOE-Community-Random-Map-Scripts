@@ -1,6 +1,9 @@
 # Hunt Rush
 by ArthurXIV
 
+### Map icon
+<img src="ArthurXIV_Hunt_Rush.png" alt="Hunt_Rush_icon" width="300" height="auto">
+
 ### Map features
 - Circular map:
 
@@ -23,6 +26,3 @@ by ArthurXIV
 This strange island located in a swampy area homes a wild variety of fauna and
 vestige. Far from the coast, the very dry land is occupied only by a few zebra
 and a vast pack of elephants.
-
-### Map icon
-<img src="ArthurXIV_Hunt_Rush.png" alt="Hunt_Rush_icon" width="300" height="auto">

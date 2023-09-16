@@ -1,6 +1,9 @@
 # Deer Glade
 by ArthurXIV
 
+### Map icon
+<img src="ArthurXIV_Deer_Glade.png" alt="Deer_Glade_icon" width="300" height="auto">
+
 ### Map features
 - Circular map:
 
@@ -22,6 +25,3 @@ by ArthurXIV
 ### Introduction
 This green island located in a swampy area homes a throng of deer. You may find
 them if you wander through the birch brush.
-
-### Map icon
-<img src="ArthurXIV_Deer_Glade.png" alt="Deer_Glade_icon" width="300" height="auto">
