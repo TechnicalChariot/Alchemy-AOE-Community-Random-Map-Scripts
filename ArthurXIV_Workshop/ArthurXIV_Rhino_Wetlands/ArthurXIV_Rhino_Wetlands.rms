@@ -48,6 +48,18 @@ effect_amount ADD_ATTRIBUTE DOCK_F ATTR_HITPOINTS 10000
 effect_amount ADD_ATTRIBUTE DOCK_C ATTR_HITPOINTS 10000
 effect_amount ADD_ATTRIBUTE DOCK_I ATTR_HITPOINTS 10000 */
 
+#define DONKEY 846
+#define JUNK 15
+if 2_PLAYER_GAME
+else
+    if 0_TEAM_GAME
+	    effect_amount SET_ATTRIBUTE TRADE_CART ATTR_TRAIN_LOCATION -1
+	    effect_amount SET_ATTRIBUTE DONKEY     ATTR_TRAIN_LOCATION -1
+	    effect_amount SET_ATTRIBUTE TRADE_COG  ATTR_TRAIN_LOCATION -1
+	    effect_amount SET_ATTRIBUTE JUNK       ATTR_TRAIN_LOCATION -1
+    endif
+endif
+
 <LAND_GENERATION>
 base_terrain WATER
 /* enable_waves 0 */
