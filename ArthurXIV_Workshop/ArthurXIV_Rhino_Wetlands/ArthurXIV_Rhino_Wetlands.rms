@@ -16,8 +16,8 @@
 
         /* 20230805 Rhino_Wetlands by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
 
-#includeXS ArthurXIV_towers_stone.xs */
-#includeXS ArthurXIV_warships_div2.xs */
+/* #includeXS ArthurXIV_towers_stone.xs */
+/* #includeXS ArthurXIV_warships_div2.xs */
 
 /* 
 Comment those define commands if you want a normal start:
@@ -501,8 +501,9 @@ endif }
 if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 
 create_object SCOUT {                                                                                                                      set_place_for_every_player find_closest_to_map_center min_distance_to_players 3 max_distance_to_players 3 }
+create_object HOUSE                             { if NINE_VILLS number_of_objects 3 else number_of_objects 2 endif                         set_place_for_every_player find_closest }
 #const DONKEY 846 /* Can trade. */
-create_object DONKEY {                                                                                                                     set_place_for_every_player find_closest }
+create_object DONKEY {                                                                                                                     set_place_for_every_player find_closest_to_map_edge min_distance_to_players 3 max_distance_to_players 3 }
 #const MERCHANT 1572
 create_object MERCHANT {                                                                                                                   set_place_for_every_player find_closest_to_map_edge min_distance_to_players 3 max_distance_to_players 3 }
 #const JUNK 15 /* Can trade. */

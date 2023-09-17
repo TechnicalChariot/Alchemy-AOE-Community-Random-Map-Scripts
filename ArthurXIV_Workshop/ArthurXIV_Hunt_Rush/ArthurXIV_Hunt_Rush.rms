@@ -16,7 +16,7 @@
 
         /* 20230805 Hunt_Rush by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
 
-#includeXS ArthurXIV_towers_stone.xs */
+/* #includeXS ArthurXIV_towers_stone.xs */
 
 /* 
 Comment those define commands if you want a normal start:
@@ -854,6 +854,7 @@ endif }
 <OBJECTS_GENERATION>
 /* Place starter units and TC. */
 create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
+if NINE_VILLS create_object HOUSE                                                                                                        { set_place_for_every_player max_distance_to_players 11         min_distance_to_players 10 } endif
 create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                         set_place_for_every_player max_distance_to_players 6          min_distance_to_players 5 set_circular_placement }
 if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 
