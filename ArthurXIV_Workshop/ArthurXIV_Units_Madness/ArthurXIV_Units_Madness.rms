@@ -61,16 +61,16 @@ effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_HOTKEY_ID 4168
 /* effect_amount ADD_ATTRIBUTE AMZ_WARRIOR ATTR_CREATION_TIME 20 */
 effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_NAME_ID 825
 effect_amount ENABLE_OBJECT AMZ_WARRIOR ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_GOLD_COST 10
-effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_FOOD_COST 80
+effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_GOLD_COST 6
+effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_FOOD_COST 100
 #const IROQUOIS 1374
 effect_amount SET_ATTRIBUTE IROQUOIS ATTR_TRAIN_LOCATION 562
 effect_amount SET_ATTRIBUTE IROQUOIS ATTR_TRAIN_BUTTON 3
 effect_amount SET_ATTRIBUTE IROQUOIS ATTR_HOTKEY_ID 1007
 effect_amount SET_ATTRIBUTE IROQUOIS ATTR_NAME_ID 1374
 effect_amount ENABLE_OBJECT IROQUOIS ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE IROQUOIS ATTR_GOLD_COST 15
-effect_amount SET_ATTRIBUTE IROQUOIS ATTR_FOOD_COST 85
+effect_amount SET_ATTRIBUTE IROQUOIS ATTR_GOLD_COST 8
+effect_amount SET_ATTRIBUTE IROQUOIS ATTR_FOOD_COST 100
 #const NINJA 1145
 effect_amount SET_ATTRIBUTE NINJA ATTR_TRAIN_LOCATION 109
 effect_amount SET_ATTRIBUTE NINJA ATTR_TRAIN_BUTTON 2
@@ -78,8 +78,8 @@ effect_amount SET_ATTRIBUTE NINJA ATTR_HOTKEY_ID 4168
 /* effect_amount SET_ATTRIBUTE NINJA ATTR_HOTKEY_ID 4174 */
 effect_amount SET_ATTRIBUTE NINJA ATTR_NAME_ID 1145
 effect_amount ENABLE_OBJECT NINJA ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE NINJA ATTR_GOLD_COST 70
-effect_amount SET_ATTRIBUTE NINJA ATTR_FOOD_COST 60
+effect_amount SET_ATTRIBUTE NINJA ATTR_GOLD_COST 10
+effect_amount SET_ATTRIBUTE NINJA ATTR_FOOD_COST 100
 
 #const GOAT 1060
 effect_amount SET_ATTRIBUTE GOAT ATTR_TRAIN_LOCATION 50
@@ -197,26 +197,27 @@ effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_TRAIN_BUTTON 15
 effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_HOTKEY_ID 4161
 effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_NAME_ID 850
 effect_amount ENABLE_OBJECT AMZ_ARCHER ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_GOLD_COST 20
-effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_WOOD_COST 70
+effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_GOLD_COST 10
+effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_WOOD_COST 100
 #const CRUS_KNIGHT 1723
 effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_TRAIN_LOCATION 104
 effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_TRAIN_BUTTON 15
 effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_HOTKEY_ID 4161
 effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_NAME_ID 1723
 effect_amount ENABLE_OBJECT CRUS_KNIGHT ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_GOLD_COST 80
+effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_FOOD_COST 120
+effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_GOLD_COST 40
 #const ASSAULT_TOWER 885
 effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_TRAIN_LOCATION 49
 effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_TRAIN_BUTTON 15
 effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_HOTKEY_ID 4161
 effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_NAME_ID 885
 effect_amount ENABLE_OBJECT ASSAULT_TOWER ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_GOLD_COST 80
+effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_GOLD_COST 10
 effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_WOOD_COST 100
 effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_CREATE_SDESC_ID 6315
-effect_amount SET_ATTRIBUTE DLC_SIEGETOWER ATTR_GOLD_COST 10
-effect_amount SET_ATTRIBUTE DLC_SIEGETOWER ATTR_WOOD_COST 50
+effect_amount SET_ATTRIBUTE DLC_SIEGETOWER ATTR_GOLD_COST 30
+effect_amount SET_ATTRIBUTE DLC_SIEGETOWER ATTR_WOOD_COST 20
 
 #const JUNK 15
 effect_amount SET_ATTRIBUTE JUNK ATTR_TRAIN_LOCATION 45
@@ -224,7 +225,7 @@ effect_amount SET_ATTRIBUTE JUNK ATTR_TRAIN_BUTTON 13
 effect_amount SET_ATTRIBUTE JUNK ATTR_HOTKEY_ID 4192
 effect_amount SET_ATTRIBUTE JUNK ATTR_NAME_ID 15
 effect_amount ENABLE_OBJECT JUNK ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE JUNK ATTR_STONE_COST 200
+effect_amount SET_ATTRIBUTE JUNK ATTR_STONE_COST 200 
 effect_amount SET_ATTRIBUTE JUNK ATTR_FOOD_COST 500
 #const CANOE 778
 effect_amount SET_ATTRIBUTE CANOE ATTR_TRAIN_LOCATION 45
@@ -240,8 +241,8 @@ effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_TRAIN_BUTTON 34
 effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_HOTKEY_ID 4155
 effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_NAME_ID 1302
 effect_amount ENABLE_OBJECT DRAGON_SHIP ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_GOLD_COST 70
-effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_WOOD_COST 90
+effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_GOLD_COST 50
+effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_WOOD_COST 110
 /* #const MONKBOAT1 535
 effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_TRAIN_LOCATION 584
 effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_TRAIN_BUTTON 13
@@ -257,8 +258,8 @@ effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_NAME_ID 536
 effect_amount ENABLE_OBJECT MONKBOAT2 ATTR_ENABLE 1
 effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_CREATE_SDESC_ID 6099
 effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_MAX_RANGE 9
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_GOLD_COST 200
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_WOOD_COST 50
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_GOLD_COST 180
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_WOOD_COST 70
 effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_DYING_GRAPHIC 539
 /* #const MONKBOAT3 1022
 effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_TRAIN_LOCATION 584
@@ -281,8 +282,10 @@ effect_amount SET_ATTRIBUTE MERCHANT ATTR_GOLD_COST 100
 effect_amount SET_ATTRIBUTE MERCHANT ATTR_STONE_COST 100
 effect_amount SET_ATTRIBUTE MERCHANT ATTR_CREATION_TIME 20
 effect_amount SET_ATTRIBUTE MERCHANT ATTR_CREATE_SDESC_ID 6504
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_DEAD_ID 66 /* 252 for 1gold */
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_DEAD_ID 70
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_DEAD_ID 247
+
+effect_amount SET_ATTRIBUTE VILLAGER ATTR_DEAD_ID 1270
+
 #const DONKEY 846
 effect_amount SET_ATTRIBUTE DONKEY ATTR_TRAIN_LOCATION 84
 effect_amount SET_ATTRIBUTE DONKEY ATTR_TRAIN_BUTTON 11
@@ -308,8 +311,8 @@ effect_amount SET_ATTRIBUTE SGODIAN ATTR_TRAIN_BUTTON 15
 effect_amount SET_ATTRIBUTE SGODIAN ATTR_HOTKEY_ID 4161
 effect_amount SET_ATTRIBUTE SGODIAN ATTR_NAME_ID 1299
 effect_amount ENABLE_OBJECT SGODIAN ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE SGODIAN ATTR_GOLD_COST 60
-effect_amount SET_ATTRIBUTE SGODIAN ATTR_FOOD_COST 80
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_GOLD_COST 40
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_FOOD_COST 100
 
 /* #const TRADE_WORKSHOP 110
 effect_amount SET_ATTRIBUTE TRADE_WORKSHOP ATTR_TRAIN_LOCATION 118
@@ -583,10 +586,10 @@ endif }
 /* Place starter. */
 create_object TOWN_CENTER {                                                                                                                set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 }
 create_object RUGS {                          number_of_groups 100                           set_place_for_every_player max_distance_to_players 4          min_distance_to_players 0 set_circular_placement set_gaia_object_only }
-create_object RUGS {                          number_of_groups 5                           set_place_for_every_player max_distance_to_players 4          min_distance_to_players 0 set_circular_placement set_gaia_object_only }
+create_object RUGS {                          number_of_groups 5                           set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 set_circular_placement set_gaia_object_only }
 #const FRUITS 1321
-create_object FRUITS {                          number_of_groups 2                           set_place_for_every_player max_distance_to_players 4          min_distance_to_players 2 set_circular_placement set_gaia_object_only }
-if NINE_VILLS create_object HOUSE                                                                                                        { set_place_for_every_player max_distance_to_players 13         min_distance_to_players 12 } endif
+create_object FRUITS {                          number_of_groups 1                           set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 set_circular_placement set_gaia_object_only }
+if NINE_VILLS create_object HOUSE                                                                                                        { set_place_for_every_player max_distance_to_players 13         min_distance_to_players 12 avoid_forest_zone 1 } endif
 create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                           set_place_for_every_player max_distance_to_players 6          min_distance_to_players 5 set_circular_placement }
 if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 
@@ -594,7 +597,7 @@ create_object SCOUT {                                                           
 #const MERCHANT 1572
 create_object MERCHANT {                                                                                                                   set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
 #const OFF_GRID 647
-create_object OFF_GRID { second_object FISHING_SHIP    terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+create_object OFF_GRID { second_object FISHING_SHIP    terrain_to_place_on DLC_WETROCKBEACH                                                set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 
 start_random percent_chance 20 create_object DLC_COW
              percent_chance 20 create_object DLC_COW_B
@@ -608,29 +611,30 @@ start_random percent_chance 20 create_object DLC_GOAT
              percent_chance 20 create_object TURKEY end_random {                    number_of_groups 1                                     set_place_for_every_player max_distance_to_players 3        min_distance_to_players 3 set_gaia_object_only }
 
 /* Add some gold and stone quite close around each player to offer a fair start and help walling. */
-create_object GOLD {                                            number_of_objects 2 number_of_groups 3 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 11          min_distance_to_players 9 set_gaia_object_only set_circular_placement }
-create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 11          min_distance_to_players 9 set_gaia_object_only set_circular_placement }
+create_object GOLD {                                            number_of_objects 2 number_of_groups 3 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 11          min_distance_to_players 9 set_gaia_object_only set_circular_placement avoid_forest_zone 1 }
+create_object STONE {                                           number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 11          min_distance_to_players 9 set_gaia_object_only set_circular_placement avoid_forest_zone 1 }
 
-#const WALL1 119  create_object OFF_GRID  { second_object WALL1 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement }
-#const WALL2 117  create_object OFF_GRID  { second_object WALL2 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement }
-#const WALL3 1062 create_object OFF_GRID  { second_object WALL3 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement }
-#const WALL4 788  create_object OFF_GRID  { second_object WALL4 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement ignore_terrain_restrictions }
-#const WALL5 370  create_object OFF_GRID  { second_object WALL5 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement }
-#const WALL6 231  create_object OFF_GRID  { second_object WALL6 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement }
-#const WALL7 155  create_object OFF_GRID  { second_object WALL7 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement }
+#const WALL1 119  create_object OFF_GRID  { second_object WALL1 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement avoid_forest_zone 1 temp_min_distance_group_placement 3 }
+#const WALL2 117  create_object OFF_GRID  { second_object WALL2 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement avoid_forest_zone 1 temp_min_distance_group_placement 3 }
+#const WALL3 1062 create_object OFF_GRID  { second_object WALL3 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement avoid_forest_zone 1 temp_min_distance_group_placement 3 }
+#const WALL4 788  create_object OFF_GRID  { second_object WALL4 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement avoid_forest_zone 1 temp_min_distance_group_placement 3 ignore_terrain_restrictions }
+#const WALL5 370  create_object OFF_GRID  { second_object WALL5 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement avoid_forest_zone 1 temp_min_distance_group_placement 3 }
+#const WALL6 231  create_object OFF_GRID  { second_object WALL6 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement avoid_forest_zone 1 temp_min_distance_group_placement 3 }
+#const WALL7 155  create_object OFF_GRID  { second_object WALL7 number_of_objects 1 number_of_groups 2 group_variance 0 set_tight_grouping set_place_for_every_player max_distance_to_players 18         min_distance_to_players 16 set_circular_placement avoid_forest_zone 1 temp_min_distance_group_placement 3 }
 /* #const TRADE_WORKSHOP 110 et 179
 #const PAGAN_SHRINE 1712 */																																																  
 
-create_object FORAGE       { set_place_for_every_player number_of_objects 2 number_of_groups 3 set_tight_grouping                                                     max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement }
+create_object DLC_RAINTREE { set_place_for_every_player                     number_of_groups 7                                                                        max_distance_to_players 7  min_distance_to_players 4  set_gaia_object_only                        avoid_forest_zone 2 }
+create_object FORAGE       { set_place_for_every_player number_of_objects 2 number_of_groups 3 set_tight_grouping                                                     max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement avoid_forest_zone 2 }
 create_object DLC_ELEPHANT { set_place_for_every_player number_of_groups 0                                                                                            max_distance_to_players 21 min_distance_to_players 19 set_gaia_object_only set_circular_placement }
 create_object JAVELINA     { set_place_for_every_player number_of_groups 1                                                                                            max_distance_to_players 21 min_distance_to_players 19 set_gaia_object_only set_circular_placement }
 create_object WILD_BOAR    { set_place_for_every_player number_of_groups 1                                                                                            max_distance_to_players 21 min_distance_to_players 19 set_gaia_object_only set_circular_placement }
 create_object DLC_RHINO    { set_place_for_every_player number_of_groups 0                                                                                            max_distance_to_players 21 min_distance_to_players 19 set_gaia_object_only set_circular_placement }
-create_object GAZELLE      { set_place_for_every_player number_of_groups 0                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement }
-create_object DEER         { set_place_for_every_player number_of_groups 4                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement }
-create_object DLC_IBEX     { set_place_for_every_player number_of_groups 0                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement }
-create_object DLC_OSTRICH  { set_place_for_every_player number_of_groups 4                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement }
-create_object DLC_ZEBRA    { set_place_for_every_player number_of_groups 0                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement }
+create_object GAZELLE      { set_place_for_every_player number_of_groups 0                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement avoid_forest_zone 4 }
+create_object DEER         { set_place_for_every_player number_of_groups 4                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement avoid_forest_zone 4 }
+create_object DLC_IBEX     { set_place_for_every_player number_of_groups 0                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement avoid_forest_zone 4 }
+create_object DLC_OSTRICH  { set_place_for_every_player number_of_groups 4                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement avoid_forest_zone 4 }
+create_object DLC_ZEBRA    { set_place_for_every_player number_of_groups 0                                                                                            max_distance_to_players 15 min_distance_to_players 13 set_gaia_object_only set_circular_placement avoid_forest_zone 4 }
 
 /* Add fish. */
 create_object SHORE_FISH    {      set_place_for_every_player   number_of_objects 2 set_gaia_object_only ignore_terrain_restrictions find_closest terrain_to_place_on DLC_WETROCKBEACH }
@@ -700,6 +704,8 @@ endif }
 create_object RELIC { set_scaling_to_player_number number_of_objects 1 number_of_groups 3             terrain_to_place_on SHALLOW second_object DLC_CROCODILE min_distance_group_placement 3 }
 create_object STONE { set_scaling_to_player_number number_of_objects 1 number_of_groups 8             terrain_to_place_on DLC_MANGROVESHALLOW min_distance_group_placement 3 }
 create_object GOLD  { set_scaling_to_player_number number_of_objects 2 number_of_groups 3             terrain_to_place_on DLC_MANGROVESHALLOW min_distance_group_placement 3 }
+
+create_object DLC_RAINTREE      { set_scaling_to_map_size                    number_of_groups 40                    terrain_to_place_on GRASS_JUNGLE set_gaia_object_only min_distance_to_players 26      avoid_forest_zone 3 }
 
 create_object GOLD           { set_place_for_every_player number_of_objects 4 number_of_groups 1 set_tight_grouping terrain_to_place_on GRASS_JUNGLE set_gaia_object_only max_distance_to_players 26 min_distance_group_placement 4 find_closest_to_map_edge min_distance_to_map_edge 3 }
 create_object STONE          { set_place_for_every_player number_of_objects 4 number_of_groups 1 set_tight_grouping terrain_to_place_on GRASS_JUNGLE set_gaia_object_only max_distance_to_players 26 min_distance_group_placement 4 find_closest_to_map_edge min_distance_to_map_edge 3 }
