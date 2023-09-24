@@ -1,4 +1,6 @@
 /*WASTELAND (6/17/22) by BPDrej
+Players start in their own oases surrounded by small forest patches. Beyond lies lifeless sand dunes with sparse resources.
+Inspired by Chrazini's Desert Void
 CHANGELOG:
 (1.1 - 7/10/22)
 - Added additional player forests, but all are smaller
@@ -23,7 +25,11 @@ create_player_lands
 	base_size 12
 	clumping_factor 30
 	other_zone_avoidance_distance 10
+	if TINY_MAP
+	circle_radius 30 0
+	else
 	circle_radius 40 0
+	endif
 }
 create_land
 {
@@ -46,21 +52,21 @@ create_land
 }
 endif
 <ELEVATION_GENERATION>
-create_elevation 4
+create_elevation 3
 if TINY_MAP
-{ base_terrain DESERT number_of_tiles 3000 number_of_clumps 40 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 1000 number_of_clumps 20 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
 elseif SMALL_MAP
-{ base_terrain DESERT number_of_tiles 4000 number_of_clumps 40 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 1500 number_of_clumps 20 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
 elseif MEDIUM_MAP
-{ base_terrain DESERT number_of_tiles 5500 number_of_clumps 40 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 2000 number_of_clumps 20 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
 elseif LARGE_MAP
-{ base_terrain DESERT number_of_tiles 7500 number_of_clumps 40 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 4000 number_of_clumps 30 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
 elseif HUGE_MAP
-{ base_terrain DESERT number_of_tiles 9500 number_of_clumps 40 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 6000 number_of_clumps 30 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
 elseif GIGANTIC_MAP
 { base_terrain DESERT number_of_tiles 13000 number_of_clumps 50 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
 elseif LUDIKRIS_MAP
-{ base_terrain DESERT number_of_tiles 30000 number_of_clumps 100 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 20000 number_of_clumps 80 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
 endif
 
 <TERRAIN_GENERATION>
@@ -105,26 +111,6 @@ create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_ti
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 
-create_terrain DLC_CRACKED
-{
-	base_terrain DLC_DESERTGRAVEL
-	land_percent 100
-	number_of_clumps 100
-	set_scale_by_size
-	set_scale_by_groups
-	clumping_factor 30
-}
-create_terrain DESERT
-{
-	base_terrain DLC_CRACKED
-	land_percent 100
-	number_of_clumps 100
-	set_scale_by_size
-	set_scale_by_groups
-	clumping_factor 30
-	spacing_to_other_terrain_types 1
-	terrain_mask 1
-}
 create_terrain DESERT
 {
 	base_terrain DIRT2
@@ -146,7 +132,7 @@ create_terrain GRASS3
 create_terrain DESERT
 {
 	base_terrain BEACH
-	if TINY_MAP land_percent 5 number_of_clumps 50
+	if TINY_MAP land_percent 4 number_of_clumps 40
 	elseif SMALL_MAP land_percent 5 number_of_clumps 125
 	elseif MEDIUM_MAP land_percent 5 number_of_clumps 125
 	elseif LARGE_MAP land_percent 7 number_of_clumps 175
@@ -199,6 +185,12 @@ create_object KING
 	max_distance_to_players 6
 }
 endif
+create_object HOUSE
+{
+	set_place_for_every_player
+	min_distance_to_players 19
+	max_distance_to_players 20
+}
 create_object VILLAGER
 {
 	set_place_for_every_player
@@ -438,9 +430,13 @@ create_object ROCK2
 */
 create_object DLC_BOULDER_A
 {
-	number_of_objects 2
+	start_random 
+	percent_chance 45 number_of_objects 1
+	percent_chance 45 number_of_objects 2
+	percent_chance 10 number_of_objects 3
+	end_random
 	number_of_groups 20
-	set_tight_grouping
+	set_loose_grouping
 	set_scaling_to_map_size
 	min_distance_group_placement 5
 	temp_min_distance_group_placement 40
@@ -448,9 +444,13 @@ create_object DLC_BOULDER_A
 }
 create_object DLC_BOULDER_B
 {
-	number_of_objects 2
+	start_random 
+	percent_chance 45 number_of_objects 1
+	percent_chance 45 number_of_objects 2
+	percent_chance 10 number_of_objects 3
+	end_random
 	number_of_groups 20
-	set_tight_grouping
+	set_loose_grouping
 	set_scaling_to_map_size
 	min_distance_group_placement 5
 	temp_min_distance_group_placement 40
