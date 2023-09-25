@@ -29,6 +29,90 @@ random_placement
 /* ai_info_map_type BLACK_FOREST 0 0 0 */
 /* weather_type -3 16 0 -1 */
 
+#const DONKEY 846
+effect_amount SET_ATTRIBUTE DONKEY ATTR_TRAIN_LOCATION 84
+effect_amount SET_ATTRIBUTE DONKEY ATTR_TRAIN_BUTTON 11
+effect_amount SET_ATTRIBUTE DONKEY ATTR_HOTKEY_ID 4174
+/* effect_amount SET_ATTRIBUTE DONKEY ATTR_HOTKEY_ID 4168 */
+effect_amount SET_ATTRIBUTE DONKEY ATTR_NAME_ID 846
+effect_amount ENABLE_OBJECT DONKEY ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE DONKEY ATTR_GOLD_COST 60
+effect_amount SET_ATTRIBUTE DONKEY ATTR_FOOD_COST 100
+effect_amount SET_ATTRIBUTE DONKEY ATTR_CREATION_TIME 60
+#const JUNK 15
+effect_amount SET_ATTRIBUTE JUNK ATTR_TRAIN_LOCATION 45
+effect_amount SET_ATTRIBUTE JUNK ATTR_TRAIN_BUTTON 13
+effect_amount SET_ATTRIBUTE JUNK ATTR_HOTKEY_ID 4192
+effect_amount SET_ATTRIBUTE JUNK ATTR_NAME_ID 15
+effect_amount ENABLE_OBJECT JUNK ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE JUNK ATTR_STONE_COST 200 
+effect_amount SET_ATTRIBUTE JUNK ATTR_FOOD_COST 500
+
+if 2_PLAYER_GAME
+else
+    if 0_TEAM_GAME
+	    #includeXS ArthurXIV_warning_notrade_ffa.xs
+	    effect_amount SET_ATTRIBUTE TRADE_CART ATTR_TRAIN_LOCATION -1
+	    effect_amount SET_ATTRIBUTE DONKEY     ATTR_TRAIN_LOCATION -1
+	    effect_amount SET_ATTRIBUTE TRADE_COG  ATTR_TRAIN_LOCATION -1
+	    effect_amount SET_ATTRIBUTE JUNK       ATTR_TRAIN_LOCATION -1
+    endif
+endif
+
+#const MERCHANT 1572
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_TRAIN_LOCATION 84
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_TRAIN_BUTTON 6
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_HOTKEY_ID 4151
+/* effect_amount SET_ATTRIBUTE MERCHANT ATTR_HOTKEY_ID 4169 */
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_NAME_ID 1572
+effect_amount ENABLE_OBJECT MERCHANT ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_FOOD_COST 1
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_CREATION_TIME 20
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_CREATE_SDESC_ID 6504
+/* effect_amount SET_ATTRIBUTE MERCHANT ATTR_DEAD_ID 247 */
+
+#const CANOE 778
+effect_amount SET_ATTRIBUTE CANOE ATTR_TRAIN_LOCATION 45
+effect_amount SET_ATTRIBUTE CANOE ATTR_TRAIN_BUTTON 33
+effect_amount SET_ATTRIBUTE CANOE ATTR_HOTKEY_ID 4192
+effect_amount SET_ATTRIBUTE CANOE ATTR_NAME_ID 778
+effect_amount ENABLE_OBJECT CANOE ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE CANOE ATTR_GOLD_COST 5
+effect_amount SET_ATTRIBUTE CANOE ATTR_WOOD_COST 85
+#const DRAGON_SHIP 1302
+effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_TRAIN_LOCATION 45
+effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_TRAIN_BUTTON 34
+effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_HOTKEY_ID 4155
+effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_NAME_ID 1302
+effect_amount ENABLE_OBJECT DRAGON_SHIP ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_GOLD_COST 50
+effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_WOOD_COST 110
+/* #const MONKBOAT1 535
+effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_TRAIN_LOCATION 584
+effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_TRAIN_BUTTON 13
+effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_HOTKEY_ID 4192
+effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_NAME_ID 535
+effect_amount ENABLE_OBJECT MONKBOAT1 ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_CREATE_SDESC_ID 6099 */
+#const MONKBOAT2 536
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_TRAIN_LOCATION 45
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_TRAIN_BUTTON 14
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_HOTKEY_ID 4155
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_NAME_ID 536
+effect_amount ENABLE_OBJECT MONKBOAT2 ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_CREATE_SDESC_ID 6099
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_MAX_RANGE 9
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_GOLD_COST 180
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_WOOD_COST 70
+effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_DYING_GRAPHIC 539
+/* #const MONKBOAT3 1022
+effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_TRAIN_LOCATION 584
+effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_TRAIN_BUTTON 15
+effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_HOTKEY_ID 4161
+effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_NAME_ID 1022
+effect_amount ENABLE_OBJECT MONKBOAT3 ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_CREATE_SDESC_ID 6099 */
+
 #const QUEEN 1292
 effect_amount SET_ATTRIBUTE QUEEN ATTR_TRAIN_LOCATION 70
 effect_amount SET_ATTRIBUTE QUEEN ATTR_TRAIN_BUTTON 1
@@ -52,34 +136,6 @@ effect_amount SET_ATTRIBUTE VMDL ATTR_GOLD_COST 1000
 effect_amount SET_ATTRIBUTE VMDL ATTR_FOOD_COST 1000
 effect_amount SET_ATTRIBUTE VMDL ATTR_WOOD_COST 1000
 effect_amount SET_ATTRIBUTE VMDL ATTR_STONE_COST 1000 */
-
-#const AMZ_WARRIOR 825
-effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_TRAIN_LOCATION 562
-effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_TRAIN_BUTTON 2
-effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_HOTKEY_ID 4168
-/* effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_HOTKEY_ID 4174 */
-/* effect_amount ADD_ATTRIBUTE AMZ_WARRIOR ATTR_CREATION_TIME 20 */
-effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_NAME_ID 825
-effect_amount ENABLE_OBJECT AMZ_WARRIOR ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_GOLD_COST 6
-effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_FOOD_COST 100
-#const IROQUOIS 1374
-effect_amount SET_ATTRIBUTE IROQUOIS ATTR_TRAIN_LOCATION 562
-effect_amount SET_ATTRIBUTE IROQUOIS ATTR_TRAIN_BUTTON 3
-effect_amount SET_ATTRIBUTE IROQUOIS ATTR_HOTKEY_ID 1007
-effect_amount SET_ATTRIBUTE IROQUOIS ATTR_NAME_ID 1374
-effect_amount ENABLE_OBJECT IROQUOIS ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE IROQUOIS ATTR_GOLD_COST 8
-effect_amount SET_ATTRIBUTE IROQUOIS ATTR_FOOD_COST 100
-#const NINJA 1145
-effect_amount SET_ATTRIBUTE NINJA ATTR_TRAIN_LOCATION 109
-effect_amount SET_ATTRIBUTE NINJA ATTR_TRAIN_BUTTON 2
-effect_amount SET_ATTRIBUTE NINJA ATTR_HOTKEY_ID 4168
-/* effect_amount SET_ATTRIBUTE NINJA ATTR_HOTKEY_ID 4174 */
-effect_amount SET_ATTRIBUTE NINJA ATTR_NAME_ID 1145
-effect_amount ENABLE_OBJECT NINJA ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE NINJA ATTR_GOLD_COST 10
-effect_amount SET_ATTRIBUTE NINJA ATTR_FOOD_COST 100
 
 #const GOAT 1060
 effect_amount SET_ATTRIBUTE GOAT ATTR_TRAIN_LOCATION 50
@@ -148,7 +204,6 @@ effect_amount SET_ATTRIBUTE COWD ATTR_NAME_ID 1600
 effect_amount ENABLE_OBJECT COWD ATTR_ENABLE 1
 effect_amount SET_ATTRIBUTE COWD ATTR_FOOD_COST 60
 effect_amount SET_ATTRIBUTE COWD ATTR_CREATE_SDESC_ID 6149
-
 effect_amount SET_ATTRIBUTE HORSE   ATTR_TRAIN_LOCATION 50
 effect_amount SET_ATTRIBUTE HORSE   ATTR_TRAIN_BUTTON 11
 effect_amount SET_ATTRIBUTE HORSE   ATTR_HOTKEY_ID 4174
@@ -191,6 +246,47 @@ effect_amount SET_ATTRIBUTE HORSE_E ATTR_FOOD_COST 1
 effect_amount SET_ATTRIBUTE HORSE_E ATTR_CREATE_SDESC_ID 6151
 effect_amount SET_ATTRIBUTE HORSE_E ATTR_CREATION_TIME 2
 
+
+#const AMZ_WARRIOR 825
+effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_TRAIN_LOCATION 562
+effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_TRAIN_BUTTON 2
+effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_HOTKEY_ID 4168
+/* effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_HOTKEY_ID 4174 */
+/* effect_amount ADD_ATTRIBUTE AMZ_WARRIOR ATTR_CREATION_TIME 20 */
+effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_NAME_ID 825
+effect_amount ENABLE_OBJECT AMZ_WARRIOR ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_GOLD_COST 6
+effect_amount SET_ATTRIBUTE AMZ_WARRIOR ATTR_FOOD_COST 100
+#const IROQUOIS 1374
+effect_amount SET_ATTRIBUTE IROQUOIS ATTR_TRAIN_LOCATION 562
+effect_amount SET_ATTRIBUTE IROQUOIS ATTR_TRAIN_BUTTON 3
+effect_amount SET_ATTRIBUTE IROQUOIS ATTR_HOTKEY_ID 1007
+effect_amount SET_ATTRIBUTE IROQUOIS ATTR_NAME_ID 1374
+effect_amount ENABLE_OBJECT IROQUOIS ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE IROQUOIS ATTR_GOLD_COST 8
+effect_amount SET_ATTRIBUTE IROQUOIS ATTR_FOOD_COST 100
+#const NINJA 1145
+effect_amount SET_ATTRIBUTE NINJA ATTR_TRAIN_LOCATION 109
+effect_amount SET_ATTRIBUTE NINJA ATTR_TRAIN_BUTTON 2
+effect_amount SET_ATTRIBUTE NINJA ATTR_HOTKEY_ID 4168
+/* effect_amount SET_ATTRIBUTE NINJA ATTR_HOTKEY_ID 4174 */
+effect_amount SET_ATTRIBUTE NINJA ATTR_NAME_ID 1145
+effect_amount ENABLE_OBJECT NINJA ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE NINJA ATTR_GOLD_COST 10
+effect_amount SET_ATTRIBUTE NINJA ATTR_FOOD_COST 100
+#const HPIK 892
+effect_amount SET_ATTRIBUTE HPIK ATTR_TRAIN_LOCATION 209
+effect_amount SET_ATTRIBUTE HPIK ATTR_TRAIN_BUTTON 14
+effect_amount SET_ATTRIBUTE HPIK ATTR_HOTKEY_ID 4155
+effect_amount SET_ATTRIBUTE HPIK ATTR_NAME_ID 892
+effect_amount ENABLE_OBJECT HPIK ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE HPIK ATTR_WOOD_COST 33
+effect_amount SET_ATTRIBUTE HPIK ATTR_FOOD_COST 33
+effect_amount SET_ATTRIBUTE HPIK ATTR_TRAIN_LOCATION 12
+effect_amount SET_ATTRIBUTE HPIK ATTR_TRAIN_BUTTON 15
+effect_amount SET_ATTRIBUTE HPIK ATTR_HOTKEY_ID 4161
+effect_amount SET_ATTRIBUTE HPIK ATTR_WOOD_COST 30
+effect_amount SET_ATTRIBUTE HPIK ATTR_FOOD_COST 40
 #const AMZ_ARCHER 850
 effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_TRAIN_LOCATION 87
 effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_TRAIN_BUTTON 15
@@ -199,14 +295,27 @@ effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_NAME_ID 850
 effect_amount ENABLE_OBJECT AMZ_ARCHER ATTR_ENABLE 1
 effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_GOLD_COST 10
 effect_amount SET_ATTRIBUTE AMZ_ARCHER ATTR_WOOD_COST 100
+#const SGODIAN 1299
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_TRAIN_LOCATION 209
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_TRAIN_BUTTON 15
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_HOTKEY_ID 4161
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_NAME_ID 1299
+effect_amount ENABLE_OBJECT SGODIAN ATTR_ENABLE 1
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_GOLD_COST 40
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_FOOD_COST 100
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_TRAIN_LOCATION 101
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_TRAIN_BUTTON 15
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_HOTKEY_ID 4161
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_GOLD_COST 40
+effect_amount SET_ATTRIBUTE SGODIAN ATTR_FOOD_COST 120
 #const CRUS_KNIGHT 1723
 effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_TRAIN_LOCATION 104
 effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_TRAIN_BUTTON 15
 effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_HOTKEY_ID 4161
 effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_NAME_ID 1723
 effect_amount ENABLE_OBJECT CRUS_KNIGHT ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_FOOD_COST 120
-effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_GOLD_COST 40
+effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_FOOD_COST 100
+effect_amount SET_ATTRIBUTE CRUS_KNIGHT ATTR_GOLD_COST 60
 #const ASSAULT_TOWER 885
 effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_TRAIN_LOCATION 49
 effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_TRAIN_BUTTON 15
@@ -219,114 +328,19 @@ effect_amount SET_ATTRIBUTE ASSAULT_TOWER ATTR_CREATE_SDESC_ID 6315
 effect_amount SET_ATTRIBUTE DLC_SIEGETOWER ATTR_GOLD_COST 30
 effect_amount SET_ATTRIBUTE DLC_SIEGETOWER ATTR_WOOD_COST 20
 
-#const JUNK 15
-effect_amount SET_ATTRIBUTE JUNK ATTR_TRAIN_LOCATION 45
-effect_amount SET_ATTRIBUTE JUNK ATTR_TRAIN_BUTTON 13
-effect_amount SET_ATTRIBUTE JUNK ATTR_HOTKEY_ID 4192
-effect_amount SET_ATTRIBUTE JUNK ATTR_NAME_ID 15
-effect_amount ENABLE_OBJECT JUNK ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE JUNK ATTR_STONE_COST 200 
-effect_amount SET_ATTRIBUTE JUNK ATTR_FOOD_COST 500
-#const CANOE 778
-effect_amount SET_ATTRIBUTE CANOE ATTR_TRAIN_LOCATION 45
-effect_amount SET_ATTRIBUTE CANOE ATTR_TRAIN_BUTTON 33
-effect_amount SET_ATTRIBUTE CANOE ATTR_HOTKEY_ID 4192
-effect_amount SET_ATTRIBUTE CANOE ATTR_NAME_ID 778
-effect_amount ENABLE_OBJECT CANOE ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE CANOE ATTR_GOLD_COST 5
-effect_amount SET_ATTRIBUTE CANOE ATTR_WOOD_COST 85
-#const DRAGON_SHIP 1302
-effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_TRAIN_LOCATION 45
-effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_TRAIN_BUTTON 34
-effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_HOTKEY_ID 4155
-effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_NAME_ID 1302
-effect_amount ENABLE_OBJECT DRAGON_SHIP ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_GOLD_COST 50
-effect_amount SET_ATTRIBUTE DRAGON_SHIP ATTR_WOOD_COST 110
-/* #const MONKBOAT1 535
-effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_TRAIN_LOCATION 584
-effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_TRAIN_BUTTON 13
-effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_HOTKEY_ID 4192
-effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_NAME_ID 535
-effect_amount ENABLE_OBJECT MONKBOAT1 ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE MONKBOAT1 ATTR_CREATE_SDESC_ID 6099 */
-#const MONKBOAT2 536
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_TRAIN_LOCATION 45
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_TRAIN_BUTTON 14
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_HOTKEY_ID 4155
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_NAME_ID 536
-effect_amount ENABLE_OBJECT MONKBOAT2 ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_CREATE_SDESC_ID 6099
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_MAX_RANGE 9
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_GOLD_COST 180
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_WOOD_COST 70
-effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_DYING_GRAPHIC 539
-/* #const MONKBOAT3 1022
-effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_TRAIN_LOCATION 584
-effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_TRAIN_BUTTON 15
-effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_HOTKEY_ID 4161
-effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_NAME_ID 1022
-effect_amount ENABLE_OBJECT MONKBOAT3 ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE MONKBOAT3 ATTR_CREATE_SDESC_ID 6099 */
-
-#const MERCHANT 1572
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_TRAIN_LOCATION 84
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_TRAIN_BUTTON 6
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_HOTKEY_ID 4151
-/* effect_amount SET_ATTRIBUTE MERCHANT ATTR_HOTKEY_ID 4169 */
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_NAME_ID 1572
-effect_amount ENABLE_OBJECT MERCHANT ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_WOOD_COST 100
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_FOOD_COST 100
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_GOLD_COST 100
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_STONE_COST 100
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_CREATION_TIME 20
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_CREATE_SDESC_ID 6504
-effect_amount SET_ATTRIBUTE MERCHANT ATTR_DEAD_ID 247
-
-effect_amount SET_ATTRIBUTE VILLAGER ATTR_DEAD_ID 1270
-
-#const DONKEY 846
-effect_amount SET_ATTRIBUTE DONKEY ATTR_TRAIN_LOCATION 84
-effect_amount SET_ATTRIBUTE DONKEY ATTR_TRAIN_BUTTON 11
-effect_amount SET_ATTRIBUTE DONKEY ATTR_HOTKEY_ID 4174
-/* effect_amount SET_ATTRIBUTE DONKEY ATTR_HOTKEY_ID 4168 */
-effect_amount SET_ATTRIBUTE DONKEY ATTR_NAME_ID 846
-effect_amount ENABLE_OBJECT DONKEY ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE DONKEY ATTR_GOLD_COST 60
-effect_amount SET_ATTRIBUTE DONKEY ATTR_FOOD_COST 100
-effect_amount SET_ATTRIBUTE DONKEY ATTR_CREATION_TIME 60
-
-#const HPIK 892
-effect_amount SET_ATTRIBUTE HPIK ATTR_TRAIN_LOCATION 209
-effect_amount SET_ATTRIBUTE HPIK ATTR_TRAIN_BUTTON 14
-effect_amount SET_ATTRIBUTE HPIK ATTR_HOTKEY_ID 4155
-effect_amount SET_ATTRIBUTE HPIK ATTR_NAME_ID 892
-effect_amount ENABLE_OBJECT HPIK ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE HPIK ATTR_WOOD_COST 33
-effect_amount SET_ATTRIBUTE HPIK ATTR_FOOD_COST 33
-#const SGODIAN 1299
-effect_amount SET_ATTRIBUTE SGODIAN ATTR_TRAIN_LOCATION 209
-effect_amount SET_ATTRIBUTE SGODIAN ATTR_TRAIN_BUTTON 15
-effect_amount SET_ATTRIBUTE SGODIAN ATTR_HOTKEY_ID 4161
-effect_amount SET_ATTRIBUTE SGODIAN ATTR_NAME_ID 1299
-effect_amount ENABLE_OBJECT SGODIAN ATTR_ENABLE 1
-effect_amount SET_ATTRIBUTE SGODIAN ATTR_GOLD_COST 40
-effect_amount SET_ATTRIBUTE SGODIAN ATTR_FOOD_COST 100
 
 /* #const TRADE_WORKSHOP 110
 effect_amount SET_ATTRIBUTE TRADE_WORKSHOP ATTR_TRAIN_LOCATION 118
 effect_amount SET_ATTRIBUTE TRADE_WORKSHOP ATTR_TRAIN_BUTTON 13
 effect_amount SET_ATTRIBUTE TRADE_WORKSHOP ATTR_CREATION_TIME 1
 effect_amount ENABLE_OBJECT TRADE_WORKSHOP ATTR_ENABLE 0 */
-
 #const FIRE_TOWER 190
 effect_amount SET_ATTRIBUTE FIRE_TOWER ATTR_TRAIN_LOCATION 118
 effect_amount SET_ATTRIBUTE FIRE_TOWER ATTR_TRAIN_BUTTON 5
 effect_amount SET_ATTRIBUTE FIRE_TOWER ATTR_HOTKEY_ID 4156
 effect_amount SET_ATTRIBUTE FIRE_TOWER ATTR_STONE_COST 225
+effect_amount SET_ATTRIBUTE FIRE_TOWER ATTR_GOLD_COST 125
 effect_amount ENABLE_OBJECT FIRE_TOWER ATTR_ENABLE 1
-
 #const FLAMETHROWER 188
 effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_TRAIN_LOCATION 190
 effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_TRAIN_BUTTON 1
@@ -334,7 +348,11 @@ effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_HOTKEY_ID 4169
 /* effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_HOTKEY_ID 4151 */
 effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_NAME_ID 188
 effect_amount ENABLE_OBJECT FLAMETHROWER ATTR_ENABLE 1
-
+effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_GOLD_COST 50
+effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_WOOD_COST 130
+effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_TRAIN_LOCATION 49
+effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_TRAIN_BUTTON 13
+effect_amount SET_ATTRIBUTE FLAMETHROWER ATTR_HOTKEY_ID 4192
 #const ROYAL_JAN 52
 effect_amount SET_ATTRIBUTE ROYAL_JAN ATTR_TRAIN_LOCATION 236
 effect_amount SET_ATTRIBUTE ROYAL_JAN ATTR_TRAIN_BUTTON 1
@@ -342,18 +360,8 @@ effect_amount SET_ATTRIBUTE ROYAL_JAN ATTR_HOTKEY_ID 4169
 /* effect_amount SET_ATTRIBUTE ROYAL_JAN ATTR_HOTKEY_ID 4151 */
 effect_amount SET_ATTRIBUTE ROYAL_JAN ATTR_NAME_ID 52
 effect_amount ENABLE_OBJECT ROYAL_JAN ATTR_ENABLE 1
-
-#define DONKEY 846
-#define JUNK 15
-if 2_PLAYER_GAME
-else
-    if 0_TEAM_GAME
-	    effect_amount SET_ATTRIBUTE TRADE_CART ATTR_TRAIN_LOCATION -1
-	    effect_amount SET_ATTRIBUTE DONKEY     ATTR_TRAIN_LOCATION -1
-	    effect_amount SET_ATTRIBUTE TRADE_COG  ATTR_TRAIN_LOCATION -1
-	    effect_amount SET_ATTRIBUTE JUNK       ATTR_TRAIN_LOCATION -1
-    endif
-endif
+effect_amount SET_ATTRIBUTE ROYAL_JAN ATTR_GOLD_COST 80
+effect_amount SET_ATTRIBUTE ROYAL_JAN ATTR_FOOD_COST 40
 
 <LAND_GENERATION>
 base_terrain GRASS
@@ -435,40 +443,40 @@ else
 endif
 
 create_land { base_size 3 terrain_type SHALLOW land_percent 100 border_fuzziness 60 clumping_factor 20 land_position 50 50 base_elevation 3
-if     TINY_MAP     top_border 42 bottom_border 42 left_border 42 right_border 42
-elseif SMALL_MAP    top_border 41 bottom_border 41 left_border 41 right_border 41
-elseif MEDIUM_MAP   top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif LARGE_MAP    top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif HUGE_MAP     top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif GIGANTIC_MAP top_border 41 bottom_border 41 left_border 41 right_border 41
-elseif LUDIKRIS_MAP top_border 43 bottom_border 43 left_border 43 right_border 43
+if     TINY_MAP     top_border 40 bottom_border 40 left_border 40 right_border 40
+elseif SMALL_MAP    top_border 39 bottom_border 39 left_border 39 right_border 39
+elseif MEDIUM_MAP   top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif LARGE_MAP    top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif HUGE_MAP     top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif GIGANTIC_MAP top_border 39 bottom_border 39 left_border 39 right_border 39
+elseif LUDIKRIS_MAP top_border 41 bottom_border 41 left_border 41 right_border 41
 endif }
 create_land { base_size 3 terrain_type SHALLOW land_percent 100 border_fuzziness 60 clumping_factor 20 land_position 50 51 base_elevation 3
-if     TINY_MAP     top_border 42 bottom_border 42 left_border 42 right_border 42
-elseif SMALL_MAP    top_border 41 bottom_border 41 left_border 41 right_border 41
-elseif MEDIUM_MAP   top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif LARGE_MAP    top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif HUGE_MAP     top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif GIGANTIC_MAP top_border 41 bottom_border 41 left_border 41 right_border 41
-elseif LUDIKRIS_MAP top_border 43 bottom_border 43 left_border 43 right_border 43
+if     TINY_MAP     top_border 40 bottom_border 40 left_border 40 right_border 40
+elseif SMALL_MAP    top_border 39 bottom_border 39 left_border 39 right_border 39
+elseif MEDIUM_MAP   top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif LARGE_MAP    top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif HUGE_MAP     top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif GIGANTIC_MAP top_border 39 bottom_border 39 left_border 39 right_border 39
+elseif LUDIKRIS_MAP top_border 41 bottom_border 41 left_border 41 right_border 41
 endif }
 create_land { base_size 3 terrain_type SHALLOW land_percent 100 border_fuzziness 60 clumping_factor 20 land_position 51 50 base_elevation 3
-if     TINY_MAP     top_border 42 bottom_border 42 left_border 42 right_border 42
-elseif SMALL_MAP    top_border 41 bottom_border 41 left_border 41 right_border 41
-elseif MEDIUM_MAP   top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif LARGE_MAP    top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif HUGE_MAP     top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif GIGANTIC_MAP top_border 41 bottom_border 41 left_border 41 right_border 41
-elseif LUDIKRIS_MAP top_border 43 bottom_border 43 left_border 43 right_border 43
+if     TINY_MAP     top_border 40 bottom_border 40 left_border 40 right_border 40
+elseif SMALL_MAP    top_border 39 bottom_border 39 left_border 39 right_border 39
+elseif MEDIUM_MAP   top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif LARGE_MAP    top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif HUGE_MAP     top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif GIGANTIC_MAP top_border 39 bottom_border 39 left_border 39 right_border 39
+elseif LUDIKRIS_MAP top_border 41 bottom_border 41 left_border 41 right_border 41
 endif }
 create_land { base_size 3 terrain_type SHALLOW land_percent 100 border_fuzziness 60 clumping_factor 20 land_position 51 51 base_elevation 3
-if     TINY_MAP     top_border 42 bottom_border 42 left_border 42 right_border 42
-elseif SMALL_MAP    top_border 41 bottom_border 41 left_border 41 right_border 41
-elseif MEDIUM_MAP   top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif LARGE_MAP    top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif HUGE_MAP     top_border 40 bottom_border 40 left_border 40 right_border 40
-elseif GIGANTIC_MAP top_border 41 bottom_border 41 left_border 41 right_border 41
-elseif LUDIKRIS_MAP top_border 43 bottom_border 43 left_border 43 right_border 43
+if     TINY_MAP     top_border 40 bottom_border 40 left_border 40 right_border 40
+elseif SMALL_MAP    top_border 39 bottom_border 39 left_border 39 right_border 39
+elseif MEDIUM_MAP   top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif LARGE_MAP    top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif HUGE_MAP     top_border 38 bottom_border 38 left_border 38 right_border 38
+elseif GIGANTIC_MAP top_border 39 bottom_border 39 left_border 39 right_border 39
+elseif LUDIKRIS_MAP top_border 41 bottom_border 41 left_border 41 right_border 41
 endif }
 /* Avoir l'ext de beach à border 25. Ça comprime un peu beach+mangroveshallow+shallow au centre, mais mon but était d'avoir un ring sans ships assez large à l'extérieur. Soit calculer soit refaire les lands en partant de beach et ensuite double expand inter et exter. */
 
@@ -516,23 +524,23 @@ height_limits
                     create_terrain DLC_MANGROVESHALLOW             { base_terrain GRASS number_of_clumps 100 land_percent 100 }
 /* clear mangroveshallow */
 #const DIRT_MUD 76  create_terrain DLC_WETROCKBEACH { terrain_mask 1 base_terrain DLC_MANGROVESHALLOW number_of_clumps 100 land_percent 100
-if     TINY_MAP     spacing_to_other_terrain_types 4
-elseif SMALL_MAP    spacing_to_other_terrain_types 5
-elseif MEDIUM_MAP   spacing_to_other_terrain_types 6
-elseif LARGE_MAP    spacing_to_other_terrain_types 6
-elseif HUGE_MAP     spacing_to_other_terrain_types 7
-elseif GIGANTIC_MAP spacing_to_other_terrain_types 9
-elseif LUDIKRIS_MAP spacing_to_other_terrain_types 11
+if     TINY_MAP     spacing_to_other_terrain_types 2
+elseif SMALL_MAP    spacing_to_other_terrain_types 2
+elseif MEDIUM_MAP   spacing_to_other_terrain_types 2
+elseif LARGE_MAP    spacing_to_other_terrain_types 3
+elseif HUGE_MAP     spacing_to_other_terrain_types 3
+elseif GIGANTIC_MAP spacing_to_other_terrain_types 4
+elseif LUDIKRIS_MAP spacing_to_other_terrain_types 5
 endif }
 /* clear+layered mangroveshallow */
                     create_terrain DLC_WETROCKBEACH                { base_terrain DLC_MANGROVESHALLOW number_of_clumps 100 land_percent 100
-if     TINY_MAP     spacing_to_other_terrain_types 7
-elseif SMALL_MAP    spacing_to_other_terrain_types 8
-elseif MEDIUM_MAP   spacing_to_other_terrain_types 10
-elseif LARGE_MAP    spacing_to_other_terrain_types 11
-elseif HUGE_MAP     spacing_to_other_terrain_types 12
-elseif GIGANTIC_MAP spacing_to_other_terrain_types 14
-elseif LUDIKRIS_MAP spacing_to_other_terrain_types 17
+if     TINY_MAP     spacing_to_other_terrain_types 4
+elseif SMALL_MAP    spacing_to_other_terrain_types 5
+elseif MEDIUM_MAP   spacing_to_other_terrain_types 6
+elseif LARGE_MAP    spacing_to_other_terrain_types 7
+elseif HUGE_MAP     spacing_to_other_terrain_types 8
+elseif GIGANTIC_MAP spacing_to_other_terrain_types 10
+elseif LUDIKRIS_MAP spacing_to_other_terrain_types 13
 endif }
 /* wetrockbeach */
                     create_terrain GRASS_JUNGLE                    { base_terrain DLC_WETROCKBEACH number_of_clumps 100 land_percent 100
