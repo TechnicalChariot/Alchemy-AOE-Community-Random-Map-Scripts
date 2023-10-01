@@ -4155,7 +4155,7 @@ L { base_size 2 land_position 36 79 base_elevation 2 terrain_type T6 zone 7 }
 L { base_size 2 land_position 36 80 base_elevation 1 terrain_type T6 zone 7 } 
 L { base_size 2 land_position 36 81 base_elevation 0 terrain_type T6 zone 7 } 
 L { base_size 2 land_position 36 82 base_elevation 0 terrain_type T6 zone 7 } 
-L { base_size 2 land_position 36 83 base_elevation 0 terrain_type T3 zone 4 } 
+L { base_size 2 land_position 36 83 base_elevation 0 terrain_type T6 zone 7 } 
 L { base_size 2 land_position 36 84 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 36 85 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 36 86 base_elevation 0 terrain_type T3 zone 4 } 
@@ -4257,7 +4257,7 @@ L { base_size 2 land_position 37 82 base_elevation 0 terrain_type T3 zone 4 }
 L { base_size 2 land_position 37 83 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 37 84 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 37 85 base_elevation 0 terrain_type T3 zone 4 } 
-L { base_size 2 land_position 37 86 base_elevation 0 terrain_type T9 zone 10 } 
+L { base_size 2 land_position 37 86 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 37 87 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 37 88 base_elevation 2 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 37 89 base_elevation 3 terrain_type T9 zone 10 } 
@@ -4355,7 +4355,7 @@ L { base_size 2 land_position 38 81 base_elevation 0 terrain_type T3 zone 4 }
 L { base_size 2 land_position 38 82 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 38 83 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 38 84 base_elevation 0 terrain_type T3 zone 4 } 
-L { base_size 2 land_position 38 85 base_elevation 0 terrain_type T9 zone 10 } 
+L { base_size 2 land_position 38 85 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 38 86 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 38 87 base_elevation 1 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 38 88 base_elevation 3 terrain_type T9 zone 10 } 
@@ -7413,7 +7413,7 @@ L { base_size 2 land_position 69 70 base_elevation 0 terrain_type T6 zone 7 }
 L { base_size 2 land_position 69 71 base_elevation 0 terrain_type T6 zone 7 } 
 L { base_size 2 land_position 69 72 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 69 73 base_elevation 0 terrain_type T3 zone 4 } 
-L { base_size 2 land_position 69 74 base_elevation 0 terrain_type T3 zone 4 } 
+L { base_size 2 land_position 69 74 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 69 75 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 69 76 base_elevation 1 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 69 77 base_elevation 2 terrain_type T9 zone 10 } 
@@ -7513,7 +7513,7 @@ L { base_size 2 land_position 70 71 base_elevation 0 terrain_type T6 zone 7 }
 L { base_size 2 land_position 70 72 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 70 73 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 70 74 base_elevation 0 terrain_type T3 zone 4 } 
-L { base_size 2 land_position 70 75 base_elevation 0 terrain_type T3 zone 4 } 
+L { base_size 2 land_position 70 75 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 70 76 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 70 77 base_elevation 2 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 70 78 base_elevation 3 terrain_type T9 zone 10 } 
@@ -7612,7 +7612,7 @@ L { base_size 2 land_position 71 71 base_elevation 0 terrain_type T3 zone 4 }
 L { base_size 2 land_position 71 72 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 71 73 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 71 74 base_elevation 0 terrain_type T3 zone 4 } 
-L { base_size 2 land_position 71 75 base_elevation 0 terrain_type T3 zone 4 } 
+L { base_size 2 land_position 71 75 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 71 76 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 71 77 base_elevation 2 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 71 78 base_elevation 3 terrain_type T9 zone 10 } 
@@ -7710,7 +7710,7 @@ L { base_size 2 land_position 72 70 base_elevation 0 terrain_type T3 zone 4 }
 L { base_size 2 land_position 72 71 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 72 72 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 72 73 base_elevation 0 terrain_type T3 zone 4 } 
-L { base_size 2 land_position 72 74 base_elevation 0 terrain_type T3 zone 4 } 
+L { base_size 2 land_position 72 74 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 72 75 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 72 76 base_elevation 0 terrain_type T9 zone 10 } 
 L { base_size 2 land_position 72 77 base_elevation 2 terrain_type T9 zone 10 } 
@@ -8280,7 +8280,7 @@ L { base_size 2 land_position 78 46 base_elevation 4 terrain_type T7 zone 8 }
 L { base_size 2 land_position 78 47 base_elevation 3 terrain_type T7 zone 8 } 
 L { base_size 2 land_position 78 48 base_elevation 2 terrain_type T7 zone 8 } 
 L { base_size 2 land_position 78 49 base_elevation 0 terrain_type T7 zone 8 } 
-L { base_size 2 land_position 78 50 base_elevation 0 terrain_type T7 zone 8 } 
+L { base_size 2 land_position 78 50 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 78 51 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 78 52 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 78 53 base_elevation 0 terrain_type T6 zone 7 } 
@@ -8477,7 +8477,7 @@ L { base_size 2 land_position 80 45 base_elevation 1 terrain_type T7 zone 8 }
 L { base_size 2 land_position 80 46 base_elevation 2 terrain_type T7 zone 8 } 
 L { base_size 2 land_position 80 47 base_elevation 1 terrain_type T7 zone 8 } 
 L { base_size 2 land_position 80 48 base_elevation 0 terrain_type T7 zone 8 } 
-L { base_size 2 land_position 80 49 base_elevation 0 terrain_type T7 zone 8 } 
+L { base_size 2 land_position 80 49 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 80 50 base_elevation 0 terrain_type T3 zone 4 } 
 L { base_size 2 land_position 80 51 base_elevation 0 terrain_type T6 zone 7 } 
 L { base_size 2 land_position 80 52 base_elevation 0 terrain_type T6 zone 7 } 
