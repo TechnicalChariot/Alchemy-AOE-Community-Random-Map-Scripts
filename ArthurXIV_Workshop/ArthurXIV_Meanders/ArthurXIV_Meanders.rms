@@ -85,6 +85,12 @@ height_limits
 
 create_terrain MED_WATER { base_terrain watr2d       spacing_to_other_terrain_types 1 land_percent 99 number_of_clumps 1000 }
 
+create_terrain DLC_RAINFOREST       { base_terrain GRASS_JUNGLE set_avoid_player_start_areas 12 land_percent 99 number_of_clumps 1000 }
+create_terrain MEDITERRANEAN_FOREST { base_terrain DIRT         set_avoid_player_start_areas 12 land_percent 99 number_of_clumps 1000 }
+create_terrain PINE_FOREST          { base_terrain LEAVES       set_avoid_player_start_areas 12 land_percent 99 number_of_clumps 1000 }
+create_terrain PALM_DESERT          { base_terrain DESERT       set_avoid_player_start_areas 12 land_percent 99 number_of_clumps 1000 }
+create_terrain BIRCH_FOREST         { base_terrain UDBR_LEAVES  set_avoid_player_start_areas 12 land_percent 99 number_of_clumps 1000 }
+
 create_terrain GRASS_JUNGLE { base_terrain DLC_RAINFOREST       spacing_to_other_terrain_types 6 land_percent 99 number_of_clumps 1000 }
 create_terrain DIRT         { base_terrain MEDITERRANEAN_FOREST spacing_to_other_terrain_types 6 land_percent 99 number_of_clumps 1000 }
 create_terrain LEAVES       { base_terrain PINE_FOREST          spacing_to_other_terrain_types 6 land_percent 99 number_of_clumps 1000 }
@@ -375,6 +381,7 @@ clumping_factor 100
 #const T 21 /* Replacing "terrain_type"   */
 #const Z 28 /* Replacing "zone"           */
 
+/* 
 #const T1 57  /* Replacing "DLC_WATER4",          */
 #const T2 22  /* Replacing "DEEP_WATER",          */
 #const T3 15  /* Replacing "watr2d",              */
@@ -384,7 +391,18 @@ clumping_factor 100
 #const T7 19  /* Replacing "PINE_FOREST",         */
 #const T8 1   /* Replacing "WATER",               */
 #const T9 13  /* Replacing "PALM_DESERT",         */
-#const T0 110 /* Replacing "BIRCH_FOREST",        */
+#const T0 110 /* Replacing "BIRCH_FOREST",        */ */
+
+#const T1 57  /* Replacing "DLC_WATER4",          */
+#const T2 22  /* Replacing "DEEP_WATER",          */
+#const T3 15  /* Replacing "watr2d",              */
+#const T4 108 /* Replacing "DLC_GRAVELBEACH",     */
+#const T5 60  /* Replacing "GRASS_JUNGLE",        */
+#const T6 6   /* Replacing "DIRT",                */
+#const T7 5   /* Replacing "LEAVES",              */
+#const T8 1   /* Replacing "WATER",               */
+#const T9 14  /* Replacing "DESERT",              */
+#const T0 71  /* Replacing "UDBR_LEAVES*",        */
 
 if 2_PLAYER_GAME start_random
 percent_chance 10
