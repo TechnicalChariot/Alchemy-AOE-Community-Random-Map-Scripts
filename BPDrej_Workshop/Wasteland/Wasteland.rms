@@ -1,14 +1,6 @@
 /*WASTELAND (6/17/22) by BPDrej
 Players start in their own oases surrounded by small forest patches. Beyond lies lifeless sand dunes with sparse resources.
-Inspired by Chrazini's Desert Void
-CHANGELOG:
-(1.1 - 7/10/22)
-- Added additional player forests, but all are smaller
-- Changed center cracked-land to only appear on KOTH, removed middle trees
-- Added sparse trees on edge of map
-- Changed Neutral Gold/Stone to 4/3 tiles and standard resources
-- Made Player Gold/Stone farther away from TC
-- Added skeletons and vultures*/
+Inspired by Chrazini's Desert Void */
 
 #const ROCK2 1323
 <PLAYER_SETUP>
@@ -176,7 +168,15 @@ elseif LUDIKRIS_MAP
 { min_number_of_cliffs 16 max_number_of_cliffs 20 min_length_of_cliff 5 max_length_of_cliff 8 cliff_curliness 20 min_distance_cliffs 20 }
 endif */
 <OBJECTS_GENERATION>
-/*player resources*/
+#const OG 647
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 6 actor_area_radius 5 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 7 actor_area_radius 6 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 8 actor_area_radius 7 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 9 actor_area_radius 8 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 14 actor_area_radius 13 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 18 actor_area_radius 17 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 20 actor_area_radius 19 }
+
 if REGICIDE
 create_object KING
 {
@@ -190,23 +190,23 @@ create_object HOUSE
 	set_place_for_every_player
 	min_distance_to_players 19
 	max_distance_to_players 20
+	avoid_actor_area 
 }
 create_object VILLAGER
 {
 	set_place_for_every_player
-	min_distance_to_players 6
+	avoid_actor_area 6
 	max_distance_to_players 6
 }
 create_object TOWN_CENTER
 {
 	set_place_for_every_player
-	min_distance_to_players 0
-	max_distance_to_players 0
+	find_closest
 }
 create_object SCOUT
 {
 	set_place_for_every_player
-	min_distance_to_players 7
+	avoid_actor_area 8
 	max_distance_to_players 9
 }
 create_object DLC_DROMEDARY
@@ -217,45 +217,47 @@ create_object DLC_DROMEDARY
 }
 create_object FORAGE
 {
-  number_of_objects          6
-  group_placement_radius     3
-  set_tight_grouping
-  set_gaia_object_only
-  set_place_for_every_player
-  min_distance_to_players    9
-  max_distance_to_players    11
-  min_distance_group_placement  6
-  avoid_forest_zone 4
+	number_of_objects 6
+	group_placement_radius 3
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 9
+	max_distance_to_players 11
+	min_distance_group_placement 6
+	avoid_forest_zone 4
 }
 create_object PALMTREE
 {
-  number_of_objects             2
-  set_gaia_object_only
-  set_place_for_every_player
-  min_distance_to_players       6
-  max_distance_to_players       8
-  min_distance_group_placement  2
+	number_of_objects  2
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 6
+	max_distance_to_players 8
+	min_distance_group_placement 2
 }
 create_object DLC_AFRICANBUSH
 {
-  number_of_objects             3
-  set_gaia_object_only
-  set_place_for_every_player
-  min_distance_to_players       6
-  max_distance_to_players       8
-  min_distance_group_placement  2
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 6
+	max_distance_to_players 8
+	min_distance_group_placement 2
 }
 /* near gold */
-create_object GOLD {
+create_object GOLD 
+{
 	number_of_objects 7
 	group_placement_radius 2
 	set_tight_grouping
 	set_gaia_object_only
 	set_place_for_every_player
-	min_distance_to_players 18
-	max_distance_to_players 20
+	avoid_actor_area 14
+	max_distance_to_players 16
 	set_circular_placement
-	min_distance_group_placement 6
+	min_distance_group_placement 7
+	temp_min_distance_group_placement 10
 	avoid_forest_zone 3
 }
 /* far gold */
@@ -265,6 +267,7 @@ create_object GOLD {
 	set_tight_grouping
 	set_gaia_object_only
 	set_place_for_every_player
+	avoid_actor_area 20
 	min_distance_to_players 22
 	max_distance_to_players 25
 	set_circular_placement
@@ -272,17 +275,18 @@ create_object GOLD {
 	avoid_forest_zone 2
 }
 /* near stone */
-create_object STONE {
+create_object STONE
+{
 	number_of_objects 5
-	group_placement_radius 2  
-	set_tight_grouping 
+	group_placement_radius 2
+	set_tight_grouping
 	set_gaia_object_only
 	set_place_for_every_player
-	min_distance_to_players 18
-	max_distance_to_players 20
+	avoid_actor_area 14
+	max_distance_to_players 18
 	set_circular_placement
-	min_distance_group_placement 6
-	avoid_forest_zone 2
+	min_distance_group_placement 7
+	avoid_forest_zone 3
 }
 /* far stone */
 create_object STONE {
@@ -291,6 +295,7 @@ create_object STONE {
 	set_tight_grouping 
 	set_gaia_object_only
 	set_place_for_every_player
+	avoid_actor_area 20
 	min_distance_to_players 22
 	max_distance_to_players 25
 	set_circular_placement
@@ -303,33 +308,35 @@ create_object DLC_ELEPHANT
 	set_gaia_object_only
 	set_place_for_every_player
 	avoid_forest_zone 2
-	min_distance_to_players 14
+	avoid_actor_area 14
 	max_distance_to_players 18
 	set_circular_placement
 	min_distance_group_placement 2
 	temp_min_distance_group_placement 6
 }
-create_object DLC_GOAT 
+create_object DLC_GOAT
 {
 	number_of_objects 4
 	set_loose_grouping
 	set_gaia_object_only
 	set_place_for_every_player
-	min_distance_to_players 6
+	avoid_actor_area 7
+	max_distance_to_players 8
 	find_closest
 	set_circular_placement
 }
-create_object DLC_GOAT 
+create_object DLC_GOAT
 {
 	number_of_objects 2
 	number_of_groups 2
 	set_loose_grouping
 	set_gaia_object_only
 	set_place_for_every_player
-	min_distance_to_players 22
-	max_distance_to_players 26
+	avoid_actor_area 20
+	max_distance_to_players 22
 	find_closest
 	set_circular_placement
+	avoid_forest_zone 2
 }
 create_object DEER 
 {
@@ -340,16 +347,17 @@ create_object DEER
 	set_gaia_object_only
 	set_place_for_every_player
 	avoid_forest_zone 2
+	avoid_actor_area 18
 	start_random
 		percent_chance 33
 			min_distance_to_players 18
 			max_distance_to_players 22
 		percent_chance 33
 			min_distance_to_players 22
-			max_distance_to_players 26
+			max_distance_to_players 24
 		percent_chance 34
-			min_distance_to_players 26
-			max_distance_to_players 30
+			min_distance_to_players 25
+			max_distance_to_players 38
 	end_random
 	set_circular_placement
 	min_distance_group_placement 2
@@ -363,9 +371,9 @@ create_object GOLD
 	set_gaia_object_only
 	set_scaling_to_map_size
 	set_scaling_to_player_number
-	temp_min_distance_group_placement 50
+	temp_min_distance_group_placement 40
 	min_distance_group_placement 20
-	max_distance_to_other_zones 20
+	set_avoid_player_start_areas 30
 	avoid_forest_zone 15
 	terrain_to_place_on DESERT
 }
@@ -377,9 +385,9 @@ create_object STONE
 	set_gaia_object_only
 	set_scaling_to_map_size
 	set_scaling_to_player_number
-	temp_min_distance_group_placement 60
+	temp_min_distance_group_placement 50
 	min_distance_group_placement 25
-	max_distance_to_other_zones 20
+	set_avoid_player_start_areas 30
 	avoid_forest_zone 15
 	terrain_to_place_on DESERT
 }
