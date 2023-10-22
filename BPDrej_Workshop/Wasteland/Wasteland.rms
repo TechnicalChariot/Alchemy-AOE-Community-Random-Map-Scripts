@@ -121,6 +121,15 @@ create_terrain GRASS3
 	set_scale_by_groups
 	terrain_mask 1
 }
+create_terrain DLC_CRACKED
+{
+	base_terrain DIRT2
+	land_percent 1
+	number_of_clumps 5
+	clumping_factor -10
+	set_scale_by_groups
+	terrain_mask 1
+}
 create_terrain DESERT
 {
 	base_terrain BEACH
@@ -189,8 +198,9 @@ create_object HOUSE
 {
 	set_place_for_every_player
 	min_distance_to_players 19
-	max_distance_to_players 20
-	avoid_actor_area 
+	max_distance_to_players 24
+	avoid_actor_area 18
+	avoid_actor_area 20
 }
 create_object VILLAGER
 {
@@ -285,7 +295,6 @@ create_object STONE
 	avoid_actor_area 14
 	max_distance_to_players 18
 	set_circular_placement
-	min_distance_group_placement 7
 	avoid_forest_zone 3
 }
 /* far stone */
@@ -299,7 +308,6 @@ create_object STONE {
 	min_distance_to_players 22
 	max_distance_to_players 25
 	set_circular_placement
-	min_distance_group_placement 8
 	avoid_forest_zone 2
 }
 create_object DLC_ELEPHANT
@@ -334,6 +342,7 @@ create_object DLC_GOAT
 	set_place_for_every_player
 	avoid_actor_area 20
 	max_distance_to_players 22
+	temp_min_distance_group_placement 6
 	find_closest
 	set_circular_placement
 	avoid_forest_zone 2
