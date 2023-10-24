@@ -216,9 +216,14 @@ create_terrain WATER
 
 <OBJECTS_GENERATION>
 /* BEGIN_OBJECTS_AUTOSCRIBE */
+#const DOLPHIN 61
 #const ICE_FLOW 728
 #const OFF_GRID 647
+#const OG 647
 #const ROCK2 1323
+#const ROCK3 389
+#const ROCK4 396
+#const TRAP 278
 if TINY_MAP
 elseif SMALL_MAP
 elseif MEDIUM_MAP
@@ -314,6 +319,46 @@ actor_area_to_place_in 1
 force_placement
 find_closest
 }
+#const PH9_1 647
+create_object PH9_1
+{
+set_place_for_every_player
+actor_area 10
+actor_area_radius 18
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH10_1 647
+create_object PH10_1
+{
+set_place_for_every_player
+actor_area 11
+actor_area_radius 23
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH11_1 647
+create_object PH11_1
+{
+set_place_for_every_player
+actor_area 12
+actor_area_radius 24
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
+#const PH12_1 647
+create_object PH12_1
+{
+set_place_for_every_player
+actor_area 13
+actor_area_radius 20
+actor_area_to_place_in 1
+force_placement
+find_closest
+}
 create_object ICE_FLOW
 {
 set_gaia_object_only
@@ -332,14 +377,14 @@ set_scaling_to_map_size
 terrain_to_place_on DIRT_SNOW
 temp_min_distance_group_placement 8
 }
-create_object FLAG_A
+create_object OG
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DIRT
 temp_min_distance_group_placement 10
-actor_area 10
+actor_area 14
 actor_area_radius 20
 }
 create_object ROCK
@@ -348,10 +393,10 @@ set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_MANGROVESHALLOW
-temp_min_distance_group_placement 10
-actor_area 11
+temp_min_distance_group_placement 15
+actor_area 15
 actor_area_radius 5
-avoid_actor_area 10
+avoid_actor_area 14
 find_closest
 }
 create_object ROCK2
@@ -360,10 +405,42 @@ set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_MANGROVESHALLOW
-temp_min_distance_group_placement 10
-avoid_actor_area 10
-avoid_actor_area 11
+temp_min_distance_group_placement 15
+avoid_actor_area 14
+avoid_actor_area 15
 find_closest
+}
+create_object ROCK3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_WATER5
+temp_min_distance_group_placement 30
+}
+create_object ROCK4
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_WATER5
+temp_min_distance_group_placement 30
+}
+create_object ROCK3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DEEP_WATER
+temp_min_distance_group_placement 30
+}
+create_object ROCK4
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DEEP_WATER
+temp_min_distance_group_placement 30
 }
 create_object SNOWPINETREE
 {
@@ -371,7 +448,7 @@ set_place_for_every_player
 set_gaia_object_only
 number_of_objects 2
 number_of_groups 1
-set_tight_grouping
+set_loose_grouping
 temp_min_distance_group_placement 2
 actor_area_to_place_in 3
 avoid_actor_area 2
@@ -382,7 +459,7 @@ set_place_for_every_player
 set_gaia_object_only
 number_of_objects 3
 number_of_groups 1
-set_tight_grouping
+set_loose_grouping
 temp_min_distance_group_placement 2
 actor_area_to_place_in 5
 avoid_actor_area 4
@@ -393,7 +470,7 @@ set_place_for_every_player
 number_of_objects 2
 number_of_groups 1
 set_tight_grouping
-actor_area 12
+actor_area 16
 actor_area_radius 6
 avoid_actor_area 4
 find_closest
@@ -402,10 +479,10 @@ create_object VILLAGER_BASE_F
 {
 set_place_for_every_player
 number_of_groups 1
-actor_area 13
+actor_area 17
 actor_area_radius 6
 avoid_actor_area 4
-avoid_actor_area 12
+avoid_actor_area 16
 find_closest
 }
 create_object SCOUT
@@ -413,8 +490,8 @@ create_object SCOUT
 set_place_for_every_player
 number_of_groups 1
 avoid_actor_area 4
-avoid_actor_area 12
-avoid_actor_area 13
+avoid_actor_area 16
+avoid_actor_area 17
 find_closest
 }
 create_object DLC_GOOSE
@@ -436,7 +513,7 @@ group_placement_radius 1
 set_tight_grouping
 max_distance_to_other_zones 2
 avoid_forest_zone 2
-actor_area 14
+actor_area 18
 actor_area_radius 7
 actor_area_to_place_in 8
 avoid_actor_area 7
@@ -452,9 +529,118 @@ set_tight_grouping
 max_distance_to_other_zones 2
 avoid_forest_zone 2
 temp_min_distance_group_placement 10
+actor_area 19
+actor_area_radius 7
 actor_area_to_place_in 9
 avoid_actor_area 8
-avoid_actor_area 14
+avoid_actor_area 18
+}
+create_object STONE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 2
+group_placement_radius 1
+set_tight_grouping
+max_distance_to_other_zones 2
+avoid_forest_zone 2
+temp_min_distance_group_placement 10
+actor_area_to_place_in 9
+avoid_actor_area 8
+avoid_actor_area 18
+avoid_actor_area 19
+}
+create_object BOAR
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 1
+set_loose_grouping
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area_to_place_in 10
+avoid_actor_area 8
+}
+create_object DLC_GOOSE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 2
+set_tight_grouping
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area_to_place_in 12
+avoid_actor_area 11
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_tight_grouping
+terrain_to_place_on DLC_MANGROVESHALLOW
+max_distance_to_other_zones 2
+avoid_forest_zone 2
+temp_min_distance_group_placement 28
+}
+create_object STONE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_tight_grouping
+terrain_to_place_on DLC_MANGROVESHALLOW
+max_distance_to_other_zones 2
+avoid_forest_zone 2
+temp_min_distance_group_placement 30
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 3
+number_of_groups 9320
+set_tight_grouping
+terrain_to_place_on DIRT_SNOW
+max_distance_to_other_zones 2
+avoid_forest_zone 1
+temp_min_distance_group_placement 20
+}
+create_object TRAP
+{
+set_gaia_object_only
+number_of_objects 3
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+max_distance_to_other_zones 1
+avoid_forest_zone 1
+temp_min_distance_group_placement 10
+second_object DLC_BOXTURTLE
+}
+create_object DOLPHIN
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DEEP_WATER
+max_distance_to_other_zones 1
+temp_min_distance_group_placement 8
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_objects 5
+number_of_groups 1
+set_tight_grouping
+set_scaling_to_map_size
+avoid_forest_zone 2
+temp_min_distance_group_placement 20
+avoid_actor_area 13
+find_closest
 }
 /* END_OBJECTS_AUTOSCRIBE */
 
