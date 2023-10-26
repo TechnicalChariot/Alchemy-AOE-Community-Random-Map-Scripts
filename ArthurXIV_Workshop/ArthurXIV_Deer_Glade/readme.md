@@ -3,6 +3,8 @@ by ArthurXIV
 
 ### Map icon
 <img src="ArthurXIV_Deer_Glade.png" alt="Deer_Glade_icon" width="300" height="auto">
+Put this png in this folder if you want it displayed ingame in the map selection screen:
+C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts
 
 ### Map features
 - Circular map:
