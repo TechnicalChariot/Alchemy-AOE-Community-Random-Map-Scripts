@@ -16,7 +16,7 @@
 
         /* 20230910 Units_Madness by Arnaud_les_biscotos aka ArthurXIV aka arthurlegrosdur */
  
-/* #define NINE_VILLS */
+/ #define NINE_VILLS */
 
 #const GRASS_JUNGLE 60
 #const GRASS_JUNGL2 83
@@ -67,7 +67,7 @@ effect_amount ENABLE_OBJECT MERCHANT ATTR_ENABLE 1
 effect_amount SET_ATTRIBUTE MERCHANT ATTR_FOOD_COST 1
 effect_amount SET_ATTRIBUTE MERCHANT ATTR_CREATION_TIME 20
 effect_amount SET_ATTRIBUTE MERCHANT ATTR_CREATE_SDESC_ID 6504
-/* effect_amount SET_ATTRIBUTE MERCHANT ATTR_DEAD_ID 247 */
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_DEAD_ID SHEEP
 
 #const CANOE 778
 effect_amount SET_ATTRIBUTE CANOE ATTR_TRAIN_LOCATION 45
@@ -100,6 +100,7 @@ effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_NAME_ID 536
 effect_amount ENABLE_OBJECT MONKBOAT2 ATTR_ENABLE 1
 effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_CREATE_SDESC_ID 6099
 effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_MAX_RANGE 9
+/* effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_MIN_RANGE 500 */
 effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_GOLD_COST 180
 effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_WOOD_COST 70
 effect_amount SET_ATTRIBUTE MONKBOAT2 ATTR_DYING_GRAPHIC 539
@@ -595,15 +596,24 @@ create_object RUGS {                          number_of_groups 100              
 create_object RUGS {                          number_of_groups 5                           set_place_for_every_player max_distance_to_players 5          min_distance_to_players 3 set_circular_placement set_gaia_object_only }
 #const FRUITS 1321
 create_object FRUITS {                          number_of_groups 1                           set_place_for_every_player max_distance_to_players 0          min_distance_to_players 0 set_circular_placement set_gaia_object_only }
-if NINE_VILLS create_object HOUSE                                                                                                        { set_place_for_every_player max_distance_to_players 13         min_distance_to_players 12 avoid_forest_zone 1 } endif
 create_object VILLAGER {                          if NINE_VILLS number_of_groups 9 else number_of_groups 3 endif                           set_place_for_every_player max_distance_to_players 6          min_distance_to_players 5 set_circular_placement }
-if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
+if NINE_VILLS effect_amount MOD_RESOURCE AMOUNT_POPULATION_CAP ATTR_ADD 6 effect_amount MOD_RESOURCE AMOUNT_POPULATION ATTR_ADD -6 endif
+if REGICIDE
+create_object KING { set_place_for_every_player find_closest }
+effect_amount SET_ATTRIBUTE KING ATTR_POPULATION 0
+effect_amount SET_ATTRIBUTE KING ATTR_TRAITS 16
+endif
 
 create_object SCOUT {                                                                                                                      set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
 #const MERCHANT 1572
 create_object MERCHANT {                                                                                                                   set_place_for_every_player max_distance_to_players 7          min_distance_to_players 4 }
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE MERCHANT ATTR_POPULATION 0
 #const OFF_GRID 647
 create_object OFF_GRID { second_object FISHING_SHIP    terrain_to_place_on DLC_WETROCKBEACH                                                set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_TRAITS 16
+effect_amount MOD_RESOURCE AMOUNT_POPULATION_CAP ATTR_ADD 1 /* Because of the starting FISHING_SHIP. */
+effect_amount MOD_RESOURCE AMOUNT_POPULATION    ATTR_ADD -1 /* Because of the starting FISHING_SHIP. */
 
 start_random percent_chance 20 create_object DLC_COW
              percent_chance 20 create_object DLC_COW_B

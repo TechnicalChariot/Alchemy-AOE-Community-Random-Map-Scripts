@@ -3,6 +3,8 @@ by ArthurXIV
 
 ### Map icon
 <img src="ArthurXIV_Hunt_Rush.png" alt="Hunt_Rush_icon" width="300" height="auto">
+Put this .png in the following folder if you want it displayed ingame in the map selection screen:  
+C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts
 
 ### Map features
 - Circular map:
@@ -17,7 +19,7 @@ by ArthurXIV
 
 - Starter:
 
-> 9 or 3 villagers  
+> 3 villagers (can be set to 9, just deactivate the comment)  
 > Scout  
 > Merchant  
 > Donkey (can trade)  
