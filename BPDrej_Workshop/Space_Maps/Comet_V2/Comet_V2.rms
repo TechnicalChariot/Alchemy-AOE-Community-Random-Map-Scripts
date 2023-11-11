@@ -138,7 +138,6 @@ elseif HUGE_MAP
 endif
 }
 
-
 create_terrain ICE
 {
 	base_terrain DIRT
