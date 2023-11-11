@@ -8078,6 +8078,8 @@ temp_min_distance_group_placement 2
 endif
 /* END_OBJECTS_AUTOSCRIBE */
 
+if REGICIDE create_object KING { set_place_for_every_player find_closest terrain_to_place_on MTSH } endif
+
 <LAND_GENERATION>
 base_terrain BT
 /* base_layer   BL */
