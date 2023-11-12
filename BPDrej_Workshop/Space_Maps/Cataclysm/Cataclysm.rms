@@ -60,7 +60,25 @@ create_terrain DEEP_WATER
 	base_terrain WATER
 	land_percent 100
 	number_of_clumps 420
-	spacing_to_other_terrain_types 1
+	set_scale_by_size
+	spacing_to_other_terrain_types 2
+}
+create_terrain GRAVEL
+{
+	base_terrain DLC_CRACKED
+	number_of_tiles 50
+	number_of_clumps 5
+	set_scale_by_groups
+	clumping_factor -10
+	terrain_mask 1
+}
+create_terrain DLC_CRACKED
+{
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 420
+	height_limits 0 0
+	terrain_mask 1
 }
 
 <OBJECTS_GENERATION>
@@ -255,20 +273,55 @@ create_land { base_size 3 land_position 64 72 terrain_type GRASS number_of_tiles
 create_land { base_size 3 land_position 63 72 terrain_type GRASS number_of_tiles 0 }
 create_land { base_size 3 land_position 62 72 terrain_type GRASS number_of_tiles 0 }
 create_land { base_size 3 land_position 61 72 terrain_type GRASS number_of_tiles 0 }
-create_land { base_size 1 land_position 50 50 terrain_type GRASS number_of_tiles 100000 }
+create_land { base_size 1 land_position 60 45 terrain_type GRASS number_of_tiles 100000 }
 
 if TINY_MAP
-create_land { land_position rnd(50,55) rnd(75,78) terrain_type DLC_BLACK number_of_tiles 10 }
+create_land { land_position rnd(20,24) rnd(42,49) terrain_type WG clumping_factor 1 number_of_tiles 10 }
+create_land { land_position rnd(13,19) rnd(45,48) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+
+create_land { land_position rnd(52,58) rnd(75,78) terrain_type WG clumping_factor 1 number_of_tiles 10 } 
+create_land { land_position rnd(55,59) rnd(80,85) terrain_type WG clumping_factor 1 number_of_tiles 10 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 10 }
 elseif MEDIUM_MAP
-create_land { land_position rnd(50,55) rnd(75,78) terrain_type DLC_BLACK number_of_tiles 10 }
+create_land { land_position rnd(20,24) rnd(42,49) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(13,19) rnd(45,48) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(17,23) rnd(48,51) terrain_type WG clumping_factor 1 number_of_tiles 30 }
+
+create_land { land_position rnd(48,53) rnd(75,78) terrain_type WG clumping_factor 1 number_of_tiles 20 } 
+create_land { land_position rnd(52,58) rnd(75,78) terrain_type WG clumping_factor 1 number_of_tiles 20 } 
+create_land { land_position rnd(55,59) rnd(80,85) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 10 }
 elseif LARGE_MAP
-create_land { land_position rnd(50,55) rnd(75,78) terrain_type DLC_BLACK number_of_tiles 20 }
+create_land { land_position rnd(24,26) rnd(45,52) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(20,24) rnd(42,49) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(13,19) rnd(45,48) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(13,19) rnd(45,48) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(13,19) rnd(45,48) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(17,23) rnd(48,51) terrain_type WG clumping_factor 1 number_of_tiles 25 }
+
+create_land { land_position rnd(48,53) rnd(75,78) terrain_type WG clumping_factor 1 number_of_tiles 25 } 
+create_land { land_position rnd(48,56) rnd(75,80) terrain_type WG clumping_factor 1 number_of_tiles 25 }
+create_land { land_position rnd(55,60) rnd(78,82) terrain_type WG clumping_factor 1 number_of_tiles 25 }
+create_land { land_position rnd(55,60) rnd(78,82) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 20 }
 elseif HUGE_MAP
-create_land { land_position rnd(48,53) rnd(75,78) terrain_type WG clumping_factor 1 number_of_tiles 30 }
+create_land { land_position rnd(24,26) rnd(45,50) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(20,24) rnd(42,49) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(13,19) rnd(45,48) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(13,19) rnd(45,48) terrain_type WG clumping_factor 1 number_of_tiles 20 }
+create_land { land_position rnd(17,23) rnd(48,51) terrain_type WG clumping_factor 1 number_of_tiles 30 }
+create_land { land_position rnd(17,23) rnd(48,51) terrain_type WG clumping_factor 1 number_of_tiles 30 }
+
+create_land { land_position rnd(48,53) rnd(75,78) terrain_type WG clumping_factor 1 number_of_tiles 30 } 
 create_land { land_position rnd(48,56) rnd(75,80) terrain_type WG clumping_factor 1 number_of_tiles 30 }
 create_land { land_position rnd(55,60) rnd(78,82) terrain_type WG clumping_factor 1 number_of_tiles 30 }
-create_land { land_position rnd(55,60) rnd(78,82) terrain_type WG clumping_factor 1 number_of_tiles 30 }
-create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 30 }
+create_land { land_position rnd(55,60) rnd(78,82) terrain_type WG clumping_factor 1 number_of_tiles 25 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 25 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 25 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 25 }
+create_land { land_position rnd(47,50) rnd(82,88) terrain_type WG clumping_factor 1 number_of_tiles 25 }
 endif
 
 create_land { base_size 1 land_position 30 88 terrain_type GRAVEL number_of_tiles 0 }
@@ -462,6 +515,31 @@ create_land { base_size 3 land_position 51 68 terrain_type DLC_CRACKED number_of
 create_land { base_size 3 land_position 51 69 terrain_type DLC_CRACKED number_of_tiles 0 }
 endif
 
-create_land { land_position 90 90  assign_to AT_TEAM -10 0 0 terrain_type DLC_BLACK zone 2 number_of_tiles 200 }
-create_land { land_position 10 10  assign_to AT_TEAM -10 0 0 terrain_type DLC_BLACK zone 2 number_of_tiles 200 }
+/*Cracks*/
+create_land { base_size 1 land_position 32 45 terrain_type DLC_CRACKED number_of_tiles 30 }
+create_land { base_size 1 land_position 34 43 terrain_type DLC_CRACKED number_of_tiles 20 }
+create_land { base_size 1 land_position 34 41 terrain_type DLC_CRACKED number_of_tiles 10 }
+
+create_land { base_size 1 land_position 42 47 terrain_type DLC_CRACKED number_of_tiles 30 }
+create_land { base_size 1 land_position 41 44 terrain_type DLC_CRACKED number_of_tiles 20 }
+create_land { base_size 1 land_position 44 rnd(42,44) terrain_type DLC_CRACKED number_of_tiles 10 }
+
+create_land { base_size 1 land_position 48 52 terrain_type DLC_CRACKED number_of_tiles 30 }
+create_land { base_size 1 land_position 51 51 terrain_type DLC_CRACKED number_of_tiles 20 }
+create_land { base_size 1 land_position 53 49 terrain_type DLC_CRACKED number_of_tiles 20 }
+create_land { base_size 1 land_position 55 rnd(46,49) terrain_type DLC_CRACKED number_of_tiles 10 }
+
+create_land { base_size 1 land_position 50 60 terrain_type DLC_CRACKED number_of_tiles 30 }
+create_land { base_size 1 land_position 54 59 terrain_type DLC_CRACKED number_of_tiles 20 }
+create_land { base_size 1 land_position 56 57 terrain_type DLC_CRACKED number_of_tiles 10 }
+create_land { base_size 1 land_position 59 56 terrain_type DLC_CRACKED number_of_tiles 10 }
+
+create_land { base_size 1 land_position 54 66 terrain_type DLC_CRACKED number_of_tiles 30 }
+create_land { base_size 1 land_position 56 66 terrain_type DLC_CRACKED number_of_tiles 20 }
+create_land { base_size 1 land_position 59 67 terrain_type DLC_CRACKED number_of_tiles 10 }
+
+/*Player Lands - Need to do direct placement, randomize locations slightly, change based on map size*/
+
+create_land { land_position 90 90  assign_to AT_TEAM -10 0 0 terrain_type DLC_BLACK zone 2 base_size 2 number_of_tiles 200 }
+create_land { land_position 10 10  assign_to AT_TEAM -10 0 0 terrain_type DLC_BLACK zone 2 base_size 2 number_of_tiles 200 }
 
