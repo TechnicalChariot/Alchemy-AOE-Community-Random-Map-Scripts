@@ -1853,6 +1853,18 @@ elseif TEMPERATE_BIOME
             #const DEER_TWO   1239
             #const DEER_THREE 65
             #const PREDATOR   126
+
+            /* Oasis Pond Eye Candy Definitions */
+            #const OASIS_POND1_EC1 647
+            #const OASIS_POND1_EC2 647
+            #const OASIS_POND1_EC3 647
+            #const OASIS_POND2_EC1 647
+            #const OASIS_POND2_EC2 647
+            #const OASIS_POND2_EC3 647
+            #const OASIS_POND3_EC1 647
+            #const OASIS_POND3_EC2 647
+            #const OASIS_POND3_EC3 647
+
             /* Innermost Ring Eye Candy Definitions */
             #const OASIS_RT1EC1 1361
             #const OASIS_RT1EC2 1363   
@@ -2019,6 +2031,18 @@ elseif TEMPERATE_BIOME
             #const DEER_TWO   65
             #const DEER_THREE 65
             #const PREDATOR   126
+
+            /* Oasis Pond Eye Candy Definitions */
+            #const OASIS_POND1_EC1 647
+            #const OASIS_POND1_EC2 647
+            #const OASIS_POND1_EC3 647
+            #const OASIS_POND2_EC1 647
+            #const OASIS_POND2_EC2 647
+            #const OASIS_POND2_EC3 647
+            #const OASIS_POND3_EC1 647
+            #const OASIS_POND3_EC2 647
+            #const OASIS_POND3_EC3 647
+
             /* Innermost Ring Eye Candy Definitions */
             #const OASIS_RT1EC1 1361
             #const OASIS_RT1EC2 1363   
@@ -2180,6 +2204,18 @@ elseif TEMPERATE_BIOME
             #const DEER_TWO   65
             #const DEER_THREE 1239
             #const PREDATOR   486
+            
+            /* Oasis Pond Eye Candy Definitions */
+            #const OASIS_POND1_EC1 647
+            #const OASIS_POND1_EC2 647
+            #const OASIS_POND1_EC3 647
+            #const OASIS_POND2_EC1 647
+            #const OASIS_POND2_EC2 647
+            #const OASIS_POND2_EC3 647
+            #const OASIS_POND3_EC1 647
+            #const OASIS_POND3_EC2 647
+            #const OASIS_POND3_EC3 647            
+            
             /* Innermost Ring Eye Candy Definitions */
             #const OASIS_RT1EC1 818
             #const OASIS_RT1EC2 1360  
@@ -2341,6 +2377,18 @@ elseif TEMPERATE_BIOME
             #const DEER_TWO   65
             #const DEER_THREE 1239
             #const PREDATOR   486
+
+            /* Oasis Pond Eye Candy Definitions */
+            #const OASIS_POND1_EC1 647
+            #const OASIS_POND1_EC2 647
+            #const OASIS_POND1_EC3 647
+            #const OASIS_POND2_EC1 647
+            #const OASIS_POND2_EC2 647
+            #const OASIS_POND2_EC3 647
+            #const OASIS_POND3_EC1 647
+            #const OASIS_POND3_EC2 647
+            #const OASIS_POND3_EC3 647
+
             /* Innermost Ring Eye Candy Definitions */
             #const OASIS_RT1EC1 818
             #const OASIS_RT1EC2 1360  
@@ -2502,6 +2550,18 @@ elseif TEMPERATE_BIOME
             #const DEER_TWO   65
             #const DEER_THREE 1239
             #const PREDATOR   486
+
+            /* Oasis Pond Eye Candy Definitions */
+            #const OASIS_POND1_EC1 647
+            #const OASIS_POND1_EC2 647
+            #const OASIS_POND1_EC3 647
+            #const OASIS_POND2_EC1 647
+            #const OASIS_POND2_EC2 647
+            #const OASIS_POND2_EC3 647
+            #const OASIS_POND3_EC1 647
+            #const OASIS_POND3_EC2 647
+            #const OASIS_POND3_EC3 647
+
             /* Innermost Ring Eye Candy Definitions */
             #const OASIS_RT1EC1 818
             #const OASIS_RT1EC2 1360  
@@ -2608,7 +2668,7 @@ elseif AFRICAN_BIOME
 
             /* Disallowing Traditional Tree Spawn on FOREST, Make it Spawn on Palm Desert Instead */
             #const AFT 1063
-            effect_amount GAIA_SET_ATTRIBUTE BBT ATTR_TERRAIN_ID 13
+            effect_amount GAIA_SET_ATTRIBUTE AFT ATTR_TERRAIN_ID 13
 
             #const RT2_MASK1 6    /* Defining First Mask for Second Innermost Ring */
             #const RT2_MASK2 41   /* Defining Second Mask for Second Innermost Ring */
@@ -2618,11 +2678,11 @@ elseif AFRICAN_BIOME
             #const RT4_MASK2 41    /* Defining Second Mask for Second Outermost Ring */
 
             /* Tree Object Definitions */
-            #const TREE_ONE 1052 
-            #const TREE_TWO 1051
+            #const TREE_ONE 1063 
+            #const TREE_TWO 1350
             #const TREE_THREE 647
-            #const TREE_FOUR 1051
-            #const STRAGGLER 1053 
+            #const TREE_FOUR 1053
+            #const STRAGGLER 302 
 
             /* Rdige Object Definitions */
             #const MOUNTAIN_ONE   744
@@ -2671,6 +2731,18 @@ elseif AFRICAN_BIOME
             #const DEER_TWO   1026
             #const DEER_THREE 647
             #const PREDATOR   1029
+            
+            /* Oasis Pond Eye Candy Definitions */
+            #const OASIS_POND1_EC1 337
+            #const OASIS_POND1_EC2 647
+            #const OASIS_POND1_EC3 647
+            #const OASIS_POND2_EC1 337
+            #const OASIS_POND2_EC2 647
+            #const OASIS_POND2_EC3 647
+            #const OASIS_POND3_EC1 337
+            #const OASIS_POND3_EC2 647
+            #const OASIS_POND3_EC3 647            
+            
             /* Innermost Ring Eye Candy Definitions */
             #const OASIS_RT1EC1 818
             #const OASIS_RT1EC2 1351   
@@ -2722,8 +2794,13 @@ elseif AFRICAN_BIOME
             else
             #const KHARGA_SCOUT 448
             endif            
-            #const NEARBY_HERDABLE 1301
-            #const LUREABLE 1139    
+            #const NEARBY_HERDABLE 1060
+            
+            start_random
+            percent_chance 50 #const LUREABLE 1139
+            percent_chance 50 #const LUREABLE 1301
+            end_random
+
         endif
 
 elseif JUNGLE_BIOME
@@ -2839,6 +2916,18 @@ elseif JUNGLE_BIOME
             #const DEER_TWO   65
             #const DEER_THREE 647
             #const PREDATOR   812
+            
+            /* Oasis Pond Eye Candy Definitions */
+            #const OASIS_POND1_EC1 334
+            #const OASIS_POND1_EC2 335
+            #const OASIS_POND1_EC3 336
+            #const OASIS_POND2_EC1 337
+            #const OASIS_POND2_EC2 334
+            #const OASIS_POND2_EC3 335
+            #const OASIS_POND3_EC1 336
+            #const OASIS_POND3_EC2 337
+            #const OASIS_POND3_EC3 334
+            
             /* Innermost Ring Eye Candy Definitions */
             #const OASIS_RT1EC1 818
             #const OASIS_RT1EC2 1351   
@@ -3007,10 +3096,22 @@ elseif ASIAN_BIOME
             /* Oasis Object Definitions */
             #const BUSH_FOOD1 59
             #const BUSH_FOOD2 1059
-            #const DEER_ONE   647
+            #const DEER_ONE   65
             #const DEER_TWO   647
             #const DEER_THREE 647
             #const PREDATOR   1137
+
+            /* Oasis Pond Eye Candy Definitions */
+            #const OASIS_POND1_EC1 337
+            #const OASIS_POND1_EC2 647
+            #const OASIS_POND1_EC3 647
+            #const OASIS_POND2_EC1 337
+            #const OASIS_POND2_EC2 647
+            #const OASIS_POND2_EC3 647
+            #const OASIS_POND3_EC1 337
+            #const OASIS_POND3_EC2 647
+            #const OASIS_POND3_EC3 647
+
             /* Innermost Ring Eye Candy Definitions */
             #const OASIS_RT1EC1 818
             #const OASIS_RT1EC2 1351   
@@ -3289,27 +3390,7 @@ create_object OFF_GRID
 set_place_for_every_player
 find_closest
 actor_area 9
-actor_area_radius 0
-}
-#const PH9_1 647
-create_object PH9_1
-{
-set_place_for_every_player
-actor_area 10
 if TINY_MAP actor_area_radius 44 elseif SMALL_MAP actor_area_radius 42 elseif MEDIUM_MAP actor_area_radius 39 elseif LARGE_MAP actor_area_radius 37 elseif HUGE_MAP actor_area_radius 34 else actor_area_radius 32 endif
-actor_area_to_place_in 9
-force_placement
-find_closest
-}
-#const PH10_1 647
-create_object PH10_1
-{
-set_place_for_every_player
-actor_area 11
-actor_area_radius 28
-actor_area_to_place_in 9
-force_placement
-find_closest
 }
 create_object ON_GRID
 {
@@ -3317,10 +3398,76 @@ set_gaia_object_only
 set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on INNER_CAP
-temp_min_distance_group_placement 5
+terrain_to_place_on REAL_BEACH
+temp_min_distance_group_placement 1
+actor_area 10
+actor_area_radius 0
+}
+#const PH10_1 647
+create_object PH10_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 11
+actor_area_radius 4
+actor_area_to_place_in 10
+force_placement
+find_closest
+}
+#const PH11_1 647
+create_object PH11_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
 actor_area 12
-if TINY_MAP actor_area_radius 6 elseif SMALL_MAP actor_area_radius 7 elseif MEDIUM_MAP actor_area_radius 8 elseif LARGE_MAP actor_area_radius 10 elseif HUGE_MAP actor_area_radius 11 else actor_area_radius 12 endif
+actor_area_radius 2
+actor_area_to_place_in 10
+force_placement
+find_closest
+}
+#const PH12_1 647
+create_object PH12_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 13
+actor_area_radius 8
+actor_area_to_place_in 10
+force_placement
+find_closest
+}
+#const PH13_1 647
+create_object PH13_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 14
+actor_area_radius 14
+actor_area_to_place_in 10
+force_placement
+find_closest
+}
+#const PH14_1 647
+create_object PH14_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 15
+actor_area_radius 1
+actor_area_to_place_in 10
+force_placement
+find_closest
+}
+#const PH15_1 647
+create_object PH15_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 16
+actor_area_radius 5
+actor_area_to_place_in 10
+force_placement
+find_closest
 }
 create_object ON_GRID
 {
@@ -3330,89 +3477,17 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 16
-second_object OUTLAND_STRAGGLER
-actor_area 13
-actor_area_radius 17
+second_object STRAGGLER
 }
-create_object ON_GRID
+create_object TREE_REED
 {
 set_gaia_object_only
-set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on REAL_BEACH
-temp_min_distance_group_placement 3
-second_object TREE_REED
-actor_area 14
-actor_area_radius 0
-avoid_actor_area 12
-find_closest
-}
-#const PH14_2 647
-create_object PH14_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 15
-actor_area_radius 6
-actor_area_to_place_in 14
-force_placement
-find_closest
-}
-#const PH15_2 647
-create_object PH15_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 16
-actor_area_radius 12
-actor_area_to_place_in 14
-force_placement
-find_closest
-}
-#const PH16_2 647
-create_object PH16_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
+temp_min_distance_group_placement 8
 actor_area 17
-actor_area_radius 18
-actor_area_to_place_in 14
-force_placement
-find_closest
-}
-#const PH17_2 647
-create_object PH17_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 18
-actor_area_radius 0
-actor_area_to_place_in 14
-force_placement
-find_closest
-}
-#const PH18_2 647
-create_object PH18_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 19
 actor_area_radius 1
-actor_area_to_place_in 14
-force_placement
-find_closest
-}
-#const PH19_2 647
-create_object PH19_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 20
-actor_area_radius 4
-actor_area_to_place_in 14
-force_placement
-find_closest
 }
 create_object ON_GRID
 {
@@ -3422,9 +3497,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 second_object TREE_ONE
-actor_area 21
+actor_area 18
 actor_area_radius 0
-actor_area_to_place_in 15
+actor_area_to_place_in 11
+avoid_actor_area 17
 }
 create_object ON_GRID
 {
@@ -3435,10 +3511,58 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 1
 second_object TREE_ONE
+actor_area 19
+actor_area_radius 0
+actor_area_to_place_in 13
+avoid_actor_area 12
+avoid_actor_area 17
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 1
+second_object TREE_TWO
+actor_area 20
+actor_area_radius 0
+actor_area_to_place_in 13
+avoid_actor_area 12
+avoid_actor_area 17
+avoid_actor_area 19
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 1
+second_object TREE_THREE
+actor_area 21
+actor_area_radius 0
+actor_area_to_place_in 13
+avoid_actor_area 12
+avoid_actor_area 17
+avoid_actor_area 19
+avoid_actor_area 20
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 4
+second_object TREE_ONE
 actor_area 22
 actor_area_radius 0
-actor_area_to_place_in 16
-avoid_actor_area 15
+actor_area_to_place_in 14
+avoid_actor_area 13
 }
 create_object ON_GRID
 {
@@ -3451,8 +3575,8 @@ temp_min_distance_group_placement 1
 second_object TREE_TWO
 actor_area 23
 actor_area_radius 0
-actor_area_to_place_in 16
-avoid_actor_area 15
+actor_area_to_place_in 14
+avoid_actor_area 13
 avoid_actor_area 22
 }
 create_object ON_GRID
@@ -3463,11 +3587,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 1
-second_object TREE_THREE
+second_object TREE_TWO
 actor_area 24
 actor_area_radius 0
-actor_area_to_place_in 16
-avoid_actor_area 15
+actor_area_to_place_in 14
+avoid_actor_area 13
 avoid_actor_area 22
 avoid_actor_area 23
 }
@@ -3478,60 +3602,15 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 4
-second_object TREE_ONE
-actor_area 25
-actor_area_radius 0
-actor_area_to_place_in 17
-avoid_actor_area 16
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 1
-second_object TREE_TWO
-actor_area 26
-actor_area_radius 0
-actor_area_to_place_in 17
-avoid_actor_area 16
-avoid_actor_area 25
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 1
-second_object TREE_TWO
-actor_area 27
-actor_area_radius 0
-actor_area_to_place_in 17
-avoid_actor_area 16
-avoid_actor_area 25
-avoid_actor_area 26
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 1
 second_object TREE_THREE
-actor_area 28
+actor_area 25
 actor_area_radius 0
-actor_area_to_place_in 17
-avoid_actor_area 16
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
+actor_area_to_place_in 14
+avoid_actor_area 13
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
 }
 create_object ON_GRID
 {
@@ -3542,10 +3621,74 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 16
 second_object TREE_ONE
+actor_area 26
+actor_area_radius 0
+avoid_actor_area 14
+avoid_actor_area 17
+find_closest
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 2
+second_object TREE_TWO
+actor_area 27
+actor_area_radius 0
+avoid_actor_area 17
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+avoid_actor_area 21
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+find_closest
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 2
+second_object TREE_TWO
+actor_area 28
+actor_area_radius 0
+avoid_actor_area 17
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+avoid_actor_area 21
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+avoid_actor_area 27
+find_closest
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 2
+second_object TREE_THREE
 actor_area 29
 actor_area_radius 0
-avoid_actor_area 13
+avoid_actor_area 17
 avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
 avoid_actor_area 21
 avoid_actor_area 22
 avoid_actor_area 23
@@ -3554,53 +3697,6 @@ avoid_actor_area 25
 avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
-find_closest
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 2
-second_object TREE_TWO
-actor_area 30
-actor_area_radius 0
-avoid_actor_area 18
-avoid_actor_area 21
-avoid_actor_area 22
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-avoid_actor_area 28
-avoid_actor_area 29
-find_closest
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 2
-second_object TREE_TWO
-actor_area 31
-actor_area_radius 0
-avoid_actor_area 18
-avoid_actor_area 21
-avoid_actor_area 22
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-avoid_actor_area 28
-avoid_actor_area 29
-avoid_actor_area 30
 find_closest
 }
 create_object ON_GRID
@@ -3612,9 +3708,10 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 2
 second_object TREE_THREE
-actor_area 32
-actor_area_radius 0
+avoid_actor_area 17
 avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
 avoid_actor_area 21
 avoid_actor_area 22
 avoid_actor_area 23
@@ -3624,32 +3721,6 @@ avoid_actor_area 26
 avoid_actor_area 27
 avoid_actor_area 28
 avoid_actor_area 29
-avoid_actor_area 30
-avoid_actor_area 31
-find_closest
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 2
-second_object TREE_THREE
-avoid_actor_area 18
-avoid_actor_area 21
-avoid_actor_area 22
-avoid_actor_area 23
-avoid_actor_area 24
-avoid_actor_area 25
-avoid_actor_area 26
-avoid_actor_area 27
-avoid_actor_area 28
-avoid_actor_area 29
-avoid_actor_area 30
-avoid_actor_area 31
-avoid_actor_area 32
 find_closest
 }
 create_object ON_GRID
@@ -3661,35 +3732,35 @@ set_scaling_to_map_size
 terrain_to_place_on OUTLAND_FOREST
 second_object TREE_FOUR
 }
-create_object OFF_GRID
+create_object ON_GRID
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTTT
 temp_min_distance_group_placement 1
-actor_area 33
+actor_area 30
 actor_area_radius 0
 }
-#const PH33_3 647
-create_object PH33_3
+#const PH30_2 647
+create_object PH30_2
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 34
+actor_area 31
 if TINY_MAP actor_area_radius 2 elseif SMALL_MAP actor_area_radius 2 elseif MEDIUM_MAP actor_area_radius 3 elseif LARGE_MAP actor_area_radius 3 elseif HUGE_MAP actor_area_radius 3 else actor_area_radius 4 endif
-actor_area_to_place_in 33
+actor_area_to_place_in 30
 force_placement
 find_closest
 }
-#const PH34_3 647
-create_object PH34_3
+#const PH31_2 647
+create_object PH31_2
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 35
+actor_area 32
 if TINY_MAP actor_area_radius 4 elseif SMALL_MAP actor_area_radius 5 elseif MEDIUM_MAP actor_area_radius 5 elseif LARGE_MAP actor_area_radius 6 elseif HUGE_MAP actor_area_radius 7 else actor_area_radius 7 endif
-actor_area_to_place_in 33
+actor_area_to_place_in 30
 force_placement
 find_closest
 }
@@ -3701,63 +3772,63 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_ONE
-actor_area 36
+actor_area 33
 actor_area_radius 0
-actor_area_to_place_in 35
-avoid_actor_area 34
+actor_area_to_place_in 32
+avoid_actor_area 31
 }
-#const PH36_4 647
-create_object PH36_4
+#const PH33_3 647
+create_object PH33_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 34
+actor_area_radius 12
+actor_area_to_place_in 33
+force_placement
+find_closest
+}
+#const PH34_3 647
+create_object PH34_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 35
+actor_area_radius 8
+actor_area_to_place_in 33
+force_placement
+find_closest
+}
+#const PH35_3 647
+create_object PH35_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 36
+actor_area_radius 4
+actor_area_to_place_in 33
+force_placement
+find_closest
+}
+#const PH36_3 647
+create_object PH36_3
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 37
-actor_area_radius 12
-actor_area_to_place_in 36
+actor_area_radius 1
+actor_area_to_place_in 33
 force_placement
 find_closest
 }
-#const PH37_4 647
-create_object PH37_4
+#const PH37_3 647
+create_object PH37_3
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 38
-actor_area_radius 8
-actor_area_to_place_in 36
-force_placement
-find_closest
-}
-#const PH38_4 647
-create_object PH38_4
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 39
-actor_area_radius 4
-actor_area_to_place_in 36
-force_placement
-find_closest
-}
-#const PH39_4 647
-create_object PH39_4
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 40
-actor_area_radius 1
-actor_area_to_place_in 36
-force_placement
-find_closest
-}
-#const PH40_4 647
-create_object PH40_4
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 41
 actor_area_radius 3
-actor_area_to_place_in 36
+actor_area_to_place_in 33
 force_placement
 find_closest
 }
@@ -3769,64 +3840,64 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_TWO
-actor_area 42
+actor_area 39
 actor_area_radius 0
-actor_area_to_place_in 35
+actor_area_to_place_in 32
+avoid_actor_area 31
 avoid_actor_area 34
-avoid_actor_area 37
 }
-#const PH42_5 647
-create_object PH42_5
+#const PH39_4 647
+create_object PH39_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 40
+actor_area_radius 12
+actor_area_to_place_in 39
+force_placement
+find_closest
+}
+#const PH40_4 647
+create_object PH40_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 41
+actor_area_radius 8
+actor_area_to_place_in 39
+force_placement
+find_closest
+}
+#const PH41_4 647
+create_object PH41_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 42
+actor_area_radius 4
+actor_area_to_place_in 39
+force_placement
+find_closest
+}
+#const PH42_4 647
+create_object PH42_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 43
-actor_area_radius 12
-actor_area_to_place_in 42
+actor_area_radius 1
+actor_area_to_place_in 39
 force_placement
 find_closest
 }
-#const PH43_5 647
-create_object PH43_5
+#const PH43_4 647
+create_object PH43_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 44
-actor_area_radius 8
-actor_area_to_place_in 42
-force_placement
-find_closest
-}
-#const PH44_5 647
-create_object PH44_5
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 45
-actor_area_radius 4
-actor_area_to_place_in 42
-force_placement
-find_closest
-}
-#const PH45_5 647
-create_object PH45_5
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 46
-actor_area_radius 1
-actor_area_to_place_in 42
-force_placement
-find_closest
-}
-#const PH46_5 647
-create_object PH46_5
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 47
 actor_area_radius 3
-actor_area_to_place_in 42
+actor_area_to_place_in 39
 force_placement
 find_closest
 }
@@ -3838,65 +3909,65 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_THREE
-actor_area 48
+actor_area 45
 actor_area_radius 0
-actor_area_to_place_in 35
+actor_area_to_place_in 32
+avoid_actor_area 31
 avoid_actor_area 34
-avoid_actor_area 37
-avoid_actor_area 43
+avoid_actor_area 40
 }
-#const PH48_6 647
-create_object PH48_6
+#const PH45_5 647
+create_object PH45_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 46
+actor_area_radius 12
+actor_area_to_place_in 45
+force_placement
+find_closest
+}
+#const PH46_5 647
+create_object PH46_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 47
+actor_area_radius 8
+actor_area_to_place_in 45
+force_placement
+find_closest
+}
+#const PH47_5 647
+create_object PH47_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 48
+actor_area_radius 4
+actor_area_to_place_in 45
+force_placement
+find_closest
+}
+#const PH48_5 647
+create_object PH48_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 49
-actor_area_radius 12
-actor_area_to_place_in 48
+actor_area_radius 1
+actor_area_to_place_in 45
 force_placement
 find_closest
 }
-#const PH49_6 647
-create_object PH49_6
+#const PH49_5 647
+create_object PH49_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 50
-actor_area_radius 8
-actor_area_to_place_in 48
-force_placement
-find_closest
-}
-#const PH50_6 647
-create_object PH50_6
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 51
-actor_area_radius 4
-actor_area_to_place_in 48
-force_placement
-find_closest
-}
-#const PH51_6 647
-create_object PH51_6
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 52
-actor_area_radius 1
-actor_area_to_place_in 48
-force_placement
-find_closest
-}
-#const PH52_6 647
-create_object PH52_6
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 53
 actor_area_radius 3
-actor_area_to_place_in 48
+actor_area_to_place_in 45
 force_placement
 find_closest
 }
@@ -3908,66 +3979,66 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_FOUR
-actor_area 54
+actor_area 51
 actor_area_radius 0
-actor_area_to_place_in 35
+actor_area_to_place_in 32
+avoid_actor_area 31
 avoid_actor_area 34
-avoid_actor_area 37
-avoid_actor_area 43
-avoid_actor_area 49
+avoid_actor_area 40
+avoid_actor_area 46
 }
-#const PH54_7 647
-create_object PH54_7
+#const PH51_6 647
+create_object PH51_6
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 52
+actor_area_radius 12
+actor_area_to_place_in 51
+force_placement
+find_closest
+}
+#const PH52_6 647
+create_object PH52_6
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 53
+actor_area_radius 8
+actor_area_to_place_in 51
+force_placement
+find_closest
+}
+#const PH53_6 647
+create_object PH53_6
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 54
+actor_area_radius 4
+actor_area_to_place_in 51
+force_placement
+find_closest
+}
+#const PH54_6 647
+create_object PH54_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 55
-actor_area_radius 12
-actor_area_to_place_in 54
+actor_area_radius 1
+actor_area_to_place_in 51
 force_placement
 find_closest
 }
-#const PH55_7 647
-create_object PH55_7
+#const PH55_6 647
+create_object PH55_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 56
-actor_area_radius 8
-actor_area_to_place_in 54
-force_placement
-find_closest
-}
-#const PH56_7 647
-create_object PH56_7
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 57
-actor_area_radius 4
-actor_area_to_place_in 54
-force_placement
-find_closest
-}
-#const PH57_7 647
-create_object PH57_7
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 58
-actor_area_radius 1
-actor_area_to_place_in 54
-force_placement
-find_closest
-}
-#const PH58_7 647
-create_object PH58_7
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 59
 actor_area_radius 3
-actor_area_to_place_in 54
+actor_area_to_place_in 51
 force_placement
 find_closest
 }
@@ -3979,67 +4050,67 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_FIVE
-actor_area 60
+actor_area 57
 actor_area_radius 0
-actor_area_to_place_in 35
+actor_area_to_place_in 32
+avoid_actor_area 31
 avoid_actor_area 34
-avoid_actor_area 37
-avoid_actor_area 43
-avoid_actor_area 49
-avoid_actor_area 55
+avoid_actor_area 40
+avoid_actor_area 46
+avoid_actor_area 52
 }
-#const PH60_8 647
-create_object PH60_8
+#const PH57_7 647
+create_object PH57_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 58
+actor_area_radius 12
+actor_area_to_place_in 57
+force_placement
+find_closest
+}
+#const PH58_7 647
+create_object PH58_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 59
+actor_area_radius 8
+actor_area_to_place_in 57
+force_placement
+find_closest
+}
+#const PH59_7 647
+create_object PH59_7
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 60
+actor_area_radius 4
+actor_area_to_place_in 57
+force_placement
+find_closest
+}
+#const PH60_7 647
+create_object PH60_7
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 61
-actor_area_radius 12
-actor_area_to_place_in 60
+actor_area_radius 1
+actor_area_to_place_in 57
 force_placement
 find_closest
 }
-#const PH61_8 647
-create_object PH61_8
+#const PH61_7 647
+create_object PH61_7
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 62
-actor_area_radius 8
-actor_area_to_place_in 60
-force_placement
-find_closest
-}
-#const PH62_8 647
-create_object PH62_8
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 63
-actor_area_radius 4
-actor_area_to_place_in 60
-force_placement
-find_closest
-}
-#const PH63_8 647
-create_object PH63_8
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 64
-actor_area_radius 1
-actor_area_to_place_in 60
-force_placement
-find_closest
-}
-#const PH64_8 647
-create_object PH64_8
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 65
 actor_area_radius 3
-actor_area_to_place_in 60
+actor_area_to_place_in 57
 force_placement
 find_closest
 }
@@ -4051,57 +4122,57 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_SIX
-actor_area 66
+actor_area 63
 actor_area_radius 0
-actor_area_to_place_in 35
+actor_area_to_place_in 32
+avoid_actor_area 31
 avoid_actor_area 34
-avoid_actor_area 37
-avoid_actor_area 43
-avoid_actor_area 49
-avoid_actor_area 55
-avoid_actor_area 61
+avoid_actor_area 40
+avoid_actor_area 46
+avoid_actor_area 52
+avoid_actor_area 58
 }
-#const PH66_9 647
-create_object PH66_9
+#const PH63_8 647
+create_object PH63_8
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 64
+actor_area_radius 8
+actor_area_to_place_in 63
+force_placement
+find_closest
+}
+#const PH64_8 647
+create_object PH64_8
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 65
+actor_area_radius 4
+actor_area_to_place_in 63
+force_placement
+find_closest
+}
+#const PH65_8 647
+create_object PH65_8
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 66
+actor_area_radius 1
+actor_area_to_place_in 63
+force_placement
+find_closest
+}
+#const PH66_8 647
+create_object PH66_8
 {
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 67
-actor_area_radius 8
-actor_area_to_place_in 66
-force_placement
-find_closest
-}
-#const PH67_9 647
-create_object PH67_9
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 68
-actor_area_radius 4
-actor_area_to_place_in 66
-force_placement
-find_closest
-}
-#const PH68_9 647
-create_object PH68_9
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 69
-actor_area_radius 1
-actor_area_to_place_in 66
-force_placement
-find_closest
-}
-#const PH69_9 647
-create_object PH69_9
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 70
 actor_area_radius 3
-actor_area_to_place_in 66
+actor_area_to_place_in 63
 force_placement
 find_closest
 }
@@ -4113,47 +4184,47 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
 second_object RIDGE_TSO1
-actor_area 71
+actor_area 68
 actor_area_radius 0
-actor_area_to_place_in 35
-avoid_actor_area 34
-avoid_actor_area 38
-avoid_actor_area 44
-avoid_actor_area 50
-avoid_actor_area 56
-avoid_actor_area 62
-avoid_actor_area 67
+actor_area_to_place_in 32
+avoid_actor_area 31
+avoid_actor_area 35
+avoid_actor_area 41
+avoid_actor_area 47
+avoid_actor_area 53
+avoid_actor_area 59
+avoid_actor_area 64
 }
-#const PH71_10 647
-create_object PH71_10
+#const PH68_9 647
+create_object PH68_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 72
+actor_area 69
 actor_area_radius 4
-actor_area_to_place_in 71
+actor_area_to_place_in 68
 force_placement
 find_closest
 }
-#const PH72_10 647
-create_object PH72_10
+#const PH69_9 647
+create_object PH69_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 73
+actor_area 70
 actor_area_radius 1
-actor_area_to_place_in 71
+actor_area_to_place_in 68
 force_placement
 find_closest
 }
-#const PH73_10 647
-create_object PH73_10
+#const PH70_9 647
+create_object PH70_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 74
+actor_area 71
 actor_area_radius 3
-actor_area_to_place_in 71
+actor_area_to_place_in 68
 force_placement
 find_closest
 }
@@ -4165,48 +4236,48 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
 second_object RIDGE_TSO2
-actor_area 75
+actor_area 72
 actor_area_radius 0
-actor_area_to_place_in 35
-avoid_actor_area 34
-avoid_actor_area 38
-avoid_actor_area 44
-avoid_actor_area 50
-avoid_actor_area 56
-avoid_actor_area 62
-avoid_actor_area 67
-avoid_actor_area 72
+actor_area_to_place_in 32
+avoid_actor_area 31
+avoid_actor_area 35
+avoid_actor_area 41
+avoid_actor_area 47
+avoid_actor_area 53
+avoid_actor_area 59
+avoid_actor_area 64
+avoid_actor_area 69
 }
-#const PH75_11 647
-create_object PH75_11
+#const PH72_10 647
+create_object PH72_10
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 76
+actor_area 73
 actor_area_radius 4
-actor_area_to_place_in 75
+actor_area_to_place_in 72
 force_placement
 find_closest
 }
-#const PH76_11 647
-create_object PH76_11
+#const PH73_10 647
+create_object PH73_10
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 77
+actor_area 74
 actor_area_radius 1
-actor_area_to_place_in 75
+actor_area_to_place_in 72
 force_placement
 find_closest
 }
-#const PH77_11 647
-create_object PH77_11
+#const PH74_10 647
+create_object PH74_10
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 78
+actor_area 75
 actor_area_radius 3
-actor_area_to_place_in 75
+actor_area_to_place_in 72
 force_placement
 find_closest
 }
@@ -4218,38 +4289,16 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 4
 second_object RIDGE_SSO1
-actor_area 79
-actor_area_radius 0
-avoid_actor_area 39
-avoid_actor_area 45
-avoid_actor_area 51
-avoid_actor_area 57
-avoid_actor_area 63
-avoid_actor_area 68
-avoid_actor_area 72
-avoid_actor_area 76
-find_closest
-}
-#const PH79_12 647
-create_object PH79_12
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 80
+actor_area 76
 actor_area_radius 1
-actor_area_to_place_in 79
-force_placement
-find_closest
-}
-#const PH80_12 647
-create_object PH80_12
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 81
-if TINY_MAP actor_area_radius 4 elseif SMALL_MAP actor_area_radius 5 elseif MEDIUM_MAP actor_area_radius 6 elseif LARGE_MAP actor_area_radius 6 elseif HUGE_MAP actor_area_radius 7 else actor_area_radius 8 endif
-actor_area_to_place_in 79
-force_placement
+avoid_actor_area 36
+avoid_actor_area 42
+avoid_actor_area 48
+avoid_actor_area 54
+avoid_actor_area 60
+avoid_actor_area 65
+avoid_actor_area 69
+avoid_actor_area 73
 find_closest
 }
 create_object RIDGE_SEC2
@@ -4260,39 +4309,17 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 3
 second_object RIDGE_SSO2
-actor_area 82
-actor_area_radius 0
-avoid_actor_area 39
-avoid_actor_area 45
-avoid_actor_area 51
-avoid_actor_area 57
-avoid_actor_area 63
-avoid_actor_area 68
-avoid_actor_area 72
-avoid_actor_area 76
-avoid_actor_area 80
-find_closest
-}
-#const PH82_13 647
-create_object PH82_13
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 83
+actor_area 77
 actor_area_radius 1
-actor_area_to_place_in 82
-force_placement
-find_closest
-}
-#const PH83_13 647
-create_object PH83_13
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 84
-if TINY_MAP actor_area_radius 4 elseif SMALL_MAP actor_area_radius 5 elseif MEDIUM_MAP actor_area_radius 6 elseif LARGE_MAP actor_area_radius 6 elseif HUGE_MAP actor_area_radius 7 else actor_area_radius 8 endif
-actor_area_to_place_in 82
-force_placement
+avoid_actor_area 36
+avoid_actor_area 42
+avoid_actor_area 48
+avoid_actor_area 54
+avoid_actor_area 60
+avoid_actor_area 65
+avoid_actor_area 69
+avoid_actor_area 73
+avoid_actor_area 76
 find_closest
 }
 create_object RIDGE_SEC3
@@ -4303,40 +4330,18 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 2
 second_object RIDGE_SSO3
-actor_area 85
-actor_area_radius 0
-avoid_actor_area 39
-avoid_actor_area 45
-avoid_actor_area 51
-avoid_actor_area 57
-avoid_actor_area 63
-avoid_actor_area 68
-avoid_actor_area 72
-avoid_actor_area 76
-avoid_actor_area 80
-avoid_actor_area 83
-find_closest
-}
-#const PH85_14 647
-create_object PH85_14
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 86
+actor_area 78
 actor_area_radius 1
-actor_area_to_place_in 85
-force_placement
-find_closest
-}
-#const PH86_14 647
-create_object PH86_14
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 87
-if TINY_MAP actor_area_radius 4 elseif SMALL_MAP actor_area_radius 5 elseif MEDIUM_MAP actor_area_radius 6 elseif LARGE_MAP actor_area_radius 6 elseif HUGE_MAP actor_area_radius 7 else actor_area_radius 8 endif
-actor_area_to_place_in 85
-force_placement
+avoid_actor_area 36
+avoid_actor_area 42
+avoid_actor_area 48
+avoid_actor_area 54
+avoid_actor_area 60
+avoid_actor_area 65
+avoid_actor_area 69
+avoid_actor_area 73
+avoid_actor_area 76
+avoid_actor_area 77
 find_closest
 }
 create_object RIDGE_TEC1
@@ -4349,41 +4354,19 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 1
 second_object RIDGE_TSO1
-actor_area 88
+actor_area 79
 actor_area_radius 1
-avoid_actor_area 39
-avoid_actor_area 45
-avoid_actor_area 51
-avoid_actor_area 57
-avoid_actor_area 63
-avoid_actor_area 68
-avoid_actor_area 72
+avoid_actor_area 36
+avoid_actor_area 42
+avoid_actor_area 48
+avoid_actor_area 54
+avoid_actor_area 60
+avoid_actor_area 65
+avoid_actor_area 69
+avoid_actor_area 73
 avoid_actor_area 76
-avoid_actor_area 80
-avoid_actor_area 83
-avoid_actor_area 86
-find_closest
-}
-#const PH88_15 647
-create_object PH88_15
-{
-number_of_groups 37280
-set_scaling_to_map_size
-actor_area 89
-actor_area_radius 1
-actor_area_to_place_in 88
-force_placement
-find_closest
-}
-#const PH89_15 647
-create_object PH89_15
-{
-number_of_groups 37280
-set_scaling_to_map_size
-actor_area 90
-if TINY_MAP actor_area_radius 4 elseif SMALL_MAP actor_area_radius 5 elseif MEDIUM_MAP actor_area_radius 6 elseif LARGE_MAP actor_area_radius 6 elseif HUGE_MAP actor_area_radius 7 else actor_area_radius 8 endif
-actor_area_to_place_in 88
-force_placement
+avoid_actor_area 77
+avoid_actor_area 78
 find_closest
 }
 create_object RIDGE_SEC1
@@ -4394,16 +4377,16 @@ set_scaling_to_map_size
 terrain_to_place_on MTTT
 temp_min_distance_group_placement 2
 second_object RIDGE_SSO1
-actor_area 91
+actor_area 80
 actor_area_radius 1
-avoid_actor_area 40
-avoid_actor_area 46
-avoid_actor_area 52
-avoid_actor_area 58
-avoid_actor_area 64
-avoid_actor_area 69
-avoid_actor_area 73
-avoid_actor_area 77
+avoid_actor_area 37
+avoid_actor_area 43
+avoid_actor_area 49
+avoid_actor_area 55
+avoid_actor_area 61
+avoid_actor_area 66
+avoid_actor_area 70
+avoid_actor_area 74
 find_closest
 }
 create_object RIDGE_SEC2
@@ -4414,17 +4397,17 @@ set_scaling_to_map_size
 terrain_to_place_on MTTT
 temp_min_distance_group_placement 1
 second_object RIDGE_SSO2
-actor_area 92
+actor_area 81
 actor_area_radius 1
-avoid_actor_area 40
-avoid_actor_area 46
-avoid_actor_area 52
-avoid_actor_area 58
-avoid_actor_area 64
-avoid_actor_area 69
-avoid_actor_area 73
-avoid_actor_area 77
-avoid_actor_area 80
+avoid_actor_area 37
+avoid_actor_area 43
+avoid_actor_area 49
+avoid_actor_area 55
+avoid_actor_area 61
+avoid_actor_area 66
+avoid_actor_area 70
+avoid_actor_area 74
+avoid_actor_area 76
 find_closest
 }
 create_object BLOCKER
@@ -4434,16 +4417,38 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
-actor_area 93
+actor_area 82
 actor_area_radius 0
-avoid_actor_area 41
-avoid_actor_area 47
-avoid_actor_area 53
-avoid_actor_area 59
-avoid_actor_area 65
-avoid_actor_area 70
-avoid_actor_area 74
-avoid_actor_area 78
+avoid_actor_area 38
+avoid_actor_area 44
+avoid_actor_area 50
+avoid_actor_area 56
+avoid_actor_area 62
+avoid_actor_area 67
+avoid_actor_area 71
+avoid_actor_area 75
+find_closest
+}
+#const PH82_11 647
+create_object PH82_11
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 83
+actor_area_radius 0
+actor_area_to_place_in 82
+force_placement
+find_closest
+}
+#const PH83_11 647
+create_object PH83_11
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 84
+if TINY_MAP actor_area_radius 4 elseif SMALL_MAP actor_area_radius 5 elseif MEDIUM_MAP actor_area_radius 6 elseif LARGE_MAP actor_area_radius 6 elseif HUGE_MAP actor_area_radius 7 else actor_area_radius 8 endif
+actor_area_to_place_in 82
+force_placement
 find_closest
 }
 create_object BLOCKER
@@ -4453,14 +4458,14 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTTT
-avoid_actor_area 41
-avoid_actor_area 47
-avoid_actor_area 53
-avoid_actor_area 59
-avoid_actor_area 65
-avoid_actor_area 70
-avoid_actor_area 74
-avoid_actor_area 78
+avoid_actor_area 38
+avoid_actor_area 44
+avoid_actor_area 50
+avoid_actor_area 56
+avoid_actor_area 62
+avoid_actor_area 67
+avoid_actor_area 71
+avoid_actor_area 75
 find_closest
 }
 create_object RIDGE_SEC1
@@ -4473,9 +4478,9 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 2
 second_object RIDGE_SSO1
-actor_area 94
+actor_area 85
 actor_area_radius 1
-avoid_actor_area 93
+avoid_actor_area 83
 find_closest
 }
 create_object RIDGE_SEC2
@@ -4486,9 +4491,9 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 2
 second_object RIDGE_SSO2
-actor_area 95
+actor_area 86
 actor_area_radius 1
-avoid_actor_area 93
+avoid_actor_area 83
 find_closest
 }
 create_object RIDGE_SEC3
@@ -4498,9 +4503,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 second_object RIDGE_SSO3
-actor_area 96
+actor_area 87
 actor_area_radius 1
-avoid_actor_area 93
+avoid_actor_area 83
 find_closest
 }
 create_object BROKEN_CART
@@ -4510,19 +4515,19 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 16
-actor_area 97
+actor_area 88
 actor_area_radius 1
-avoid_actor_area 73
+avoid_actor_area 70
+avoid_actor_area 74
+avoid_actor_area 76
 avoid_actor_area 77
+avoid_actor_area 78
+avoid_actor_area 79
 avoid_actor_area 80
-avoid_actor_area 83
+avoid_actor_area 81
+avoid_actor_area 85
 avoid_actor_area 86
-avoid_actor_area 89
-avoid_actor_area 91
-avoid_actor_area 92
-avoid_actor_area 94
-avoid_actor_area 95
-avoid_actor_area 96
+avoid_actor_area 87
 find_closest
 }
 create_object STONE
@@ -4536,16 +4541,16 @@ avoid_actor_area 5
 avoid_actor_area 6
 avoid_actor_area 7
 avoid_actor_area 8
-avoid_actor_area 73
+avoid_actor_area 70
+avoid_actor_area 74
+avoid_actor_area 76
 avoid_actor_area 77
-avoid_actor_area 80
-avoid_actor_area 83
+avoid_actor_area 78
+avoid_actor_area 79
+avoid_actor_area 85
 avoid_actor_area 86
-avoid_actor_area 89
-avoid_actor_area 94
-avoid_actor_area 95
-avoid_actor_area 96
-avoid_actor_area 97
+avoid_actor_area 87
+avoid_actor_area 88
 find_closest
 }
 create_object RIDGE_IEC1
@@ -4555,7 +4560,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 98
+actor_area 89
 actor_area_radius 1
 }
 create_object RIDGE_IEC2
@@ -4565,9 +4570,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 99
+actor_area 90
 actor_area_radius 1
-avoid_actor_area 98
+avoid_actor_area 89
 find_closest
 }
 create_object RIDGE_IEC3
@@ -4577,10 +4582,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 100
+actor_area 91
 actor_area_radius 1
-avoid_actor_area 98
-avoid_actor_area 99
+avoid_actor_area 89
+avoid_actor_area 90
 find_closest
 }
 create_object RIDGE_IEC4
@@ -4590,11 +4595,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 101
+actor_area 92
 actor_area_radius 1
-avoid_actor_area 98
-avoid_actor_area 99
-avoid_actor_area 100
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
 find_closest
 }
 create_object RIDGE_IEC5
@@ -4604,12 +4609,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 102
+actor_area 93
 actor_area_radius 1
-avoid_actor_area 98
-avoid_actor_area 99
-avoid_actor_area 100
-avoid_actor_area 101
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
 find_closest
 }
 create_object RIDGE_IEC6
@@ -4619,13 +4624,13 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 103
+actor_area 94
 actor_area_radius 1
-avoid_actor_area 98
-avoid_actor_area 99
-avoid_actor_area 100
-avoid_actor_area 101
-avoid_actor_area 102
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
 find_closest
 }
 create_object RIDGE_IEC7
@@ -4635,14 +4640,14 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 104
+actor_area 95
 actor_area_radius 1
-avoid_actor_area 98
-avoid_actor_area 99
-avoid_actor_area 100
-avoid_actor_area 101
-avoid_actor_area 102
-avoid_actor_area 103
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
+avoid_actor_area 94
 find_closest
 }
 create_object RIDGE_IEC8
@@ -4652,15 +4657,15 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 105
+actor_area 96
 actor_area_radius 1
-avoid_actor_area 98
-avoid_actor_area 99
-avoid_actor_area 100
-avoid_actor_area 101
-avoid_actor_area 102
-avoid_actor_area 103
-avoid_actor_area 104
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
+avoid_actor_area 94
+avoid_actor_area 95
 find_closest
 }
 create_object RIDGE_IEC9
@@ -4670,16 +4675,16 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 106
+actor_area 97
 actor_area_radius 1
-avoid_actor_area 98
-avoid_actor_area 99
-avoid_actor_area 100
-avoid_actor_area 101
-avoid_actor_area 102
-avoid_actor_area 103
-avoid_actor_area 104
-avoid_actor_area 105
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
+avoid_actor_area 94
+avoid_actor_area 95
+avoid_actor_area 96
 find_closest
 }
 create_object RIDGE_IEC10
@@ -4689,17 +4694,17 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 107
+actor_area 98
 actor_area_radius 1
-avoid_actor_area 98
-avoid_actor_area 99
-avoid_actor_area 100
-avoid_actor_area 101
-avoid_actor_area 102
-avoid_actor_area 103
-avoid_actor_area 104
-avoid_actor_area 105
-avoid_actor_area 106
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
+avoid_actor_area 94
+avoid_actor_area 95
+avoid_actor_area 96
+avoid_actor_area 97
 find_closest
 }
 create_object RIDGE_IEC11
@@ -4709,18 +4714,18 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 108
+actor_area 99
 actor_area_radius 1
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
+avoid_actor_area 94
+avoid_actor_area 95
+avoid_actor_area 96
+avoid_actor_area 97
 avoid_actor_area 98
-avoid_actor_area 99
-avoid_actor_area 100
-avoid_actor_area 101
-avoid_actor_area 102
-avoid_actor_area 103
-avoid_actor_area 104
-avoid_actor_area 105
-avoid_actor_area 106
-avoid_actor_area 107
 find_closest
 }
 create_object RIDGE_IEC12
@@ -4730,8 +4735,141 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
+avoid_actor_area 89
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
+avoid_actor_area 94
+avoid_actor_area 95
+avoid_actor_area 96
+avoid_actor_area 97
 avoid_actor_area 98
 avoid_actor_area 99
+find_closest
+}
+create_object OASIS_POND1_EC1 
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on WATER_TYPE
+temp_min_distance_group_placement 12
+actor_area 100
+actor_area_radius 4
+}
+create_object OASIS_POND1_EC2 
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on WATER_TYPE
+temp_min_distance_group_placement 12
+actor_area 101
+actor_area_radius 4
+avoid_actor_area 100
+find_closest
+}
+create_object OASIS_POND1_EC3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on WATER_TYPE
+temp_min_distance_group_placement 12
+actor_area 102
+actor_area_radius 4
+avoid_actor_area 100
+avoid_actor_area 101
+find_closest
+}
+create_object OASIS_POND2_EC1 
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OUTER_CAP
+temp_min_distance_group_placement 12
+actor_area 103
+actor_area_radius 4
+avoid_actor_area 100
+avoid_actor_area 101
+avoid_actor_area 102
+find_closest
+}
+create_object OASIS_POND2_EC2 
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OUTER_CAP
+temp_min_distance_group_placement 12
+actor_area 104
+actor_area_radius 4
+avoid_actor_area 100
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+find_closest
+}
+create_object OASIS_POND2_EC3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OUTER_CAP
+temp_min_distance_group_placement 12
+actor_area 105
+actor_area_radius 4
+avoid_actor_area 100
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+find_closest
+}
+create_object OASIS_POND2_EC1 
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on INNER_CAP
+temp_min_distance_group_placement 12
+actor_area 106
+actor_area_radius 4
+avoid_actor_area 100
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
+find_closest
+}
+create_object OASIS_POND2_EC2 
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on INNER_CAP
+temp_min_distance_group_placement 12
+actor_area 107
+actor_area_radius 4
+avoid_actor_area 100
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
+avoid_actor_area 106
+find_closest
+}
+create_object OASIS_POND2_EC3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on INNER_CAP
+temp_min_distance_group_placement 12
 avoid_actor_area 100
 avoid_actor_area 101
 avoid_actor_area 102
@@ -4740,367 +4878,6 @@ avoid_actor_area 104
 avoid_actor_area 105
 avoid_actor_area 106
 avoid_actor_area 107
-avoid_actor_area 108
-find_closest
-}
-create_object RELIC
-{
-set_gaia_object_only
-number_of_groups 1
-set_scaling_to_map_size
-terrain_to_place_on INNER_CAP
-if TINY_MAP temp_min_distance_group_placement 8 elseif SMALL_MAP temp_min_distance_group_placement 10 elseif MEDIUM_MAP temp_min_distance_group_placement 11 elseif LARGE_MAP temp_min_distance_group_placement 13 elseif HUGE_MAP temp_min_distance_group_placement 14 else temp_min_distance_group_placement 16 endif
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on WATER_TYPE
-temp_min_distance_group_placement 6
-second_object SMALL_FISH
-actor_area_to_place_in 19
-}
-create_object OFF_GRID
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OUTER_CAP
-temp_min_distance_group_placement 8
-second_object LARGE_FISH1
-actor_area 109
-actor_area_radius 4
-avoid_actor_area 20
-find_closest
-}
-create_object OFF_GRID
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on INNER_CAP
-temp_min_distance_group_placement 8
-second_object LARGE_FISH2
-avoid_actor_area 20
-avoid_actor_area 109
-find_closest
-}
-create_object BUSH_FOOD1
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 110
-actor_area_radius 12
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 111
-actor_area_radius 12
-avoid_actor_area 110
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 112
-actor_area_radius 12
-avoid_actor_area 110
-avoid_actor_area 111
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 113
-actor_area_radius 12
-avoid_actor_area 110
-avoid_actor_area 111
-avoid_actor_area 112
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 114
-actor_area_radius 12
-avoid_actor_area 110
-avoid_actor_area 111
-avoid_actor_area 112
-avoid_actor_area 113
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-avoid_actor_area 110
-avoid_actor_area 111
-avoid_actor_area 112
-avoid_actor_area 113
-avoid_actor_area 114
-find_closest
-}
-create_object DEER_ONE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-temp_min_distance_group_placement 24
-actor_area 115
-actor_area_radius 12
-}
-create_object DEER_TWO
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-temp_min_distance_group_placement 24
-actor_area 116
-actor_area_radius 12
-avoid_actor_area 115
-find_closest
-}
-create_object DEER_THREE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-temp_min_distance_group_placement 24
-actor_area 117
-actor_area_radius 12
-avoid_actor_area 115
-avoid_actor_area 116
-find_closest
-}
-create_object DEER_ONE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-temp_min_distance_group_placement 24
-actor_area 118
-actor_area_radius 12
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-find_closest
-}
-create_object DEER_TWO
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-temp_min_distance_group_placement 24
-actor_area 119
-actor_area_radius 12
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-find_closest
-}
-create_object DEER_THREE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-temp_min_distance_group_placement 24
-actor_area 120
-actor_area_radius 12
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-find_closest
-}
-create_object DEER_ONE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-temp_min_distance_group_placement 24
-actor_area 121
-actor_area_radius 12
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
-find_closest
-}
-create_object DEER_TWO
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-temp_min_distance_group_placement 24
-actor_area 122
-actor_area_radius 12
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
-avoid_actor_area 121
-find_closest
-}
-create_object DEER_THREE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-temp_min_distance_group_placement 24
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
-avoid_actor_area 121
-avoid_actor_area 122
-find_closest
-}
-create_object LUREABLE
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on RT4
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-}
-create_object PREDATOR
-{
-set_gaia_object_only
-number_of_objects 2
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-avoid_forest_zone 1
-temp_min_distance_group_placement 8
-avoid_actor_area 10
-find_closest
-}
-create_object GOLD
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 1200
-number_of_groups 3
-set_tight_grouping
-set_scaling_to_map_size
-layer_to_place_on BASE_MASK1
-terrain_to_place_on BT
-avoid_forest_zone 2
-temp_min_distance_group_placement 18
-avoid_actor_area 11
-find_closest
-}
-create_object OFF_GRID
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-layer_to_place_on BASE_MASK1
-terrain_to_place_on BT
-temp_min_distance_group_placement 12
-actor_area 123
-actor_area_radius 16
-avoid_actor_area 11
-find_closest
-}
-create_object GOLD
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 1200
-number_of_groups 3
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on BT
-avoid_forest_zone 2
-temp_min_distance_group_placement 18
-avoid_actor_area 11
-avoid_actor_area 123
 find_closest
 }
 create_object OASIS_RT1EC1 
@@ -5254,7 +5031,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 124
+actor_area 108
 actor_area_radius 3
 }
 create_object OASIS_RT4EC2 
@@ -5264,9 +5041,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 125
+actor_area 109
 actor_area_radius 3
-avoid_actor_area 124
+avoid_actor_area 108
 find_closest
 }
 create_object OASIS_RT4EC3
@@ -5276,10 +5053,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 126
+actor_area 110
 actor_area_radius 3
-avoid_actor_area 124
-avoid_actor_area 125
+avoid_actor_area 108
+avoid_actor_area 109
 find_closest
 }
 create_object OASIS_RT4EC4
@@ -5289,11 +5066,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 127
+actor_area 111
 actor_area_radius 3
-avoid_actor_area 124
-avoid_actor_area 125
-avoid_actor_area 126
+avoid_actor_area 108
+avoid_actor_area 109
+avoid_actor_area 110
 find_closest
 }
 create_object OASIS_RT4EC5 
@@ -5303,12 +5080,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 128
+actor_area 112
 actor_area_radius 3
-avoid_actor_area 124
-avoid_actor_area 125
-avoid_actor_area 126
-avoid_actor_area 127
+avoid_actor_area 108
+avoid_actor_area 109
+avoid_actor_area 110
+avoid_actor_area 111
 find_closest
 }
 create_object OASIS_RT4EC6 
@@ -5318,11 +5095,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-avoid_actor_area 124
-avoid_actor_area 125
-avoid_actor_area 126
-avoid_actor_area 127
-avoid_actor_area 128
+avoid_actor_area 108
+avoid_actor_area 109
+avoid_actor_area 110
+avoid_actor_area 111
+avoid_actor_area 112
 find_closest
 }
 create_object OASIS_BTEC1 
@@ -5332,7 +5109,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 129
+actor_area 113
 actor_area_radius 3
 }
 create_object OASIS_BTEC2 
@@ -5342,9 +5119,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 130
+actor_area 114
 actor_area_radius 3
-avoid_actor_area 129
+avoid_actor_area 113
 find_closest
 }
 create_object OASIS_BTEC3
@@ -5354,10 +5131,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 131
+actor_area 115
 actor_area_radius 3
-avoid_actor_area 129
-avoid_actor_area 130
+avoid_actor_area 113
+avoid_actor_area 114
 find_closest
 }
 create_object OASIS_BTEC4
@@ -5367,11 +5144,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 132
+actor_area 116
 actor_area_radius 3
-avoid_actor_area 129
-avoid_actor_area 130
-avoid_actor_area 131
+avoid_actor_area 113
+avoid_actor_area 114
+avoid_actor_area 115
 find_closest
 }
 create_object OASIS_BTEC5 
@@ -5381,12 +5158,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 133
+actor_area 117
 actor_area_radius 3
-avoid_actor_area 129
-avoid_actor_area 130
-avoid_actor_area 131
-avoid_actor_area 132
+avoid_actor_area 113
+avoid_actor_area 114
+avoid_actor_area 115
+avoid_actor_area 116
 find_closest
 }
 create_object OASIS_BTEC6 
@@ -5396,10 +5173,362 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
+avoid_actor_area 113
+avoid_actor_area 114
+avoid_actor_area 115
+avoid_actor_area 116
+avoid_actor_area 117
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 1
+set_scaling_to_map_size
+terrain_to_place_on INNER_CAP
+if TINY_MAP temp_min_distance_group_placement 8 elseif SMALL_MAP temp_min_distance_group_placement 10 elseif MEDIUM_MAP temp_min_distance_group_placement 11 elseif LARGE_MAP temp_min_distance_group_placement 13 elseif HUGE_MAP temp_min_distance_group_placement 14 else temp_min_distance_group_placement 16 endif
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on WATER_TYPE
+temp_min_distance_group_placement 6
+second_object SMALL_FISH
+actor_area_to_place_in 15
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OUTER_CAP
+temp_min_distance_group_placement 8
+second_object LARGE_FISH1
+actor_area 118
+actor_area_radius 4
+avoid_actor_area 16
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on INNER_CAP
+temp_min_distance_group_placement 8
+second_object LARGE_FISH2
+avoid_actor_area 16
+avoid_actor_area 118
+find_closest
+}
+create_object BUSH_FOOD1
+{
+set_gaia_object_only
+number_of_objects 3
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 119
+actor_area_radius 12
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 3
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 120
+actor_area_radius 12
+avoid_actor_area 119
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 3
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 121
+actor_area_radius 12
+avoid_actor_area 119
+avoid_actor_area 120
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 3
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 122
+actor_area_radius 12
+avoid_actor_area 119
+avoid_actor_area 120
+avoid_actor_area 121
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 3
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+actor_area 123
+actor_area_radius 12
+avoid_actor_area 119
+avoid_actor_area 120
+avoid_actor_area 121
+avoid_actor_area 122
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 3
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+avoid_actor_area 119
+avoid_actor_area 120
+avoid_actor_area 121
+avoid_actor_area 122
+avoid_actor_area 123
+find_closest
+}
+create_object DEER_ONE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 124
+actor_area_radius 12
+}
+create_object DEER_TWO
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 125
+actor_area_radius 12
+avoid_actor_area 124
+find_closest
+}
+create_object DEER_THREE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 126
+actor_area_radius 12
+avoid_actor_area 124
+avoid_actor_area 125
+find_closest
+}
+create_object DEER_ONE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 127
+actor_area_radius 12
+avoid_actor_area 124
+avoid_actor_area 125
+avoid_actor_area 126
+find_closest
+}
+create_object DEER_TWO
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 128
+actor_area_radius 12
+avoid_actor_area 124
+avoid_actor_area 125
+avoid_actor_area 126
+avoid_actor_area 127
+find_closest
+}
+create_object DEER_THREE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 129
+actor_area_radius 12
+avoid_actor_area 124
+avoid_actor_area 125
+avoid_actor_area 126
+avoid_actor_area 127
+avoid_actor_area 128
+find_closest
+}
+create_object DEER_ONE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+actor_area 130
+actor_area_radius 12
+avoid_actor_area 124
+avoid_actor_area 125
+avoid_actor_area 126
+avoid_actor_area 127
+avoid_actor_area 128
+avoid_actor_area 129
+find_closest
+}
+create_object DEER_TWO
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+actor_area 131
+actor_area_radius 12
+avoid_actor_area 124
+avoid_actor_area 125
+avoid_actor_area 126
+avoid_actor_area 127
+avoid_actor_area 128
+avoid_actor_area 129
+avoid_actor_area 130
+find_closest
+}
+create_object DEER_THREE
+{
+set_gaia_object_only
+number_of_objects 4
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+avoid_actor_area 124
+avoid_actor_area 125
+avoid_actor_area 126
+avoid_actor_area 127
+avoid_actor_area 128
 avoid_actor_area 129
 avoid_actor_area 130
 avoid_actor_area 131
+find_closest
+}
+create_object PREDATOR
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on RT3
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area 132
+actor_area_radius 8
+avoid_actor_area 9
+find_closest
+}
+create_object PREDATOR
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on RT4
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+avoid_actor_area 9
 avoid_actor_area 132
+find_closest
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 800
+number_of_groups 5
+set_tight_grouping
+set_scaling_to_map_size
+layer_to_place_on BASE_MASK1
+terrain_to_place_on BT
+avoid_forest_zone 2
+temp_min_distance_group_placement 12
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+layer_to_place_on BASE_MASK1
+terrain_to_place_on BT
+temp_min_distance_group_placement 12
+actor_area 133
+actor_area_radius 16
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 800
+number_of_groups 5
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on BT
+avoid_forest_zone 2
+temp_min_distance_group_placement 12
 avoid_actor_area 133
 find_closest
 }
@@ -5459,44 +5588,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 avoid_forest_zone 1
-temp_min_distance_group_placement 32
+temp_min_distance_group_placement 12
 actor_area 137
-actor_area_radius 0
-}
-#const PH137_16 647
-create_object PH137_16
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 138
-actor_area_radius 16
-actor_area_to_place_in 137
-force_placement
-find_closest
-}
-#const PH138_16 647
-create_object PH138_16
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 139
 actor_area_radius 8
-actor_area_to_place_in 137
-force_placement
-find_closest
-}
-create_object NEARBY_HERDABLE
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on BT
-avoid_forest_zone 1
-temp_min_distance_group_placement 32
-actor_area 140
-actor_area_radius 8
-avoid_actor_area 138
-find_closest
 }
 create_object WILD_HERD_ANIMAL
 {
@@ -5508,8 +5602,7 @@ set_scaling_to_map_size
 terrain_to_place_on BT
 avoid_forest_zone 2
 temp_min_distance_group_placement 40
-avoid_actor_area 139
-avoid_actor_area 140
+avoid_actor_area 137
 find_closest
 }
 create_object BIRD
@@ -5524,14 +5617,9 @@ create_object OX_WAGON
 {
 set_place_for_every_player
 terrain_to_place_on MTSH
-actor_area 141
-actor_area_radius 1
-avoid_actor_area 72
-avoid_actor_area 76
-avoid_actor_area 81
+actor_area 138
+actor_area_radius 2
 avoid_actor_area 84
-avoid_actor_area 87
-avoid_actor_area 90
 find_closest
 }
 create_object KHARGA_SCOUT
@@ -5539,7 +5627,7 @@ create_object KHARGA_SCOUT
 set_place_for_every_player
 terrain_to_place_on MTSH
 find_closest
-actor_area_to_place_in 141
+actor_area_to_place_in 138
 }
 else
 #const OFF_GRID 647
@@ -5626,7 +5714,7 @@ create_object PH9_1
 {
 set_place_for_every_player
 actor_area 10
-actor_area_radius 24
+actor_area_radius 8
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5636,7 +5724,7 @@ create_object PH10_1
 {
 set_place_for_every_player
 actor_area 11
-actor_area_radius 6
+if TINY_MAP actor_area_radius 44 elseif SMALL_MAP actor_area_radius 42 elseif MEDIUM_MAP actor_area_radius 39 elseif LARGE_MAP actor_area_radius 37 elseif HUGE_MAP actor_area_radius 34 else actor_area_radius 32 endif
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5646,7 +5734,7 @@ create_object PH11_1
 {
 set_place_for_every_player
 actor_area 12
-actor_area_radius 7
+actor_area_radius 32
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5656,7 +5744,7 @@ create_object PH12_1
 {
 set_place_for_every_player
 actor_area 13
-actor_area_radius 8
+actor_area_radius 28
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5676,7 +5764,7 @@ create_object PH14_1
 {
 set_place_for_every_player
 actor_area 15
-actor_area_radius 9
+actor_area_radius 40
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5686,7 +5774,7 @@ create_object PH15_1
 {
 set_place_for_every_player
 actor_area 16
-actor_area_radius 13
+actor_area_radius 6
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5696,7 +5784,7 @@ create_object PH16_1
 {
 set_place_for_every_player
 actor_area 17
-actor_area_radius 14
+actor_area_radius 7
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5706,7 +5794,7 @@ create_object PH17_1
 {
 set_place_for_every_player
 actor_area 18
-actor_area_radius 18
+actor_area_radius 9
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5716,7 +5804,7 @@ create_object PH18_1
 {
 set_place_for_every_player
 actor_area 19
-actor_area_radius 20
+actor_area_radius 13
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5726,7 +5814,7 @@ create_object PH19_1
 {
 set_place_for_every_player
 actor_area 20
-actor_area_radius 3
+actor_area_radius 14
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5736,7 +5824,7 @@ create_object PH20_1
 {
 set_place_for_every_player
 actor_area 21
-actor_area_radius 32
+actor_area_radius 18
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5746,7 +5834,7 @@ create_object PH21_1
 {
 set_place_for_every_player
 actor_area 22
-if TINY_MAP actor_area_radius 44 elseif SMALL_MAP actor_area_radius 42 elseif MEDIUM_MAP actor_area_radius 39 elseif LARGE_MAP actor_area_radius 37 elseif HUGE_MAP actor_area_radius 34 else actor_area_radius 32 endif
+actor_area_radius 20
 actor_area_to_place_in 9
 force_placement
 find_closest
@@ -5756,44 +5844,9 @@ create_object PH22_1
 {
 set_place_for_every_player
 actor_area 23
-actor_area_radius 28
+actor_area_radius 3
 actor_area_to_place_in 9
 force_placement
-find_closest
-}
-#const PH23_1 647
-create_object PH23_1
-{
-set_place_for_every_player
-actor_area 24
-actor_area_radius 40
-actor_area_to_place_in 9
-force_placement
-find_closest
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on INNER_CAP
-temp_min_distance_group_placement 5
-actor_area 25
-if TINY_MAP actor_area_radius 6 elseif SMALL_MAP actor_area_radius 7 elseif MEDIUM_MAP actor_area_radius 8 elseif LARGE_MAP actor_area_radius 10 elseif HUGE_MAP actor_area_radius 11 else actor_area_radius 12 endif
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on BT
-temp_min_distance_group_placement 16
-second_object OUTLAND_STRAGGLER
-actor_area 26
-actor_area_radius 17
-avoid_actor_area 10
 find_closest
 }
 create_object ON_GRID
@@ -5803,11 +5856,41 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on REAL_BEACH
-temp_min_distance_group_placement 3
-second_object TREE_REED
-actor_area 27
+temp_min_distance_group_placement 1
+actor_area 24
 actor_area_radius 0
-avoid_actor_area 25
+}
+#const PH24_2 647
+create_object PH24_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 25
+actor_area_radius 4
+actor_area_to_place_in 24
+force_placement
+find_closest
+}
+#const PH25_2 647
+create_object PH25_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 26
+actor_area_radius 2
+actor_area_to_place_in 24
+force_placement
+find_closest
+}
+#const PH26_2 647
+create_object PH26_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 27
+actor_area_radius 8
+actor_area_to_place_in 24
+force_placement
 find_closest
 }
 #const PH27_2 647
@@ -5816,8 +5899,8 @@ create_object PH27_2
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 28
-actor_area_radius 6
-actor_area_to_place_in 27
+actor_area_radius 14
+actor_area_to_place_in 24
 force_placement
 find_closest
 }
@@ -5827,8 +5910,8 @@ create_object PH28_2
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 29
-actor_area_radius 12
-actor_area_to_place_in 27
+actor_area_radius 1
+actor_area_to_place_in 24
 force_placement
 find_closest
 }
@@ -5838,41 +5921,8 @@ create_object PH29_2
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 30
-actor_area_radius 18
-actor_area_to_place_in 27
-force_placement
-find_closest
-}
-#const PH30_2 647
-create_object PH30_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 31
-actor_area_radius 0
-actor_area_to_place_in 27
-force_placement
-find_closest
-}
-#const PH31_2 647
-create_object PH31_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 32
-actor_area_radius 1
-actor_area_to_place_in 27
-force_placement
-find_closest
-}
-#const PH32_2 647
-create_object PH32_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
-actor_area 33
-actor_area_radius 4
-actor_area_to_place_in 27
+actor_area_radius 5
+actor_area_to_place_in 24
 force_placement
 find_closest
 }
@@ -5882,11 +5932,32 @@ set_gaia_object_only
 set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
+terrain_to_place_on BT
+temp_min_distance_group_placement 16
+second_object STRAGGLER
+}
+create_object TREE_REED
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on REAL_BEACH
+temp_min_distance_group_placement 8
+actor_area 31
+actor_area_radius 1
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 second_object TREE_ONE
-actor_area 34
+actor_area 32
 actor_area_radius 0
-actor_area_to_place_in 28
+actor_area_to_place_in 25
+avoid_actor_area 31
 }
 create_object ON_GRID
 {
@@ -5897,10 +5968,11 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 1
 second_object TREE_ONE
-actor_area 35
+actor_area 33
 actor_area_radius 0
-actor_area_to_place_in 29
-avoid_actor_area 28
+actor_area_to_place_in 27
+avoid_actor_area 26
+avoid_actor_area 31
 }
 create_object ON_GRID
 {
@@ -5911,11 +5983,12 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 1
 second_object TREE_TWO
-actor_area 36
+actor_area 34
 actor_area_radius 0
-actor_area_to_place_in 29
-avoid_actor_area 28
-avoid_actor_area 35
+actor_area_to_place_in 27
+avoid_actor_area 26
+avoid_actor_area 31
+avoid_actor_area 33
 }
 create_object ON_GRID
 {
@@ -5926,12 +5999,13 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 1
 second_object TREE_THREE
-actor_area 37
+actor_area 35
 actor_area_radius 0
-actor_area_to_place_in 29
-avoid_actor_area 28
-avoid_actor_area 35
-avoid_actor_area 36
+actor_area_to_place_in 27
+avoid_actor_area 26
+avoid_actor_area 31
+avoid_actor_area 33
+avoid_actor_area 34
 }
 create_object ON_GRID
 {
@@ -5942,41 +6016,41 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 4
 second_object TREE_ONE
+actor_area 36
+actor_area_radius 0
+actor_area_to_place_in 28
+avoid_actor_area 27
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 1
+second_object TREE_TWO
+actor_area 37
+actor_area_radius 0
+actor_area_to_place_in 28
+avoid_actor_area 27
+avoid_actor_area 36
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 1
+second_object TREE_TWO
 actor_area 38
 actor_area_radius 0
-actor_area_to_place_in 30
-avoid_actor_area 29
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 1
-second_object TREE_TWO
-actor_area 39
-actor_area_radius 0
-actor_area_to_place_in 30
-avoid_actor_area 29
-avoid_actor_area 38
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 1
-second_object TREE_TWO
-actor_area 40
-actor_area_radius 0
-actor_area_to_place_in 30
-avoid_actor_area 29
-avoid_actor_area 38
-avoid_actor_area 39
+actor_area_to_place_in 28
+avoid_actor_area 27
+avoid_actor_area 36
+avoid_actor_area 37
 }
 create_object ON_GRID
 {
@@ -5987,13 +6061,13 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 1
 second_object TREE_THREE
-actor_area 41
+actor_area 39
 actor_area_radius 0
-actor_area_to_place_in 30
-avoid_actor_area 29
+actor_area_to_place_in 28
+avoid_actor_area 27
+avoid_actor_area 36
+avoid_actor_area 37
 avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
 }
 create_object ON_GRID
 {
@@ -6004,10 +6078,49 @@ set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 16
 second_object TREE_ONE
+actor_area 40
+actor_area_radius 0
+avoid_actor_area 28
+avoid_actor_area 31
+find_closest
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 2
+second_object TREE_TWO
+actor_area 41
+actor_area_radius 0
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
+avoid_actor_area 38
+avoid_actor_area 39
+avoid_actor_area 40
+find_closest
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OASIS_FOREST
+temp_min_distance_group_placement 2
+second_object TREE_TWO
 actor_area 42
 actor_area_radius 0
-avoid_actor_area 26
 avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
 avoid_actor_area 34
 avoid_actor_area 35
 avoid_actor_area 36
@@ -6026,10 +6139,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 2
-second_object TREE_TWO
+second_object TREE_THREE
 actor_area 43
 actor_area_radius 0
 avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
 avoid_actor_area 34
 avoid_actor_area 35
 avoid_actor_area 36
@@ -6039,55 +6154,6 @@ avoid_actor_area 39
 avoid_actor_area 40
 avoid_actor_area 41
 avoid_actor_area 42
-find_closest
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 2
-second_object TREE_TWO
-actor_area 44
-actor_area_radius 0
-avoid_actor_area 31
-avoid_actor_area 34
-avoid_actor_area 35
-avoid_actor_area 36
-avoid_actor_area 37
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-avoid_actor_area 43
-find_closest
-}
-create_object ON_GRID
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on OASIS_FOREST
-temp_min_distance_group_placement 2
-second_object TREE_THREE
-actor_area 45
-actor_area_radius 0
-avoid_actor_area 31
-avoid_actor_area 34
-avoid_actor_area 35
-avoid_actor_area 36
-avoid_actor_area 37
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-avoid_actor_area 43
-avoid_actor_area 44
 find_closest
 }
 create_object ON_GRID
@@ -6100,6 +6166,8 @@ terrain_to_place_on OASIS_FOREST
 temp_min_distance_group_placement 2
 second_object TREE_THREE
 avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
 avoid_actor_area 34
 avoid_actor_area 35
 avoid_actor_area 36
@@ -6110,8 +6178,6 @@ avoid_actor_area 40
 avoid_actor_area 41
 avoid_actor_area 42
 avoid_actor_area 43
-avoid_actor_area 44
-avoid_actor_area 45
 find_closest
 }
 create_object ON_GRID
@@ -6123,210 +6189,35 @@ set_scaling_to_map_size
 terrain_to_place_on OUTLAND_FOREST
 second_object TREE_FOUR
 }
-create_object VILLAGER_BASE_F
-{
-set_place_for_every_player
-number_of_objects 2
-set_tight_grouping
-actor_area 46
-actor_area_radius 1
-actor_area_to_place_in 12
-avoid_actor_area 11
-}
-#const PH46_3 647
-create_object PH46_3
-{
-set_place_for_every_player
-number_of_groups 4
-actor_area 47
-actor_area_radius 6
-actor_area_to_place_in 46
-force_placement
-find_closest
-}
-#const PH47_3 647
-create_object PH47_3
-{
-set_place_for_every_player
-number_of_groups 4
-actor_area 48
-actor_area_radius 4
-actor_area_to_place_in 46
-force_placement
-find_closest
-}
-create_object VILLAGER_BASE_F
-{
-set_place_for_every_player
-actor_area 49
-actor_area_radius 4
-actor_area_to_place_in 12
-avoid_actor_area 11
-avoid_actor_area 47
-}
-create_object KHARGA_SCOUT
-{
-set_place_for_every_player
-avoid_forest_zone 2
-actor_area 50
-actor_area_radius 8
-actor_area_to_place_in 14
-avoid_actor_area 13
-avoid_actor_area 48
-avoid_actor_area 49
-}
-create_object NEARBY_HERDABLE
-{
-set_place_for_every_player
-number_of_objects 4
-set_tight_grouping
-avoid_forest_zone 2
-actor_area_to_place_in 12
-avoid_actor_area 11
-avoid_actor_area 48
-avoid_actor_area 49
-}
-create_object GOLD
-{
-set_place_for_every_player
-set_gaia_object_only
-number_of_objects 2
-resource_delta 700
-set_tight_grouping
-terrain_to_place_on BT
-avoid_forest_zone 2
-actor_area 51
-actor_area_radius 1
-actor_area_to_place_in 16
-avoid_actor_area 15
-}
-#const PH51_4 647
-create_object PH51_4
-{
-set_place_for_every_player
-number_of_groups 4
-actor_area 52
-actor_area_radius 4
-actor_area_to_place_in 51
-force_placement
-find_closest
-}
-#const PH52_4 647
-create_object PH52_4
-{
-set_place_for_every_player
-number_of_groups 4
-actor_area 53
-actor_area_radius 8
-actor_area_to_place_in 51
-force_placement
-find_closest
-}
-create_object LUREABLE
-{
-set_place_for_every_player
-set_gaia_object_only
-number_of_groups 2
-avoid_forest_zone 1
-temp_min_distance_group_placement 8
-actor_area 54
-actor_area_radius 0
-actor_area_to_place_in 14
-avoid_actor_area 13
-avoid_actor_area 50
-avoid_actor_area 52
-}
-#const PH54_5 647
-create_object PH54_5
-{
-set_place_for_every_player
-number_of_groups 2
-actor_area 55
-actor_area_radius 4
-actor_area_to_place_in 54
-force_placement
-find_closest
-}
-#const PH55_5 647
-create_object PH55_5
-{
-set_place_for_every_player
-number_of_groups 2
-actor_area 56
-actor_area_radius 8
-actor_area_to_place_in 54
-force_placement
-find_closest
-}
-create_object DEER_ONE
-{
-set_place_for_every_player
-set_gaia_object_only
-number_of_objects rnd(3,4)
-set_tight_grouping
-terrain_to_place_on BT
-avoid_forest_zone 1
-actor_area 57
-actor_area_radius 8
-actor_area_to_place_in 18
-avoid_actor_area 17
-avoid_actor_area 53
-avoid_actor_area 55
-}
-create_object NEARBY_HERDABLE
-{
-set_place_for_every_player
-set_gaia_object_only
-number_of_objects 2
-number_of_groups 2
-set_tight_grouping
-avoid_forest_zone 1
-temp_min_distance_group_placement 8
-actor_area_to_place_in 19
-avoid_actor_area 17
-avoid_actor_area 53
-avoid_actor_area 56
-avoid_actor_area 57
-}
 create_object ON_GRID
-{
-set_place_for_every_player
-set_gaia_object_only
-number_of_groups 5
-temp_min_distance_group_placement 4
-second_object STRAGGLER
-actor_area_to_place_in 11
-avoid_actor_area 20
-}
-create_object OFF_GRID
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTTT
 temp_min_distance_group_placement 1
-actor_area 58
+actor_area 44
 actor_area_radius 0
 }
-#const PH58_6 647
-create_object PH58_6
+#const PH44_3 647
+create_object PH44_3
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 59
+actor_area 45
 if TINY_MAP actor_area_radius 2 elseif SMALL_MAP actor_area_radius 2 elseif MEDIUM_MAP actor_area_radius 3 elseif LARGE_MAP actor_area_radius 3 elseif HUGE_MAP actor_area_radius 3 else actor_area_radius 4 endif
-actor_area_to_place_in 58
+actor_area_to_place_in 44
 force_placement
 find_closest
 }
-#const PH59_6 647
-create_object PH59_6
+#const PH45_3 647
+create_object PH45_3
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 60
+actor_area 46
 if TINY_MAP actor_area_radius 4 elseif SMALL_MAP actor_area_radius 5 elseif MEDIUM_MAP actor_area_radius 5 elseif LARGE_MAP actor_area_radius 6 elseif HUGE_MAP actor_area_radius 7 else actor_area_radius 7 endif
-actor_area_to_place_in 58
+actor_area_to_place_in 44
 force_placement
 find_closest
 }
@@ -6338,63 +6229,63 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_ONE
-actor_area 61
+actor_area 47
 actor_area_radius 0
-actor_area_to_place_in 60
-avoid_actor_area 59
+actor_area_to_place_in 46
+avoid_actor_area 45
 }
-#const PH61_7 647
-create_object PH61_7
+#const PH47_4 647
+create_object PH47_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 62
+actor_area 48
 actor_area_radius 12
-actor_area_to_place_in 61
+actor_area_to_place_in 47
 force_placement
 find_closest
 }
-#const PH62_7 647
-create_object PH62_7
+#const PH48_4 647
+create_object PH48_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 63
+actor_area 49
 actor_area_radius 8
-actor_area_to_place_in 61
+actor_area_to_place_in 47
 force_placement
 find_closest
 }
-#const PH63_7 647
-create_object PH63_7
+#const PH49_4 647
+create_object PH49_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 64
+actor_area 50
 actor_area_radius 4
-actor_area_to_place_in 61
+actor_area_to_place_in 47
 force_placement
 find_closest
 }
-#const PH64_7 647
-create_object PH64_7
+#const PH50_4 647
+create_object PH50_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 65
+actor_area 51
 actor_area_radius 1
-actor_area_to_place_in 61
+actor_area_to_place_in 47
 force_placement
 find_closest
 }
-#const PH65_7 647
-create_object PH65_7
+#const PH51_4 647
+create_object PH51_4
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 66
+actor_area 52
 actor_area_radius 3
-actor_area_to_place_in 61
+actor_area_to_place_in 47
 force_placement
 find_closest
 }
@@ -6406,64 +6297,64 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_TWO
-actor_area 67
+actor_area 53
 actor_area_radius 0
-actor_area_to_place_in 60
-avoid_actor_area 59
-avoid_actor_area 62
+actor_area_to_place_in 46
+avoid_actor_area 45
+avoid_actor_area 48
 }
-#const PH67_8 647
-create_object PH67_8
+#const PH53_5 647
+create_object PH53_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 68
+actor_area 54
 actor_area_radius 12
-actor_area_to_place_in 67
+actor_area_to_place_in 53
 force_placement
 find_closest
 }
-#const PH68_8 647
-create_object PH68_8
+#const PH54_5 647
+create_object PH54_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 69
+actor_area 55
 actor_area_radius 8
-actor_area_to_place_in 67
+actor_area_to_place_in 53
 force_placement
 find_closest
 }
-#const PH69_8 647
-create_object PH69_8
+#const PH55_5 647
+create_object PH55_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 70
+actor_area 56
 actor_area_radius 4
-actor_area_to_place_in 67
+actor_area_to_place_in 53
 force_placement
 find_closest
 }
-#const PH70_8 647
-create_object PH70_8
+#const PH56_5 647
+create_object PH56_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 71
+actor_area 57
 actor_area_radius 1
-actor_area_to_place_in 67
+actor_area_to_place_in 53
 force_placement
 find_closest
 }
-#const PH71_8 647
-create_object PH71_8
+#const PH57_5 647
+create_object PH57_5
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 72
+actor_area 58
 actor_area_radius 3
-actor_area_to_place_in 67
+actor_area_to_place_in 53
 force_placement
 find_closest
 }
@@ -6475,65 +6366,65 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_THREE
-actor_area 73
+actor_area 59
 actor_area_radius 0
-actor_area_to_place_in 60
-avoid_actor_area 59
-avoid_actor_area 62
-avoid_actor_area 68
+actor_area_to_place_in 46
+avoid_actor_area 45
+avoid_actor_area 48
+avoid_actor_area 54
 }
-#const PH73_9 647
-create_object PH73_9
+#const PH59_6 647
+create_object PH59_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 74
+actor_area 60
 actor_area_radius 12
-actor_area_to_place_in 73
+actor_area_to_place_in 59
 force_placement
 find_closest
 }
-#const PH74_9 647
-create_object PH74_9
+#const PH60_6 647
+create_object PH60_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 75
+actor_area 61
 actor_area_radius 8
-actor_area_to_place_in 73
+actor_area_to_place_in 59
 force_placement
 find_closest
 }
-#const PH75_9 647
-create_object PH75_9
+#const PH61_6 647
+create_object PH61_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 76
+actor_area 62
 actor_area_radius 4
-actor_area_to_place_in 73
+actor_area_to_place_in 59
 force_placement
 find_closest
 }
-#const PH76_9 647
-create_object PH76_9
+#const PH62_6 647
+create_object PH62_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 77
+actor_area 63
 actor_area_radius 1
-actor_area_to_place_in 73
+actor_area_to_place_in 59
 force_placement
 find_closest
 }
-#const PH77_9 647
-create_object PH77_9
+#const PH63_6 647
+create_object PH63_6
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 78
+actor_area 64
 actor_area_radius 3
-actor_area_to_place_in 73
+actor_area_to_place_in 59
 force_placement
 find_closest
 }
@@ -6545,66 +6436,66 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_FOUR
-actor_area 79
+actor_area 65
 actor_area_radius 0
-actor_area_to_place_in 60
-avoid_actor_area 59
-avoid_actor_area 62
-avoid_actor_area 68
-avoid_actor_area 74
+actor_area_to_place_in 46
+avoid_actor_area 45
+avoid_actor_area 48
+avoid_actor_area 54
+avoid_actor_area 60
 }
-#const PH79_10 647
-create_object PH79_10
+#const PH65_7 647
+create_object PH65_7
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 80
+actor_area 66
 actor_area_radius 12
-actor_area_to_place_in 79
+actor_area_to_place_in 65
 force_placement
 find_closest
 }
-#const PH80_10 647
-create_object PH80_10
+#const PH66_7 647
+create_object PH66_7
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 81
+actor_area 67
 actor_area_radius 8
-actor_area_to_place_in 79
+actor_area_to_place_in 65
 force_placement
 find_closest
 }
-#const PH81_10 647
-create_object PH81_10
+#const PH67_7 647
+create_object PH67_7
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 82
+actor_area 68
 actor_area_radius 4
-actor_area_to_place_in 79
+actor_area_to_place_in 65
 force_placement
 find_closest
 }
-#const PH82_10 647
-create_object PH82_10
+#const PH68_7 647
+create_object PH68_7
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 83
+actor_area 69
 actor_area_radius 1
-actor_area_to_place_in 79
+actor_area_to_place_in 65
 force_placement
 find_closest
 }
-#const PH83_10 647
-create_object PH83_10
+#const PH69_7 647
+create_object PH69_7
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 84
+actor_area 70
 actor_area_radius 3
-actor_area_to_place_in 79
+actor_area_to_place_in 65
 force_placement
 find_closest
 }
@@ -6616,67 +6507,67 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_FIVE
-actor_area 85
+actor_area 71
 actor_area_radius 0
-actor_area_to_place_in 60
-avoid_actor_area 59
-avoid_actor_area 62
-avoid_actor_area 68
-avoid_actor_area 74
-avoid_actor_area 80
+actor_area_to_place_in 46
+avoid_actor_area 45
+avoid_actor_area 48
+avoid_actor_area 54
+avoid_actor_area 60
+avoid_actor_area 66
 }
-#const PH85_11 647
-create_object PH85_11
+#const PH71_8 647
+create_object PH71_8
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 86
+actor_area 72
 actor_area_radius 12
-actor_area_to_place_in 85
+actor_area_to_place_in 71
 force_placement
 find_closest
 }
-#const PH86_11 647
-create_object PH86_11
+#const PH72_8 647
+create_object PH72_8
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 87
+actor_area 73
 actor_area_radius 8
-actor_area_to_place_in 85
+actor_area_to_place_in 71
 force_placement
 find_closest
 }
-#const PH87_11 647
-create_object PH87_11
+#const PH73_8 647
+create_object PH73_8
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 88
+actor_area 74
 actor_area_radius 4
-actor_area_to_place_in 85
+actor_area_to_place_in 71
 force_placement
 find_closest
 }
-#const PH88_11 647
-create_object PH88_11
+#const PH74_8 647
+create_object PH74_8
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 89
+actor_area 75
 actor_area_radius 1
-actor_area_to_place_in 85
+actor_area_to_place_in 71
 force_placement
 find_closest
 }
-#const PH89_11 647
-create_object PH89_11
+#const PH75_8 647
+create_object PH75_8
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 90
+actor_area 76
 actor_area_radius 3
-actor_area_to_place_in 85
+actor_area_to_place_in 71
 force_placement
 find_closest
 }
@@ -6688,57 +6579,57 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 72
 second_object MOUNTAIN_SIX
-actor_area 91
+actor_area 77
 actor_area_radius 0
-actor_area_to_place_in 60
-avoid_actor_area 59
-avoid_actor_area 62
-avoid_actor_area 68
-avoid_actor_area 74
-avoid_actor_area 80
-avoid_actor_area 86
+actor_area_to_place_in 46
+avoid_actor_area 45
+avoid_actor_area 48
+avoid_actor_area 54
+avoid_actor_area 60
+avoid_actor_area 66
+avoid_actor_area 72
 }
-#const PH91_12 647
-create_object PH91_12
+#const PH77_9 647
+create_object PH77_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 92
+actor_area 78
 actor_area_radius 8
-actor_area_to_place_in 91
+actor_area_to_place_in 77
 force_placement
 find_closest
 }
-#const PH92_12 647
-create_object PH92_12
+#const PH78_9 647
+create_object PH78_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 93
+actor_area 79
 actor_area_radius 4
-actor_area_to_place_in 91
+actor_area_to_place_in 77
 force_placement
 find_closest
 }
-#const PH93_12 647
-create_object PH93_12
+#const PH79_9 647
+create_object PH79_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 94
+actor_area 80
 actor_area_radius 1
-actor_area_to_place_in 91
+actor_area_to_place_in 77
 force_placement
 find_closest
 }
-#const PH94_12 647
-create_object PH94_12
+#const PH80_9 647
+create_object PH80_9
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 95
+actor_area 81
 actor_area_radius 3
-actor_area_to_place_in 91
+actor_area_to_place_in 77
 force_placement
 find_closest
 }
@@ -6750,47 +6641,47 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
 second_object RIDGE_TSO1
-actor_area 96
+actor_area 82
 actor_area_radius 0
-actor_area_to_place_in 60
-avoid_actor_area 59
-avoid_actor_area 63
-avoid_actor_area 69
-avoid_actor_area 75
-avoid_actor_area 81
-avoid_actor_area 87
-avoid_actor_area 92
+actor_area_to_place_in 46
+avoid_actor_area 45
+avoid_actor_area 49
+avoid_actor_area 55
+avoid_actor_area 61
+avoid_actor_area 67
+avoid_actor_area 73
+avoid_actor_area 78
 }
-#const PH96_13 647
-create_object PH96_13
+#const PH82_10 647
+create_object PH82_10
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 97
+actor_area 83
 actor_area_radius 4
-actor_area_to_place_in 96
+actor_area_to_place_in 82
 force_placement
 find_closest
 }
-#const PH97_13 647
-create_object PH97_13
+#const PH83_10 647
+create_object PH83_10
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 98
+actor_area 84
 actor_area_radius 1
-actor_area_to_place_in 96
+actor_area_to_place_in 82
 force_placement
 find_closest
 }
-#const PH98_13 647
-create_object PH98_13
+#const PH84_10 647
+create_object PH84_10
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 99
+actor_area 85
 actor_area_radius 3
-actor_area_to_place_in 96
+actor_area_to_place_in 82
 force_placement
 find_closest
 }
@@ -6802,48 +6693,48 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
 second_object RIDGE_TSO2
-actor_area 100
+actor_area 86
 actor_area_radius 0
-actor_area_to_place_in 60
-avoid_actor_area 59
-avoid_actor_area 63
-avoid_actor_area 69
-avoid_actor_area 75
-avoid_actor_area 81
-avoid_actor_area 87
-avoid_actor_area 92
-avoid_actor_area 97
+actor_area_to_place_in 46
+avoid_actor_area 45
+avoid_actor_area 49
+avoid_actor_area 55
+avoid_actor_area 61
+avoid_actor_area 67
+avoid_actor_area 73
+avoid_actor_area 78
+avoid_actor_area 83
 }
-#const PH100_14 647
-create_object PH100_14
+#const PH86_11 647
+create_object PH86_11
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 101
+actor_area 87
 actor_area_radius 4
-actor_area_to_place_in 100
+actor_area_to_place_in 86
 force_placement
 find_closest
 }
-#const PH101_14 647
-create_object PH101_14
+#const PH87_11 647
+create_object PH87_11
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 102
+actor_area 88
 actor_area_radius 1
-actor_area_to_place_in 100
+actor_area_to_place_in 86
 force_placement
 find_closest
 }
-#const PH102_14 647
-create_object PH102_14
+#const PH88_11 647
+create_object PH88_11
 {
 number_of_groups 9320
 set_scaling_to_map_size
-actor_area 103
+actor_area 89
 actor_area_radius 3
-actor_area_to_place_in 100
+actor_area_to_place_in 86
 force_placement
 find_closest
 }
@@ -6855,16 +6746,16 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 4
 second_object RIDGE_SSO1
-actor_area 104
+actor_area 90
 actor_area_radius 1
-avoid_actor_area 64
-avoid_actor_area 70
-avoid_actor_area 76
-avoid_actor_area 82
-avoid_actor_area 88
-avoid_actor_area 93
-avoid_actor_area 97
-avoid_actor_area 101
+avoid_actor_area 50
+avoid_actor_area 56
+avoid_actor_area 62
+avoid_actor_area 68
+avoid_actor_area 74
+avoid_actor_area 79
+avoid_actor_area 83
+avoid_actor_area 87
 find_closest
 }
 create_object RIDGE_SEC2
@@ -6875,17 +6766,17 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 3
 second_object RIDGE_SSO2
-actor_area 105
+actor_area 91
 actor_area_radius 1
-avoid_actor_area 64
-avoid_actor_area 70
-avoid_actor_area 76
-avoid_actor_area 82
-avoid_actor_area 88
-avoid_actor_area 93
-avoid_actor_area 97
-avoid_actor_area 101
-avoid_actor_area 104
+avoid_actor_area 50
+avoid_actor_area 56
+avoid_actor_area 62
+avoid_actor_area 68
+avoid_actor_area 74
+avoid_actor_area 79
+avoid_actor_area 83
+avoid_actor_area 87
+avoid_actor_area 90
 find_closest
 }
 create_object RIDGE_SEC3
@@ -6896,18 +6787,18 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 2
 second_object RIDGE_SSO3
-actor_area 106
+actor_area 92
 actor_area_radius 1
-avoid_actor_area 64
-avoid_actor_area 70
-avoid_actor_area 76
-avoid_actor_area 82
-avoid_actor_area 88
-avoid_actor_area 93
-avoid_actor_area 97
-avoid_actor_area 101
-avoid_actor_area 104
-avoid_actor_area 105
+avoid_actor_area 50
+avoid_actor_area 56
+avoid_actor_area 62
+avoid_actor_area 68
+avoid_actor_area 74
+avoid_actor_area 79
+avoid_actor_area 83
+avoid_actor_area 87
+avoid_actor_area 90
+avoid_actor_area 91
 find_closest
 }
 create_object RIDGE_TEC1
@@ -6920,19 +6811,19 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 1
 second_object RIDGE_TSO1
-actor_area 107
+actor_area 93
 actor_area_radius 1
-avoid_actor_area 64
-avoid_actor_area 70
-avoid_actor_area 76
-avoid_actor_area 82
-avoid_actor_area 88
-avoid_actor_area 93
-avoid_actor_area 97
-avoid_actor_area 101
-avoid_actor_area 104
-avoid_actor_area 105
-avoid_actor_area 106
+avoid_actor_area 50
+avoid_actor_area 56
+avoid_actor_area 62
+avoid_actor_area 68
+avoid_actor_area 74
+avoid_actor_area 79
+avoid_actor_area 83
+avoid_actor_area 87
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
 find_closest
 }
 create_object RIDGE_SEC1
@@ -6943,16 +6834,16 @@ set_scaling_to_map_size
 terrain_to_place_on MTTT
 temp_min_distance_group_placement 2
 second_object RIDGE_SSO1
-actor_area 108
+actor_area 94
 actor_area_radius 1
-avoid_actor_area 65
-avoid_actor_area 71
-avoid_actor_area 77
-avoid_actor_area 83
-avoid_actor_area 89
-avoid_actor_area 94
-avoid_actor_area 98
-avoid_actor_area 102
+avoid_actor_area 51
+avoid_actor_area 57
+avoid_actor_area 63
+avoid_actor_area 69
+avoid_actor_area 75
+avoid_actor_area 80
+avoid_actor_area 84
+avoid_actor_area 88
 find_closest
 }
 create_object RIDGE_SEC2
@@ -6963,17 +6854,17 @@ set_scaling_to_map_size
 terrain_to_place_on MTTT
 temp_min_distance_group_placement 1
 second_object RIDGE_SSO2
-actor_area 109
+actor_area 95
 actor_area_radius 1
-avoid_actor_area 65
-avoid_actor_area 71
-avoid_actor_area 77
-avoid_actor_area 83
-avoid_actor_area 89
-avoid_actor_area 94
-avoid_actor_area 98
-avoid_actor_area 102
-avoid_actor_area 104
+avoid_actor_area 51
+avoid_actor_area 57
+avoid_actor_area 63
+avoid_actor_area 69
+avoid_actor_area 75
+avoid_actor_area 80
+avoid_actor_area 84
+avoid_actor_area 88
+avoid_actor_area 90
 find_closest
 }
 create_object BLOCKER
@@ -6983,16 +6874,16 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
-actor_area 110
+actor_area 96
 actor_area_radius 0
-avoid_actor_area 66
-avoid_actor_area 72
-avoid_actor_area 78
-avoid_actor_area 84
-avoid_actor_area 90
-avoid_actor_area 95
-avoid_actor_area 99
-avoid_actor_area 103
+avoid_actor_area 52
+avoid_actor_area 58
+avoid_actor_area 64
+avoid_actor_area 70
+avoid_actor_area 76
+avoid_actor_area 81
+avoid_actor_area 85
+avoid_actor_area 89
 find_closest
 }
 create_object BLOCKER
@@ -7002,14 +6893,14 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTTT
-avoid_actor_area 66
-avoid_actor_area 72
-avoid_actor_area 78
-avoid_actor_area 84
-avoid_actor_area 90
-avoid_actor_area 95
-avoid_actor_area 99
-avoid_actor_area 103
+avoid_actor_area 52
+avoid_actor_area 58
+avoid_actor_area 64
+avoid_actor_area 70
+avoid_actor_area 76
+avoid_actor_area 81
+avoid_actor_area 85
+avoid_actor_area 89
 find_closest
 }
 create_object RIDGE_SEC1
@@ -7022,9 +6913,9 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 2
 second_object RIDGE_SSO1
-actor_area 111
+actor_area 97
 actor_area_radius 1
-avoid_actor_area 110
+avoid_actor_area 96
 find_closest
 }
 create_object RIDGE_SEC2
@@ -7035,9 +6926,9 @@ set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 2
 second_object RIDGE_SSO2
-actor_area 112
+actor_area 98
 actor_area_radius 1
-avoid_actor_area 110
+avoid_actor_area 96
 find_closest
 }
 create_object RIDGE_SEC3
@@ -7047,9 +6938,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 second_object RIDGE_SSO3
-actor_area 113
+actor_area 99
 actor_area_radius 1
-avoid_actor_area 110
+avoid_actor_area 96
 find_closest
 }
 create_object BROKEN_CART
@@ -7059,19 +6950,19 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 16
-actor_area 114
+actor_area 100
 actor_area_radius 1
+avoid_actor_area 84
+avoid_actor_area 88
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
+avoid_actor_area 94
+avoid_actor_area 95
+avoid_actor_area 97
 avoid_actor_area 98
-avoid_actor_area 102
-avoid_actor_area 104
-avoid_actor_area 105
-avoid_actor_area 106
-avoid_actor_area 107
-avoid_actor_area 108
-avoid_actor_area 109
-avoid_actor_area 111
-avoid_actor_area 112
-avoid_actor_area 113
+avoid_actor_area 99
 find_closest
 }
 create_object STONE
@@ -7085,16 +6976,16 @@ avoid_actor_area 5
 avoid_actor_area 6
 avoid_actor_area 7
 avoid_actor_area 8
+avoid_actor_area 84
+avoid_actor_area 88
+avoid_actor_area 90
+avoid_actor_area 91
+avoid_actor_area 92
+avoid_actor_area 93
+avoid_actor_area 97
 avoid_actor_area 98
-avoid_actor_area 102
-avoid_actor_area 104
-avoid_actor_area 105
-avoid_actor_area 106
-avoid_actor_area 107
-avoid_actor_area 111
-avoid_actor_area 112
-avoid_actor_area 113
-avoid_actor_area 114
+avoid_actor_area 99
+avoid_actor_area 100
 find_closest
 }
 create_object RIDGE_IEC1
@@ -7104,7 +6995,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 115
+actor_area 101
 actor_area_radius 1
 }
 create_object RIDGE_IEC2
@@ -7114,9 +7005,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 116
+actor_area 102
 actor_area_radius 1
-avoid_actor_area 115
+avoid_actor_area 101
 find_closest
 }
 create_object RIDGE_IEC3
@@ -7126,10 +7017,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 117
+actor_area 103
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
+avoid_actor_area 101
+avoid_actor_area 102
 find_closest
 }
 create_object RIDGE_IEC4
@@ -7139,11 +7030,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 118
+actor_area 104
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
 find_closest
 }
 create_object RIDGE_IEC5
@@ -7153,12 +7044,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 119
+actor_area 105
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
 find_closest
 }
 create_object RIDGE_IEC6
@@ -7168,13 +7059,13 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 120
+actor_area 106
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
 find_closest
 }
 create_object RIDGE_IEC7
@@ -7184,14 +7075,14 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 121
+actor_area 107
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
+avoid_actor_area 106
 find_closest
 }
 create_object RIDGE_IEC8
@@ -7201,15 +7092,15 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 122
+actor_area 108
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
-avoid_actor_area 121
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
+avoid_actor_area 106
+avoid_actor_area 107
 find_closest
 }
 create_object RIDGE_IEC9
@@ -7219,16 +7110,16 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 123
+actor_area 109
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
-avoid_actor_area 121
-avoid_actor_area 122
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
+avoid_actor_area 106
+avoid_actor_area 107
+avoid_actor_area 108
 find_closest
 }
 create_object RIDGE_IEC10
@@ -7238,17 +7129,17 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 124
+actor_area 110
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
-avoid_actor_area 121
-avoid_actor_area 122
-avoid_actor_area 123
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
+avoid_actor_area 106
+avoid_actor_area 107
+avoid_actor_area 108
+avoid_actor_area 109
 find_closest
 }
 create_object RIDGE_IEC11
@@ -7258,18 +7149,18 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-actor_area 125
+actor_area 111
 actor_area_radius 1
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
-avoid_actor_area 121
-avoid_actor_area 122
-avoid_actor_area 123
-avoid_actor_area 124
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
+avoid_actor_area 106
+avoid_actor_area 107
+avoid_actor_area 108
+avoid_actor_area 109
+avoid_actor_area 110
 find_closest
 }
 create_object RIDGE_IEC12
@@ -7279,385 +7170,149 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MTOL
 temp_min_distance_group_placement 8
-avoid_actor_area 115
-avoid_actor_area 116
-avoid_actor_area 117
-avoid_actor_area 118
-avoid_actor_area 119
-avoid_actor_area 120
-avoid_actor_area 121
-avoid_actor_area 122
-avoid_actor_area 123
-avoid_actor_area 124
-avoid_actor_area 125
+avoid_actor_area 101
+avoid_actor_area 102
+avoid_actor_area 103
+avoid_actor_area 104
+avoid_actor_area 105
+avoid_actor_area 106
+avoid_actor_area 107
+avoid_actor_area 108
+avoid_actor_area 109
+avoid_actor_area 110
+avoid_actor_area 111
 find_closest
 }
-create_object RELIC
-{
-set_gaia_object_only
-number_of_groups 1
-set_scaling_to_map_size
-terrain_to_place_on INNER_CAP
-if TINY_MAP temp_min_distance_group_placement 8 elseif SMALL_MAP temp_min_distance_group_placement 10 elseif MEDIUM_MAP temp_min_distance_group_placement 11 elseif LARGE_MAP temp_min_distance_group_placement 13 elseif HUGE_MAP temp_min_distance_group_placement 14 else temp_min_distance_group_placement 16 endif
-}
-create_object ON_GRID
+create_object OASIS_POND1_EC1 
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on WATER_TYPE
-temp_min_distance_group_placement 6
-second_object SMALL_FISH
-actor_area_to_place_in 32
+temp_min_distance_group_placement 12
+actor_area 112
+actor_area_radius 4
 }
-create_object OFF_GRID
+create_object OASIS_POND1_EC2 
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on WATER_TYPE
+temp_min_distance_group_placement 12
+actor_area 113
+actor_area_radius 4
+avoid_actor_area 112
+find_closest
+}
+create_object OASIS_POND1_EC3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on WATER_TYPE
+temp_min_distance_group_placement 12
+actor_area 114
+actor_area_radius 4
+avoid_actor_area 112
+avoid_actor_area 113
+find_closest
+}
+create_object OASIS_POND2_EC1 
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on OUTER_CAP
-temp_min_distance_group_placement 8
-second_object LARGE_FISH1
-actor_area 126
+temp_min_distance_group_placement 12
+actor_area 115
 actor_area_radius 4
-avoid_actor_area 33
+avoid_actor_area 112
+avoid_actor_area 113
+avoid_actor_area 114
 find_closest
 }
-create_object OFF_GRID
+create_object OASIS_POND2_EC2 
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OUTER_CAP
+temp_min_distance_group_placement 12
+actor_area 116
+actor_area_radius 4
+avoid_actor_area 112
+avoid_actor_area 113
+avoid_actor_area 114
+avoid_actor_area 115
+find_closest
+}
+create_object OASIS_POND2_EC3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OUTER_CAP
+temp_min_distance_group_placement 12
+actor_area 117
+actor_area_radius 4
+avoid_actor_area 112
+avoid_actor_area 113
+avoid_actor_area 114
+avoid_actor_area 115
+avoid_actor_area 116
+find_closest
+}
+create_object OASIS_POND2_EC1 
 {
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on INNER_CAP
-temp_min_distance_group_placement 8
-second_object LARGE_FISH2
-avoid_actor_area 33
-avoid_actor_area 126
-find_closest
-}
-create_object BUSH_FOOD1
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 127
-actor_area_radius 12
-avoid_actor_area 21
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 128
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 127
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 129
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 127
-avoid_actor_area 128
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 130
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 127
-avoid_actor_area 128
-avoid_actor_area 129
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-actor_area 131
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 127
-avoid_actor_area 128
-avoid_actor_area 129
-avoid_actor_area 130
-find_closest
-}
-create_object BUSH_FOOD2
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 125
-number_of_groups 9320
-set_tight_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-avoid_forest_zone 1
-temp_min_distance_group_placement 24
-avoid_actor_area 21
-avoid_actor_area 127
-avoid_actor_area 128
-avoid_actor_area 129
-avoid_actor_area 130
-avoid_actor_area 131
-find_closest
-}
-create_object DEER_ONE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-temp_min_distance_group_placement 24
-actor_area 132
-actor_area_radius 12
-avoid_actor_area 21
-find_closest
-}
-create_object DEER_TWO
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-temp_min_distance_group_placement 24
-actor_area 133
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 132
-find_closest
-}
-create_object DEER_THREE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT2
-temp_min_distance_group_placement 24
-actor_area 134
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 132
-avoid_actor_area 133
-find_closest
-}
-create_object DEER_ONE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-temp_min_distance_group_placement 24
-actor_area 135
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 132
-avoid_actor_area 133
-avoid_actor_area 134
-find_closest
-}
-create_object DEER_TWO
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-temp_min_distance_group_placement 24
-actor_area 136
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 132
-avoid_actor_area 133
-avoid_actor_area 134
-avoid_actor_area 135
-find_closest
-}
-create_object DEER_THREE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT3
-temp_min_distance_group_placement 24
-actor_area 137
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 132
-avoid_actor_area 133
-avoid_actor_area 134
-avoid_actor_area 135
-avoid_actor_area 136
-find_closest
-}
-create_object DEER_ONE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-temp_min_distance_group_placement 24
-actor_area 138
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 132
-avoid_actor_area 133
-avoid_actor_area 134
-avoid_actor_area 135
-avoid_actor_area 136
-avoid_actor_area 137
-find_closest
-}
-create_object DEER_TWO
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-temp_min_distance_group_placement 24
-actor_area 139
-actor_area_radius 12
-avoid_actor_area 21
-avoid_actor_area 132
-avoid_actor_area 133
-avoid_actor_area 134
-avoid_actor_area 135
-avoid_actor_area 136
-avoid_actor_area 137
-avoid_actor_area 138
-find_closest
-}
-create_object DEER_THREE
-{
-set_gaia_object_only
-number_of_objects rnd(2,4)
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-temp_min_distance_group_placement 24
-avoid_actor_area 21
-avoid_actor_area 132
-avoid_actor_area 133
-avoid_actor_area 134
-avoid_actor_area 135
-avoid_actor_area 136
-avoid_actor_area 137
-avoid_actor_area 138
-avoid_actor_area 139
-find_closest
-}
-create_object PREDATOR
-{
-set_gaia_object_only
-number_of_objects 2
-number_of_groups 9320
-set_loose_grouping
-set_scaling_to_map_size
-terrain_to_place_on RT4
-avoid_forest_zone 1
-temp_min_distance_group_placement 8
-avoid_actor_area 22
-find_closest
-}
-create_object GOLD
-{
-set_gaia_object_only
-number_of_objects 2
-resource_delta 1200
-number_of_groups 3
-set_tight_grouping
-set_scaling_to_map_size
-layer_to_place_on BASE_MASK1
-terrain_to_place_on BT
-avoid_forest_zone 2
-temp_min_distance_group_placement 18
-avoid_actor_area 23
-find_closest
-}
-create_object OFF_GRID
-{
-set_gaia_object_only
-number_of_groups 9320
-set_scaling_to_map_size
-layer_to_place_on BASE_MASK1
-terrain_to_place_on BT
 temp_min_distance_group_placement 12
-actor_area 140
-actor_area_radius 16
-avoid_actor_area 23
+actor_area 118
+actor_area_radius 4
+avoid_actor_area 112
+avoid_actor_area 113
+avoid_actor_area 114
+avoid_actor_area 115
+avoid_actor_area 116
+avoid_actor_area 117
 find_closest
 }
-create_object GOLD
+create_object OASIS_POND2_EC2 
 {
 set_gaia_object_only
-number_of_objects 2
-resource_delta 1200
-number_of_groups 3
-set_tight_grouping
+number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on BT
-avoid_forest_zone 2
-temp_min_distance_group_placement 18
-avoid_actor_area 23
-avoid_actor_area 140
+terrain_to_place_on INNER_CAP
+temp_min_distance_group_placement 12
+actor_area 119
+actor_area_radius 4
+avoid_actor_area 112
+avoid_actor_area 113
+avoid_actor_area 114
+avoid_actor_area 115
+avoid_actor_area 116
+avoid_actor_area 117
+avoid_actor_area 118
+find_closest
+}
+create_object OASIS_POND2_EC3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on INNER_CAP
+temp_min_distance_group_placement 12
+avoid_actor_area 112
+avoid_actor_area 113
+avoid_actor_area 114
+avoid_actor_area 115
+avoid_actor_area 116
+avoid_actor_area 117
+avoid_actor_area 118
+avoid_actor_area 119
 find_closest
 }
 create_object OASIS_RT1EC1 
@@ -7763,7 +7418,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT3
 temp_min_distance_group_placement 8
-avoid_actor_area 13
+avoid_actor_area 10
 find_closest
 }
 create_object OASIS_RT3EC2 
@@ -7773,7 +7428,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT3
 temp_min_distance_group_placement 8
-avoid_actor_area 13
+avoid_actor_area 10
 find_closest
 }
 create_object OASIS_RT3EC3
@@ -7783,7 +7438,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT3
 temp_min_distance_group_placement 8
-avoid_actor_area 13
+avoid_actor_area 10
 find_closest
 }
 create_object OASIS_RT3EC4
@@ -7793,7 +7448,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT3
 temp_min_distance_group_placement 8
-avoid_actor_area 13
+avoid_actor_area 10
 find_closest
 }
 create_object OASIS_RT3EC5 
@@ -7803,7 +7458,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT3
 temp_min_distance_group_placement 8
-avoid_actor_area 13
+avoid_actor_area 10
 find_closest
 }
 create_object OASIS_RT3EC6 
@@ -7813,7 +7468,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT3
 temp_min_distance_group_placement 8
-avoid_actor_area 13
+avoid_actor_area 10
 find_closest
 }
 create_object OASIS_RT4EC1 
@@ -7823,9 +7478,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 141
+actor_area 120
 actor_area_radius 3
-avoid_actor_area 13
+avoid_actor_area 10
 find_closest
 }
 create_object OASIS_RT4EC2 
@@ -7835,10 +7490,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 142
+actor_area 121
 actor_area_radius 3
-avoid_actor_area 13
-avoid_actor_area 141
+avoid_actor_area 10
+avoid_actor_area 120
 find_closest
 }
 create_object OASIS_RT4EC3
@@ -7848,11 +7503,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 143
+actor_area 122
 actor_area_radius 3
-avoid_actor_area 13
-avoid_actor_area 141
-avoid_actor_area 142
+avoid_actor_area 10
+avoid_actor_area 120
+avoid_actor_area 121
 find_closest
 }
 create_object OASIS_RT4EC4
@@ -7862,12 +7517,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 144
+actor_area 123
 actor_area_radius 3
-avoid_actor_area 13
-avoid_actor_area 141
-avoid_actor_area 142
-avoid_actor_area 143
+avoid_actor_area 10
+avoid_actor_area 120
+avoid_actor_area 121
+avoid_actor_area 122
 find_closest
 }
 create_object OASIS_RT4EC5 
@@ -7877,13 +7532,13 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-actor_area 145
+actor_area 124
 actor_area_radius 3
-avoid_actor_area 13
-avoid_actor_area 141
-avoid_actor_area 142
-avoid_actor_area 143
-avoid_actor_area 144
+avoid_actor_area 10
+avoid_actor_area 120
+avoid_actor_area 121
+avoid_actor_area 122
+avoid_actor_area 123
 find_closest
 }
 create_object OASIS_RT4EC6 
@@ -7893,12 +7548,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 18
-avoid_actor_area 13
-avoid_actor_area 141
-avoid_actor_area 142
-avoid_actor_area 143
-avoid_actor_area 144
-avoid_actor_area 145
+avoid_actor_area 10
+avoid_actor_area 120
+avoid_actor_area 121
+avoid_actor_area 122
+avoid_actor_area 123
+avoid_actor_area 124
 find_closest
 }
 create_object OASIS_BTEC1 
@@ -7908,9 +7563,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 146
+actor_area 125
 actor_area_radius 3
-avoid_actor_area 13
+avoid_actor_area 10
 find_closest
 }
 create_object OASIS_BTEC2 
@@ -7920,10 +7575,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 147
+actor_area 126
 actor_area_radius 3
-avoid_actor_area 13
-avoid_actor_area 146
+avoid_actor_area 10
+avoid_actor_area 125
 find_closest
 }
 create_object OASIS_BTEC3
@@ -7933,11 +7588,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 148
+actor_area 127
 actor_area_radius 3
-avoid_actor_area 13
-avoid_actor_area 146
-avoid_actor_area 147
+avoid_actor_area 10
+avoid_actor_area 125
+avoid_actor_area 126
 find_closest
 }
 create_object OASIS_BTEC4
@@ -7947,12 +7602,12 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 149
+actor_area 128
 actor_area_radius 3
-avoid_actor_area 13
-avoid_actor_area 146
-avoid_actor_area 147
-avoid_actor_area 148
+avoid_actor_area 10
+avoid_actor_area 125
+avoid_actor_area 126
+avoid_actor_area 127
 find_closest
 }
 create_object OASIS_BTEC5 
@@ -7962,13 +7617,13 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
-actor_area 150
+actor_area 129
 actor_area_radius 3
-avoid_actor_area 13
-avoid_actor_area 146
-avoid_actor_area 147
-avoid_actor_area 148
-avoid_actor_area 149
+avoid_actor_area 10
+avoid_actor_area 125
+avoid_actor_area 126
+avoid_actor_area 127
+avoid_actor_area 128
 find_closest
 }
 create_object OASIS_BTEC6 
@@ -7978,12 +7633,390 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on BT
 temp_min_distance_group_placement 18
+avoid_actor_area 10
+avoid_actor_area 125
+avoid_actor_area 126
+avoid_actor_area 127
+avoid_actor_area 128
+avoid_actor_area 129
+find_closest
+}
+create_object PREDATOR
+{
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area 130
+actor_area_radius 8
+avoid_actor_area 11
+find_closest
+}
+create_object PREDATOR
+{
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+avoid_actor_area 11
+avoid_actor_area 130
+find_closest
+}
+create_object RELIC
+{
+set_gaia_object_only
+number_of_groups 1
+set_scaling_to_map_size
+terrain_to_place_on INNER_CAP
+if TINY_MAP temp_min_distance_group_placement 8 elseif SMALL_MAP temp_min_distance_group_placement 10 elseif MEDIUM_MAP temp_min_distance_group_placement 11 elseif LARGE_MAP temp_min_distance_group_placement 13 elseif HUGE_MAP temp_min_distance_group_placement 14 else temp_min_distance_group_placement 16 endif
+}
+create_object ON_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on WATER_TYPE
+temp_min_distance_group_placement 6
+second_object SMALL_FISH
+actor_area_to_place_in 29
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on OUTER_CAP
+temp_min_distance_group_placement 8
+second_object LARGE_FISH1
+actor_area 131
+actor_area_radius 4
+avoid_actor_area 30
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on INNER_CAP
+temp_min_distance_group_placement 8
+second_object LARGE_FISH2
+avoid_actor_area 30
+avoid_actor_area 131
+find_closest
+}
+create_object BUSH_FOOD1
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 132
+actor_area_radius 12
+avoid_actor_area 12
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 133
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 132
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 134
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 132
+avoid_actor_area 133
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 135
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 132
+avoid_actor_area 133
+avoid_actor_area 134
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+actor_area 136
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 132
+avoid_actor_area 133
+avoid_actor_area 134
+avoid_actor_area 135
+find_closest
+}
+create_object BUSH_FOOD2
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 125
+number_of_groups 9320
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+avoid_actor_area 12
+avoid_actor_area 132
+avoid_actor_area 133
+avoid_actor_area 134
+avoid_actor_area 135
+avoid_actor_area 136
+find_closest
+}
+create_object DEER_ONE
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 137
+actor_area_radius 12
+avoid_actor_area 12
+find_closest
+}
+create_object DEER_TWO
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 138
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 137
+find_closest
+}
+create_object DEER_THREE
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT2
+temp_min_distance_group_placement 24
+actor_area 139
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 137
+avoid_actor_area 138
+find_closest
+}
+create_object DEER_ONE
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 140
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 137
+avoid_actor_area 138
+avoid_actor_area 139
+find_closest
+}
+create_object DEER_TWO
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 141
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 137
+avoid_actor_area 138
+avoid_actor_area 139
+avoid_actor_area 140
+find_closest
+}
+create_object DEER_THREE
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT3
+temp_min_distance_group_placement 24
+actor_area 142
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 137
+avoid_actor_area 138
+avoid_actor_area 139
+avoid_actor_area 140
+avoid_actor_area 141
+find_closest
+}
+create_object DEER_ONE
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+actor_area 143
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 137
+avoid_actor_area 138
+avoid_actor_area 139
+avoid_actor_area 140
+avoid_actor_area 141
+avoid_actor_area 142
+find_closest
+}
+create_object DEER_TWO
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+actor_area 144
+actor_area_radius 12
+avoid_actor_area 12
+avoid_actor_area 137
+avoid_actor_area 138
+avoid_actor_area 139
+avoid_actor_area 140
+avoid_actor_area 141
+avoid_actor_area 142
+avoid_actor_area 143
+find_closest
+}
+create_object DEER_THREE
+{
+set_gaia_object_only
+number_of_objects rnd(2,4)
+number_of_groups 9320
+set_loose_grouping
+set_scaling_to_map_size
+terrain_to_place_on RT4
+temp_min_distance_group_placement 24
+avoid_actor_area 12
+avoid_actor_area 137
+avoid_actor_area 138
+avoid_actor_area 139
+avoid_actor_area 140
+avoid_actor_area 141
+avoid_actor_area 142
+avoid_actor_area 143
+avoid_actor_area 144
+find_closest
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 1200
+number_of_groups 3
+set_tight_grouping
+set_scaling_to_map_size
+layer_to_place_on BASE_MASK1
+terrain_to_place_on BT
+avoid_forest_zone 2
+temp_min_distance_group_placement 18
 avoid_actor_area 13
-avoid_actor_area 146
-avoid_actor_area 147
-avoid_actor_area 148
-avoid_actor_area 149
-avoid_actor_area 150
+find_closest
+}
+create_object OFF_GRID
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+layer_to_place_on BASE_MASK1
+terrain_to_place_on BT
+temp_min_distance_group_placement 12
+actor_area 145
+actor_area_radius 16
+avoid_actor_area 13
+find_closest
+}
+create_object GOLD
+{
+set_gaia_object_only
+number_of_objects 2
+resource_delta 1200
+number_of_groups 3
+set_tight_grouping
+set_scaling_to_map_size
+terrain_to_place_on BT
+avoid_forest_zone 2
+temp_min_distance_group_placement 18
+avoid_actor_area 13
+avoid_actor_area 145
 find_closest
 }
 create_object RUINS
@@ -7993,7 +8026,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 72
-actor_area 151
+actor_area 146
 actor_area_radius 18
 avoid_actor_area 14
 find_closest
@@ -8005,10 +8038,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 72
-actor_area 152
+actor_area 147
 actor_area_radius 18
 avoid_actor_area 14
-avoid_actor_area 151
+avoid_actor_area 146
 find_closest
 }
 create_object ROMAN_RUINS
@@ -8018,11 +8051,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 72
-actor_area 153
+actor_area 148
 actor_area_radius 18
 avoid_actor_area 14
-avoid_actor_area 151
-avoid_actor_area 152
+avoid_actor_area 146
+avoid_actor_area 147
 find_closest
 }
 create_object STATUE_COLUMN
@@ -8035,9 +8068,9 @@ set_scaling_to_map_size
 terrain_to_place_on RT4
 temp_min_distance_group_placement 72
 avoid_actor_area 14
-avoid_actor_area 151
-avoid_actor_area 152
-avoid_actor_area 153
+avoid_actor_area 146
+avoid_actor_area 147
+avoid_actor_area 148
 find_closest
 }
 create_object LOST_HERDABLE
@@ -8048,9 +8081,9 @@ set_scaling_to_map_size
 terrain_to_place_on BT
 avoid_forest_zone 1
 temp_min_distance_group_placement 16
-actor_area 154
+actor_area 149
 actor_area_radius 8
-avoid_actor_area 21
+avoid_actor_area 12
 find_closest
 }
 create_object WILD_HERD_ANIMAL
@@ -8063,8 +8096,8 @@ set_scaling_to_map_size
 terrain_to_place_on BT
 avoid_forest_zone 2
 temp_min_distance_group_placement 40
-avoid_actor_area 24
-avoid_actor_area 154
+avoid_actor_area 15
+avoid_actor_area 149
 find_closest
 }
 create_object BIRD
@@ -8074,6 +8107,181 @@ number_of_groups 4
 set_scaling_to_map_size
 terrain_to_place_on INNER_CAP
 temp_min_distance_group_placement 2
+}
+create_object VILLAGER_BASE_F
+{
+set_place_for_every_player
+number_of_objects 2
+set_tight_grouping
+actor_area 150
+actor_area_radius 1
+actor_area_to_place_in 17
+avoid_actor_area 16
+}
+#const PH150_12 647
+create_object PH150_12
+{
+set_place_for_every_player
+number_of_groups 4
+actor_area 151
+actor_area_radius 6
+actor_area_to_place_in 150
+force_placement
+find_closest
+}
+#const PH151_12 647
+create_object PH151_12
+{
+set_place_for_every_player
+number_of_groups 4
+actor_area 152
+actor_area_radius 4
+actor_area_to_place_in 150
+force_placement
+find_closest
+}
+create_object VILLAGER_BASE_F
+{
+set_place_for_every_player
+actor_area 153
+actor_area_radius 4
+actor_area_to_place_in 17
+avoid_actor_area 16
+avoid_actor_area 151
+}
+create_object KHARGA_SCOUT
+{
+set_place_for_every_player
+avoid_forest_zone 2
+actor_area 154
+actor_area_radius 8
+actor_area_to_place_in 14
+avoid_actor_area 10
+avoid_actor_area 152
+avoid_actor_area 153
+}
+create_object NEARBY_HERDABLE
+{
+set_place_for_every_player
+number_of_objects 4
+set_tight_grouping
+avoid_forest_zone 2
+actor_area_to_place_in 17
+avoid_actor_area 16
+avoid_actor_area 152
+avoid_actor_area 153
+}
+create_object GOLD
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 2
+resource_delta 700
+set_tight_grouping
+terrain_to_place_on BT
+avoid_forest_zone 2
+actor_area 155
+actor_area_radius 1
+actor_area_to_place_in 19
+avoid_actor_area 18
+}
+#const PH155_13 647
+create_object PH155_13
+{
+set_place_for_every_player
+number_of_groups 4
+actor_area 156
+actor_area_radius 4
+actor_area_to_place_in 155
+force_placement
+find_closest
+}
+#const PH156_13 647
+create_object PH156_13
+{
+set_place_for_every_player
+number_of_groups 4
+actor_area 157
+actor_area_radius 8
+actor_area_to_place_in 155
+force_placement
+find_closest
+}
+create_object LUREABLE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_groups 2
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area 158
+actor_area_radius 0
+actor_area_to_place_in 14
+avoid_actor_area 10
+avoid_actor_area 154
+avoid_actor_area 156
+}
+#const PH158_14 647
+create_object PH158_14
+{
+set_place_for_every_player
+number_of_groups 2
+actor_area 159
+actor_area_radius 4
+actor_area_to_place_in 158
+force_placement
+find_closest
+}
+#const PH159_14 647
+create_object PH159_14
+{
+set_place_for_every_player
+number_of_groups 2
+actor_area 160
+actor_area_radius 8
+actor_area_to_place_in 158
+force_placement
+find_closest
+}
+create_object DEER_ONE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects rnd(3,4)
+set_tight_grouping
+terrain_to_place_on BT
+avoid_forest_zone 1
+actor_area 161
+actor_area_radius 8
+actor_area_to_place_in 21
+avoid_actor_area 20
+avoid_actor_area 157
+avoid_actor_area 159
+}
+create_object NEARBY_HERDABLE
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_objects 2
+number_of_groups 2
+set_tight_grouping
+avoid_forest_zone 1
+temp_min_distance_group_placement 8
+actor_area_to_place_in 22
+avoid_actor_area 20
+avoid_actor_area 157
+avoid_actor_area 160
+avoid_actor_area 161
+}
+create_object ON_GRID
+{
+set_place_for_every_player
+set_gaia_object_only
+number_of_groups 5
+temp_min_distance_group_placement 4
+second_object STRAGGLER
+actor_area_to_place_in 16
+avoid_actor_area 23
 }
 endif
 /* END_OBJECTS_AUTOSCRIBE */
