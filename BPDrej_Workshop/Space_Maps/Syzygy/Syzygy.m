@@ -15,48 +15,53 @@ files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
-b = 23
-b1 = 23
-##b2 = 23
-##b3 = 23
-nr = 16;
-r = linspace(0,15,nr);
+
+r1 = [0:24]; nr1 = length(r1);
+r2 = [0:20]; nr2 = length(r2);
+r3 = [0:16]; nr3 = length(r3);
+r4 = [0:12]; nr4 = length(r4);
+
 for i=1:360
-for j=1:nr
-x(i,j) = r(j)*cosd(i);
-y(i,j) = r(j)*sind(i);
-x1(i,j) = r(j)*cosd(i);
-y1(i,j) = r(j)*sind(i);
-x2(i,j) = r(j)*cosd(i);
-y2(i,j) = r(j)*sind(i);
-x3(i,j) = r(j)*cosd(i);
-y3(i,j) = r(j)*sind(i);
-end
-##r2(i,1) = b2/sqrt(1-(ecc*cosd(i))^2);
-##x2(i,1) = r2(i,1)*cosd(i);
-##y2(i,1) = r2(i,1)*sind(i);
-##r3(i,1) = b3/sqrt(1-(ecc*cosd(i))^2);
-##x3(i,1) = r3(i,1)*cosd(i);
-##y3(i,1) = r3(i,1)*sind(i);
+for j = 1:nr1
+x1(i,j) = r1(j)*cosd(i);
+y1(i,j) = r1(j)*sind(i);
 end
 %
-x = reshape(x,360*nr,1);
-y = reshape(y,360*nr,1);
-x1 = reshape(x1,360*nr,1);
-y1 = reshape(y1,360*nr,1);
-x2 = reshape(x2,360*nr,1);
-y2 = reshape(y2,360*nr,1);
-x3 = reshape(x3,360*nr,1);
-y3 = reshape(y3,360*nr,1);
-M = [x y]; CC = [70 30];
-M1 = [x1 y1]; CC1 = [55 45];
-M2 = [x2 y2]; CC2 = [45 55];
-M3 = [x3 y3]; CC3 = [30 70];
+for j=1:nr2
+x2(i,j) = r2(j)*cosd(i);
+y2(i,j) = r2(j)*sind(i);
+end
+%
+for j=1:nr3
+x3(i,j) = r3(j)*cosd(i);
+y3(i,j) = r3(j)*sind(i);
+end
+%
+for j=1:nr4
+x4(i,j) = r4(j)*cosd(i);
+y4(i,j) = r4(j)*sind(i);
+end
+%
+end
+%
+x1 = reshape(x1,360*nr1,1);
+y1 = reshape(y1,360*nr1,1);
+x2 = reshape(x2,360*nr2,1);
+y2 = reshape(y2,360*nr2,1);
+x3 = reshape(x3,360*nr3,1);
+y3 = reshape(y3,360*nr3,1);
+x4 = reshape(x4,360*nr4,1);
+y4 = reshape(y4,360*nr4,1);
 
-R = LandScribeV5([{'DLC_GRAVELBEACH'}],[{1}],{CC},{45},{M},{1});
-R1 = LandScribeV5([{'B3'}],[{1}],{CC1},{45},{M1},{1});
-R2 = LandScribeV5([{'BEACH'}],[{1}],{CC2},{45},{M2},{1});
-R3 = LandScribeV5([{'WRB'}],[{1}],{CC3},{45},{M3},{1});
+M1 = [x1 y1]; CC1 = [70 30];
+M2 = [x2 y2]; CC2 = [55 45];
+M3 = [x3 y3]; CC3 = [45 55];
+M4 = [x4 y4]; CC4 = [30 70];
+
+R1 = LandScribeV5([{'PN1'}],[{2}],{CC1},{0},{M1},{1});
+R2 = LandScribeV5([{'PN2'}],[{2}],{CC2},{0},{M2},{1});
+R3 = LandScribeV5([{'PN3'}],[{2}],{CC3},{0},{M3},{1});
+R4 = LandScribeV5([{'PN4'}],[{2}],{CC4},{0},{M4},{1});
 tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 
 %% -- CPL_V9 INPUT FORMAT -- %%
@@ -75,20 +80,32 @@ tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 %      {Linear Slop};
 %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
-G = [{[20 24]}; {45}; {180}; {45}; {[0.15]}; {0.6}; {[CC; CC]}];
+G = [{[20 24]}; {45}; {180}; {45}; {[0.15]}; {0.6}; {[CC1; CC1]}];
 C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
-
-
 [create_player_lands] = RMS_CPL_V9(G,C);
 
+off1 = -14; off2 = 1;  off3 = 18;
+xr1  =  22; xr2 =  21; xr3 =  15;
 
-COMMAND = [RMS_Processor_V4([R3; R2; R1; R],LPM_exp);];
+L1 = [LandScribeV5({'PN1'},{0},{[0 off1]},{45},{'0*x'},{1},{0},[-75 -xr1]); ...
+      LandScribeV5({'PN1'},{0},{[0 off1]},{45},{'0*x'},{1},{0},[xr1 75])];
+L2 = [LandScribeV5({'PN2'},{0},{[0 off2]},{45},{'0*x'},{1},{0},[-75 -xr2]); ...
+      LandScribeV5({'PN2'},{0},{[0 off2]},{45},{'0*x'},{1},{0},[xr2 75])];
+L3 = [LandScribeV5({'PN3'},{0},{[0 off3]},{45},{'0*x'},{1},{0},[-75 -xr3]); ...
+      LandScribeV5({'PN3'},{0},{[0 off3]},{45},{'0*x'},{1},{0},[xr3 75])];
 
-##MLA = [{'L { terrain_type GRASS land_position 1 1 base_size 0 number_of_tiles 12000 }'}];
+COMMAND = [RMS_Processor_V4([L1; L2; L3; R4; R3; R2; R1],LPM_exp);];
+
+MLA = [{'L { terrain_type PN1 land_position 99 1 base_size 0 land_percent 100 }'}; ...
+       {'L { terrain_type PN2 land_position 15 4 base_size 0 land_percent 100 }'}; ...
+       {'L { terrain_type PN2 land_position 99 95 base_size 0 land_percent 100 }'}; ...
+       {'L { terrain_type PN3 land_position 1 5 base_size 0 land_percent 100 }'}; ...
+       {'L { terrain_type PN3 land_position 85 96 base_size 0 land_percent 100 }'}; ...
+       {'L { terrain_type PN4 land_position  1 99 base_size 0 land_percent 100 }'}];
 
 
 ##%ObjectAutoscribeV8('Comet_V2.ods')
-CODE = [Preface; COMMAND]; %Adding Preface, Definitions, Random Statement to beginning of CODE
+CODE = [Preface; COMMAND; MLA]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 RMS_ForgeV4(filename,CODE);
 
 disp(["Run Completed " datestr(clock) "..."])
