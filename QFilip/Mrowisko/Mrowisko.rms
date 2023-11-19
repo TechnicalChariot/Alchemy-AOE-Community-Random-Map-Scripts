@@ -146,7 +146,8 @@ create_object STONE {
     max_distance_to_other_zones 10 
     terrain_to_place_on GRASS
     min_distance_to_map_edge 2
-    avoid_forest_zone 1
+    avoid_forest_zone 3
+    find_closest
 }
 
 create_object DEER { 
@@ -197,6 +198,7 @@ create_object SHEEP {
     temp_min_distance_group_placement 10
     max_distance_to_other_zones 7 
     terrain_to_place_on GRASS
+    avoid_forest_zone 2
 }
 
 create_object BOAR {
