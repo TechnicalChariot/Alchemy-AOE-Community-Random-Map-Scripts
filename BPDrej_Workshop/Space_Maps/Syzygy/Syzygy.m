@@ -16,10 +16,10 @@ files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
 
-r1 = [0:24]; nr1 = length(r1);
-r2 = [0:20]; nr2 = length(r2);
-r3 = [0:16]; nr3 = length(r3);
-r4 = [0:12]; nr4 = length(r4);
+r1 = [0:22]; nr1 = length(r1);
+r2 = [0:22]; nr2 = length(r2);
+r3 = [0:22]; nr3 = length(r3);
+r4 = [0:22]; nr4 = length(r4);
 
 for i=1:360
 for j = 1:nr1

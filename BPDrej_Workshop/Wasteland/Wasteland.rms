@@ -1,6 +1,24 @@
-/*WASTELAND (6/17/22) by BPDrej
-Players start in their own oases surrounded by small forest patches. Beyond lies lifeless sand dunes with sparse resources.
-Inspired by Chrazini's Desert Void */
+/* WASTELAND */
+/* Players start in their own oases surrounded by small forest patches. Beyond lies lifeless sand dunes with sparse resources. Inspired by Chrazini's Desert Void */
+/* A Random Map Script by BPDrej */
+/* 06.17.23 */
+
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552
+	#const SILK_ROAD 499
+	effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
 
 #const ROCK2 1323
 <PLAYER_SETUP>
@@ -46,19 +64,19 @@ endif
 <ELEVATION_GENERATION>
 create_elevation 3
 if TINY_MAP
-{ base_terrain DESERT number_of_tiles 1000 number_of_clumps 20 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 1000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
 elseif SMALL_MAP
-{ base_terrain DESERT number_of_tiles 1500 number_of_clumps 20 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 1500 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
 elseif MEDIUM_MAP
-{ base_terrain DESERT number_of_tiles 2000 number_of_clumps 20 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 2000 number_of_clumps 20 set_scale_by_groups enable_balanced_elevation }
 elseif LARGE_MAP
-{ base_terrain DESERT number_of_tiles 4000 number_of_clumps 30 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 4000 number_of_clumps 30 set_scale_by_groups enable_balanced_elevation }
 elseif HUGE_MAP
-{ base_terrain DESERT number_of_tiles 6000 number_of_clumps 30 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 6000 number_of_clumps 30 set_scale_by_groups enable_balanced_elevation }
 elseif GIGANTIC_MAP
-{ base_terrain DESERT number_of_tiles 13000 number_of_clumps 50 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 13000 number_of_clumps 50 set_scale_by_groups enable_balanced_elevation }
 elseif LUDIKRIS_MAP
-{ base_terrain DESERT number_of_tiles 20000 number_of_clumps 80 set_scale_by_size set_scale_by_groups enable_balanced_elevation }
+{ base_terrain DESERT number_of_tiles 20000 number_of_clumps 80 set_scale_by_groups enable_balanced_elevation }
 endif
 
 <TERRAIN_GENERATION>
@@ -108,16 +126,14 @@ create_terrain DESERT
 	base_terrain DIRT2
 	land_percent 3
 	number_of_clumps 20
-	set_scale_by_size
 	set_scale_by_groups
 	terrain_mask 1
 }
 create_terrain GRASS3
 {
 	base_terrain DIRT2
-	land_percent 1
-	number_of_clumps 10
-	set_scale_by_size
+	number_of_tiles 50
+	number_of_clumps 5
 	set_scale_by_groups
 	terrain_mask 1
 }
@@ -139,7 +155,6 @@ create_terrain DESERT
 	elseif LARGE_MAP land_percent 7 number_of_clumps 175
 	elseif HUGE_MAP land_percent 7 number_of_clumps 60
 	endif
-	set_scale_by_size
 	set_scale_by_groups
 }
 create_terrain PALM_DESERT
@@ -147,7 +162,6 @@ create_terrain PALM_DESERT
 	base_terrain BEACH
 	land_percent 100
 	number_of_clumps 1000
-	set_scale_by_size
 	set_scale_by_groups
 }
 create_terrain DESERT
@@ -155,8 +169,24 @@ create_terrain DESERT
 	base_terrain BEACH
 	land_percent 100
 	number_of_clumps 1000
-	set_scale_by_size
 	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain DLC_CRACKED
+{
+	base_terrain DESERT
+	number_of_tiles 150
+	number_of_clumps 5
+	set_scale_by_groups
+	height_limits 0 0
+	clumping_factor 30
+	spacing_to_other_terrain_types 10
+}
+create_terrain DESERT
+{
+	base_terrain DLC_CRACKED
+	land_percent 100
+	number_of_clumps 1000
 	terrain_mask 1
 }
 	
@@ -194,13 +224,13 @@ create_object KING
 	max_distance_to_players 6
 }
 endif
-create_object HOUSE
+create_object DLC_AFRICANHUT_A
 {
 	set_place_for_every_player
-	min_distance_to_players 19
-	max_distance_to_players 24
-	avoid_actor_area 18
+	max_distance_to_players 22
 	avoid_actor_area 20
+	find_closest
+	avoid_forest_zone 2
 }
 create_object VILLAGER
 {
@@ -322,6 +352,18 @@ create_object DLC_ELEPHANT
 	min_distance_group_placement 2
 	temp_min_distance_group_placement 6
 }
+create_object DLC_RHINO
+{
+	number_of_groups 1
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 2
+	avoid_actor_area 14
+	max_distance_to_players 18
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 6
+}
 create_object DLC_GOAT
 {
 	number_of_objects 4
@@ -337,16 +379,15 @@ create_object DLC_GOAT
 {
 	number_of_objects 2
 	number_of_groups 2
-	set_loose_grouping
-	set_gaia_object_only
 	set_place_for_every_player
+	set_gaia_object_only
+	set_tight_grouping
+	avoid_forest_zone 1
+	temp_min_distance_group_placement 8
 	avoid_actor_area 20
 	max_distance_to_players 22
-	temp_min_distance_group_placement 6
-	find_closest
-	set_circular_placement
-	avoid_forest_zone 2
 }
+/*
 create_object DEER 
 {
 	number_of_objects 4
@@ -371,41 +412,18 @@ create_object DEER
 	set_circular_placement
 	min_distance_group_placement 2
 }
+*/
+
 /*desert resources*/
-create_object GOLD 
-{
-	number_of_objects 4
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	set_scaling_to_player_number
-	temp_min_distance_group_placement 40
-	min_distance_group_placement 20
-	set_avoid_player_start_areas 30
-	avoid_forest_zone 15
-	terrain_to_place_on DESERT
-}
-create_object STONE 
-{
-	number_of_objects 3
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	set_scaling_to_player_number
-	temp_min_distance_group_placement 50
-	min_distance_group_placement 25
-	set_avoid_player_start_areas 30
-	avoid_forest_zone 15
-	terrain_to_place_on DESERT
-}
 create_object RELIC 
 {
+	set_gaia_object_only
 	max_distance_to_other_zones 2
 	min_distance_to_players 27
 	set_circular_placement
-	min_distance_group_placement 1
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	avoid_actor_area 25
 	if TINY_MAP
 		number_of_objects 5
 		temp_min_distance_group_placement 35
@@ -424,59 +442,66 @@ create_object RELIC
 	endif
 	terrain_to_place_on DESERT
 }
-/* Aesthetic Objects */
-/*
-create_object ROCK
+create_object GOLD 
 {
-	number_of_objects 1
-	number_of_groups 20
+	number_of_objects 4
+	number_of_groups 1000
 	set_tight_grouping
+	set_gaia_object_only
 	set_scaling_to_map_size
-	temp_min_distance_group_placement 30
+	min_distance_to_players 30
+	if TINY_MAP
+	temp_min_distance_group_placement 40
+	elseif MEDIUM_MAP
+	temp_min_distance_group_placement 45
+	elseif LARGE_MAP
+	temp_min_distance_group_placement 65
+	elseif HUGE_MAP
+	temp_min_distance_group_placement 65
+	endif
+	min_distance_group_placement 10
+	avoid_forest_zone 15
 	terrain_to_place_on DESERT
 }
-create_object ROCK2
-{
-	number_of_objects 3
-	number_of_groups 20
-	set_tight_grouping
-	set_scaling_to_map_size
-	temp_min_distance_group_placement 30
-	terrain_to_place_on DESERT
-}
-*/
 create_object DLC_BOULDER_A
 {
-	start_random 
-	percent_chance 45 number_of_objects 1
-	percent_chance 45 number_of_objects 2
-	percent_chance 10 number_of_objects 3
-	end_random
-	number_of_groups 20
-	set_loose_grouping
+	number_of_objects 6
+	number_of_groups 1000
+	set_tight_grouping
 	set_scaling_to_map_size
-	min_distance_group_placement 5
+	set_gaia_object_only
+	avoid_forest_zone 10
+	min_distance_to_players 40
+	if TINY_MAP
 	temp_min_distance_group_placement 40
+	elseif MEDIUM_MAP
+	temp_min_distance_group_placement 45
+	elseif LARGE_MAP
+	temp_min_distance_group_placement 65
+	elseif HUGE_MAP
+	temp_min_distance_group_placement 75
+	endif
+	actor_area 25
+	actor_area_radius 1
 	terrain_to_place_on DESERT
 }
-create_object DLC_BOULDER_B
+create_object STONE 
 {
-	start_random 
-	percent_chance 45 number_of_objects 1
-	percent_chance 45 number_of_objects 2
-	percent_chance 10 number_of_objects 3
-	end_random
-	number_of_groups 20
-	set_loose_grouping
+	number_of_objects 3
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
 	set_scaling_to_map_size
-	min_distance_group_placement 5
-	temp_min_distance_group_placement 40
-	terrain_to_place_on DESERT
+	temp_min_distance_group_placement 10
+	find_closest
+	actor_area_to_place_in 25
 }
+/* Aesthetic Objects */
 create_object SKELETON 
 {
 	number_of_objects 1
 	number_of_groups 6
+	set_gaia_object_only
 	set_scaling_to_map_size
 	min_distance_group_placement 10
 	temp_min_distance_group_placement 20
@@ -486,9 +511,19 @@ create_object DLC_ANIMALSKELETON
 {
 	number_of_objects 1
 	number_of_groups 3
+	set_gaia_object_only
 	set_scaling_to_map_size
 	min_distance_group_placement 10
 	temp_min_distance_group_placement 30
+	terrain_to_place_on DESERT
+}
+create_object CACTUS {
+	number_of_objects 25
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 10
+	set_circular_placement
+	temp_min_distance_group_placement 35
 	terrain_to_place_on DESERT
 }
 create_object DLC_VULTURE 
@@ -496,6 +531,7 @@ create_object DLC_VULTURE
 	number_of_objects 1
 	number_of_groups 3
 	set_scaling_to_map_size
+	set_gaia_object_only
 	temp_min_distance_group_placement 30
 	terrain_to_place_on DESERT
 }
