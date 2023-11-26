@@ -24,7 +24,8 @@ endif
 <PLAYER_SETUP>
 random_placement
 
-effect_amount 
+behavior_version 1
+
 <LAND_GENERATION>
 base_terrain BEACH
 
@@ -36,7 +37,7 @@ create_player_lands
 	clumping_factor 30
 	other_zone_avoidance_distance 10
 	if TINY_MAP
-	circle_radius 30 0
+	circle_radius 33 0
 	else
 	circle_radius 40 0
 	endif

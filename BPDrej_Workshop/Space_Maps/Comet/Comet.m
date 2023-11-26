@@ -1,4 +1,4 @@
-%Comet_V2 Land Generation
+%Comet Land Generation
 %BPDrej
 %1.31.23
 
@@ -56,7 +56,7 @@ COMMAND = [RMS_Processor_V4([TL; tail1; tail2],LPM_exp); create_player_lands];
 MLA = [{'L { terrain_type GRASS land_position 1 1 base_size 0 number_of_tiles 12000 }'}];
 
 
-##%ObjectAutoscribeV8('Comet_V2.ods')
+##%ObjectAutoscribeV8('Comet.ods')
 CODE = [Preface; COMMAND; MLA]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 RMS_ForgeV4(filename,CODE);
 
