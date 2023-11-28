@@ -1,1 +1,0 @@
-Standard nomad map, but players start with 9 villagers and 4 fishing ships.
