@@ -13,7 +13,7 @@ TODOs
  take steps to fill in more sinkholes
 move more fish further into the middle lake? (at least for larger map sizes)
 adjust size of middle lake for different map sizes - not really possible to increase the size of the slope, since that is determined by the land's base_elevation, which is what determines the size of the sinkholes, so this is limited to increasing the amount of flat water.
-enable Empire Wars, Deathmatch
+enable EMPIRE_WARS, DEATH_MATCH
 reduce map sizes (scale less - Tiny unchanged, larger map sizes increase by smaller amount)
 move players closer to central lake
 Randomly swap cracked and rock terrains? - will need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
@@ -27,9 +27,10 @@ random_placement
 behavior_version 2
 
 #const STONE_MINE_CLASS 908
+#const REEDS 1350
 
 effect_amount SET_ATTRIBUTE STONE_MINE_CLASS ATTR_STORAGE_VALUE 100
-effect_amount SET_ATTRIBUTE TREE_CLASS ATTR_TERRAIN_ID 3
+effect_amount SET_ATTRIBUTE TREE_CLASS ATTR_TERRAIN_ID 9
 
 /* Removing Trade Cogs for Multi-team Games, as per Alchemy requirements. Trade Carts are not disabled due to the presence of neutral markets in the corners of the map, nor are any techs affecting trade carts.
     #const SILK_ROAD 499
@@ -151,13 +152,13 @@ create_land {
 create_player_lands {
 	terrain_type TEMP_TERRAIN_A
 	land_percent 100
+    circle_radius rnd(36,40) 0 /* at the larger end, the player start areas might be able to hit the edge of the map.
     if TINY_MAP
-        circle_radius rnd(36,40) 0
     elseif SMALL_MAP
-        circle_radius rnd(36,41) 0
+        circle_radius rnd(36,40) 0
     else
-        circle_radius rnd(36,44) 0  /* at the larger end, the player start areas might be able to hit the edge of the map. */
-    endif
+        circle_radius rnd(36,40) 0  
+    endif  */
     zone 2
 	base_elevation 9 /* 9 is the lowest height at which sinkholes form, and forms the smallest sinkholes. */
     other_zone_avoidance_distance 9
@@ -290,36 +291,39 @@ create_terrain SHALLOW_TERRAIN {
     set_flat_terrain_only
     spacing_to_other_terrain_types 1 
 }
-effect_amount SET_ATTRIBUTE TREE_CLASS ATTR_TERRAIN_ID 0
-create_terrain FOREST_TERRAIN_B {
-    base_terrain SHALLOW_TERRAIN
-    if 2_PLAYER_GAME
-        number_of_tiles 72
-        number_of_clumps 8
-    elseif 3_PLAYER_GAME
-        number_of_tiles 108
-        number_of_clumps 12
-    elseif 4_PLAYER_GAME
-        number_of_tiles 144
-        number_of_clumps 16
-    elseif 5_PLAYER_GAME
-        number_of_tiles 180
-        number_of_clumps 20
-    elseif 6_PLAYER_GAME
-        number_of_tiles 216
-        number_of_clumps 24
-    elseif 7_PLAYER_GAME
-        number_of_tiles 252
-        number_of_clumps 28
-    elseif 8_PLAYER_GAME
-        number_of_tiles 288
-        number_of_clumps 32
-    else /* 1 player game */
-        number_of_tiles 36
-        number_of_clumps 4
-    endif
-    set_avoid_player_start_areas 10
-}
+if DEATH_MATCH
+/* elseif EMPIRE_WARS */
+else /* create close forests */
+    create_terrain FOREST_TERRAIN_B {
+        base_terrain SHALLOW_TERRAIN
+        if 2_PLAYER_GAME
+            number_of_tiles 72
+            number_of_clumps 8
+        elseif 3_PLAYER_GAME
+            number_of_tiles 108
+            number_of_clumps 12
+        elseif 4_PLAYER_GAME
+            number_of_tiles 144
+            number_of_clumps 16
+        elseif 5_PLAYER_GAME
+            number_of_tiles 180
+            number_of_clumps 20
+        elseif 6_PLAYER_GAME
+            number_of_tiles 216
+            number_of_clumps 24
+        elseif 7_PLAYER_GAME
+            number_of_tiles 252
+            number_of_clumps 28
+        elseif 8_PLAYER_GAME
+            number_of_tiles 288
+            number_of_clumps 32
+        else /* 1 player game */
+            number_of_tiles 36
+            number_of_clumps 4
+        endif
+        set_avoid_player_start_areas 10
+    }
+endif
 create_terrain LAND_TERRAIN_A {
     base_terrain TEMP_TERRAIN_A
     land_percent 100
@@ -514,6 +518,13 @@ create_object TERRAIN_BLOCKER {
     set_gaia_object_only
     terrain_to_place_on FOREST_TERRAIN_A
 }
+create_object TERRAIN_BLOCKER {
+    second_object REEDS
+    number_of_objects 9320
+    number_of_clumps 9320
+    set_gaia_object_only
+    terrain_to_place_on FOREST_TERRAIN_B
+}
 if LUDIKRIS_MAP
 
 create_object TERRAIN_BLOCKER {
@@ -593,19 +604,21 @@ create_object DLC_CROCODILE {
     endif
     number_of_objects 10 /* tends not to be very many, typically 1-3 */
 }
-create_object DLC_BOXTURTLE {
-    actor_area_to_place_in 5
-    min_distance_group_placement 1
-    temp_min_distance_group_placement 3
-    number_of_objects 9320
-}
-create_object SALMON {
-    actor_area_to_place_in 5
-    number_of_objects 9320
-    min_distance_group_placement 2
-    temp_min_distance_group_placement 3
-}
-
+if DEATH_MATCH
+else
+    create_object DLC_BOXTURTLE {
+        actor_area_to_place_in 5
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 3
+        number_of_objects 9320
+    }
+    create_object SALMON {
+        actor_area_to_place_in 5
+        number_of_objects 9320
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 3
+    }
+endif
 create_object SEA_TOWER {
     set_place_for_every_player
     min_distance_group_placement 2
@@ -626,72 +639,73 @@ deer
 no player stone
 
  */
-create_object FORAGE {
-    set_place_for_every_player
-    set_gaia_object_only
-    number_of_objects 5
-    number_of_groups 4 /* 5 doesn't always generate 5 */
-    set_tight_grouping
-    terrain_to_place_on SHALLOW_TERRAIN
-    min_distance_to_players 6
-    max_distance_to_players 13
-    min_distance_group_placement 1
-    temp_min_distance_group_placement 6
-    set_circular_placement
-    avoid_forest_zone 2
-}
-create_object DLC_WATERBUFFALO {
-    set_place_for_every_player
-    set_gaia_object_only
-    number_of_groups 2
-    terrain_to_place_on SHALLOW_TERRAIN
-    min_distance_to_players 6
-    max_distance_to_players 8
-    temp_min_distance_group_placement 1
-    set_circular_placement
+if DEATH_MATCH
+else
+    create_object FORAGE {
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 5
+        number_of_groups 4 /* 5 doesn't always generate 5 */
+        set_tight_grouping
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 6
+        max_distance_to_players 13
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 6
+        set_circular_placement
+        avoid_forest_zone 2
+    }
+    create_object DLC_WATERBUFFALO {
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_groups 2
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 6
+        max_distance_to_players 8
+        temp_min_distance_group_placement 1
+        set_circular_placement
 
-}
-create_object DLC_WATERBUFFALO {
-    set_place_for_every_player
-    set_gaia_object_only
-    number_of_objects 2
-    number_of_groups 2 /* 5 doesn't always generate 5 */
-    terrain_to_place_on SHALLOW_TERRAIN
-    min_distance_to_players 8
-    max_distance_to_players 14
-    min_distance_group_placement 1
-    temp_min_distance_group_placement 7
-    set_circular_placement
+    }
+    create_object DLC_WATERBUFFALO {
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 2
+        number_of_groups 2 /* 5 doesn't always generate 5 */
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 8
+        max_distance_to_players 14
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 7
+        set_circular_placement
 
-}
-
-create_object TERRAIN_BLOCKER {
-    second_object DLC_BOXTURTLE
-    set_place_for_every_player
-    set_gaia_object_only
-    number_of_objects 2
-    terrain_to_place_on SHALLOW_TERRAIN
-    min_distance_to_players 4
-    max_distance_to_players 5
-    ignore_terrain_restrictions
-    min_distance_group_placement 1
-    temp_min_distance_group_placement 3
-    set_circular_placement
-}
-create_object TERRAIN_BLOCKER {
-    second_object DLC_BOXTURTLE
-    set_place_for_every_player
-    set_gaia_object_only
-    number_of_objects 3
-    terrain_to_place_on SHALLOW_TERRAIN
-    min_distance_to_players 5
-    max_distance_to_players 7
-    ignore_terrain_restrictions
-    min_distance_group_placement 1
-    temp_min_distance_group_placement 3
-    set_circular_placement
-}
-
+    }
+    create_object TERRAIN_BLOCKER {
+        second_object DLC_BOXTURTLE
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 2
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 4
+        max_distance_to_players 5
+        ignore_terrain_restrictions
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 3
+        set_circular_placement
+    }
+    create_object TERRAIN_BLOCKER {
+        second_object DLC_BOXTURTLE
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 3
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 5
+        max_distance_to_players 7
+        ignore_terrain_restrictions
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 3
+        set_circular_placement
+    }
+endif
 
 create_object GOLD {
     number_of_objects 6
@@ -732,30 +746,32 @@ create_object GOLD {
     set_circular_placement
     avoid_forest_zone 2
 }
-
-create_object DEER { /* TODO change with the theme? */
-    set_place_for_every_player
-    set_gaia_object_only
-    min_distance_group_placement 3
-    temp_min_distance_group_placement 9
-    ignore_terrain_restrictions
-    number_of_groups 2
-    number_of_objects 3
-    min_distance_to_players 14
-    max_distance_to_players 20
-    set_circular_placement
-    avoid_forest_zone 1
-    terrain_to_place_on LAND_TERRAIN_A
-}
-create_object BOAR { /* TODO change with the theme? */
-    set_place_for_every_player
-    set_gaia_object_only
-    min_distance_group_placement 3
-    min_distance_to_players 20
-    max_distance_to_players 24
-    set_circular_placement
-    avoid_forest_zone 1
-}
+if DEATH_MATCH
+else
+    create_object DEER { /* TODO change with the theme? */
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+        temp_min_distance_group_placement 9
+        ignore_terrain_restrictions
+        number_of_groups 2
+        number_of_objects 3
+        min_distance_to_players 14
+        max_distance_to_players 20
+        set_circular_placement
+        avoid_forest_zone 1
+        terrain_to_place_on LAND_TERRAIN_A
+    }
+    create_object BOAR { /* TODO change with the theme? */
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+        min_distance_to_players 20
+        max_distance_to_players 24
+        set_circular_placement
+        avoid_forest_zone 1
+    }
+endif
 /*
 
 neutral res:
@@ -770,7 +786,6 @@ reeds on the beach terrain (excluding rocky island)
 some gold
 */
 
-#const REEDS 1350
 create_object STONE { /* result is plenty of scattered stone piles */
     number_of_groups 9320
     terrain_to_place_on DLC_CRACKED
