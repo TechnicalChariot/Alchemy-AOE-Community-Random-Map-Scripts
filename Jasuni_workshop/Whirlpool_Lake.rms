@@ -17,9 +17,8 @@ enable Empire Wars, Deathmatch
 reduce map sizes (scale less - Tiny unchanged, larger map sizes increase by smaller amount)
 move players closer to central lake
 Randomly swap cracked and rock terrains? - will need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
-
-I'm thinking I'll add more neutral gold onto the map. I might also mess with map size (to smaller map size, though I'd leave tiny and ludicrous size alone) and move players closer to the central lake (both changes that should favor aggression).
-One other change I'm considering is swapping the cracked terrain and rock terrains (possibly on a random basis - having rock terrain spread thoroughly the map should make defenses harder to build, though it would also impact base building).
+Add more neutral golds
+adjust map sizes to be smaller (see Socotra for comparison?)
 
 */
 
@@ -864,7 +863,7 @@ create_object DLC_STORK {
     number_of_objects 4
     set_scaling_to_map_size
 }
-create_object DLC_WILD_DROMEDARY {
+create_object DLC_WILD_CAMEL {
     number_of_objects 2
     number_of_groups 4
     avoid_actor_area 5
