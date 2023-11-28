@@ -11,6 +11,7 @@ Welcome to the AOE2:DE RMS Collaboration project! This repository is intended to
 
 
 
+
 ___________________________________________________________________________________________________________________________________________________________
 How to Configure Github Repository on Your PC:
 
@@ -20,7 +21,7 @@ How to Configure Github Repository on Your PC:
 2) Configure Github to your desktop by going to the following website: https://desktop.github.com/ and clicking on the button below:
 ![image](https://user-images.githubusercontent.com/115369420/194990520-1cbc95de-5c1d-4797-9a88-ccd5df84eebb.png)
 
-3) Visit the working directory for AOE2 map scripts: C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources_common\random-map-scripts
+3) Visit the working directory for AOE2 map scripts: C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts
 In its unmodified state, this directory will contain the original Ensemble Studios map scripts:
 ![image](https://user-images.githubusercontent.com/115369420/194990628-ddad0474-db8e-466c-9363-1116ea14971a.png)
 Move these scripts to their own subfolder or delete them:
@@ -111,3 +112,7 @@ How to Publish Scripts to the "Entire-Library":
 ![image](https://user-images.githubusercontent.com/115369420/196483390-c4749401-4076-4616-8d32-fa1d410f054d.png)
 
 Updating the files in "Entire-Library" is simple: repeat steps 1-3 with the new files.
+
+_____________________________________________________________________________________________________________________________________________________________
+
+Map Summary (refer to the template in this folder) are recommended for all maps you upload. This will help people looking for maps know that what you've created will work for their application!
