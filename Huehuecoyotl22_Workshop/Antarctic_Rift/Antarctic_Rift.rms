@@ -833,8 +833,8 @@ create_object GOLD {
 	set_gaia_object_only
 	min_distance_group_placement 3
 	avoid_forest_zone 2
-		min_distance_to_players 23
-			terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
+	min_distance_to_players 23
+	terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
 }
 
 create_object STONE {
@@ -859,7 +859,7 @@ create_object STONE {
 	min_distance_group_placement 3
 	avoid_forest_zone 2
 	terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
-		min_distance_to_players 23
+	min_distance_to_players 23
 }
 
 create_object TREE_K {
@@ -872,7 +872,9 @@ create_object TREE_K {
 	min_distance_group_placement 2
 	avoid_forest_zone 2
 	layer_to_place_on WATER_AZURE
-		min_distance_to_players 23
+	min_distance_to_players 23
+	resource_delta 975
+
 }
 
 create_object TREE_J {
@@ -885,8 +887,8 @@ create_object TREE_J {
 	min_distance_group_placement 2
 	avoid_forest_zone 2
 	layer_to_place_on WATER_AZURE
-		min_distance_to_players 23
-		resource_delta 475
+	min_distance_to_players 23
+	resource_delta 475
 }
 
 create_object TREE_I {
@@ -899,11 +901,11 @@ create_object TREE_I {
 	min_distance_group_placement 0
 	avoid_forest_zone 0
 	layer_to_place_on WATER_AZURE
-		min_distance_to_players 23
-		resource_delta 175
-		set_facet 1
-		actor_area 872
-		actor_area_radius 2
+	min_distance_to_players 23
+	resource_delta 175
+	set_facet 1
+	actor_area 872
+	actor_area_radius 2
 }
 
 create_object TREE_I {
@@ -916,11 +918,11 @@ create_object TREE_I {
 	min_distance_group_placement 0
 	avoid_forest_zone 0
 	layer_to_place_on WATER_AZURE
-		min_distance_to_players 23
-		resource_delta 175
-		set_facet 3
-		actor_area_to_place_in 872
-		second_object TREE_I
+	min_distance_to_players 23
+	resource_delta 175
+	set_facet 3
+	actor_area_to_place_in 872
+	second_object TREE_I
 }
 
 create_object TREE_J {
