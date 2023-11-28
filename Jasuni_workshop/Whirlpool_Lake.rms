@@ -14,12 +14,11 @@ TODOs
 move more fish further into the middle lake? (at least for larger map sizes)
 adjust size of middle lake for different map sizes - not really possible to increase the size of the slope, since that is determined by the land's base_elevation, which is what determines the size of the sinkholes, so this is limited to increasing the amount of flat water.
 enable Empire Wars, Deathmatch
-modify the cracked terrain to be one tile further into the sinkholes. This could be done by writing over the sinkhole terrain with a spacing_to_other_terrain 1 restriction (though I'd want to change what is currently becoming the cracked terrain with a temporary terrain, or perhaps a terrain that can't be replaced during connection generation. This way, the cracked terrain is applied at the new later step.)
 reduce map sizes (scale less - Tiny unchanged, larger map sizes increase by smaller amount)
 move players closer to central lake
 Randomly swap cracked and rock terrains? - will need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
 
-I'm thinking I'll add more neutral gold onto the map and reduce that amount of stone per pile (I'm thinking to 100 stone per pile). I'm also planning a change that would restrict stone placements a little bit more (but I suspect this won't have too much impact on the amount of stone). I might also mess with map size (to smaller map size, though I'd leave tiny and ludicrous size alone) and move players closer to the central lake (both changes that should favor aggression).
+I'm thinking I'll add more neutral gold onto the map. I might also mess with map size (to smaller map size, though I'd leave tiny and ludicrous size alone) and move players closer to the central lake (both changes that should favor aggression).
 One other change I'm considering is swapping the cracked terrain and rock terrains (possibly on a random basis - having rock terrain spread thoroughly the map should make defenses harder to build, though it would also impact base building).
 
 */
@@ -56,6 +55,14 @@ DLC_CRACKED
 add herdable, passive huntables, defensive huntables, and predators into theme
 
 */
+
+start_random
+    percent_chance 20 #define THEME_OPTION_A
+    percent_chance 20 #define THEME_OPTION_B
+    percent_chance 20 #define THEME_OPTION_C
+    percent_chance 20 #define THEME_OPTION_D
+    percent_chance 20 #define THEME_OPTION_E
+end_random
 #define THEME_DESERT
 if THEME_DESERT
     #const ORIG_TERRAIN 6 /* DIRT */
@@ -66,12 +73,17 @@ if THEME_DESERT
     #const SHALLOW_TERRAIN 54 /* DLC_MANGROVESHALLOW */
     #const FOREST_TERRAIN_A 13 /* PALM_DESERT */
     #const FOREST_TERRAIN_B 91 /* DLC_REEDSBEACH */
-    start_random
-        percent_chance 20 #const CRACKED_INNER_MASK 40 /* DLC_ROCK */
-        percent_chance 20 #const CRACKED_INNER_MASK 42  /* DLC_DIRT4 */
-        percent_chance 60  #const CRACKED_INNER_MASK 46  /* DLC_QUICKSAND */
-    end_random
-
+    if THEME_OPTION_A 
+        #const CRACKED_INNER_MASK 40 /* DLC_ROCK */
+    elseif THEME_OPTION_B
+        #const CRACKED_INNER_MASK 42  /* DLC_DIRT4 */
+    elseif THEME_OPTION_C
+        #const CRACKED_INNER_MASK 102 /* DLC_DESERTGRAVEL */
+    elseif THEME_OPTION_D
+        #const CRACKED_INNER_MASK 70 /* gravel terrain */
+    else
+        #const CRACKED_INNER_MASK 46  /* DLC_QUICKSAND */
+    endif
     #const LAND_MASK_A 14 /* Desert */
     #const CRACKED_MASK 45 /* DLC_CRACKED */
     #const WATER_MASK 54 /* DLC_MANGROVESHALLOW */
