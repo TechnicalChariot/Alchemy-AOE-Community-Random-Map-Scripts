@@ -15,12 +15,22 @@ move more fish further into the middle lake? (at least for larger map sizes)
 adjust size of middle lake for different map sizes - not really possible to increase the size of the slope, since that is determined by the land's base_elevation, which is what determines the size of the sinkholes, so this is limited to increasing the amount of flat water.
 enable Empire Wars, Deathmatch
 modify the cracked terrain to be one tile further into the sinkholes. This could be done by writing over the sinkhole terrain with a spacing_to_other_terrain 1 restriction (though I'd want to change what is currently becoming the cracked terrain with a temporary terrain, or perhaps a terrain that can't be replaced during connection generation. This way, the cracked terrain is applied at the new later step.)
+reduce map sizes (scale less - Tiny unchanged, larger map sizes increase by smaller amount)
+move players closer to central lake
+Randomly swap cracked and rock terrains? - will need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
+
+I'm thinking I'll add more neutral gold onto the map and reduce that amount of stone per pile (I'm thinking to 100 stone per pile). I'm also planning a change that would restrict stone placements a little bit more (but I suspect this won't have too much impact on the amount of stone). I might also mess with map size (to smaller map size, though I'd leave tiny and ludicrous size alone) and move players closer to the central lake (both changes that should favor aggression).
+One other change I'm considering is swapping the cracked terrain and rock terrains (possibly on a random basis - having rock terrain spread thoroughly the map should make defenses harder to build, though it would also impact base building).
 
 */
 
 <PLAYER_SETUP>
 random_placement
 behavior_version 2
+
+#const STONE_MINE_CLASS 908
+
+effect_amount SET_ATTRIBUTE STONE_MINE_CLASS ATTR_STORAGE_VALUE 100
 effect_amount SET_ATTRIBUTE TREE_CLASS ATTR_TERRAIN_ID 3
 
 /* Removing Trade Cogs for Multi-team Games, as per Alchemy requirements. Trade Carts are not disabled due to the presence of neutral markets in the corners of the map, nor are any techs affecting trade carts.
@@ -56,6 +66,12 @@ if THEME_DESERT
     #const SHALLOW_TERRAIN 54 /* DLC_MANGROVESHALLOW */
     #const FOREST_TERRAIN_A 13 /* PALM_DESERT */
     #const FOREST_TERRAIN_B 91 /* DLC_REEDSBEACH */
+    start_random
+        percent_chance 20 #const CRACKED_INNER_MASK 40 /* DLC_ROCK */
+        percent_chance 20 #const CRACKED_INNER_MASK 42  /* DLC_DIRT4 */
+        percent_chance 60  #const CRACKED_INNER_MASK 46  /* DLC_QUICKSAND */
+    end_random
+
     #const LAND_MASK_A 14 /* Desert */
     #const CRACKED_MASK 45 /* DLC_CRACKED */
     #const WATER_MASK 54 /* DLC_MANGROVESHALLOW */
@@ -71,10 +87,12 @@ else
     #const SHALLOW_TERRAIN 54 /* DLC_MANGROVESHALLOW */
     #const FOREST_TERRAIN_A 13 /* PALM_DESERT */
     #const FOREST_TERRAIN_B 91 /* DLC_REEDSBEACH */
+    #const CRACKED_INNER_MASK 70 /* gravel default */
+
     #const LAND_MASK_A 32 /* Snow */
     #const CRACKED_MASK 32 /* Snow */
     #const WATER_MASK 54 /* DLC_MANGROVESHALLOW */
-    #const SHALLOW_MASK 1 /* wATER */
+    #const SHALLOW_MASK 1 /* WATER */
     #const ROCK_MASK 54
     #const FOREST_MASK 11 /* Dirt 2 */
 endif
@@ -314,19 +332,54 @@ create_terrain DLC_ROCK {
     spacing_to_other_terrain_types 1
 } */
 
-/* terrain masks. */
+
+/* terrain masks. Cosmetic unless otherwise specificied) */
 create_terrain LAND_MASK_A {
     base_terrain LAND_TERRAIN_A
     land_percent 100
     number_of_clumps 9320
     terrain_mask 1
-}
+} /* 
 create_terrain CRACKED_MASK {
     base_terrain DLC_CRACKED
     land_percent 100
     number_of_clumps 9320
     terrain_mask 1
 }
+create a mask for the inner portion of the cracked terrains that will be used for stone placement */
+create_terrain CRACKED_INNER_MASK {
+    set_scale_by_groups
+    base_terrain DLC_CRACKED
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+create_terrain CRACKED_INNER_MASK {
+    base_terrain DLC_CRACKED
+    set_scale_by_groups
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+create_terrain CRACKED_INNER_MASK {
+    base_terrain DLC_CRACKED
+    land_percent 100
+    set_scale_by_groups
+    number_of_clumps 9320
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+create_terrain CRACKED_INNER_MASK {
+    base_terrain DLC_CRACKED
+    land_percent 100
+    number_of_clumps 9320
+    set_scale_by_groups
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+
 create_terrain WATER_MASK {
     base_terrain WATER_TERRAIN
     land_percent 100
@@ -710,6 +763,7 @@ some gold
 create_object STONE { /* result is plenty of scattered stone piles */
     number_of_groups 9320
     terrain_to_place_on DLC_CRACKED
+    layer_to_place_on CRACKED_INNER_MASK
     set_tight_grouping
     set_gaia_object_only
     temp_min_distance_group_placement 5
