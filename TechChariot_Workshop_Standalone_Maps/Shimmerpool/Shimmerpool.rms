@@ -1,7 +1,7 @@
 /* Shimmerpool */
 /* A Random Map Script by TechChariot -- 11/09/2023 */
 
-/*  --- Reincarnated from popular map "Kharga", originally developed 3/30/20721 ---
+/*  --- Reincarnated from popular map "Kharga", originally developed 3/30/2021 ---
     The sandy dunes of southern Egypt are rumored to be rich in gold, lost and forgotten from another era. 
     You have been dispatched to recover these riches, but the harsh Khamsin has led your expedition astray. 
     Running low on supplies and hope, you reach the summit of a rocky ridge and behold a lush, green oasis in the valley below. 
@@ -38,19 +38,21 @@ effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_FOOD  ATTR_SET 0
 effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_GOLD  ATTR_SET 0
 effect_percent GAIA_MOD_RESOURCE AMOUNT_BUILDING_TRICKLE_STONE ATTR_SET 0
 
-/* Removing Trade Carts and Cogs for Multi-team Games */
+/* Disabling Trade Carts and Cogs for Multi-team Games */
 if 2_TEAM_GAME
 else
-    #const TRADE_CART_ENABLER 161
-    #const TRADE_COG_ENABLER 180
-    #const TRADE_CARAVAN_ENABLER 48
-    #const HINDU_CARAVANSERAI_ENABLER 518
-    #const PERSIAN_CARAVANSERAI_ENABLER 552  
-    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
-    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
-    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
-    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
-    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
 endif
 
 /* Configuring Unit Spawn From Hero Trade Cart */
