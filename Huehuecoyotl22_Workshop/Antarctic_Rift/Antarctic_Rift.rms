@@ -1,5 +1,5 @@
 /*
-ANTARCTIC RIFT by Huehuecoyotl22 - October-November 2023
+Antarctic Rift by Huehuecoyotl22
  */
 
 #const AT_TEAM 2
@@ -472,27 +472,6 @@ create_terrain WATER_AZURE {
 	set_scaling_to_map_size
 }
 
-create_terrain WATER {
-	base_terrain SNOW
-	land_percent 3
-	number_of_clumps 8
-	terrain_mask 0
-	spacing_to_other_terrain_types 1
-	beach_terrain ICE
-	set_avoid_player_start_areas 20 
-	set_scaling_to_map_size
-}
-
-create_terrain DEEP_WATER {
-	base_terrain WATER
-	land_percent 100
-	number_of_clumps 1200
-	terrain_mask 1
-	spacing_to_other_terrain_types 0
-	beach_terrain ICE 
-	set_scaling_to_map_size
-}
-
 create_terrain DLC_DRYGRASS {
 	base_terrain BEACH_GRAVEL_UNSAILABLE
 	land_percent 1
@@ -515,8 +494,8 @@ create_terrain SNOW_STRONG {
 if 8_PLAYER_GAME
 create_terrain DESERT {
 	base_terrain SNOW
-	land_percent 5
-	number_of_clumps 12
+	land_percent 7
+	number_of_clumps 16
 	terrain_mask 0
 	spacing_to_other_terrain_types 8
 	height_limits 0 0
@@ -528,8 +507,8 @@ create_terrain DESERT {
 else
 create_terrain DESERT {
 	base_terrain SNOW
-	land_percent 5
-	number_of_clumps 8
+	land_percent 7
+	number_of_clumps 12
 	terrain_mask 0
 	spacing_to_other_terrain_types 8
 	height_limits 0 0
@@ -539,7 +518,6 @@ create_terrain DESERT {
 	border_fuzziness 1
 }
 endif
-
 
 create_terrain BEACH_GRAVEL_UNSAILABLE {
 	base_terrain DESERT
@@ -647,6 +625,27 @@ create_terrain SNOW {
 	number_of_clumps 3200
 	terrain_mask 0
 	spacing_to_other_terrain_types 0
+}
+
+create_terrain WATER {
+	base_terrain SNOW
+	land_percent 3
+	number_of_clumps 8
+	terrain_mask 0
+	spacing_to_other_terrain_types 1
+	beach_terrain ICE
+	set_avoid_player_start_areas 20 
+	set_scaling_to_map_size
+}
+
+create_terrain DEEP_WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 1
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
+	set_scaling_to_map_size
 }
 
 create_terrain DLC_ROCK {
@@ -833,8 +832,8 @@ create_object GOLD {
 	set_gaia_object_only
 	min_distance_group_placement 3
 	avoid_forest_zone 2
-	min_distance_to_players 23
-	terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
+		min_distance_to_players 23
+			terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
 }
 
 create_object STONE {
@@ -859,7 +858,7 @@ create_object STONE {
 	min_distance_group_placement 3
 	avoid_forest_zone 2
 	terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
-	min_distance_to_players 23
+		min_distance_to_players 23
 }
 
 create_object TREE_K {
@@ -872,9 +871,8 @@ create_object TREE_K {
 	min_distance_group_placement 2
 	avoid_forest_zone 2
 	layer_to_place_on WATER_AZURE
-	min_distance_to_players 23
-	resource_delta 975
-
+		min_distance_to_players 23
+		resource_delta 975
 }
 
 create_object TREE_J {
@@ -887,8 +885,8 @@ create_object TREE_J {
 	min_distance_group_placement 2
 	avoid_forest_zone 2
 	layer_to_place_on WATER_AZURE
-	min_distance_to_players 23
-	resource_delta 475
+		min_distance_to_players 23
+		resource_delta 475
 }
 
 create_object TREE_I {
@@ -901,11 +899,11 @@ create_object TREE_I {
 	min_distance_group_placement 0
 	avoid_forest_zone 0
 	layer_to_place_on WATER_AZURE
-	min_distance_to_players 23
-	resource_delta 175
-	set_facet 1
-	actor_area 872
-	actor_area_radius 2
+		min_distance_to_players 23
+		resource_delta 175
+		set_facet 1
+		actor_area 872
+		actor_area_radius 2
 }
 
 create_object TREE_I {
@@ -918,11 +916,11 @@ create_object TREE_I {
 	min_distance_group_placement 0
 	avoid_forest_zone 0
 	layer_to_place_on WATER_AZURE
-	min_distance_to_players 23
-	resource_delta 175
-	set_facet 3
-	actor_area_to_place_in 872
-	second_object TREE_I
+		min_distance_to_players 23
+		resource_delta 175
+		set_facet 3
+		actor_area_to_place_in 872
+		second_object TREE_I
 }
 
 create_object TREE_J {
