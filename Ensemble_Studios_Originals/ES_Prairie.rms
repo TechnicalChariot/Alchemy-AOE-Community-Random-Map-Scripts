@@ -8,6 +8,23 @@
 <PLAYER_SETUP>
   random_placement
 
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+
 /* ****************************************************** */
 <LAND_GENERATION>
 
@@ -244,7 +261,7 @@ create_object GOLD
   max_distance_to_other_zones  7
 }
 
-/* Everyone gets 3 sets of gold mines.  Sometimes the far gold mine is really far (30 tiles) from the player’s Town Center. */
+/* Everyone gets 3 sets of gold mines.  Sometimes the far gold mine is really far (30 tiles) from the playerï¿½s Town Center. */
 
 /* NEAR STONE */
 
@@ -361,7 +378,7 @@ create_object DEER
 }
 endif
 
-/*  Because large maps have more open space, they need more resources.  These resources do not “belong” to anyone.  They are scattered for the taking. */
+/*  Because large maps have more open space, they need more resources.  These resources do not ï¿½belongï¿½ to anyone.  They are scattered for the taking. */
 
 if HUGE_MAP
 create_object DEER
@@ -583,7 +600,7 @@ create_object STONE
 }
 endif
 
-/* These are the “straggler” trees near every Town Center. */
+/* These are the ï¿½stragglerï¿½ trees near every Town Center. */
 
 create_object PALMTREE
 {
