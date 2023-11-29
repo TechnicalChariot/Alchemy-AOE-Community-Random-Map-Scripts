@@ -152,13 +152,21 @@ create_land {
 create_player_lands {
 	terrain_type TEMP_TERRAIN_A
 	land_percent 100
-    circle_radius rnd(36,40) 0 /* at the larger end, the player start areas might be able to hit the edge of the map.
     if TINY_MAP
+        circle_radius rnd(36,38) 0
     elseif SMALL_MAP
-        circle_radius rnd(36,40) 0
+        circle_radius rnd(32,36) 0
+    elseif MEDIUM_MAP
+        circle_radius rnd(30,34) 0
+    elseif LARGE_MAP
+        circle_radius rnd(27,32) 0
+    elseif HUGE_MAP
+        circle_radius rnd(25,30) 0
+    elseif GIGANTIC_MAP
+        circle_radius rnd(22,27) 0
     else
-        circle_radius rnd(36,40) 0  
-    endif  */
+        circle_radius rnd(13,18) 0
+    endif
     zone 2
 	base_elevation 9 /* 9 is the lowest height at which sinkholes form, and forms the smallest sinkholes. */
     other_zone_avoidance_distance 9
@@ -861,6 +869,7 @@ if AT_LEAST_LARGE
         endif
         min_distance_to_players 40
         avoid_forest_zone 1
+        avoid_actor_area 5
     }
 endif
 /* place predators and birds last */
