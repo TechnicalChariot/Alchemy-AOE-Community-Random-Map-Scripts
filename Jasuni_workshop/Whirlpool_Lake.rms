@@ -15,7 +15,7 @@ move more fish further into the middle lake? (at least for larger map sizes)
 adjust size of middle lake for different map sizes - not really possible to increase the size of the slope, since that is determined by the land's base_elevation, which is what determines the size of the sinkholes, so this is limited to increasing the amount of flat water.
 enable EMPIRE_WARS, DEATH_MATCH
 reduce map sizes (scale less - Tiny unchanged, larger map sizes increase by smaller amount)
-move players closer to central lake
+
 Randomly swap cracked and rock terrains? - will need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
 Add more neutral golds
 adjust map sizes to be smaller (see Socotra for comparison?)
@@ -25,6 +25,18 @@ adjust map sizes to be smaller (see Socotra for comparison?)
 <PLAYER_SETUP>
 random_placement
 behavior_version 2
+
+if SMALL_MAP
+override_map_size 136
+elseif MEDIUM_MAP
+override_map_size 152
+elseif LARGE_MAP
+override_map_size 172
+elseif HUGE_MAP
+override_map_size 186
+elseif GIGANTIC_MAP
+override_map_size 200
+endif /* else leave unchanged for tiny and ludicrous */
 
 #const STONE_MINE_CLASS 908
 #const REEDS 1350
@@ -287,7 +299,7 @@ create_terrain WATER_TERRAIN {
     number_of_clumps 9320 /* need many clumps to ensure the middle is filled with WATER_TERRAIN, even if a surviving depression is prioritized. */
 }
 create_terrain LAND_TERRAIN_A {
-    base_terrain TEMP_TERRAIN_A
+    base_terrain TEMP_TERRAIN_A /* can miss a small clump, but not too serious if it does. */
     land_percent 100
     number_of_clumps 9320
 	set_avoid_player_start_areas 15
@@ -295,7 +307,7 @@ create_terrain LAND_TERRAIN_A {
 create_terrain SHALLOW_TERRAIN {
 	base_terrain TEMP_TERRAIN_A
 	land_percent 100
-	number_of_clumps 9320
+	number_of_clumps 320
     set_flat_terrain_only
     spacing_to_other_terrain_types 1 
 }
@@ -459,32 +471,31 @@ create_connect_to_nonplayer_land {
 #const TERRAIN_BLOCKER 1613
 #const TRADING_POST 1646
 effect_amount SET_ATTRIBUTE TRADING_POST ATTR_TERRAIN_ID 10 /* land + beach - needed because of beach surrounding mangrove shallows. */
-/*  copied from relic island */
 create_actor_area 0 0 1 0
 if TINY_MAP
     create_actor_area 118 0 2 0
     create_actor_area 0 118 3 0
     create_actor_area 118 118 4 0
 elseif SMALL_MAP
-    create_actor_area 142 0 2 0
-    create_actor_area 0 142 3 0
-    create_actor_area 142 142 4 0
+    create_actor_area 134 0 2 0
+    create_actor_area 0 134 3 0
+    create_actor_area 134 134 4 0
 elseif MEDIUM_MAP
-    create_actor_area 166 0 2 0
-    create_actor_area 0 166 3 0
-    create_actor_area 166 166 4 0
+    create_actor_area 150 0 2 0
+    create_actor_area 0 150 3 0
+    create_actor_area 150 150 4 0
 elseif LARGE_MAP
+    create_actor_area 170 0 2 0
+    create_actor_area 0 170 3 0
+    create_actor_area 170 170 4 0
+elseif HUGE_MAP
+    create_actor_area 184 0 2 0
+    create_actor_area 0 184 3 0
+    create_actor_area 184 184 4 0
+elseif GIGANTIC_MAP
     create_actor_area 198 0 2 0
     create_actor_area 0 198 3 0
     create_actor_area 198 198 4 0
-elseif HUGE_MAP
-    create_actor_area 218 0 2 0
-    create_actor_area 0 218 3 0
-    create_actor_area 218 218 4 0
-elseif GIGANTIC_MAP
-    create_actor_area 238 0 2 0
-    create_actor_area 0 238 3 0
-    create_actor_area 238 238 4 0
 else 
     create_actor_area 478 0 2 0
     create_actor_area 0 478 3 0
