@@ -268,7 +268,7 @@ endif
 create_object PALMTREE { set_place_for_every_player set_gaia_object_only find_closest number_of_groups 2 min_distance_to_players 4 max_distance_to_players 5 }
 create_object PALMTREE { set_place_for_every_player set_gaia_object_only find_closest number_of_groups 3 min_distance_to_players 6 max_distance_to_players 8 }
 
-create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 4 number_of_groups 1 set_tight_grouping min_distance_to_players 9 max_distance_to_players 9 set_circular_placement actor_area 40 actor_area_radius 6 }
+create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 4 number_of_groups 1 set_tight_grouping min_distance_to_players 7 max_distance_to_players 7 set_circular_placement actor_area 40 actor_area_radius 6 }
 create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 1 set_tight_grouping min_distance_to_players 15 max_distance_to_players 15 set_circular_placement actor_area 41 actor_area_radius 6 avoid_actor_area 40 }
 create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_objects 2 number_of_groups 1 set_tight_grouping min_distance_to_players 17 max_distance_to_players 17 set_circular_placement avoid_actor_area 40 avoid_actor_area 41 }
 create_object BOAR { set_place_for_every_player set_gaia_object_only number_of_objects 2 min_distance_to_players 16 max_distance_to_players 18 set_circular_placement }
@@ -289,7 +289,7 @@ create_object STONE { set_place_for_every_player set_gaia_object_only number_of_
 /* Objects defined BASED ON MAP SIZE */
 
 create_object DLC_ORANGEBUSH { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size set_tight_grouping number_of_objects 4 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 10 }
-create_object GOLD { set_gaia_object_only set_scaling_to_map_size number_of_objects 2 set_tight_grouping number_of_groups 4 avoid_forest_zone 2 min_distance_to_players 20 temp_min_distance_group_placement 4 }
+create_object GOLD { set_gaia_object_only set_scaling_to_map_size number_of_groups 9320 number_of_objects 2 set_tight_grouping avoid_forest_zone 2 min_distance_to_players 20 temp_min_distance_group_placement 20 terrain_to_place_on GRASS2 }
 
 create_object STONE { set_gaia_object_only number_of_groups 9320 number_of_objects 2 avoid_forest_zone 2 min_distance_to_players 20 temp_min_distance_group_placement 12 terrain_to_place_on NNB }
 create_object STONE { set_gaia_object_only number_of_groups 9320 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 8 min_distance_group_placement 4 terrain_to_place_on DIRT3 }
