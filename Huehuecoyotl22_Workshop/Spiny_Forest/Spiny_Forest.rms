@@ -1,26 +1,26 @@
 /* SPINY FOREST by Huehuecoyotl22 - October-November 2023 */
 
 <PLAYER_SETUP>
- random_placement  
+random_placement  
 
 /* Removing Trade Carts and Cogs for Multi-team Games */
 if 2_TEAM_GAME
 else
-    #const TRADE_CART_ENABLER 161
-    #const TRADE_COG_ENABLER 180
-    #const TRADE_CARAVAN_ENABLER 48
-    #const HINDU_CARAVANSERAI_ENABLER 518
-    #const PERSIAN_CARAVANSERAI_ENABLER 552  
-    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
-    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
-    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
-    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
-    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+#const TRADE_CART_ENABLER 161
+#const TRADE_COG_ENABLER 180
+#const TRADE_CARAVAN_ENABLER 48
+#const HINDU_CARAVANSERAI_ENABLER 518
+#const PERSIAN_CARAVANSERAI_ENABLER 552  
+effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
 endif
-
-
- #const MULECART 1808
- #const WARRIORPRIEST 1811
+#const TREE_BAOBAB 1052
+#const MULECART 1808
+#const WARRIORPRIEST 1811
+#const FOREST_BAOBAB 49
  
 /*
 effect_amount ENABLE_OBJECT FISHERM ATTR_ENABLE 				0
@@ -393,7 +393,7 @@ create_terrain DLC_NEWSHALLOW
 }
 */
 
-create_terrain PALM_DESERT
+create_terrain FOREST_BAOBAB
 {
      base_terrain DLC_NEWSHALLOW
      spacing_to_other_terrain_types 2
@@ -403,7 +403,7 @@ create_terrain PALM_DESERT
      set_scale_by_groups
 }
 
-create_terrain PALM_DESERT
+create_terrain FOREST_BAOBAB
 {
      base_terrain DLC_NEWSHALLOW
      spacing_to_other_terrain_types 2
@@ -1064,6 +1064,18 @@ create_object VILLAGER
 	 terrain_to_place_on DLC_DRYGRASS
 
 }
+
+create_object DLC_GOAT
+{
+     set_place_for_every_player
+     min_distance_to_players 3
+	 max_distance_to_players 9
+	 set_tight_grouping
+	 group_placement_radius 4
+	 number_of_objects 4
+	 terrain_to_place_on DLC_DRYGRASS
+
+}
 /*
 create_object MILITIA
 {
@@ -1075,6 +1087,18 @@ create_object MILITIA
 
 }
 */
+
+create_object TREE_BAOBAB {
+	number_of_objects 5
+	set_place_for_every_player
+	set_gaia_object_only
+	min_distance_to_players 7
+	max_distance_to_players 10
+	set_circular_placement
+	min_distance_group_placement 1
+	terrain_to_place_on DLC_DRYGRASS
+}
+
 create_object TREE_I {
 	number_of_objects 5
 	set_place_for_every_player
@@ -1085,6 +1109,7 @@ create_object TREE_I {
 	min_distance_group_placement 1
 	set_facet 11
 	resource_delta -75
+	terrain_to_place_on DESERT
 }
 
 create_object TREE_I {
@@ -1319,7 +1344,7 @@ create_object GOLD
      group_placement_radius     3
      set_loose_grouping
      set_gaia_object_only
-     min_distance_to_players    26
+     min_distance_to_players    24
      max_distance_to_players   76
 	 avoid_forest_zone 2
 	 temp_min_distance_group_placement 30
@@ -1337,7 +1362,7 @@ create_object STONE
      group_placement_radius     3
      set_loose_grouping
      set_gaia_object_only
-     min_distance_to_players    26
+     min_distance_to_players    24
      max_distance_to_players   56
 	 avoid_forest_zone 2
 	 temp_min_distance_group_placement 30
@@ -1356,7 +1381,7 @@ create_object GOLD
      group_placement_radius     3
      set_loose_grouping
      set_gaia_object_only
-     min_distance_to_players    26
+     min_distance_to_players    23
      max_distance_to_players   76
 	 avoid_forest_zone 2
 	 temp_min_distance_group_placement 30
@@ -1374,7 +1399,7 @@ create_object STONE
      group_placement_radius     3
      set_loose_grouping
      set_gaia_object_only
-     min_distance_to_players    26
+     min_distance_to_players    23
      max_distance_to_players   56
 	 avoid_forest_zone 2
 	 temp_min_distance_group_placement 30
@@ -1393,7 +1418,7 @@ create_object GOLD
      group_placement_radius     3
      set_loose_grouping
      set_gaia_object_only
-     min_distance_to_players    26
+     min_distance_to_players    22
      max_distance_to_players   76
 	 avoid_forest_zone 2
 	 temp_min_distance_group_placement 30
@@ -1411,7 +1436,7 @@ create_object STONE
      group_placement_radius     3
      set_loose_grouping
      set_gaia_object_only
-     min_distance_to_players    26
+     min_distance_to_players    22
      max_distance_to_players   56
 	 avoid_forest_zone 2
 	 temp_min_distance_group_placement 30
@@ -1430,7 +1455,7 @@ create_object GOLD
      group_placement_radius     3
      set_loose_grouping
      set_gaia_object_only
-     min_distance_to_players    26
+     min_distance_to_players    22
      max_distance_to_players   76
 	 avoid_forest_zone 2
 	 temp_min_distance_group_placement 30
@@ -1448,7 +1473,7 @@ create_object STONE
      group_placement_radius     3
      set_loose_grouping
      set_gaia_object_only
-     min_distance_to_players    26
+     min_distance_to_players    22
      max_distance_to_players   56
 	 avoid_forest_zone 2
 	 temp_min_distance_group_placement 30
@@ -1716,6 +1741,16 @@ create_object DLC_VULTURE /* or MACAW */
      set_scaling_to_map_size
 }
 
+create_object BOAR
+{
+     number_of_groups 9320
+	 number_of_objects         1
+     set_loose_grouping
+     set_gaia_object_only
+     min_distance_to_players    20
+	 avoid_forest_zone 2
+	 temp_min_distance_group_placement 30
+}
 
 /* **************************************** */
 <ELEVATION_GENERATION>
