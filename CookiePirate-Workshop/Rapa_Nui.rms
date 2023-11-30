@@ -1,23 +1,26 @@
-/* Rapa Nui */
+/* Rapa Nui (Easter Island) */
 /* 11/27/2023 */
 /* A Random Map Script by Cookie Pirate */
+/* Version 1.02 -- Updated 11.28.23 -- added/clarified comments and revision history */
+/* Version 1.01 -- Updated 11.28.23 -- modified neutral gold and starting sheep distance from TC */
+/* Version 1.00 -- Created/uploaded 11.27.23 */
 
 <PLAYER_SETUP>
 grouped_by_team
 behavior_version 1
 
-#const NNB 81 /* Defining non-navigable gravel beach */
+#const NNB 81 /* Non-navigable gravel beach */
 #const PALM 112 /* Palm forest grass */
 #const FALCON 1056
 #const SEAGULL 303
-#const RNW 825 /* Amazon warrior */
-#const RNA 850 /* Amazon archer */
+#const RNW 825 /* Amazon 'Rapa Nui' warrior */
+#const RNA 850 /* Amazon 'Rapa Nui' archer */
 #const RNF 304 /* Campfire */
 #const MERCHANT 1572
-#const MOAILEFT 1343 /* Defining Moai statues */
-#const MOAIRIGHT 1345
-#const PH 647
-#const PWR 1400
+#const MOAILEFT 1343 /* Moai statues, facing front-left, facet ID 8 */
+#const MOAIRIGHT 1345 /* Moai statues, facing front-right, facet ID 8 */
+#const PH 647 /* Placeholder to avoid relics spawning on mountaintop */
+#const PWR 1400 /* Priest with relic */
 
 effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_ATTACK_GRAPHIC 7336
 effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_STANDING_GRAPHIC 7338
@@ -38,6 +41,7 @@ effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_LINE_OF_SIGHT 3
 effect_amount GAIA_SET_ATTRIBUTE FALCON ATTR_LINE_OF_SIGHT 0
 effect_amount GAIA_SET_ATTRIBUTE SEAGULL ATTR_LINE_OF_SIGHT 0
 
+/* Disable trade for matches with more than 2 teams or FFA */
 if 2_TEAM_GAME
 else
     #const TRADE_CART_ENABLER 161
@@ -246,11 +250,9 @@ if NEUTRAL_HIGH_FORESTS
     endif
 endif
 
-<CONNECTION_GENERATION>
-
 <OBJECTS_GENERATION>
 
-/* Gaia Rapa Nui units on mountain top */
+/* GAIA Rapa Nui units and objects on mountaintop */
 
 create_object DLC_AFRICANHUT_D { set_gaia_object_only set_gaia_unconvertible terrain_to_place_on DIRT2 number_of_groups 1 set_scaling_to_map_size actor_area 11 actor_area_radius 5 temp_min_distance_group_placement 5 }
 create_object DLC_AFRICANHUT_F { set_gaia_object_only set_gaia_unconvertible terrain_to_place_on DIRT2 number_of_groups 1 set_scaling_to_map_size actor_area 12 actor_area_radius 5 avoid_actor_area 11 temp_min_distance_group_placement 5 }
@@ -259,7 +261,7 @@ create_object RNW { set_gaia_object_only set_gaia_unconvertible terrain_to_place
 create_object RNA { set_gaia_object_only set_gaia_unconvertible terrain_to_place_on DIRT2 number_of_groups 3 set_scaling_to_map_size }
 create_object MONK { set_gaia_object_only set_gaia_unconvertible terrain_to_place_on DIRT2 number_of_groups 2 set_scaling_to_map_size }
 
-/* Objects defined PER PLAYER */
+/* PLAYER assigned objects */
 
 create_object TOWN_CENTER { set_place_for_every_player find_closest }
 create_object VILLAGER { set_place_for_every_player min_distance_to_players 3 max_distance_to_players 6 }
@@ -278,41 +280,42 @@ create_object SHEEP { set_place_for_every_player set_gaia_object_only number_of_
 create_object BOAR { set_place_for_every_player set_gaia_object_only number_of_objects 2 min_distance_to_players 16 max_distance_to_players 18 set_circular_placement }
 create_object DEER { set_place_for_every_player set_gaia_object_only number_of_objects 4 min_distance_to_players 14 max_distance_to_players 18 set_circular_placement group_placement_radius 4 }
 
-create_object PH { number_of_groups 9320 terrain_to_place_on DIRT2 temp_min_distance_group_placement 1 actor_area 61 actor_area_radius 10 }
+/* Neutral Starting Relic placement */
 
+create_object PH { number_of_groups 9320 terrain_to_place_on DIRT2 temp_min_distance_group_placement 1 actor_area 61 actor_area_radius 10 }
 create_object RELIC { set_scaling_to_player_number set_gaia_object_only number_of_groups 1 min_distance_to_players 31 set_circular_placement actor_area 31 actor_area_radius 1 avoid_forest_zone 2 temp_min_distance_group_placement 10 avoid_actor_area 61 }
 create_object RNW { set_scaling_to_player_number set_gaia_object_only set_gaia_unconvertible number_of_groups 2 actor_area_to_place_in 31 temp_min_distance_group_placement 2 }
 create_object RNA { set_scaling_to_player_number set_gaia_object_only set_gaia_unconvertible number_of_groups 2 actor_area_to_place_in 31 temp_min_distance_group_placement 2 }
 
+/* More PLAYER assigned objects */
+
 create_object DLC_ORANGEBUSH { set_place_for_every_player set_gaia_object_only number_of_objects 6 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement }
 create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 7 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement }
 create_object GOLD { set_place_for_every_player set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 18 max_distance_to_players 19 min_distance_group_placement 6 set_circular_placement }
-
 create_object STONE { set_place_for_every_player set_gaia_object_only number_of_objects 5 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 12 max_distance_to_players 13 min_distance_group_placement 6 set_circular_placement }
 
 /* Objects defined BASED ON MAP SIZE */
 
 create_object DLC_ORANGEBUSH { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size set_tight_grouping number_of_objects 4 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 10 }
 create_object GOLD { set_gaia_object_only set_scaling_to_map_size number_of_groups 9320 number_of_objects 2 set_tight_grouping avoid_forest_zone 2 min_distance_to_players 20 temp_min_distance_group_placement 20 terrain_to_place_on GRASS2 }
-
 create_object STONE { set_gaia_object_only number_of_groups 9320 number_of_objects 2 avoid_forest_zone 2 min_distance_to_players 20 temp_min_distance_group_placement 12 terrain_to_place_on NNB }
 create_object STONE { set_gaia_object_only number_of_groups 9320 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 8 min_distance_group_placement 4 terrain_to_place_on DIRT3 }
 create_object GOLD { set_gaia_object_only number_of_groups 9320 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 8 terrain_to_place_on DIRT3 }
-
 create_object SHORE_FISH { number_of_groups 9320 temp_min_distance_group_placement 4 }
 create_object GREAT_FISH_MARLIN { number_of_groups 9320 min_distance_group_placement 8 terrain_to_place_on DLC_WATER4 }
 create_object FISH { number_of_groups 9320 set_scaling_to_map_size min_distance_group_placement 6 terrain_to_place_on DEEP_WATER }
 create_object FISH { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 4 terrain_to_place_on MED_WATER }
-
 create_object PALMTREE { set_gaia_object_only number_of_groups 30 number_of_objects 1 set_scaling_to_map_size min_distance_to_players 12 }
+
+/* Nature */
+
 create_object FALCON { number_of_groups 50 set_scaling_to_map_size set_gaia_object_only }
 create_object SEAGULL { number_of_groups 20 set_scaling_to_map_size set_gaia_object_only terrain_to_place_on DLC_GRAVELBEACH }
 create_object WILD_HORSE { number_of_groups 10 set_scaling_to_map_size set_gaia_object_only }
-
 create_object SEA_ROCKS_1 { number_of_objects 100 set_scaling_to_map_size terrain_to_place_on DLC_GRAVELBEACH temp_min_distance_group_placement 1 }
 create_object SEA_ROCKS_2 { number_of_objects 100 set_scaling_to_map_size terrain_to_place_on DLC_GRAVELBEACH temp_min_distance_group_placement 1 }
 
-/* PLACEMENT OF MOAI (NOTE FOR FUTURE REFERENCE: facets 22 24 25 26 for tikis) */
+/* PLACEMENT OF MOAI */
 create_object MOAILEFT  { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 10 terrain_to_place_on NNB actor_area 1 actor_area_radius 1 }
 create_object MOAILEFT  { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 10 terrain_to_place_on NNB actor_area 2 actor_area_radius 1 actor_area_to_place_in 1 }
 create_object MOAILEFT  { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 12 set_facet 8 min_distance_to_players 10 terrain_to_place_on NNB actor_area 3 actor_area_radius 1 actor_area_to_place_in 2 avoid_actor_area 1 }
