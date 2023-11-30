@@ -1,5 +1,5 @@
 /*
-Antarctic Rift by Huehuecoyotl22
+ANTARCTIC RIFT by Huehuecoyotl22 - October-November 2023
  */
 
 #const AT_TEAM 2
@@ -38,8 +38,14 @@ Antarctic Rift by Huehuecoyotl22
 #const DEERXD 43
 #const AFRICANHUT_A 1082
 
+/* effect_amount SET_ATTRIBUTE FARM_DEAD ATTR_FOUNDATION_TERRAIN 73 */
+
 /* =================================================================================================== */
 <PLAYER_SETUP>
+
+	if 2_PLAYER_GAME
+override_map_size 130
+endif
 
 random_placement 
 ai_info_map_type BALTIC 0 0 0
@@ -142,8 +148,6 @@ effect_amount GAIA_SET_ATTRIBUTE FISHING_SHIP ATTR_SPAWN_GRAPHIC 12262
 effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_NAME_ID 5734
 effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_ICON_ID 157
 */
-effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_RADIUS_1 0
-effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_RADIUS_2 0
 /*
 effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_STANDING_GRAPHIC 8259
 effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_WALKING_GRAPHIC 8261
@@ -232,31 +236,31 @@ base_terrain SNOW
 /* the player lands */
 create_player_lands {
 	terrain_type BEACH_GRAVEL_UNSAILABLE
-	base_size 6
+	base_size 8
 	land_percent 8
 	border_fuzziness 1
-	base_elevation 7
+	base_elevation 9
 	zone 11
 if 2_PLAYER_GAME
-circle_radius 35
+circle_radius 37
 endif
 if 3_PLAYER_GAME
-circle_radius 35
+circle_radius 37
 endif	
 if 4_PLAYER_GAME
-circle_radius 35
+circle_radius 37
 endif	
 if 5_PLAYER_GAME
-circle_radius 35
+circle_radius 37
 endif	
 if 6_PLAYER_GAME
-circle_radius 35
+circle_radius 37
 endif	
 if 7_PLAYER_GAME
-circle_radius 35
+circle_radius 36
 endif	
 if 8_PLAYER_GAME
-circle_radius 35
+circle_radius 36
 endif		
 }
 
@@ -599,6 +603,33 @@ create_terrain ICE_SAILABLE {
 	spacing_to_other_terrain_types 0
 }
 #const SNOW_LIGHT 73
+if 2_PLAYER_GAME
+create_terrain SNOW_LIGHT {
+	base_terrain ICE
+	land_percent 1
+	number_of_clumps 12
+	terrain_mask 2
+	spacing_to_other_terrain_types 3
+}
+elseif
+3_PLAYER_GAME
+create_terrain SNOW_LIGHT {
+	base_terrain ICE
+	land_percent 1
+	number_of_clumps 18
+	terrain_mask 2
+	spacing_to_other_terrain_types 3
+}
+elseif
+4_PLAYER_GAME
+create_terrain SNOW_LIGHT {
+	base_terrain ICE
+	land_percent 1
+	number_of_clumps 24
+	terrain_mask 2
+	spacing_to_other_terrain_types 3
+}
+else
 create_terrain SNOW_LIGHT {
 	base_terrain ICE
 	land_percent 1
@@ -606,7 +637,7 @@ create_terrain SNOW_LIGHT {
 	terrain_mask 2
 	spacing_to_other_terrain_types 4
 }
-
+endif
 create_terrain WATER_AZURE {
 	base_terrain SNOW
 	land_percent 1
@@ -656,6 +687,122 @@ create_terrain DLC_ROCK {
 	spacing_to_other_terrain_types 0
 	height_limits 6 8
 	set_avoid_player_start_areas 25
+}
+
+create_terrain SNOW {
+	base_terrain ICE
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+create_terrain SNOW {
+	base_terrain ICE
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+
+create_terrain SNOW {
+	base_terrain ICE
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+create_terrain SNOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+create_terrain SNOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 3200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	height_limits 4 8
+}
+
+create_terrain SNOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 3200
+	spacing_to_other_terrain_types 0
+	height_limits 3 9
+}
+
+create_terrain SNOW {
+	base_terrain DLC_ROCK
+	land_percent 100
+	number_of_clumps 3200
+	spacing_to_other_terrain_types 0
+	height_limits 3 9
+}
+
+create_terrain BEACH_GRAVEL_UNSAILABLE {
+	base_terrain GRASS
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
+}
+
+create_terrain DEEP_WATER {
+	base_terrain SNOW
+	number_of_tiles 48
+	number_of_clumps 12
+	terrain_mask 2
+	spacing_to_other_terrain_types 8
+	beach_terrain ICE
+	set_avoid_player_start_areas 20
+	height_limits 0 0
+	set_scaling_to_map_size
+}
+
+create_terrain DEEP_WATER {
+	base_terrain SNOW
+	number_of_tiles 56
+	number_of_clumps 28
+	terrain_mask 1
+	spacing_to_other_terrain_types 5
+	beach_terrain ICE
+	set_avoid_player_start_areas 20
+	height_limits 0 0
+	set_scaling_to_map_size
+}
+
+create_terrain ICE {
+	base_terrain SNOW
+	land_percent 1
+	number_of_clumps 28
+	terrain_mask 1
+	spacing_to_other_terrain_types 5
+	beach_terrain ICE
+	set_avoid_player_start_areas 20
+	height_limits 0 0
+	set_scaling_to_map_size
+}
+
+create_terrain BEACH_GRAVEL_UNSAILABLE {
+	base_terrain DESERT
+	land_percent 100
+	number_of_clumps 1200
+	terrain_mask 0
+	spacing_to_other_terrain_types 0
+	beach_terrain ICE 
 }
 
 /* =================================================================================================== */
@@ -762,7 +909,7 @@ create_object OUTPOST {
 	terrain_to_place_on 
 	ignore_terrain_restrictions
 	terrain_to_place_on ICE_BEACH
-	second_object DOCK
+	second_object MILL
 	find_closest_to_map_center
 	temp_min_distance_group_placement 5
 	actor_area_to_place_in 199
@@ -873,6 +1020,7 @@ create_object TREE_K {
 	layer_to_place_on WATER_AZURE
 		min_distance_to_players 23
 		resource_delta 975
+		set_scaling_to_map_size
 }
 
 create_object TREE_J {
@@ -887,6 +1035,21 @@ create_object TREE_J {
 	layer_to_place_on WATER_AZURE
 		min_distance_to_players 23
 		resource_delta 475
+		set_scaling_to_map_size
+}
+
+create_object TREE_J {
+	number_of_groups 25
+	number_of_objects 1
+	group_placement_radius 2
+	temp_min_distance_group_placement 10
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 2
+	layer_to_place_on WATER_AZURE
+		min_distance_to_players 23
+		resource_delta 475
+		set_scaling_to_map_size
 }
 
 create_object TREE_I {
@@ -904,6 +1067,7 @@ create_object TREE_I {
 		set_facet 1
 		actor_area 872
 		actor_area_radius 2
+		set_scaling_to_map_size
 }
 
 create_object TREE_I {
@@ -940,7 +1104,7 @@ create_object TREE_J {
 
 create_object DLC_ORANGEBUSH {
 	number_of_objects 1
-	number_of_groups 8
+	number_of_groups 6
 	temp_min_distance_group_placement 4
 	group_placement_radius 2
 	set_tight_grouping
@@ -951,7 +1115,18 @@ create_object DLC_ORANGEBUSH {
 	min_distance_to_players 5
 	set_circular_placement
 	find_closest
+	second_object DLC_GOOSE
 }
+
+	create_object FENCE {
+		set_place_for_every_player
+		min_distance_to_players 11
+		max_distance_to_players 11
+		terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
+		set_facet 3
+		actor_area 201
+		actor_area_radius 6
+	}
 
 
 create_object TEMP
@@ -968,6 +1143,7 @@ create_object TEMP
 	second_object DEER
 	ignore_terrain_restrictions
 	temp_min_distance_group_placement  10
+	avoid_actor_area 6
 }
 
 #const CLIFF1 264
@@ -1000,6 +1176,187 @@ create_object TEMP
 #const CLIFF26 1865
 #const CLIFF27 1866
 
+if 2_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 2
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 3_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 2
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 4_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 4
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 5_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 3
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 5
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 5
+	 number_of_objects 2
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 6_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 5
+	 number_of_objects 4
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 7
+	 number_of_objects 4
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 7
+	 number_of_objects 4
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+if 7_PLAYER_GAME
 create_object CLIFF19
 {
      number_of_groups 6
@@ -1034,6 +1391,46 @@ create_object CLIFF19
      set_tight_grouping
 	 set_facet 6
 	 terrain_to_place_on SNOW_LIGHT
+endif
+if 8_PLAYER_GAME
+create_object CLIFF19
+{
+     number_of_groups 6
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 12
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 9
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 9
+	 terrain_to_place_on SNOW_LIGHT
+}
+
+create_object CLIFF19
+{
+     number_of_groups 9
+	 number_of_objects 5
+	 group_placement_radius 0
+      min_distance_to_players 25
+	  temp_min_distance_group_placement 5
+     set_tight_grouping
+	 set_facet 6
+	 terrain_to_place_on SNOW_LIGHT
+endif
+
+
+
 }
 	#const MOUNTAIN_SNOW_A 1045 /* A rocky mountain covered in snow */
 	#const MOUNTAIN_SNOW_B 1046 /* A rocky mountain covered in snow */
@@ -1049,6 +1446,8 @@ create_object MOUNTAIN_SNOW_A
 	  temp_min_distance_group_placement 0
      set_tight_grouping
 	 layer_to_place_on DLC_ROCK
+	 actor_area 204
+	 actor_area_radius 8
 }
 
 create_object MOUNTAIN_SNOW_C
@@ -1060,6 +1459,8 @@ create_object MOUNTAIN_SNOW_C
 	  temp_min_distance_group_placement 0
      set_tight_grouping
 	 layer_to_place_on DLC_ROCK
+	 actor_area 204
+	 actor_area_radius 8
 }
 
 create_object CLIFF19
@@ -1104,6 +1505,7 @@ create_object RELIC {
 	number_of_objects 5
     min_distance_to_players 30
 	temp_min_distance_group_placement 40
+	avoid_actor_area 204
 }
 
 
@@ -1117,19 +1519,20 @@ if KING_OT_HILL
 endif
 
 
-
+/*
 create_object DLC_GOOSE {
 	number_of_objects 4
 	set_loose_grouping
 	set_place_for_every_player
-	min_distance_to_players 5
-	max_distance_to_players 7
+	min_distance_to_players 6
+	max_distance_to_players 9
+	group_placement_radius 4
 	find_closest
 	actor_area 6
 	actor_area_radius 1
-	min_distance_group_placement 2
+	min_distance_group_placement 1
 }
-
+*/
 
 /* far sheep */
 create_object DLC_GOOSE {
@@ -1142,8 +1545,9 @@ create_object DLC_GOOSE {
 	max_distance_to_players 19
 	temp_min_distance_group_placement 7
 	avoid_forest_zone 1
+	avoid_actor_area 204
 }
-
+/*
 create_object WOLF {
 	number_of_objects 1
 	number_of_groups 6
@@ -1154,6 +1558,7 @@ create_object WOLF {
 	min_distance_to_players 25
 	set_place_for_every_player
 }
+*/
 
 
 /* birds */
@@ -1211,10 +1616,18 @@ create_object GATE_CORNER
 }
 */
 
-	create_object FENCE {
-		set_place_for_every_player
-		min_distance_to_players 11
-		max_distance_to_players 11
-		terrain_to_place_on BEACH_GRAVEL_UNSAILABLE
+create_object TREE_I {
+	number_of_groups 250
+	number_of_objects 3
+	group_placement_radius 1
+	temp_min_distance_group_placement 27
+	set_tight_grouping
+	set_gaia_object_only
+	min_distance_group_placement 0
+	avoid_forest_zone 10
+		min_distance_to_players 25
+		resource_delta 175
 		set_facet 3
-	}
+		second_object TREE_I
+		terrain_to_place_on SNOW
+}
