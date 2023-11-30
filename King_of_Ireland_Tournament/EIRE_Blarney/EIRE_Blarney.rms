@@ -28,16 +28,27 @@ effect_amount GAIA_SET_ATTRIBUTE BLACKSMITH ATTR_LINE_OF_SIGHT 0
 effect_amount GAIA_SET_ATTRIBUTE ARCHERY_RANGE ATTR_LINE_OF_SIGHT 0
 effect_amount GAIA_SET_ATTRIBUTE STABLE ATTR_LINE_OF_SIGHT 0
 effect_amount GAIA_SET_ATTRIBUTE SIEGE_WORKSHOP ATTR_LINE_OF_SIGHT 0
-/* Upgrade Outpost to Palisade Wall */
-effect_amount GAIA_SET_ATTRIBUTE OUTPOST ATTR_ARMOR 1026
-effect_amount GAIA_SET_ATTRIBUTE OUTPOST ATTR_ARMOR 773
-effect_amount GAIA_UPGRADE_UNIT OUTPOST PALISADE_WALL 0
-effect_amount GAIA_SET_ATTRIBUTE OUTPOST ATTR_TERRAIN_ID 0
-effect_amount GAIA_SET_ATTRIBUTE OUTPOST ATTR_LINE_OF_SIGHT 1
-effect_amount SET_ATTRIBUTE FLAG_A ATTR_LINE_OF_SIGHT 1
-effect_amount SET_ATTRIBUTE FLAG_A ATTR_HITPOINTS 0
+/* Setting Up Blocker (Prevent Walls From Spawning Inside Castle) */
+#const BLOCKER 1776
+effect_amount GAIA_SET_ATTRIBUTE BLOCKER ATTR_HITPOINTS 0 
 /* Upgrading Health of Starting Paviliion */
 effect_amount SET_ATTRIBUTE PAVILION ATTR_HITPOINTS 2000
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
 <ELEVATION_GENERATION>
 create_elevation 3
 {
@@ -280,14 +291,12 @@ create_terrain GRASS
 #const FORTIFIED_GATE_DOWN 85
 #const FORTIFIED_GATE_UP 63
 #const GRASS_PATCH 301
-#const ON_GRID 278
+#const OFF_GRID 647
 #const PLANT 818
 #const PLANT_DEAD 1365
 #const SHRUB_GREEN 1362
 #const TREE_REED 1350
 #const UNDERBRUSH 1353
-#const WALL_AVOIDANCE_1 278
-#const WALL_AVOIDANCE_2 278
 #const WEEDS 1364
 if TINY_MAP
 create_actor_area rnd(60,60) rnd(60,60) 1 rnd(0,0)
@@ -350,7 +359,7 @@ create_actor_area rnd(132,132) rnd(108,108) 7 rnd(0,0)
 create_actor_area rnd(108,108) rnd(132,132) 8 rnd(0,0)
 create_actor_area rnd(108,108) rnd(108,108) 9 rnd(0,0)
 endif
-create_object ON_GRID
+create_object OFF_GRID
 {
 set_place_for_every_player
 number_of_groups 1
@@ -365,7 +374,7 @@ create_object PH10_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 11
-actor_area_radius 11
+actor_area_radius 10
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -376,7 +385,7 @@ create_object PH11_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 12
-actor_area_radius 10
+actor_area_radius 11
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -387,7 +396,7 @@ create_object PH12_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 13
-actor_area_radius 2
+actor_area_radius 16
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -398,7 +407,7 @@ create_object PH13_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 14
-actor_area_radius 4
+actor_area_radius 24
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -409,7 +418,7 @@ create_object PH14_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 15
-actor_area_radius 5
+actor_area_radius 15
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -420,7 +429,7 @@ create_object PH15_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 16
-actor_area_radius 1
+actor_area_radius 5
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -431,7 +440,7 @@ create_object PH16_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 17
-actor_area_radius 3
+actor_area_radius 2
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -442,7 +451,7 @@ create_object PH17_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 18
-actor_area_radius 14
+actor_area_radius 4
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -453,7 +462,7 @@ create_object PH18_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 19
-actor_area_radius 15
+actor_area_radius 1
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -464,7 +473,18 @@ create_object PH19_1
 set_place_for_every_player
 number_of_groups 1
 actor_area 20
-actor_area_radius 16
+actor_area_radius 3
+actor_area_to_place_in 10
+force_placement
+find_closest
+}
+#const PH20_1 647
+create_object PH20_1
+{
+set_place_for_every_player
+number_of_groups 1
+actor_area 21
+actor_area_radius 14
 actor_area_to_place_in 10
 force_placement
 find_closest
@@ -498,8 +518,7 @@ create_object FORTIFIED_GATE_UP
 set_gaia_object_only
 set_gaia_unconvertible
 terrain_to_place_on DIRT
-force_placement
-actor_area 21
+actor_area 22
 actor_area_radius 4
 actor_area_to_place_in 5
 }
@@ -508,8 +527,7 @@ create_object FORTIFIED_GATE_UP
 set_gaia_object_only
 set_gaia_unconvertible
 terrain_to_place_on DIRT
-force_placement
-actor_area 22
+actor_area 23
 actor_area_radius 4
 actor_area_to_place_in 4
 }
@@ -518,8 +536,7 @@ create_object FORTIFIED_GATE_DOWN
 set_gaia_object_only
 set_gaia_unconvertible
 terrain_to_place_on DIRT
-force_placement
-actor_area 23
+actor_area 24
 actor_area_radius 4
 actor_area_to_place_in 3
 }
@@ -528,8 +545,7 @@ create_object FORTIFIED_GATE_DOWN
 set_gaia_object_only
 set_gaia_unconvertible
 terrain_to_place_on DIRT
-force_placement
-actor_area 24
+actor_area 25
 actor_area_radius 4
 actor_area_to_place_in 2
 }
@@ -537,7 +553,7 @@ create_object CASTLE
 {
 set_gaia_object_only
 set_gaia_unconvertible
-actor_area 25
+actor_area 26
 actor_area_radius 40
 actor_area_to_place_in 1
 }
@@ -548,19 +564,8 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DIRT
-actor_area 26
-actor_area_radius 0
-}
-#const PH26_2 647
-create_object PH26_2
-{
-number_of_groups 9320
-set_scaling_to_map_size
 actor_area 27
-actor_area_radius 4
-actor_area_to_place_in 26
-force_placement
-find_closest
+actor_area_radius 0
 }
 #const PH27_2 647
 create_object PH27_2
@@ -568,8 +573,8 @@ create_object PH27_2
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 28
-actor_area_radius 6
-actor_area_to_place_in 26
+actor_area_radius 4
+actor_area_to_place_in 27
 force_placement
 find_closest
 }
@@ -579,179 +584,310 @@ create_object PH28_2
 number_of_groups 9320
 set_scaling_to_map_size
 actor_area 29
-actor_area_radius 12
-actor_area_to_place_in 26
+actor_area_radius 6
+actor_area_to_place_in 27
 force_placement
 find_closest
 }
-create_object WALL_AVOIDANCE_1
+#const PH29_2 647
+create_object PH29_2
 {
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 100000
-set_scaling_to_map_size
-terrain_to_place_on R2
-actor_area 30
-actor_area_radius 0
-avoid_actor_area 11
-find_closest
-}
-#const PH30_3 647
-create_object PH30_3
-{
-number_of_groups 100000
-set_scaling_to_map_size
-actor_area 31
-actor_area_radius 1
-actor_area_to_place_in 30
-force_placement
-find_closest
-}
-#const PH31_3 647
-create_object PH31_3
-{
-number_of_groups 100000
-set_scaling_to_map_size
-actor_area 32
-actor_area_radius 0
-actor_area_to_place_in 30
-force_placement
-find_closest
-}
-create_object WALL_AVOIDANCE_2
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 100000
-set_scaling_to_map_size
-terrain_to_place_on R2
-actor_area 33
-actor_area_radius 0
-avoid_actor_area 31
-find_closest
-}
-create_object FLAG_A
-{
-set_place_for_every_player
-number_of_groups 100000
-set_scaling_to_map_size
-terrain_to_place_on R2
-actor_area_to_place_in 11
-avoid_actor_area 12
-}
-create_object OUTPOST
-{
-set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on R2
-avoid_actor_area 32
-avoid_actor_area 33
+actor_area 30
+actor_area_radius 12
+actor_area_to_place_in 27
+force_placement
 find_closest
+}
+create_object BLOCKER
+{
+set_place_for_every_player
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_ROADGRAVEL
+actor_area_to_place_in 12
+avoid_actor_area 11
 }
 create_object PAVILION
 {
 set_place_for_every_player
 terrain_to_place_on DLC_ROADGRAVEL
-avoid_actor_area 27
+avoid_actor_area 28
 find_closest
 }
-create_object FARM
+create_object GRASS_PATCH
 {
-set_place_for_every_player
-set_gaia_object_only
-force_placement
-actor_area_to_place_in 14
-avoid_actor_area 13
-avoid_actor_area 28
-}
-create_object STONE
-{
-set_place_for_every_player
 set_gaia_object_only
 set_gaia_unconvertible
-number_of_objects 2
-resource_delta 350
-number_of_groups 2
-set_tight_grouping
-avoid_forest_zone 1
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
+temp_min_distance_group_placement 4
+actor_area 31
+actor_area_radius 4
+}
+create_object FLOWER_BED
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
+temp_min_distance_group_placement 4
+actor_area 32
+actor_area_radius 4
+avoid_actor_area 31
+find_closest
+}
+create_object UNDERBRUSH
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
+temp_min_distance_group_placement 4
+actor_area 33
+actor_area_radius 4
+avoid_actor_area 31
+avoid_actor_area 32
+find_closest
+}
+create_object WEEDS
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
 temp_min_distance_group_placement 4
 actor_area 34
-actor_area_radius 2
-actor_area_to_place_in 11
-avoid_actor_area 15
-avoid_actor_area 28
-}
-create_object GOLD
-{
-set_place_for_every_player
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_objects 2
-resource_delta -600
-set_tight_grouping
-avoid_forest_zone 1
-temp_min_distance_group_placement 4
-actor_area_to_place_in 11
-avoid_actor_area 15
-avoid_actor_area 28
-avoid_actor_area 34
-}
-create_object VILLAGER_BASE_F
-{
-set_place_for_every_player
-actor_area 35
-actor_area_radius 1
-avoid_actor_area 16
-avoid_actor_area 28
+actor_area_radius 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
 find_closest
 }
-create_object VILLAGER_BASE_F
+create_object BUSH_GREEN
 {
-set_place_for_every_player
-number_of_objects 2
-set_tight_grouping
-avoid_actor_area 16
-avoid_actor_area 28
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
+temp_min_distance_group_placement 4
+actor_area 35
+actor_area_radius 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+find_closest
+}
+create_object SHRUB_GREEN
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
+temp_min_distance_group_placement 4
+actor_area 36
+actor_area_radius 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
 avoid_actor_area 35
 find_closest
 }
-create_object DLC_COW
+create_object PLANT
 {
-set_place_for_every_player
 set_gaia_object_only
-number_of_objects 4
-resource_delta rnd(0,100)
-set_tight_grouping
-avoid_actor_area 17
-avoid_actor_area 28
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
+temp_min_distance_group_placement 4
+actor_area 37
+actor_area_radius 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
 find_closest
 }
-create_object WATCH_TOWER
+create_object PLANT_DEAD
 {
-set_place_for_every_player
-number_of_groups 4
-temp_min_distance_group_placement 6
-actor_area_to_place_in 19
-avoid_actor_area 18
-avoid_actor_area 29
-}
-create_object BOAR
-{
-set_place_for_every_player
 set_gaia_object_only
-resource_delta rnd(0,100)
-number_of_groups 2
-temp_min_distance_group_placement 6
-actor_area_to_place_in 11
-avoid_actor_area 15
-avoid_actor_area 28
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
+place_on_forest_zone
+temp_min_distance_group_placement 4
+actor_area 38
+actor_area_radius 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
+find_closest
 }
-create_object SCOUT
+create_object DLC_FERN_PATCH
 {
-set_place_for_every_player
-avoid_actor_area 19
-avoid_actor_area 25
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on GRASS3
+place_on_forest_zone
+temp_min_distance_group_placement 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
+avoid_actor_area 38
+find_closest
+}
+create_object GRASS_PATCH
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+temp_min_distance_group_placement 4
+actor_area 39
+actor_area_radius 4
+}
+create_object FLOWER_BED
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+temp_min_distance_group_placement 4
+avoid_actor_area 39
+find_closest
+}
+create_object UNDERBRUSH
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+temp_min_distance_group_placement 4
+avoid_actor_area 31
+avoid_actor_area 32
+find_closest
+}
+create_object WEEDS
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+temp_min_distance_group_placement 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+find_closest
+}
+create_object BUSH_GREEN
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+temp_min_distance_group_placement 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+find_closest
+}
+create_object SHRUB_GREEN
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+temp_min_distance_group_placement 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+find_closest
+}
+create_object PLANT
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+temp_min_distance_group_placement 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+find_closest
+}
+create_object PLANT_DEAD
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+place_on_forest_zone
+temp_min_distance_group_placement 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
+find_closest
+}
+create_object DLC_FERN_PATCH
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on G
+place_on_forest_zone
+temp_min_distance_group_placement 4
+avoid_actor_area 31
+avoid_actor_area 32
+avoid_actor_area 33
+avoid_actor_area 34
+avoid_actor_area 35
+avoid_actor_area 36
+avoid_actor_area 37
+avoid_actor_area 38
 find_closest
 }
 create_object FORAGE
@@ -766,9 +902,9 @@ set_scaling_to_map_size
 terrain_to_place_on GRASS3
 avoid_forest_zone 2
 temp_min_distance_group_placement 8
-actor_area 36
+actor_area 40
 actor_area_radius 6
-avoid_actor_area 20
+avoid_actor_area 13
 find_closest
 }
 create_object GOLD
@@ -783,9 +919,9 @@ terrain_to_place_on G
 max_distance_to_other_zones 2
 avoid_forest_zone 3
 temp_min_distance_group_placement 12
-actor_area 37
+actor_area 41
 actor_area_radius 6
-avoid_actor_area 36
+avoid_actor_area 40
 find_closest
 }
 create_object STONE
@@ -800,27 +936,20 @@ terrain_to_place_on G
 max_distance_to_other_zones 2
 avoid_forest_zone 3
 temp_min_distance_group_placement 12
-avoid_actor_area 36
-avoid_actor_area 37
+avoid_actor_area 40
+avoid_actor_area 41
 find_closest
 }
 create_object DEER
 {
 set_gaia_object_only
-set_gaia_unconvertible
 number_of_objects rnd(2,5)
 number_of_groups 9320
 set_tight_grouping
 set_scaling_to_map_size
 terrain_to_place_on G
-temp_min_distance_group_placement 12
-}
-create_object TREE_REED
-{
-set_place_for_every_player
-set_gaia_object_only
-set_gaia_unconvertible
-avoid_actor_area 13
+temp_min_distance_group_placement 16
+avoid_actor_area 14
 find_closest
 }
 create_object TREE_REED
@@ -831,7 +960,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on MUD
 temp_min_distance_group_placement 4
-avoid_actor_area 19
+avoid_actor_area 15
 find_closest
 }
 create_object TREE_REED
@@ -843,288 +972,15 @@ set_scaling_to_map_size
 terrain_to_place_on DLC_WETBEACH
 temp_min_distance_group_placement 4
 }
-create_object GRASS_PATCH
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-temp_min_distance_group_placement 4
-actor_area 38
-actor_area_radius 4
-}
-create_object FLOWER_BED
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-temp_min_distance_group_placement 4
-actor_area 39
-actor_area_radius 4
-avoid_actor_area 38
-find_closest
-}
-create_object UNDERBRUSH
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-temp_min_distance_group_placement 4
-actor_area 40
-actor_area_radius 4
-avoid_actor_area 38
-avoid_actor_area 39
-find_closest
-}
-create_object WEEDS
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-temp_min_distance_group_placement 4
-actor_area 41
-actor_area_radius 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-find_closest
-}
-create_object BUSH_GREEN
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-temp_min_distance_group_placement 4
-actor_area 42
-actor_area_radius 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-find_closest
-}
-create_object SHRUB_GREEN
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-temp_min_distance_group_placement 4
-actor_area 43
-actor_area_radius 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-find_closest
-}
-create_object PLANT
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-temp_min_distance_group_placement 4
-actor_area 44
-actor_area_radius 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-avoid_actor_area 43
-find_closest
-}
-create_object PLANT_DEAD
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-place_on_forest_zone
-temp_min_distance_group_placement 4
-actor_area 45
-actor_area_radius 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-avoid_actor_area 43
-avoid_actor_area 44
-find_closest
-}
-create_object DLC_FERN_PATCH
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on GRASS3
-place_on_forest_zone
-temp_min_distance_group_placement 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-avoid_actor_area 43
-avoid_actor_area 44
-avoid_actor_area 45
-find_closest
-}
-create_object GRASS_PATCH
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-temp_min_distance_group_placement 4
-actor_area 46
-actor_area_radius 4
-}
-create_object FLOWER_BED
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-temp_min_distance_group_placement 4
-avoid_actor_area 46
-find_closest
-}
-create_object UNDERBRUSH
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-temp_min_distance_group_placement 4
-avoid_actor_area 38
-avoid_actor_area 39
-find_closest
-}
-create_object WEEDS
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-temp_min_distance_group_placement 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-find_closest
-}
-create_object BUSH_GREEN
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-temp_min_distance_group_placement 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-find_closest
-}
-create_object SHRUB_GREEN
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-temp_min_distance_group_placement 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-find_closest
-}
-create_object PLANT
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-temp_min_distance_group_placement 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-avoid_actor_area 43
-find_closest
-}
-create_object PLANT_DEAD
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-place_on_forest_zone
-temp_min_distance_group_placement 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-avoid_actor_area 43
-avoid_actor_area 44
-find_closest
-}
-create_object DLC_FERN_PATCH
-{
-set_gaia_object_only
-set_gaia_unconvertible
-number_of_groups 9320
-set_scaling_to_map_size
-terrain_to_place_on G
-place_on_forest_zone
-temp_min_distance_group_placement 4
-avoid_actor_area 38
-avoid_actor_area 39
-avoid_actor_area 40
-avoid_actor_area 41
-avoid_actor_area 42
-avoid_actor_area 43
-avoid_actor_area 44
-avoid_actor_area 45
-find_closest
-}
 create_object BARRELS
 {
 set_place_for_every_player
 set_gaia_object_only
-set_gaia_unconvertible
 number_of_objects 2
 number_of_groups 3
 set_tight_grouping
 temp_min_distance_group_placement 4
-avoid_actor_area 15
+avoid_actor_area 16
 find_closest
 }
 create_object RELIC
@@ -1145,7 +1001,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROADGRAVEL
 temp_min_distance_group_placement 16
-actor_area 47
+actor_area 42
 actor_area_radius 4
 }
 create_object BARRACKS
@@ -1156,9 +1012,9 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROADGRAVEL
 temp_min_distance_group_placement 16
-actor_area 48
+actor_area 43
 actor_area_radius 4
-avoid_actor_area 47
+avoid_actor_area 42
 find_closest
 }
 create_object STABLE
@@ -1169,10 +1025,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROADGRAVEL
 temp_min_distance_group_placement 16
-actor_area 49
+actor_area 44
 actor_area_radius 4
-avoid_actor_area 47
-avoid_actor_area 48
+avoid_actor_area 42
+avoid_actor_area 43
 find_closest
 }
 create_object ARCHERY_RANGE
@@ -1183,11 +1039,11 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROADGRAVEL
 temp_min_distance_group_placement 16
-actor_area 50
+actor_area 45
 actor_area_radius 4
-avoid_actor_area 47
-avoid_actor_area 48
-avoid_actor_area 49
+avoid_actor_area 42
+avoid_actor_area 43
+avoid_actor_area 44
 find_closest
 }
 create_object SIEGE_WORKSHOP
@@ -1198,10 +1054,10 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROADGRAVEL
 temp_min_distance_group_placement 16
-avoid_actor_area 47
-avoid_actor_area 48
-avoid_actor_area 49
-avoid_actor_area 50
+avoid_actor_area 42
+avoid_actor_area 43
+avoid_actor_area 44
+avoid_actor_area 45
 find_closest
 }
 create_object THROWING_AXEMAN
@@ -1211,36 +1067,155 @@ set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DLC_ROADGRAVEL
-avoid_actor_area 21
+if TINY_MAP temp_min_distance_group_placement 1 elseif SMALL_MAP temp_min_distance_group_placement 1 elseif MEDIUM_MAP temp_min_distance_group_placement 1 elseif LARGE_MAP temp_min_distance_group_placement 2 elseif HUGE_MAP temp_min_distance_group_placement 2 else temp_min_distance_group_placement 2 endif
 avoid_actor_area 22
 avoid_actor_area 23
 avoid_actor_area 24
-avoid_actor_area 27
+avoid_actor_area 25
+avoid_actor_area 28
 find_closest
 }
 create_object WOLF
 {
 set_gaia_object_only
-set_gaia_unconvertible
 number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on G
 temp_min_distance_group_placement 12
 }
+create_object TREE_REED
+{
+set_place_for_every_player
+set_gaia_object_only
+avoid_actor_area 17
+find_closest
+}
+create_object FARM
+{
+set_place_for_every_player
+set_gaia_object_only
+actor_area_to_place_in 18
+avoid_actor_area 17
+avoid_actor_area 29
+}
+create_object STONE
+{
+set_place_for_every_player
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_objects 2
+resource_delta 350
+number_of_groups 2
+set_tight_grouping
+avoid_forest_zone 1
+temp_min_distance_group_placement 4
+actor_area 46
+actor_area_radius 2
+actor_area_to_place_in 12
+avoid_actor_area 16
+avoid_actor_area 29
+}
+create_object GOLD
+{
+set_place_for_every_player
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_objects 2
+resource_delta -600
+set_tight_grouping
+avoid_forest_zone 1
+temp_min_distance_group_placement 4
+actor_area_to_place_in 12
+avoid_actor_area 16
+avoid_actor_area 29
+avoid_actor_area 46
+}
+create_object VILLAGER_BASE_F
+{
+set_place_for_every_player
+actor_area 47
+actor_area_radius 1
+avoid_actor_area 19
+avoid_actor_area 29
+find_closest
+}
+create_object VILLAGER_BASE_F
+{
+set_place_for_every_player
+number_of_objects 2
+set_tight_grouping
+avoid_actor_area 19
+avoid_actor_area 29
+avoid_actor_area 47
+find_closest
+}
+create_object DLC_COW
+{
+set_place_for_every_player
+number_of_objects 4
+resource_delta rnd( ,d)
+set_tight_grouping
+avoid_actor_area 20
+avoid_actor_area 29
+find_closest
+}
+create_object WATCH_TOWER
+{
+set_place_for_every_player
+number_of_groups 4
+temp_min_distance_group_placement 6
+actor_area_to_place_in 15
+avoid_actor_area 21
+avoid_actor_area 30
+}
+create_object BOAR
+{
+set_place_for_every_player
+set_gaia_object_only
+resource_delta rnd( ,d)
+number_of_groups 2
+temp_min_distance_group_placement 6
+actor_area_to_place_in 12
+avoid_actor_area 16
+avoid_actor_area 29
+}
+create_object SCOUT
+{
+set_place_for_every_player
+avoid_actor_area 15
+avoid_actor_area 26
+find_closest
+}
+create_object BLOCKER
+{
+set_place_for_every_player
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 500
+find_closest
+actor_area_to_place_in 11
+}
 /* END_OBJECTS_AUTOSCRIBE */
+create_object PALISADE_WALL
+{
+  set_place_for_every_player
+  min_distance_to_players 11
+  max_distance_to_players 11
+}
 if REGICIDE
 create_object KING
 {
   set_place_for_every_player
   find_closest
   force_placement
+  avoid_forest_zone 4
 }
 endif
 <LAND_GENERATION>
 base_terrain R2
 /* Manually Specified Lands */
 /* Starting_Land */
-/* LAND_AUTOSCRIBE */
+
 start_random
 percent_chance 50  #define C1
 percent_chance 50  #define C2
@@ -20936,3 +20911,4 @@ endif
 land_position rnd(49,49) rnd(63,63)
 }
 endif
+/* LAND_AUTOSCRIBE */
