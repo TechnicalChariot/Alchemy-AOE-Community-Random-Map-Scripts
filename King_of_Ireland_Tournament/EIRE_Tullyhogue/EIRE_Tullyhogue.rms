@@ -6,6 +6,7 @@
 /* Defining Foliage */
 <PLAYER_SETUP>
 direct_placement
+nomad_resources
 ai_info_map_type NOMAD 1 0 1
 #const G 0 /* Defining S as Grass */
 #const S 5 /* Defining L as Leaves */
@@ -29,13 +30,31 @@ effect_amount GAIA_SET_ATTRIBUTE ON_GRID_95 ATTR_STORAGE_VALUE 0
 effect_amount MOD_RESOURCE AMOUNT_RELIC_FOOD_TRICKLE ATTR_SET 15
 effect_amount MOD_RESOURCE RELIC_RATE ATTR_SET 15 /* normal rate appears to be 30 gold/min, so 10 cuts the rate to 1/3 of what it normally is, 15 to half of what it normally is. food trickle is modified through the xs file. */
 /* Modify Player Starting Resources */
-effect_amount MOD_RESOURCE AMOUNT_STARTING_GOLD ATTR_ADD 50
+/* effect_amount MOD_RESOURCE AMOUNT_STARTING_GOLD ATTR_ADD 50
 effect_amount MOD_RESOURCE AMOUNT_STARTING_STONE ATTR_ADD 150
 effect_amount MOD_RESOURCE AMOUNT_STARTING_WOOD ATTR_SET 275
-effect_amount MOD_RESOURCE AMOUNT_STARTING_WOOD ATTR_ADD -200
+effect_amount MOD_RESOURCE AMOUNT_STARTING_WOOD ATTR_ADD -200 */
 /* Allow Yurts to Support 10 Population Drain Player Gold if They Control Yurt (Equivalent One Relic) */
 effect_amount SET_ATTRIBUTE YURT ATTR_STORAGE_VALUE 10
-guard_state YURT AMOUNT_GOLD -36 2
+effect_amount SET_ATTRIBUTE YURT ATTR_DEAD_ID 712
+effect_amount SET_ATTRIBUTE YURT ATTR_CREATION_TIME 0
+/* guard_state YURT AMOUNT_GOLD -36 2 */
+/* Disabling Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
 <ELEVATION_GENERATION>
 create_elevation 7
 {
