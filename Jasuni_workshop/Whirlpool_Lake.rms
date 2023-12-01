@@ -163,10 +163,17 @@ create_land {
         number_of_tiles 1000 
     endif  */
     land_percent 100
-	top_border 48
-	bottom_border 48
-	left_border 48
-	right_border 48 /* minimal size on tiny and small maps. Medium maps is where it starts to enlarge */
+    if AT_LEAST_LARGE /* slightly increases the size of the lake, and provides more space for relics to spawn. */
+        top_border 47
+        bottom_border 47
+        left_border 47
+        right_border 47 
+    else
+        top_border 48
+        bottom_border 48
+        left_border 48
+        right_border 48 
+    endif
 	zone 1
 	other_zone_avoidance_distance 13
 	land_position 50 50
@@ -176,20 +183,38 @@ create_land {
 create_player_lands {
 	terrain_type TEMP_TERRAIN_A
 	land_percent 100
-    if TINY_MAP
-        circle_radius rnd(36,38) 0
-    elseif SMALL_MAP
-        circle_radius rnd(32,36) 0
-    elseif MEDIUM_MAP
-        circle_radius rnd(30,34) 0
-    elseif LARGE_MAP
-        circle_radius rnd(27,32) 0
-    elseif HUGE_MAP
-        circle_radius rnd(25,30) 0
-    elseif GIGANTIC_MAP
-        circle_radius rnd(22,27) 0
+    if DEBUG_MODE /* useful for checking minimum player distances */
+        if TINY_MAP
+            circle_radius 36 0
+        elseif SMALL_MAP
+            circle_radius 32 0
+        elseif MEDIUM_MAP
+            circle_radius 30 0
+        elseif LARGE_MAP
+            circle_radius 27 0
+        elseif HUGE_MAP
+            circle_radius 25 0
+        elseif GIGANTIC_MAP
+            circle_radius 22 0
+        else
+            circle_radius 13 0
+        endif
     else
-        circle_radius rnd(13,18) 0
+        if TINY_MAP
+            circle_radius rnd(36,38) 0
+        elseif SMALL_MAP
+            circle_radius rnd(32,36) 0
+        elseif MEDIUM_MAP
+            circle_radius rnd(30,34) 0
+        elseif LARGE_MAP
+            circle_radius rnd(27,32) 0
+        elseif HUGE_MAP
+            circle_radius rnd(25,30) 0
+        elseif GIGANTIC_MAP
+            circle_radius rnd(22,27) 0
+        else
+            circle_radius rnd(13,18) 0
+        endif
     endif
     zone 2
 	base_elevation 9 /* 9 is the lowest height at which sinkholes form, and forms the smallest sinkholes. */
@@ -606,9 +631,8 @@ create_object SALMON {
     temp_min_distance_group_placement 2
     min_distance_group_placement 1
 }
-/* note: on a tiny map, it is possible for just 4 relics to spawn. I don't consider this a serious issue. */
-create_object RELIC { /* scale to player numbers manually? 5/5/5/7/8/more
-    large, huge, gigantic, Ludicrous */
+/* note: on some of the map sizes, it is possible for a few less relics to spawn. These sizes include tiny and small. I don't consider this a serious issue. */
+create_object RELIC { 
     temp_min_distance_group_placement 1
     if LARGE_MAP
         number_of_objects 7
