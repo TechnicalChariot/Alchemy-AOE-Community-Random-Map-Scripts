@@ -916,6 +916,7 @@ create_object DLC_WILD_CAMEL {
     number_of_groups 4
     avoid_actor_area 5
     set_scaling_to_map_size
+    min_distance_to_players 40
 }
 
 
