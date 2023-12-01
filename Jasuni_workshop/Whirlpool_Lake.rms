@@ -13,12 +13,10 @@ TODOs
  take steps to fill in more sinkholes
 move more fish further into the middle lake? (at least for larger map sizes)
 adjust size of middle lake for different map sizes - not really possible to increase the size of the slope, since that is determined by the land's base_elevation, which is what determines the size of the sinkholes, so this is limited to increasing the amount of flat water.
-enable EMPIRE_WARS, DEATH_MATCH
-reduce map sizes (scale less - Tiny unchanged, larger map sizes increase by smaller amount)
+enable EMPIRE_WARS
 
 Randomly swap cracked and rock terrains? - will need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
 Add more neutral golds
-adjust map sizes to be smaller (see Socotra for comparison?)
 
 */
 
@@ -50,9 +48,23 @@ effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
  */
 #define TOURNAMENT_VERSION
 if 2_TEAM_GAME
+elseif 2_PLAYER_GAME
 elseif TOURNAMENT_VERSION
-    #const TRADE_COG_ENABLER 180
-    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+endif
+if DISABLE_TRADE
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
 endif
 /*
 #define THEME_A
@@ -501,35 +513,36 @@ else
     create_actor_area 0 478 3 0
     create_actor_area 478 478 4 0
 endif
+if DISABLE_TRADE
+else
+    create_object TRADING_POST {
+        actor_area_to_place_in 1 
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+    }
 
-create_object TRADING_POST {
-    actor_area_to_place_in 1 
-    set_place_for_every_player
-    set_gaia_object_only
-    min_distance_group_placement 3
-}
+    create_object TRADING_POST {
+        actor_area_to_place_in 2 
+        set_place_for_every_player /* sets one for every player, but not a serious issue. */
+        set_gaia_object_only
+        min_distance_group_placement 3
+    }
 
-create_object TRADING_POST {
-    actor_area_to_place_in 2 
-    set_place_for_every_player /* sets one for every player, but not a serious issue. */
-    set_gaia_object_only
-    min_distance_group_placement 3
-}
+    create_object TRADING_POST {
+        actor_area_to_place_in 3 
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+    }
 
-create_object TRADING_POST {
-    actor_area_to_place_in 3 
-    set_place_for_every_player
-    set_gaia_object_only
-    min_distance_group_placement 3
-}
-
-create_object TRADING_POST {
-    actor_area_to_place_in 4 
-    set_place_for_every_player
-    set_gaia_object_only
-    min_distance_group_placement 3
-}
-
+    create_object TRADING_POST {
+        actor_area_to_place_in 4 
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+    }
+endif
 create_object TERRAIN_BLOCKER {
     second_object PALMTREE
     number_of_objects 9320
