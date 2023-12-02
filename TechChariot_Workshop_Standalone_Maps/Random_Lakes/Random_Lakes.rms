@@ -9,7 +9,8 @@ behavior_version 1
 
 /* Setting Scout Properties */
 #const CHAND_BARDAI 1295
-effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_LINE_OF_SIGHT 2
+effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_LINE_OF_SIGHT 4
+effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_MOVE_SPEED 1   
 effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_HITPOINTS 5
 /* Removing Visual Effect of Dead Fish Trap */
 #const ON_GRID 278
