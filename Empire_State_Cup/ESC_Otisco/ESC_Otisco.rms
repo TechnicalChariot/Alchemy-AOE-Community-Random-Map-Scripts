@@ -2385,14 +2385,7 @@ avoid_actor_area 26
 find_closest
 }
 /* END_OBJECTS_AUTOSCRIBE */
-if REGICIDE
-create_object KING
-{
-set_place_for_every_player
-find_closest  
-}
-else
-endif
+
 <LAND_GENERATION>
 base_terrain M
 /* Manual Land */
