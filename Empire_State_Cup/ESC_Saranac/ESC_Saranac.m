@@ -9,10 +9,10 @@ clc
 tic
 disp(["Run Executed " datestr(clock) "..."])
 filestruc = dir; %Extract a structure of the files in this directory
-path = filestruc.folder; path = path(1:102); addpath(path) %Adding functions in main folder to the path
-files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms'); 
+path = filestruc.folder; path = path(1:89); addpath(genpath(path)) %Adding functions in main folder to the path
+files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 
-[Preface,LPM_exp,SigComb] = RMS_Manual_Land(filename);
+[Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
 off =  45;           %Player Starting Offset Angle
 b   =  0;            %Player Starting team bias factor
@@ -87,12 +87,12 @@ NewProbs = [{'start_random'}; ...
             {'percent_chance 10  #define C5'}; ...
             {'end_random'}];
 
-List(1:7,:) = [];   List = [NewProbs; List];         
-            
+List(1:7,:) = [];   List = [NewProbs; List];
+
 CODE = [Preface; List]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 RMS_ForgeV4(filename,CODE);
 
-%ObjectAutoscribeV8('ESC_Saranac.ods')
+%ObjectAutoscribeV9('ESC_Saranac.ods')
 
 disp(["Run Completed " datestr(clock) "..."])
 toc
