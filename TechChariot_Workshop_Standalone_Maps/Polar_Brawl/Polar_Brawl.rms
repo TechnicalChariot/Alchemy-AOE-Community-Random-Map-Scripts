@@ -75,7 +75,8 @@ base_terrain NNGB
 base_layer ICE
 
 create_land { terrain_type ROAD2 base_elevation 2 land_position 50 50 top_border 38 bottom_border 38 right_border 38 left_border 38 land_percent 20 zone 1 clumping_factor 30 if TINY_MAP base_size 8 elseif SMALL_MAP base_size 10 elseif MEDIUM_MAP base_size 12 elseif LARGE_MAP base_size 14 elseif HUGE_MAP base_size 16 else base_size 18 endif }
-create_player_lands { terrain_type GRAVEL base_elevation 4 base_size 2 circle_radius 16 0 top_border 30 bottom_border 30 right_border 30 left_border 30 land_percent 100 zone 1 }
+/* create_player_lands { terrain_type GRAVEL base_elevation 4 base_size 2 circle_radius 16 0 top_border 30 bottom_border 30 right_border 30 left_border 30 land_percent 100 zone 1 } */
+create_player_lands { terrain_type GRAVEL base_elevation 4 base_size 6 circle_radius 16 0 top_border 30 bottom_border 30 right_border 30 left_border 30 land_percent 100 zone 1 }
 
 create_land { terrain_type SNOW base_elevation 1 land_position 20 50 base_size 0 top_border 12 bottom_border 12 right_border 12 left_border 12 land_percent 100 zone 2 border_fuzziness 3 other_zone_avoidance_distance 1 }
 create_land { terrain_type SNOW base_elevation 1 land_position 50 20 base_size 0 top_border 12 bottom_border 12 right_border 12 left_border 12 land_percent 100 zone 2 border_fuzziness 3 other_zone_avoidance_distance 1 }
@@ -199,9 +200,9 @@ if FRONTIER_OBJECTS
     /* Gold Creation */
     create_object GOLD  { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 12 set_tight_grouping temp_min_distance_group_placement 12 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 }
     /* Relic Creation */
-    create_object RELIC { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size number_of_objects 1 set_tight_grouping temp_min_distance_group_placement 12 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 }
+    create_object RELIC { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size number_of_objects 1 set_tight_grouping temp_min_distance_group_placement 30 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 min_distance_to_players 24 }
     /* Deer Creation */
-    create_object DEER { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 4 set_loose_grouping temp_min_distance_group_placement 12 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 }
+    create_object DEER { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 4 set_loose_grouping temp_min_distance_group_placement 12 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 min_distance_to_players 24 }
     /* Wolf Creation */
     create_object DLC_SNOWLEOPARD { set_gaia_object_only number_of_groups 10000 set_scaling_to_map_size number_of_objects 1 set_loose_grouping temp_min_distance_group_placement 18 min_distance_group_placement 4 terrain_to_place_on SNOW avoid_forest_zone 4 }
 endif
@@ -223,12 +224,12 @@ if PLAYER_OBJECTS_GENERATION
     create_object TOWN_CENTER  { set_place_for_every_player find_closest }
     create_object VILLAGER     { set_place_for_every_player min_distance_to_players 5 max_distance_to_players 6 avoid_forest_zone 2 }
     create_object SCOUT { set_place_for_every_player min_distance_to_players 8 max_distance_to_players 9 avoid_forest_zone 2 }
-    create_object SHEEP        { set_place_for_every_player set_circular_placement min_distance_to_players 7 max_distance_to_players 8 number_of_groups 1 number_of_objects 4 set_loose_grouping resource_delta 100 } 
+    create_object SHEEP        { set_place_for_every_player set_circular_placement min_distance_to_players 7 max_distance_to_players 8 terrain_to_place_on GRAVEL number_of_groups 1 number_of_objects 4 set_loose_grouping resource_delta 100 } 
     if REGICIDE create_object KING { set_place_for_every_player find_closest } else endif
     /* Player-Assigned-Resources */
     create_object DLC_AFRICANBUSH_2 { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 3 max_distance_to_players 7 number_of_groups 5 temp_min_distance_group_placement 3 } 
     create_object GOLD   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 6 max_distance_to_players 8 number_of_groups 1 number_of_objects 7 set_tight_grouping group_placement_radius 1 avoid_forest_zone 3 min_distance_group_placement 6 } 
-    create_object DEER   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 10 max_distance_to_players 16 number_of_groups 1 number_of_objects rnd(5,6) set_loose_grouping avoid_forest_zone 3 min_distance_group_placement 3 resource_delta 50 } 
+    create_object DEER   { set_place_for_every_player set_gaia_object_only set_circular_placement min_distance_to_players 8 max_distance_to_players 16 number_of_groups 1 number_of_objects rnd(5,6) set_loose_grouping avoid_forest_zone 3 min_distance_group_placement 3 resource_delta 50 } 
 endif
 
 

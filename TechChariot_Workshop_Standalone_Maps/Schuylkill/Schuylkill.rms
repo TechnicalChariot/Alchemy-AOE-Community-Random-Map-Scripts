@@ -1,7 +1,13 @@
 /* Schuylkill
 A Random Map Script by ThorsChariot
 3.21.21 */
-#includeXS NomadTreatyTimer.xs
+/* #includeXS NomadTreatyTimer.xs */
+
+<PLAYER_SETUP>
+direct_placement
+nomad_resources
+ai_info_map_type NOMAD 1 0 0
+
 /* Defining Land Generation */
 #const L 32     
 /* Defining Terrain */
@@ -19,15 +25,10 @@ A Random Map Script by ThorsChariot
 #const PLANT_DEAD 1365
 /* Definitions Regarding Starting Scout -- Chand Bardai */
 #const CHAND_BARDAI        1295   /* A hero monk that can heal, but not convert or manipulate relics */
-#const ATTR_SHOWN_MELEE_ARMOR 48
-#const ATTR_SHOWN_PIERCE_ARMOR 49
 effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_LINE_OF_SIGHT 4 
 effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_MOVE_SPEED 1   
-effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_ARMOR 262145
-effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_ARMOR 196617
-effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_SHOWN_MELEE_ARMOR 1
-effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_SHOWN_PIERCE_ARMOR 9
-effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_HITPOINTS 30
+effect_amount SET_ATTRIBUTE CHAND_BARDAI ATTR_HITPOINTS 5
+
 /* Disabling Trade Carts and Cogs for Multi-team Games */
 if 2_TEAM_GAME
 else
@@ -45,10 +46,13 @@ else
   effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
 endif
 
-<PLAYER_SETUP>
-direct_placement
-nomad_resources
-ai_info_map_type NOMAD
+/* Enabling Loom by Default at the Start of the Game */
+#const RI_LOOM 22
+effect_amount MODIFY_TECH RI_LOOM ATTR_SET_STATE 3
+
+/* Modify Player Starting Resources */
+effect_amount MOD_RESOURCE AMOUNT_STARTING_WOOD ATTR_ADD 50
+
 <ELEVATION_GENERATION>
 create_elevation 7
 {
