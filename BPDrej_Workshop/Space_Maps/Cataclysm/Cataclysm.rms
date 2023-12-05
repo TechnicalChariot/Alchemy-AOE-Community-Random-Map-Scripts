@@ -1,6 +1,7 @@
 /* Cataclysm */
 /* This planet has been hit by its moon, scattering the inhabitants and resources. Players must venture back to their scarred homeworld and rebuild. */
-/* A Random Map Script by BPDrej - 11.11.23 */
+/* A Random Map Script by BPDrej */
+/* 11.11.23 */
 
 <PLAYER_SETUP>
 direct_placement
@@ -125,26 +126,21 @@ create_terrain FOREST
 	set_scale_by_size
 	clumping_factor 20
 	if TINY_MAP
-	land_percent 7
-	number_of_clumps 12
+	land_percent 6
+	number_of_clumps 10
 	spacing_to_other_terrain_types 4
 	elseif MEDIUM_MAP
-	land_percent 6
-	number_of_clumps 14
+	land_percent 5
+	number_of_clumps 12
 	spacing_to_other_terrain_types 5
 	elseif LARGE_MAP
-	land_percent 6
-	number_of_clumps 14
+	land_percent 5
+	number_of_clumps 12
 	spacing_to_other_terrain_types 7
 	elseif HUGE_MAP
-	land_percent 6
-	number_of_clumps 18
-	clumping_factor 20
+	land_percent 5
+	number_of_clumps 14
 	spacing_to_other_terrain_types 8
-	else
-	land_percent 7
-	number_of_clumps 18
-	spacing_to_other_terrain_types 10
 	endif
 }
 create_terrain LEAVES
@@ -415,7 +411,7 @@ create_object BOAR
 	number_of_groups 999
 	set_loose_grouping
 	set_gaia_object_only
-	temp_min_distance_group_placement  18
+	temp_min_distance_group_placement  24
 	avoid_forest_zone 2
 	terrain_to_place_on GRASS
 }
@@ -427,22 +423,19 @@ create_object RELIC
 	avoid_forest_zone 2
 	if TINY_MAP
 		number_of_objects 5
-		temp_min_distance_group_placement 10
+		temp_min_distance_group_placement 6
 	elseif SMALL_MAP
 		number_of_objects 5
-		temp_min_distance_group_placement 10
+		temp_min_distance_group_placement 6
 	elseif MEDIUM_MAP
 		number_of_objects 5
-		temp_min_distance_group_placement 10
+		temp_min_distance_group_placement 8
 	elseif LARGE_MAP
 		number_of_objects 7
-		temp_min_distance_group_placement 12
+		temp_min_distance_group_placement 9
 	elseif HUGE_MAP
 		number_of_objects 8
-		temp_min_distance_group_placement 13
-	else
-		number_of_objects 8
-		temp_min_distance_group_placement 15
+		temp_min_distance_group_placement 10
 	endif
 	terrain_to_place_on DLC_CRACKED
 }
@@ -518,7 +511,7 @@ create_object TRAP
 	set_loose_grouping
 	set_scaling_to_map_size
 	terrain_to_place_on DLC_WATER5
-	temp_min_distance_group_placement 7
+	temp_min_distance_group_placement 8
 	find_closest
 	actor_area 70
 	actor_area_radius 6
@@ -540,8 +533,6 @@ create_object DOLPHIN
 	temp_min_distance_group_placement 10
 	elseif HUGE_MAP
 	temp_min_distance_group_placement 10
-	else
-	temp_min_distance_group_placement 12
 	endif
 }
 

@@ -1,12 +1,7 @@
 /* WASTELAND */
-/* Players start in their own oases surrounded by small forest patches. Beyond lies lifeless sand dunes with sparse resources. Inspired by Chrazini's Desert Void. */
-/* A Random Map Script by BPDrej - 06.17.23 */
-
-
-<PLAYER_SETUP>
-random_placement
-
-#const ROCK2 1323
+/* Players start in their own oases surrounded by small forest patches. Beyond lies lifeless sand dunes with sparse resources. Inspired by Chrazini's Desert Void */
+/* A Random Map Script by BPDrej */
+/* 06.17.23 */
 
 /* Removing Trade Carts and Cogs for Multi-team Games */
 if 2_TEAM_GAME
@@ -25,6 +20,10 @@ else
     effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
 endif
 
+#const ROCK2 1323
+<PLAYER_SETUP>
+random_placement
+
 behavior_version 1
 
 <LAND_GENERATION>
@@ -33,20 +32,14 @@ base_terrain BEACH
 create_player_lands
 {
 	terrain_type DIRT
-	if TINY_MAP number_of_tiles 1250
-	elseif MEDIUM_MAP number_of_tiles 1500
-	elseif LARGE_MAP number_of_tiles 1750
-	else number_of_tiles 2000
-	endif
+	number_of_tiles 1000
 	base_size 12
 	clumping_factor 30
 	other_zone_avoidance_distance 10
-	left_border 5
-	right_border 5
-	top_border 5
-	bottom_border 5
-	if TINY_MAP circle_radius 35 0
-	else circle_radius 38 0
+	if TINY_MAP
+	circle_radius 33 0
+	else
+	circle_radius 40 0
 	endif
 }
 create_land
@@ -90,42 +83,42 @@ endif
 <TERRAIN_GENERATION>
 /* player starting forests  x1 */
 create_terrain GRASS2 { base_terrain DIRT number_of_clumps 1 land_percent 100 }
-create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 7 number_of_tiles 225 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
+create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_tiles 250 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 /* player starting forests  x1 */
 create_terrain GRASS2 { base_terrain DIRT number_of_clumps 1 land_percent 100 }
-create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 7 number_of_tiles 225  spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
+create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_tiles 250 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 /* player starting forests  x1 */
 create_terrain GRASS2 { base_terrain DIRT number_of_clumps 1 land_percent 100 }
-create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 7 number_of_tiles 225 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
+create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_tiles 250 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 /* player starting forests  x1 */
 create_terrain GRASS2 { base_terrain DIRT number_of_clumps 1 land_percent 100 }
-create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 7 number_of_tiles 225  spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
+create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_tiles 250 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 /* player starting forests  x1 */
 create_terrain GRASS2 { base_terrain DIRT number_of_clumps 1 land_percent 100 }
-create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 7 number_of_tiles 225 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
+create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_tiles 250 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 /* player starting forests  x1 */
 create_terrain GRASS2 { base_terrain DIRT number_of_clumps 1 land_percent 100 }
-create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 7 number_of_tiles 225  spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
+create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_tiles 250 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 /* player starting forests  x1 */
 create_terrain GRASS2 { base_terrain DIRT number_of_clumps 1 land_percent 100 }
-create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 7 number_of_tiles 225 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
+create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_tiles 250 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 /* player starting forests  x1 */
 create_terrain GRASS2 { base_terrain DIRT number_of_clumps 1 land_percent 100 }
-create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 7 number_of_tiles 225  spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
+create_terrain PALM_DESERT { base_terrain GRASS2 number_of_clumps 6 number_of_tiles 250 spacing_to_other_terrain_types 2 set_avoid_player_start_areas 15 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 create_terrain DIRT2 { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
 
@@ -161,7 +154,7 @@ create_terrain DESERT
 	elseif SMALL_MAP land_percent 5 number_of_clumps 125
 	elseif MEDIUM_MAP land_percent 5 number_of_clumps 125
 	elseif LARGE_MAP land_percent 7 number_of_clumps 175
-	else land_percent 7 number_of_clumps 60
+	elseif HUGE_MAP land_percent 7 number_of_clumps 60
 	endif
 	set_scale_by_groups
 }
@@ -171,22 +164,15 @@ create_terrain PALM_DESERT
 	land_percent 100
 	number_of_clumps 1000
 	set_scale_by_groups
-	if TINY_MAP
-	set_avoid_player_start_areas 30
-	elseif MEDIUM_MAP
-	set_avoid_player_start_areas 38
-	elseif LARGE_MAP
-	set_avoid_player_start_areas 40
-	else
-	set_avoid_player_start_areas 35
-	endif
 }
 create_terrain DESERT
-{ base_terrain BEACH land_percent 100 number_of_clumps 9320 }
-create_terrain DESERT
-{ base_terrain BEACH land_percent 100 number_of_clumps 9320 }
-create_terrain DESERT
-{ base_terrain BEACH land_percent 100 number_of_clumps 9320 }
+{
+	base_terrain BEACH
+	land_percent 100
+	number_of_clumps 1000
+	set_scale_by_groups
+	terrain_mask 1
+}
 create_terrain DLC_CRACKED
 {
 	base_terrain DESERT
@@ -324,7 +310,7 @@ create_object GOLD {
 	set_place_for_every_player
 	avoid_actor_area 20
 	min_distance_to_players 22
-	max_distance_to_players 24
+	max_distance_to_players 25
 	set_circular_placement
 	min_distance_group_placement 6
 	avoid_forest_zone 2
@@ -337,8 +323,6 @@ create_object STONE
 	set_tight_grouping
 	set_gaia_object_only
 	set_place_for_every_player
-	actor_area 31
-	actor_area_radius 10
 	avoid_actor_area 14
 	max_distance_to_players 18
 	set_circular_placement
@@ -352,7 +336,6 @@ create_object STONE {
 	set_gaia_object_only
 	set_place_for_every_player
 	avoid_actor_area 20
-	avoid_actor_area 31
 	min_distance_to_players 22
 	max_distance_to_players 25
 	set_circular_placement
@@ -437,7 +420,7 @@ create_object RELIC
 {
 	set_gaia_object_only
 	max_distance_to_other_zones 2
-	min_distance_to_players 30
+	min_distance_to_players 27
 	set_circular_placement
 	min_distance_group_placement 2
 	avoid_forest_zone 2
@@ -454,7 +437,7 @@ create_object RELIC
 	elseif LARGE_MAP
 		number_of_objects 7
 		temp_min_distance_group_placement 48
-	else
+	elseif HUGE_MAP
 		number_of_objects 8
 		temp_min_distance_group_placement 52
 	endif
@@ -467,14 +450,14 @@ create_object GOLD
 	set_tight_grouping
 	set_gaia_object_only
 	set_scaling_to_map_size
-	min_distance_to_players 35
+	min_distance_to_players 30
 	if TINY_MAP
 	temp_min_distance_group_placement 40
 	elseif MEDIUM_MAP
 	temp_min_distance_group_placement 45
 	elseif LARGE_MAP
 	temp_min_distance_group_placement 65
-	else
+	elseif HUGE_MAP
 	temp_min_distance_group_placement 65
 	endif
 	min_distance_group_placement 10
@@ -496,7 +479,7 @@ create_object DLC_BOULDER_A
 	temp_min_distance_group_placement 45
 	elseif LARGE_MAP
 	temp_min_distance_group_placement 65
-	else
+	elseif HUGE_MAP
 	temp_min_distance_group_placement 75
 	endif
 	actor_area 25
