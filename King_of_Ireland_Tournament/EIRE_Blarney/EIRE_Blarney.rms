@@ -1,9 +1,18 @@
 /* Blarney */
 /* A Random Map Script by TechChariot */
 /* 09.18.21 */
-#const L 32  /* Defining Land Creation Command */
+
+/* This map was inspired by Blarney Castle in County Cork, Ireland, built in the 13th century.
+
+Blarney is a closed, hideout style map where players start inside palisade walls surrounding the main
+neutral gaia unconvertible castle in the center of the map. As they advance through the ages, they must
+decide if it is better to go around Blarney Castle to get to the opponent, or through it. But beware – the
+castle has a garrison and will defend itself if attacked.  */
+
+
 <PLAYER_SETUP>
 direct_placement
+#const L 32  /* Defining Land Creation Command */
 /* Defining Terrain */
 #const G 0
 #const R2 11

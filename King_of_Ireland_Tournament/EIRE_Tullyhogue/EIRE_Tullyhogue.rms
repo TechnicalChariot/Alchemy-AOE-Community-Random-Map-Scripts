@@ -1,13 +1,20 @@
 /* Tullyhogue */
 /* A Random Map Script by TechChariot */
 /* 10.06.21 */
-#const L 32  /* Defining Land Creation Command */
-/* Defining Terrain */
-/* Defining Foliage */
+
+/* This map was inspired by Tullhogue Fort in County Tyrone of Northern Ireland, the ceremonial site where O’Neill clan chieftains were inaugurated. 
+   Following the narrow defeat of Hugh O’Neill during The Nine-Years war, the standing stone atop this hill was smashed to pieces by English soldiers
+   in the early 1600s, symbolizing their triumph over Irish rebels, the end of the Gaelic clan system, and English political domination for the next 300 years. 
+  
+   Tullyhogue is a closed, gold-rush and land-nomad style map where players start with 11 villagers and a homestead that is taxed by the O’Neills. 
+   A generally closed landscape, the unique feature of Tullyhogue is the mystery of what is behind the wood boundaries in each corner: relics or stone? 
+   Either way, it’s guarded by wolves. */
+
 <PLAYER_SETUP>
 direct_placement
 nomad_resources
 ai_info_map_type NOMAD 1 0 1
+#const L 32  /* Defining Land Creation Command */
 #const G 0 /* Defining S as Grass */
 #const S 5 /* Defining L as Leaves */
 #const G3 9 /* Defining G3 as Grass3 */
