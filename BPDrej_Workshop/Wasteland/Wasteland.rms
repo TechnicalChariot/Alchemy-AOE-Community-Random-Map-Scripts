@@ -1,7 +1,10 @@
 /* WASTELAND */
 /* Players start in their own oases surrounded by small forest patches. Beyond lies lifeless sand dunes with sparse resources. Inspired by Chrazini's Desert Void */
-/* A Random Map Script by BPDrej */
-/* 06.17.23 */
+/* A Random Map Script by BPDrej - 06.17.23 */
+
+<PLAYER_SETUP>
+random_placement
+#const ROCK2 1323
 
 /* Removing Trade Carts and Cogs for Multi-team Games */
 if 2_TEAM_GAME
@@ -19,10 +22,6 @@ else
     effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
     effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
 endif
-
-#const ROCK2 1323
-<PLAYER_SETUP>
-random_placement
 
 behavior_version 1
 

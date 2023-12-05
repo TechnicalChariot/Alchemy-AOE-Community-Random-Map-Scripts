@@ -1,7 +1,6 @@
 /* Cataclysm */
 /* This planet has been hit by its moon, scattering the inhabitants and resources. Players must venture back to their scarred homeworld and rebuild. */
-/* A Random Map Script by BPDrej */
-/* 11.11.23 */
+/* A Random Map Script by BPDrej - 11.11.23 */
 
 <PLAYER_SETUP>
 direct_placement

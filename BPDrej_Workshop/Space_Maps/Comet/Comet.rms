@@ -1,7 +1,7 @@
 /* Comet */
 /*A giant comet hurtling through space carries all the necessary resources for a growing empire.*/
-/* A Random Map Script by BPDrej */
-/* 01.31.23 */
+/* A Random Map Script by BPDrej - 01.31.23 */
+
 <PLAYER_SETUP>
 direct_placement
 #const L 32
