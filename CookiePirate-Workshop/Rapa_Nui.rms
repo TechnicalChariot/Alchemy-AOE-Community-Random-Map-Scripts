@@ -1,9 +1,17 @@
 /* Rapa Nui (Easter Island) */
-/* 11/27/2023 */
-/* A Random Map Script by Cookie Pirate */
-/* Version 1.02 -- Updated 11.28.23 -- added/clarified comments and revision history */
+/* A Random Map Script by CookiePirate -- Created 11.27.2023 */
+
+/* Rapa Nui, also known as Easter Island, is a small island in the South Pacific Ocean.
+Famous for its stone statues known as Moai, Rapa Nui is part of the Polynesian Triangle.
+The setting may look like any lovely tropical island, but don't be deceived! Danger awaits.
+Use your merchant to discover your surroundings and watch out for the Rapa Nui guardians.
+Find the resources you need to build the greatest Empire and be the Ariki (King) of Rapa Nui.
+Ka oho riva-riva! (Good luck!) */
+
 /* Version 1.01 -- Updated 11.28.23 -- modified neutral gold and starting sheep distance from TC */
-/* Version 1.00 -- Created/uploaded 11.27.23 */
+/* Version 1.02 -- Updated 11.28.23 -- added/clarified comments and revision history */
+/* Version 1.03 -- Updated 12.05.23 -- added text description and minor formatting adjustments */
+
 
 <PLAYER_SETUP>
 grouped_by_team
