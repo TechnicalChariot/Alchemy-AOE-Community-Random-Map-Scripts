@@ -1,5 +1,14 @@
 /*
 ANTARCTIC RIFT by Huehuecoyotl22 - October-November 2023
+
+* * * Map Description * * *
+Players start on snowy high elevations with walls made of cliffs. 
+Their starting wood is in 2 big piles of lumber, in addition 6 piles of food, 6+2+2 geese, 4 piles of gold and 5 piles of stone are closeby 
+(stone and gold always outside of the walls, close to gates, 6 geese, piles of food and 2 piles of lumber always inside). 
+All remaining stone and gold as well as wood in shape of shipwrecks, lumberpiles and driftwood are scattered across the lowlands. 
+Lastly, the center of the map is a rift where hot updrifting water has broken the ice and includes some fish, while lots of huntable penguins roam on the ice. 
+Players also start with a mill and an outpost next to the rift. 
+More snowy spots on the ice leave a little space for buildings, the center water cannot be sailed, but walked on.
  */
 
 #const AT_TEAM 2
