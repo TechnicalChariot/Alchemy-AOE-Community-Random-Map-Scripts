@@ -1,4 +1,14 @@
-/* SPINY FOREST by Huehuecoyotl22 - October-November 2023 */
+/*
+SPINY FOREST by Huehuecoyotl22 - October-November 2023
+
+* * * Map Description * * *
+Inspired by the Madagascar Spiny Forests. All cacti on the map can be harvested for wood like normal trees.
+Players start with 2 groups of units. 
+Group 1 are a mounted priest (can only heal with low range, but not convert), an elephant scout (can’t attack) and a packed town center. 
+They are surrounded by 2 piles of loot (contain 2000 gold each) and some cacti. 
+Group 2 are 3 villagers, a mule cart and a packed town center, surrounded by some trees, cacti, piles of wood, piles of food, a group of camels and 4 goats. 
+Camels can be hunted like deer. The map contains several big forests, gold and stone scattered around, groups of camels, piles of gold and stone, single boars, wolves and a few shallow ponds with turtles.
+ */
 
 <PLAYER_SETUP>
 random_placement  
