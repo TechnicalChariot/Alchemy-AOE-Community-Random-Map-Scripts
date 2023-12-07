@@ -533,7 +533,6 @@ effect_amount SET_ATTRIBUTE JUNK ATTR_TRAITS 16
 create_object OFF_GRID { second_object JUNK            terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 effect_amount SET_ATTRIBUTE TRADE_COG ATTR_TRAITS 16
 create_object OFF_GRID { second_object TRADE_COG       terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
-effect_amount SET_ATTRIBUTE TRANSPORT_SHIP ATTR_TRAITS 16
 create_object OFF_GRID { second_object TRANSPORT_SHIP  terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_TRAITS 16
 create_object OFF_GRID { second_object FISHING_SHIP    terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
@@ -846,3 +845,4 @@ endif }
 #const GRASS_6       1358 create_object GRASS_6 {      number_of_objects 50 ignore_terrain_restrictions   set_scaling_to_map_size                                                                                   set_gaia_object_only }
 #const GRASS_7       1359 create_object GRASS_7 {      number_of_objects 90 ignore_terrain_restrictions   set_scaling_to_map_size                                                                                   set_gaia_object_only }
 #const GRASS_8       1364 create_object GRASS_8 {      number_of_objects 20 ignore_terrain_restrictions   set_scaling_to_map_size                                                                                   set_gaia_object_only }
+
