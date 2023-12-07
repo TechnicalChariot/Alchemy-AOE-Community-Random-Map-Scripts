@@ -2,8 +2,8 @@
 
 Title: Whirlpool Lake
 Author: Jasuni
-date: 25 Nov 2023
-map info: This map features a lake that is filled with a whirlpool and plenty of fish. Players start in mangrove shallows that is connected to the lake through more shallows. The land surrounding the lake has lots of small depressions with cracked terrain and small stone deposits. 4 neutral markets are in the map's corners
+date originally published: 25 Nov 2023
+map info: This map features a lake that is filled with a whirlpool and plenty of fish. Players start in mangrove shallows that is connected to the lake through more shallows. The land surrounding the lake has lots of small depressions with cracked terrain and small stone deposits. 4 neutral markets are in the map's corners in 2-player and "2-team" games.
 
 
 ai_info_map_type XXX 0 0 0
@@ -42,10 +42,6 @@ endif /* else leave unchanged for tiny and ludicrous */
 effect_amount SET_ATTRIBUTE STONE_MINE_CLASS ATTR_STORAGE_VALUE 100
 effect_amount SET_ATTRIBUTE TREE_CLASS ATTR_TERRAIN_ID 9
 
-/* Removing Trade Cogs for Multi-team Games, as per Alchemy requirements. Trade Carts are not disabled due to the presence of neutral markets in the corners of the map, nor are any techs affecting trade carts.
-    #const SILK_ROAD 499
-effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
- */
 #define TOURNAMENT_VERSION
 if 2_TEAM_GAME
 elseif 2_PLAYER_GAME
@@ -53,6 +49,7 @@ elseif TOURNAMENT_VERSION
     #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
 endif
 if DISABLE_TRADE
+/* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
   #const TRADE_CART_ENABLER 161
   #const TRADE_COG_ENABLER 180
   #const TRADE_CARAVAN_ENABLER 48
