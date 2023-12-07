@@ -40,6 +40,7 @@ Comment those define commands if you want a normal start:
 random_placement
 /* ai_info_map_type BLACK_FOREST 0 0 0 */
 /* weather_type -3 16 0 -1 */
+effect_amount SET_ATTRIBUTE WARSHIP_CLASS ATTR_TRAIN_LOCATION -1
 
 if 2_TEAM_GAME
 else
@@ -515,20 +516,17 @@ if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 create_object SCOUT {                                                                                                                      set_place_for_every_player find_closest_to_map_center min_distance_to_players 3 max_distance_to_players 3 }
 create_object HOUSE                             { if NINE_VILLS number_of_objects 3 else number_of_objects 2 endif                         set_place_for_every_player find_closest }
 #const DONKEY 846 /* Can trade. */
-effect_amount SET_ATTRIBUTE DONKEY ATTR_TRAITS 16
 create_object DONKEY {                                                                                                                     set_place_for_every_player find_closest_to_map_edge min_distance_to_players 3 max_distance_to_players 3 }
 #const MERCHANT 1572
 effect_amount SET_ATTRIBUTE MERCHANT ATTR_TRAITS 16
 create_object MERCHANT {                                                                                                                   set_place_for_every_player find_closest_to_map_edge min_distance_to_players 3 max_distance_to_players 3 }
 #const JUNK 15 /* Can trade. */
 #const OFF_GRID 647
-effect_amount SET_ATTRIBUTE JUNK ATTR_TRAITS 16
 create_object OFF_GRID { second_object JUNK            terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
-effect_amount SET_ATTRIBUTE TRADE_COG ATTR_TRAITS 16
-create_object OFF_GRID { second_object TRADE_COG       terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
-effect_amount SET_ATTRIBUTE TRANSPORT_SHIP ATTR_TRAITS 16
+create_object OFF_GRID { second_object TRADE_COG       terrain_to_place_on WATER                                                          set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
+effect_amount SET_ATTRIBUTE TRANSPORT_SHIP ATTR_TRAITS 19                                                         set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 create_object OFF_GRID { second_object TRANSPORT_SHIP  terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
-effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE FISHING_SHIP ATTR_TRAITS 18
 create_object OFF_GRID { second_object FISHING_SHIP    terrain_to_place_on WATER                                                           set_place_for_every_player find_closest ignore_terrain_restrictions } /* Without this trick ships spawn in editor but not in skirmish. */
 
 /* 
