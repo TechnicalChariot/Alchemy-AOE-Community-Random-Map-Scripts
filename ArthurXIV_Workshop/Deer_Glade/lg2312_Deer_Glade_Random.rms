@@ -1,6 +1,6 @@
 
 
-        /* 20230823 Deer_Glade_Random_Random by ArthurXIV */
+        /* 20230823 Deer_Glade_Random_Random_Random by ArthurXIV */
  
 
 <PLAYER_SETUP>
@@ -16,8 +16,8 @@ elseif LUDIKRIS_MAP override_map_size 300
 endif
 
 if 2_PLAYER_GAME
+elseif 2_TEAM_GAME
 else
-    if 0_TEAM_GAME
 #const DONKEY             846
 #const JUNK               15
 #const CARAVANSERAI       1754
@@ -30,18 +30,8 @@ effect_amount SET_ATTRIBUTE JUNK         ATTR_TRAIN_LOCATION -1
 effect_amount SET_ATTRIBUTE CARAVANSERAI ATTR_TRAIN_LOCATION -1
 effect_amount DISABLE_TECH  TECH_TRADE_CARAVAN ATTR_DISABLE   1
 effect_amount DISABLE_TECH  TECH_SILK_ROAD     ATTR_DISABLE   1
-    endif
 endif
 
-effect_amount ADD_ATTRIBUTE TOWER_CLASS ATTR_STONE_COST 76
-
-#const TECH_FORT_PALISADE 525
-effect_amount ENABLE_TECH TECH_FORT_PALISADE ATTR_ENABLE 1
-effect_amount MODIFY_TECH TECH_FORT_PALISADE ATTR_SET_LOCATION 103
-effect_amount MODIFY_TECH TECH_FORT_PALISADE ATTR_SET_BUTTON 8
-effect_amount MODIFY_TECH TECH_FORT_PALISADE ATTR_WOOD_COST 400 /* Doesn't work, cost still fixed at 10wood. */
-effect_amount MODIFY_TECH TECH_FORT_PALISADE ATTR_HOTKEY_ID 1151
-/* Need to make the research time longer, currently it's just like 5-10 seconds. */
 <ELEVATION_GENERATION>
 #const GRASS_JUNGLE 60
 
