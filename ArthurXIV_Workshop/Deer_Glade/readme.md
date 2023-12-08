@@ -3,7 +3,7 @@ by ArthurXIV
 
 ### Map icon
 <img src="ArthurXIV_Deer_Glade.png" alt="Deer_Glade_icon" width="300" height="auto">
-Put this .png in the following folder if you want it displayed ingame in the map selection screen:  
+Rename this .png to fit the played map name and put it in the following folder if you want it displayed ingame in the map selection screen:  
 C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts
 
 ### Map features
@@ -23,6 +23,10 @@ C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-ma
 > Scout  
 > Merchant  
 > Donkey (can trade)  
+
+### Description
+My goal with this map was to have a sparse forest in the center where archers can slowly progress while cavalry raids bases by circling around that forest.
+I also wanted this center forest to be inhabited only by deer, so i pushed boars further towards the edges of the map.
 
 ### Introduction
 This green island located in a swampy area homes a throng of deer. You may find
