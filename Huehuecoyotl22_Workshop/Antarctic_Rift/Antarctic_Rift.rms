@@ -905,25 +905,33 @@ create_object TEMP
 	find_closest_to_map_center
 	number_of_objects 1
 	actor_area 199
-	actor_area_radius 19
-	second_object SHEEP
+	actor_area_radius 15
 	ignore_terrain_restrictions
-	terrain_to_place_on DLC_BLACK
 }
+create_object TEMP
+{
+	find_closest_to_map_center
+	number_of_objects 1
+	actor_area 179
+	actor_area_radius 8
+	ignore_terrain_restrictions
+}
+/*
 create_object OUTPOST {
 	set_place_for_every_player
 	number_of_objects 	1
 	actor_area 753
-	actor_area_radius 2
-	terrain_to_place_on 
+	actor_area_radius 5
 	ignore_terrain_restrictions
-	terrain_to_place_on ICE_BEACH
+	terrain_to_place_on ICE
 	second_object MILL
-	find_closest_to_map_center
-	temp_min_distance_group_placement 5
+	/* find_closest */
+	temp_min_distance_group_placement 7
 	actor_area_to_place_in 199
+	/* avoid_actor_area 753 */
+	avoid_actor_area 179
 }
-
+*/
 
 create_object TEMP
 {
@@ -966,6 +974,23 @@ create_object TEMP
   temp_min_distance_group_placement 3
   max_distance_to_other_zones 2
   resource_delta -999
+  actor_area 119
+  actor_area_radius 3
+  min_distance_to_players 33
+}
+
+create_object OUTPOST {
+	set_place_for_every_player
+	number_of_objects 	1
+	actor_area 753
+	actor_area_radius 5
+	ignore_terrain_restrictions
+	terrain_to_place_on ICE
+	second_object MILL
+	find_closest
+	temp_min_distance_group_placement 7
+	actor_area_to_place_in 119
+	/* avoid_actor_area 753 */
 }
 
 create_object GOLD {
