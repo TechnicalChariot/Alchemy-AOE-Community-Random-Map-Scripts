@@ -1,0 +1,943 @@
+/*
+
+Title: Whirlpool Lake
+Author: Jasuni
+date originally published: 25 Nov 2023
+map info: This map features a lake that is filled with a whirlpool and plenty of fish. Players start in mangrove shallows that is connected to the lake through more shallows. The land surrounding the lake has lots of small depressions with cracked terrain and small stone deposits. 4 neutral markets are in the map's corners in 2-player and "2-team" games.
+
+
+ai_info_map_type XXX 0 0 0
+
+
+TODOs
+ take steps to fill in more sinkholes
+move more fish further into the middle lake? (at least for larger map sizes)
+adjust size of middle lake for different map sizes - not really possible to increase the size of the slope, since that is determined by the land's base_elevation, which is what determines the size of the sinkholes, so this is limited to increasing the amount of flat water.
+enable EMPIRE_WARS
+
+Randomly swap cracked and rock terrains? - will need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
+Add more neutral golds
+
+*/
+
+<PLAYER_SETUP>
+random_placement
+behavior_version 2
+
+if SMALL_MAP
+override_map_size 136
+elseif MEDIUM_MAP
+override_map_size 152
+elseif LARGE_MAP
+override_map_size 172
+elseif HUGE_MAP
+override_map_size 186
+elseif GIGANTIC_MAP
+override_map_size 200
+endif /* else leave unchanged for tiny and ludicrous */
+
+#const STONE_MINE_CLASS 908
+#const REEDS 1350
+
+effect_amount SET_ATTRIBUTE STONE_MINE_CLASS ATTR_STORAGE_VALUE 100
+effect_amount SET_ATTRIBUTE TREE_CLASS ATTR_TERRAIN_ID 9
+
+#define TOURNAMENT_VERSION
+if 2_TEAM_GAME
+elseif 2_PLAYER_GAME
+elseif TOURNAMENT_VERSION
+    #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+endif
+if DISABLE_TRADE
+/* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
+/*
+#define THEME_A
+if THEME_A
+    #const TERRAIN_A 60
+endif
+
+other terrains used:
+DLC_ROCK
+DLC_CRACKED
+
+add herdable, passive huntables, defensive huntables, and predators into theme
+
+*/
+
+start_random
+    percent_chance 20 #define THEME_OPTION_A
+    percent_chance 20 #define THEME_OPTION_B
+    percent_chance 20 #define THEME_OPTION_C
+    percent_chance 20 #define THEME_OPTION_D
+    percent_chance 20 #define THEME_OPTION_E
+end_random
+#define THEME_DESERT
+if THEME_DESERT
+    #const ORIG_TERRAIN 6 /* DIRT */
+    #const TEMP_TERRAIN_A 14 /* Desert */
+    #const WATER_TERRAIN 1 /* Water */
+    #const LAND_TERRAIN_A 11 /* Dirt 2 */
+    #const LAND_TERRAIN_B 3 /* Dirt 3 */
+    #const SHALLOW_TERRAIN 54 /* DLC_MANGROVESHALLOW */
+    #const FOREST_TERRAIN_A 13 /* PALM_DESERT */
+    #const FOREST_TERRAIN_B 91 /* DLC_REEDSBEACH */
+    if THEME_OPTION_A 
+        #const CRACKED_INNER_MASK 40 /* DLC_ROCK */
+    elseif THEME_OPTION_B
+        #const CRACKED_INNER_MASK 42  /* DLC_DIRT4 */
+    elseif THEME_OPTION_C
+        #const CRACKED_INNER_MASK 102 /* DLC_DESERTGRAVEL */
+    elseif THEME_OPTION_D
+        #const CRACKED_INNER_MASK 70 /* gravel terrain */
+    else
+        #const CRACKED_INNER_MASK 46  /* DLC_QUICKSAND */
+    endif
+    #const LAND_MASK_A 14 /* Desert */
+    #const CRACKED_MASK 45 /* DLC_CRACKED */
+    #const WATER_MASK 54 /* DLC_MANGROVESHALLOW */
+    #const SHALLOW_MASK 1 /* WATER - unused due to connection */
+    #const ROCK_MASK 54
+    #const FOREST_MASK 3 /* Dirt 3 */
+else
+    #const ORIG_TERRAIN 0 /* Grass */
+    #const TEMP_TERRAIN_A 32 /* Snow */
+    #const WATER_TERRAIN 1 /* Water */
+    #const LAND_TERRAIN_A 11 /* Dirt 2 */
+    #const LAND_TERRAIN_B 3 /* Dirt 3 */
+    #const SHALLOW_TERRAIN 54 /* DLC_MANGROVESHALLOW */
+    #const FOREST_TERRAIN_A 13 /* PALM_DESERT */
+    #const FOREST_TERRAIN_B 91 /* DLC_REEDSBEACH */
+    #const CRACKED_INNER_MASK 70 /* gravel default */
+
+    #const LAND_MASK_A 32 /* Snow */
+    #const CRACKED_MASK 32 /* Snow */
+    #const WATER_MASK 54 /* DLC_MANGROVESHALLOW */
+    #const SHALLOW_MASK 1 /* WATER */
+    #const ROCK_MASK 54
+    #const FOREST_MASK 11 /* Dirt 2 */
+endif
+
+if LARGE_MAP
+    #define AT_LEAST_LARGE
+elseif HUGE_MAP
+    #define AT_LEAST_LARGE
+elseif GIGANTIC_MAP
+    #define AT_LEAST_LARGE
+elseif LUDIKRIS_MAP
+    #define AT_LEAST_LARGE
+endif
+<LAND_GENERATION>
+base_terrain ORIG_TERRAIN
+create_land {
+	terrain_type DLC_ROCK /* may decide to change, but pretty much a terrain without equivalent, like cracked terrain.
+	land_percent 1 - replacing with number of tiles for 0.5% 
+    if TINY_MAP
+        number_of_tiles 72 
+    elseif SMALL_MAP
+        number_of_tiles 104 
+    elseif MEDIUM_MAP
+        number_of_tiles 141 
+    elseif LARGE_MAP
+        number_of_tiles 200 
+    elseif HUGE_MAP
+        number_of_tiles 242 
+    elseif GIGANTIC_MAP
+        number_of_tiles 288 
+    else /* LUDIKRUS_MAP - not quite 0.5% */
+        number_of_tiles 1000 
+    endif  */
+    land_percent 100
+    if AT_LEAST_LARGE /* slightly increases the size of the lake, and provides more space for relics to spawn. */
+        top_border 47
+        bottom_border 47
+        left_border 47
+        right_border 47 
+    else
+        top_border 48
+        bottom_border 48
+        left_border 48
+        right_border 48 
+    endif
+	zone 1
+	other_zone_avoidance_distance 13
+	land_position 50 50
+    
+    border_fuzziness 100
+}
+create_player_lands {
+	terrain_type TEMP_TERRAIN_A
+	land_percent 100
+    if DEBUG_MODE /* useful for checking minimum player distances */
+        if TINY_MAP
+            circle_radius 36 0
+        elseif SMALL_MAP
+            circle_radius 32 0
+        elseif MEDIUM_MAP
+            circle_radius 30 0
+        elseif LARGE_MAP
+            circle_radius 27 0
+        elseif HUGE_MAP
+            circle_radius 25 0
+        elseif GIGANTIC_MAP
+            circle_radius 22 0
+        else
+            circle_radius 13 0
+        endif
+    else
+        if TINY_MAP
+            circle_radius rnd(36,38) 0
+        elseif SMALL_MAP
+            circle_radius rnd(32,36) 0
+        elseif MEDIUM_MAP
+            circle_radius rnd(30,34) 0
+        elseif LARGE_MAP
+            circle_radius rnd(27,32) 0
+        elseif HUGE_MAP
+            circle_radius rnd(25,30) 0
+        elseif GIGANTIC_MAP
+            circle_radius rnd(22,27) 0
+        else
+            circle_radius rnd(13,18) 0
+        endif
+    endif
+    zone 2
+	base_elevation 9 /* 9 is the lowest height at which sinkholes form, and forms the smallest sinkholes. */
+    other_zone_avoidance_distance 9
+} 
+<ELEVATION_GENERATION>
+
+/* At high base_elevation, the elevation generation section will go down instead of up, resulting in depressions. */
+create_elevation 10 {
+    base_terrain TEMP_TERRAIN_A
+    spacing 2
+        number_of_tiles 100
+        number_of_clumps 100
+    set_scale_by_groups
+    enable_balanced_elevation
+} 
+
+<TERRAIN_GENERATION>
+create_terrain WATER_TERRAIN {
+	base_terrain ORIG_TERRAIN
+	land_percent 100
+}
+create_terrain LAND_TERRAIN_A {
+	base_terrain TEMP_TERRAIN_A
+	land_percent 100
+	spacing_to_other_terrain_types 2 /* need enough space to place docks, due to elevation */
+}
+create_terrain WATER_TERRAIN {
+	base_terrain TEMP_TERRAIN_A
+	land_percent 100
+} /* Lake completed */
+/* would change terrain that isn't in the sinkholes, except the land doesn't have a base terrain of LAND_TERRAIN_B.
+create_terrain LAND_TERRAIN_A {
+	base_terrain LAND_TERRAIN_B
+	land_percent 100
+    height_limits 9 9
+}  */
+create_terrain LAND_TERRAIN_B {
+    base_terrain LAND_TERRAIN_A
+    land_percent 100
+    terrain_mask 1
+} 
+/* temporarily fill in the water - distinguished from old land by the terrain mask. */
+create_terrain LAND_TERRAIN_A {
+    base_terrain WATER_TERRAIN
+    land_percent 100
+
+}
+/* fill flat ground with desert terrain. */
+create_terrain TEMP_TERRAIN_A {
+    base_terrain LAND_TERRAIN_A
+    base_layer LAND_TERRAIN_B
+    land_percent 100
+    number_of_clumps 9320 /* needed to prevent buggy cases - can be trapped by the depressions. */
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1
+}
+create_terrain DLC_CRACKED {
+	base_terrain LAND_TERRAIN_A
+    base_layer LAND_TERRAIN_B
+	land_percent 100
+    number_of_clumps 9320 /* may need more clumps, but this is more or less right */
+    set_scale_by_groups
+}
+create_terrain DLC_CRACKED { /* repeat */
+	base_terrain LAND_TERRAIN_A
+    base_layer LAND_TERRAIN_B
+	land_percent 100
+    number_of_clumps 9320 
+    set_scale_by_groups
+}
+create_terrain DLC_CRACKED {
+	base_terrain LAND_TERRAIN_A
+    base_layer LAND_TERRAIN_B
+	land_percent 100
+    number_of_clumps 9320 
+    set_scale_by_groups
+}
+create_terrain DLC_CRACKED { /* repeat again */
+	base_terrain LAND_TERRAIN_A
+    base_layer LAND_TERRAIN_B
+	land_percent 100
+    number_of_clumps 9320 
+    set_scale_by_groups
+}
+create_terrain DLC_CRACKED { /* as much as needed */
+	base_terrain LAND_TERRAIN_A
+    base_layer LAND_TERRAIN_B
+	land_percent 100
+    number_of_clumps 9320 
+    set_scale_by_groups
+}
+create_terrain DLC_CRACKED { /* hopefully gets all the depressions, but I know it won't always do so. */
+	base_terrain LAND_TERRAIN_A
+    base_layer LAND_TERRAIN_B
+	land_percent 100
+    number_of_clumps 9320 
+    set_scale_by_groups
+}
+if LUDIKRIS_MAP
+    create_terrain DLC_CRACKED { 
+        base_terrain LAND_TERRAIN_A
+        base_layer LAND_TERRAIN_B
+        land_percent 100
+        number_of_clumps 9320 
+        set_scale_by_groups
+    }
+    create_terrain DLC_CRACKED { /* hopefully gets all the depressions, but I know it won't actually do so. */
+        base_terrain LAND_TERRAIN_A
+        base_layer LAND_TERRAIN_B
+        land_percent 100
+        number_of_clumps 9320 
+        set_scale_by_groups
+    }
+endif
+create_terrain WATER_TERRAIN {
+    base_terrain LAND_TERRAIN_A
+    land_percent 100
+    number_of_clumps 9320 /* need many clumps to ensure the middle is filled with WATER_TERRAIN, even if a surviving depression is prioritized. */
+}
+create_terrain LAND_TERRAIN_A {
+    base_terrain TEMP_TERRAIN_A /* can miss a small clump, but not too serious if it does. */
+    land_percent 100
+    number_of_clumps 9320
+	set_avoid_player_start_areas 15
+}
+create_terrain SHALLOW_TERRAIN {
+	base_terrain TEMP_TERRAIN_A
+	land_percent 100
+	number_of_clumps 320
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1 
+}
+if DEATH_MATCH
+/* elseif EMPIRE_WARS */
+else /* create close forests */
+    create_terrain FOREST_TERRAIN_B {
+        base_terrain SHALLOW_TERRAIN
+        if 2_PLAYER_GAME
+            number_of_tiles 72
+            number_of_clumps 8
+        elseif 3_PLAYER_GAME
+            number_of_tiles 108
+            number_of_clumps 12
+        elseif 4_PLAYER_GAME
+            number_of_tiles 144
+            number_of_clumps 16
+        elseif 5_PLAYER_GAME
+            number_of_tiles 180
+            number_of_clumps 20
+        elseif 6_PLAYER_GAME
+            number_of_tiles 216
+            number_of_clumps 24
+        elseif 7_PLAYER_GAME
+            number_of_tiles 252
+            number_of_clumps 28
+        elseif 8_PLAYER_GAME
+            number_of_tiles 288
+            number_of_clumps 32
+        else /* 1 player game */
+            number_of_tiles 36
+            number_of_clumps 4
+        endif
+        set_avoid_player_start_areas 10
+    }
+endif
+create_terrain LAND_TERRAIN_A {
+    base_terrain TEMP_TERRAIN_A
+    land_percent 100
+    number_of_clumps 9320
+}
+create_terrain FOREST_TERRAIN_A {
+    base_terrain LAND_TERRAIN_A
+    land_percent 10
+    number_of_clumps 60
+}
+/* An experiment, preferred what the rocky isle in the middle looked like from the land generation section
+create_terrain WATER_TERRAIN {
+    base_terrain DLC_ROCK
+    land_percent 100
+}
+create_terrain DLC_ROCK {
+    base_terrain WATER_TERRAIN
+    land_percent 100
+    height_limits 0 0
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1
+} */
+
+
+/* terrain masks. Cosmetic unless otherwise specificied) */
+create_terrain LAND_MASK_A {
+    base_terrain LAND_TERRAIN_A
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+} /* 
+create_terrain CRACKED_MASK {
+    base_terrain DLC_CRACKED
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+}
+create a mask for the inner portion of the cracked terrains that will be used for stone placement */
+create_terrain CRACKED_INNER_MASK {
+    set_scale_by_groups
+    base_terrain DLC_CRACKED
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+create_terrain CRACKED_INNER_MASK {
+    base_terrain DLC_CRACKED
+    set_scale_by_groups
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+create_terrain CRACKED_INNER_MASK {
+    base_terrain DLC_CRACKED
+    land_percent 100
+    set_scale_by_groups
+    number_of_clumps 9320
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+create_terrain CRACKED_INNER_MASK {
+    base_terrain DLC_CRACKED
+    land_percent 100
+    number_of_clumps 9320
+    set_scale_by_groups
+    terrain_mask 1
+    spacing_to_other_terrain_types 1
+}
+
+create_terrain WATER_MASK {
+    base_terrain WATER_TERRAIN
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+}
+create_terrain ROCK_MASK {
+    base_terrain DLC_ROCK
+    land_percent 100
+    terrain_mask 1
+}
+create_terrain FOREST_MASK {
+    base_terrain FOREST_TERRAIN_A
+    land_percent 100
+    terrain_mask 1
+    number_of_clumps 9320
+}
+/*
+This alters the terrain mask for the shallows, but connections are unaffected.
+create_terrain SHALLOW_MASK {
+    base_terrain SHALLOW_TERRAIN
+    land_percent 100
+    number_of_clumps 9320
+    terrain_mask 1
+}
+
+create_terrain DIRT {
+	base_terrain LAND_TERRAIN_B
+	land_percent 100
+	spacing_to_other_terrain_types 1
+}
+create_terrain LAND_TERRAIN_A {
+	base_terrain LAND_TERRAIN_B
+	land_percent 100
+    number_of_clumps 9320
+}
+
+*/
+
+
+<CONNECTION_GENERATION>
+create_connect_to_nonplayer_land {
+	replace_terrain LAND_TERRAIN_A SHALLOW_TERRAIN
+	replace_terrain FOREST_TERRAIN_A SHALLOW_TERRAIN
+	replace_terrain FOREST_TERRAIN_B SHALLOW_TERRAIN
+	replace_terrain BEACH SHALLOW_TERRAIN
+    terrain_cost DLC_CRACKED 0 /* have it avoid cracked terrain, which fills the many depressions. */
+    terrain_cost LAND_TERRAIN_B 0 /* occasionally can have a dip with this terrain, though it is a bug. Also can have a dip with water terrain, but can't do anything about that. */
+    terrain_cost FOREST_TERRAIN_A 4 /* discourage replacing forest terrain. */
+    terrain_cost FOREST_TERRAIN_B 7 /* discourage replacing forest terrain. */
+}
+<OBJECTS_GENERATION>
+#const ON_GRID 278 /* 278 - dead fish trap  */
+#const TERRAIN_BLOCKER 1613
+#const TRADING_POST 1646
+effect_amount SET_ATTRIBUTE TRADING_POST ATTR_TERRAIN_ID 10 /* land + beach - needed because of beach surrounding mangrove shallows. */
+create_actor_area 0 0 1 0
+if TINY_MAP
+    create_actor_area 118 0 2 0
+    create_actor_area 0 118 3 0
+    create_actor_area 118 118 4 0
+elseif SMALL_MAP
+    create_actor_area 134 0 2 0
+    create_actor_area 0 134 3 0
+    create_actor_area 134 134 4 0
+elseif MEDIUM_MAP
+    create_actor_area 150 0 2 0
+    create_actor_area 0 150 3 0
+    create_actor_area 150 150 4 0
+elseif LARGE_MAP
+    create_actor_area 170 0 2 0
+    create_actor_area 0 170 3 0
+    create_actor_area 170 170 4 0
+elseif HUGE_MAP
+    create_actor_area 184 0 2 0
+    create_actor_area 0 184 3 0
+    create_actor_area 184 184 4 0
+elseif GIGANTIC_MAP
+    create_actor_area 198 0 2 0
+    create_actor_area 0 198 3 0
+    create_actor_area 198 198 4 0
+else 
+    create_actor_area 478 0 2 0
+    create_actor_area 0 478 3 0
+    create_actor_area 478 478 4 0
+endif
+if DISABLE_TRADE
+else
+    create_object TRADING_POST {
+        actor_area_to_place_in 1 
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+    }
+
+    create_object TRADING_POST {
+        actor_area_to_place_in 2 
+        set_place_for_every_player /* sets one for every player, but not a serious issue. */
+        set_gaia_object_only
+        min_distance_group_placement 3
+    }
+
+    create_object TRADING_POST {
+        actor_area_to_place_in 3 
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+    }
+
+    create_object TRADING_POST {
+        actor_area_to_place_in 4 
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+    }
+endif
+create_object TERRAIN_BLOCKER {
+    second_object PALMTREE
+    number_of_objects 9320
+    number_of_clumps 9320
+    set_gaia_object_only
+    terrain_to_place_on FOREST_TERRAIN_A
+}
+create_object TERRAIN_BLOCKER {
+    second_object REEDS
+    number_of_objects 9320
+    number_of_clumps 9320
+    set_gaia_object_only
+    terrain_to_place_on FOREST_TERRAIN_B
+}
+if LUDIKRIS_MAP
+
+create_object TERRAIN_BLOCKER {
+    second_object PALMTREE
+    number_of_objects 9320
+    number_of_clumps 9320
+    set_gaia_object_only
+    terrain_to_place_on FOREST_TERRAIN_A
+}
+create_object TERRAIN_BLOCKER { /* needs a third one to get it all. */
+    second_object PALMTREE
+    number_of_objects 9320
+    number_of_clumps 9320
+    set_gaia_object_only
+    terrain_to_place_on FOREST_TERRAIN_A
+}
+endif
+
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    find_closest
+}
+create_object VILLAGER {
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 6
+}
+if REGICIDE
+    create_object KING {
+        set_place_for_every_player
+        min_distance_to_players 7
+        find_closest
+        avoid_forest_zone 1
+    }
+endif
+create_object SCOUT {
+    set_place_for_every_player
+    min_distance_to_players 7
+    max_distance_to_players 9
+    avoid_forest_zone 1
+}
+/* note: restrict fish so that they are only in the whirlpool - place height restriction on them. */
+create_object SALMON {
+    number_of_objects 9320
+    max_distance_to_other_zones 3
+    set_scale_to_map_size
+    temp_min_distance_group_placement 2
+    min_distance_group_placement 1
+}
+/* note: on some of the map sizes, it is possible for a few less relics to spawn. These sizes include tiny and small. I don't consider this a serious issue. */
+create_object RELIC { 
+    temp_min_distance_group_placement 1
+    if LARGE_MAP
+        number_of_objects 7
+    elseif HUGE_MAP
+        number_of_objects 8
+    elseif GIGANTIC_MAP
+        number_of_objects 10
+    elseif LUDIKRIS_MAP
+        number_of_objects 20
+        temp_min_distance_group_placement 3
+    else
+        number_of_objects 5
+    endif
+    terrain_to_place_on DLC_ROCK
+    min_distance_group_placement 1
+    actor_area 5
+    actor_area_radius 7
+}
+create_object DLC_CROCODILE {
+    actor_area_to_place_in 5 /* place on rocky area */
+    if LUDIKRIS_MAP
+        temp_min_distance_group_placement 8
+    else
+        temp_min_distance_group_placement 3
+    endif
+    number_of_objects 10 /* tends not to be very many, typically 1-3 */
+}
+if DEATH_MATCH
+else
+    create_object DLC_BOXTURTLE {
+        actor_area_to_place_in 5
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 3
+        number_of_objects 9320
+    }
+    create_object SALMON {
+        actor_area_to_place_in 5
+        number_of_objects 9320
+        min_distance_group_placement 2
+        temp_min_distance_group_placement 3
+    }
+endif
+create_object SEA_TOWER {
+    set_place_for_every_player
+    min_distance_group_placement 2
+    find_closest_to_map_center
+    max_distance_to_players 15 /* may be messed up if the connection isn't straight-forward, but usually good enough */
+    set_circular_placement
+}
+
+/* player resources:
+4 groups of 5 forage bushes 6-13 tiles away
+2 individual box turtles 4-5 tiles away
+3 individual box turtles 5-7 tiles away
+a crocodile at least 34 tiles away
+gold mines: 6 (back gold), 4, and 4
+boar
+deer
+6 water buffalo?
+no player stone
+
+ */
+if DEATH_MATCH
+else
+    create_object FORAGE {
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 5
+        number_of_groups 4 /* 5 doesn't always generate 5 */
+        set_tight_grouping
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 6
+        max_distance_to_players 13
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 6
+        set_circular_placement
+        avoid_forest_zone 2
+    }
+    create_object DLC_WATERBUFFALO {
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_groups 2
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 6
+        max_distance_to_players 8
+        temp_min_distance_group_placement 1
+        set_circular_placement
+
+    }
+    create_object DLC_WATERBUFFALO {
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 2
+        number_of_groups 2 /* 5 doesn't always generate 5 */
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 8
+        max_distance_to_players 14
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 7
+        set_circular_placement
+
+    }
+    create_object TERRAIN_BLOCKER {
+        second_object DLC_BOXTURTLE
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 2
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 4
+        max_distance_to_players 5
+        ignore_terrain_restrictions
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 3
+        set_circular_placement
+    }
+    create_object TERRAIN_BLOCKER {
+        second_object DLC_BOXTURTLE
+        set_place_for_every_player
+        set_gaia_object_only
+        number_of_objects 3
+        terrain_to_place_on SHALLOW_TERRAIN
+        min_distance_to_players 5
+        max_distance_to_players 7
+        ignore_terrain_restrictions
+        min_distance_group_placement 1
+        temp_min_distance_group_placement 3
+        set_circular_placement
+    }
+endif
+
+create_object GOLD {
+    number_of_objects 6
+    find_closest_to_map_edge
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_group_placement 3
+    ignore_terrain_restrictions
+    terrain_to_place_on LAND_TERRAIN_A
+    max_distance_to_players 14
+    set_circular_placement
+    avoid_forest_zone 2
+}
+create_object GOLD {
+    number_of_objects 4
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_group_placement 3
+    ignore_terrain_restrictions
+    terrain_to_place_on LAND_TERRAIN_A
+    min_distance_to_players 16
+    max_distance_to_players 21
+    set_circular_placement
+    avoid_forest_zone 2
+}
+create_object GOLD {
+    number_of_objects 4
+    set_tight_grouping
+    set_place_for_every_player
+    set_gaia_object_only
+    min_distance_group_placement 3
+    ignore_terrain_restrictions
+    terrain_to_place_on LAND_TERRAIN_A
+    min_distance_to_players 20
+    max_distance_to_players 24
+    set_circular_placement
+    avoid_forest_zone 2
+}
+if DEATH_MATCH
+else
+    create_object DEER { /* TODO change with the theme? */
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+        temp_min_distance_group_placement 9
+        ignore_terrain_restrictions
+        number_of_groups 2
+        number_of_objects 3
+        min_distance_to_players 14
+        max_distance_to_players 20
+        set_circular_placement
+        avoid_forest_zone 1
+        terrain_to_place_on LAND_TERRAIN_A
+    }
+    create_object BOAR { /* TODO change with the theme? */
+        set_place_for_every_player
+        set_gaia_object_only
+        min_distance_group_placement 3
+        min_distance_to_players 20
+        max_distance_to_players 24
+        set_circular_placement
+        avoid_forest_zone 1
+    }
+endif
+/*
+
+neutral res:
+hunt on large/huge/giant/ludicrous maps (very low density)
+4 birds
+
+
+5/5/5/7/8/~15 relics - note chance of fewer relics spawning on smaller map sizes.
+plenty of stone
+30 trees with set_scaling_to_map_size
+reeds on the beach terrain (excluding rocky island)
+some gold
+*/
+
+create_object STONE { /* result is plenty of scattered stone piles */
+    number_of_groups 9320
+    terrain_to_place_on DLC_CRACKED
+    layer_to_place_on CRACKED_INNER_MASK
+    set_tight_grouping
+    set_gaia_object_only
+    temp_min_distance_group_placement 5
+    min_distance_group_placement 2
+    max_distance_to_other_zones 2
+    avoid_forest_zone 1
+}
+create_object GOLD {
+    temp_min_distance_group_placement 25
+    if TINY_MAP
+        number_of_groups 2
+        number_of_objects 3
+    elseif SMALL_MAP
+        number_of_groups 2
+        number_of_objects 3
+    elseif MEDIUM_MAP
+        number_of_groups 3
+        number_of_objects 3
+    elseif LARGE_MAP
+        number_of_groups 4
+        number_of_objects 3
+    elseif HUGE_MAP
+        number_of_groups 8
+        number_of_objects 4
+        temp_min_distance_group_placement 50
+    elseif GIGANTIC_MAP
+        number_of_groups 9320
+        number_of_objects 4
+        temp_min_distance_group_placement 60
+    else
+        number_of_groups 9320
+        number_of_objects 4
+        temp_min_distance_group_placement 75
+    endif
+    group_variance 1
+    set_tight_grouping
+    set_gaia_object_only
+    min_distance_group_placement 3
+    max_distance_to_other_zones 2
+    min_distance_to_players 40
+    set_circular_placement
+    avoid_forest_zone 2
+    terrain_to_place_on LAND_TERRAIN_A
+}
+create_object TERRAIN_BLOCKER {
+    second_object REEDS
+    temp_min_distance_group_placement 4
+    set_gaia_object_only
+    terrain_to_place_on BEACH
+    avoid_actor_area 5
+    number_of_objects 9320
+}
+create_object TERRAIN_BLOCKER {
+    second_object PALMTREE
+    number_of_objects 30
+    set_gaia_object_only
+    set_scaling_to_map_size
+    terrain_to_place_on LAND_TERRAIN_A /* don't want trees on water, nor on cracked terrain */
+}
+if AT_LEAST_LARGE
+/* TODO fold into theme. */
+    create_object DLC_ELEPHANT {
+        number_of_objects 30
+        set_gaia_object_only
+        set_scaling_to_map_size
+        temp_min_distance_group_placement 55
+        if LUDIKRIS_MAP
+            temp_min_distance_group_placement 70
+        endif
+        min_distance_to_players 40
+        avoid_forest_zone 1
+        avoid_actor_area 5
+    }
+endif
+/* place predators and birds last */
+create_object ON_GRID {
+    second_object DLC_CROCODILE
+    set_place_for_every_player
+    set_circular_placement
+    min_distance_to_players 34
+    max_distance_to_players 60
+    set_gaia_object_only
+    min_distance_group_placement 10
+    avoid_forest_zone 1
+}
+create_object DLC_STORK {
+    number_of_objects 4
+    set_scaling_to_map_size
+}
+create_object DLC_WILD_CAMEL {
+    number_of_objects 2
+    number_of_groups 4
+    avoid_actor_area 5
+    set_scaling_to_map_size
+    min_distance_to_players 40
+}
+
+
