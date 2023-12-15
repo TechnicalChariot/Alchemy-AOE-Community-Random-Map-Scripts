@@ -1,7 +1,7 @@
 /* Comet */
-/*A giant comet hurtling through space carries all the necessary resources for a growing empire.*/
-/* A Random Map Script by BPDrej */
-/* 01.31.23 */
+/* A giant comet hurtling through space carries all the necessary resources for a growing empire. */
+/* A Random Map Script by BPDrej - 01.31.23 */
+
 <PLAYER_SETUP>
 direct_placement
 #const L 32
@@ -151,7 +151,7 @@ elseif MEDIUM_MAP
 	set_avoid_player_start_areas 18
 elseif LARGE_MAP
 	set_avoid_player_start_areas 18
-elseif HUGE_MAP
+else
 	set_avoid_player_start_areas 19
 endif
 }
@@ -714,7 +714,7 @@ create_object RELIC
 	elseif LARGE_MAP
 		number_of_objects 7
 		temp_min_distance_group_placement 48
-	elseif HUGE_MAP
+	else
 		number_of_objects 8
 		temp_min_distance_group_placement 52
 	endif
