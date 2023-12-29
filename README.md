@@ -41,7 +41,7 @@ Make sure that your Local path is set to: C:\Program Files (x86)\Steam\steamapps
 Hit “Clone”:
 ![image](https://user-images.githubusercontent.com/115369420/194993244-b59f61aa-80eb-4619-accc-83f44185efda.png)
 
-6) A few loading screens will process, and when completed, you should be able to visit:  C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources_common\random-map-scripts and confirm that an additional folder called “Age-of-Empires-II-Definitive-Edition----Random-Map-Scripts” has been added:
+6) A few loading screens will process, and when completed, you should be able to visit:  C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\random-map-scripts and confirm that an additional folder called “Age-of-Empires-II-Definitive-Edition----Random-Map-Scripts” has been added:
 ![image](https://user-images.githubusercontent.com/115369420/194993716-a83da5d6-69d8-49f6-80fc-866a374c8484.png)
 Any folders or files you add to this folder will be tracked by Github and visible to any other collaborators of the repository. Happy scripting!
 
