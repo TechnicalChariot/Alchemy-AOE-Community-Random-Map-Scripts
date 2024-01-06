@@ -503,7 +503,7 @@ create_connect_to_nonplayer_land {
 <OBJECTS_GENERATION>
 #const ON_GRID 278 /* 278 - dead fish trap  */
 #const TERRAIN_BLOCKER 1613
-#const TRADING_POST 1646
+#const TRADING_POST 1646 /* gaia neutral market - results in a crash when a player with extended unit stats selects it. */
 effect_amount SET_ATTRIBUTE TRADING_POST ATTR_TERRAIN_ID 10 /* land + beach - needed because of beach surrounding mangrove shallows. */
 create_actor_area 0 0 1 0
 if TINY_MAP
@@ -537,31 +537,43 @@ else
 endif
 if DISABLE_TRADE
 else
-    create_object TRADING_POST {
+    create_object MARKET {
         actor_area_to_place_in 1 
         set_place_for_every_player
         set_gaia_object_only
+        set_gaia_unconvertible
+        make_indestructible
+        ignore_terrain_restrictions
         min_distance_group_placement 3
     }
 
-    create_object TRADING_POST {
+    create_object MARKET {
         actor_area_to_place_in 2 
         set_place_for_every_player /* sets one for every player, but not a serious issue. */
         set_gaia_object_only
+        set_gaia_unconvertible
+        make_indestructible
+        ignore_terrain_restrictions
         min_distance_group_placement 3
     }
 
-    create_object TRADING_POST {
+    create_object MARKET {
         actor_area_to_place_in 3 
         set_place_for_every_player
         set_gaia_object_only
+        set_gaia_unconvertible
+        make_indestructible
+        ignore_terrain_restrictions
         min_distance_group_placement 3
     }
 
-    create_object TRADING_POST {
+    create_object MARKET {
         actor_area_to_place_in 4 
         set_place_for_every_player
         set_gaia_object_only
+        set_gaia_unconvertible
+        make_indestructible
+        ignore_terrain_restrictions
         min_distance_group_placement 3
     }
 endif
