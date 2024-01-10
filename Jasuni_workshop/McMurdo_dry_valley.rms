@@ -1,0 +1,312 @@
+/*
+Have a few ideas for how to do the McMurdo one. I'm thinking direct placement with players near the water, borders for the terrain, stone piles all on an icy snow terrain (imagine ice fortifications). Not certain where I'd put gold yet. I also recall there being some kind of wood/food stockpile object, which should work for starting resources. I think I'd like to see what I can make for this map.
+
+https://en.wikipedia.org/wiki/McMurdo_Dry_Valleys
+
+Here a little bit of water could be used on one side. Penguins and fish would be the only animals. Snow, ice, rocks. No plants, so maybe the shipwrecks etc. like on Antarctic Valley as wood sources.
+I don't have many ideas about it yet, but it's the driest place on Earth at the moment.
+Maybe a map layout like elevation-valley-elevation-valley-elevation.
+
+basic format (rotated): add water at top of the map
+|l|l|
+
+
+idea: for team/larger games, 1 player can be further in the corner (by the lake). In FFAs, this would leave them in a more defensive postion, but also make it easier to cut them off from the rest of the map.
+
+ex for 3v3:
+XWWWWX
+OXXXXO
+OOOOOO
+...
+
+
+dry valleys: no humidity, lack snow/ice covering
+katabatic winds evaporate water/ice/snow (can reach over 200 mph)
+
+I think I may want to craft out a scenario editor map first to get a good idea of what I want it to look like
+
+TODO completely redo lands/terrain
+determine a good number of shipwrecks and amount of resources needed for them.
+*/
+<PLAYER_SETUP>
+behavior_version 2
+direct_placement
+nomad_resources
+force_nomad_treaty
+/* 
+Could consider having nomad_resources and force_nomad_treaty, with players starting near shipwrecks
+*/
+
+#const PILE_STONE 248
+#const PILE_GOLD 252 /* used later */
+#const PILE_WOOD 253 /* supposedly looks like tree stump, which may make it inelligible
+I think that the wood pile is also too small, but that may be due to popular mods. */
+#const PILE_FOOD 262 /* looks like forage bush, which is too small */
+/* appear to have other issues as well, like being off-grid and capable of building over. */
+#const STORM_DOG 862 /* the optional bird replacement. */
+/* 
+
+Following code is taken from Spiny Forest from alchemy league 
+TODO go through and determine what all of these changes are doing and how they work.
+
+Not certain what these first 3 lines are doing yet. Guess is error, change name of forage bush, error
+*/
+effect_amount SET_ATTRIBUTE REED_TREE ATTR_NAME_ID 5323
+effect_amount SET_ATTRIBUTE FORAGE ATTR_NAME_ID 5324
+effect_amount SET_ATTRIBUTE REED_TREE ATTR_DEAD_ID 1350 /* Tree (Reeds) - REED_TREE is undefined, so this line doesn't do anything. */
+
+/* make the penguin mostly harmless */
+effect_amount GAIA_UPGRADE_UNIT SHEEP DLC_PENGUIN 0 /* changed from PENGUIN to DLC_PENGUIN b/c PENGUIN is undefined */
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 1024
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 3328
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_ATTACK 5376
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_SHOWN_ATTACK
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_HITPOINTS 4
+
+/* penguins drop food on death */
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_DEAD_ID 1026 /* DLC_OSTRICH, which auto dies due to next line */
+effect_amount GAIA_SET_ATTRIBUTE DLC_OSTRICH ATTR_HITPOINTS 0
+/* effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DYING_GRAPHIC 1751 */
+effect_amount GAIA_SET_ATTRIBUTE SHEEP ATTR_DYING_GRAPHIC 1751
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DYING_GRAPHIC 8258
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_NAME_ID 5734
+effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_ICON_ID 157
+/* effect_amount SET_ATTRIBUTE DLC_OSTRICH ATTR_DEAD_GRAPHIC 641 */
+
+/* wood piles */
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_STANDING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_WALKING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DYING_GRAPHIC 8244
+effect_amount GAIA_SET_ATTRIBUTE TREE_J ATTR_DEAD_GRAPHIC 8244
+effect_amount SET_ATTRIBUTE TREE_J ATTR_NAME_ID 5323
+effect_amount SET_ATTRIBUTE TREE_J ATTR_ICON_ID 32
+
+/* shipwrecks */
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_STANDING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_WALKING_GRAPHIC 4354
+effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DYING_GRAPHIC 4354
+effect_amount SET_ATTRIBUTE TREE_K ATTR_NAME_ID 729
+/* effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DEAD_GRAPHIC 4354 */
+
+effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_STANDING_GRAPHIC 7640
+effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_WALKING_GRAPHIC 7640
+effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_DYING_GRAPHIC 7640
+/* effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_DEAD_GRAPHIC 7640 */
+
+/* changes orange bush into a diffent (usable) pile */
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_STANDING_GRAPHIC 8245
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_WALKING_GRAPHIC 8245
+effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DYING_GRAPHIC 8245
+/* effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DEAD_GRAPHIC 8245 */
+effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_NAME_ID 5705
+/* effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_ICON_ID 916 */
+
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_STANDING_GRAPHIC 10203
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_WALKING_GRAPHIC 10203
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_RUNNING_GRAPHIC 10203
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_DYING_GRAPHIC 10203
+effect_amount GAIA_SET_ATTRIBUTE MARLIN1 ATTR_DEAD_GRAPHIC 10203
+effect_amount SET_ATTRIBUTE MARLIN1 ATTR_NAME_ID 5173
+effect_amount SET_ATTRIBUTE MARLIN1 ATTR_ICON_ID 282
+
+
+<LAND_GENERATION>
+/* 
+terrains that I might want to use
+SNOW
+DIRT_SNOW
+ICE
+ICYSHORE
+defined terrains
+*/
+#const SNOW_LIGHT 73
+#const SNOW_HEAVY 74
+#const SNOW_FOUNDATION 36 /* like SNOW_DIRT; no beaches; still dockable; left behind by buildings on snowy terrains */
+#const ICE_NAVIGABLE 26
+#const GRAVEL 70
+
+base_terrain GRAVEL
+base_layer DLC_DESERTGRAVEL
+
+/*
+create_land {
+    terrain_type WATER
+    base_layer ICE_NAVIGABLE
+    land_percent 100
+    left_border 70 /* may adjust
+    land_position 90 10  */
+    top_border 20
+    bottom_border 20
+    land_position 80 50
+}
+create_land {
+    terrain_type WATER
+    base_layer ICE_NAVIGABLE
+    land_percent 100
+    left_border 90 /* may adjust
+    land_position 90 10  */
+    land_position 95 90
+}
+create_land {
+    terrain_type WATER
+    base_layer ICE_NAVIGABLE
+    land_percent 100
+    left_border 90 /* may adjust
+    land_position 90 10  */
+    land_position 95 10
+}
+ */
+create_land {
+    terrain_type WATER
+    base_layer ICE_NAVIGABLE
+    land_percent 100
+    left_border 70 /* may adjust */
+    land_position 90 90
+}
+create_land {
+    terrain_type SNOW_HEAVY
+    base_layer ICE
+    top_border 80
+    right_border 30
+    /* assign_to_player 1 */
+    land_position 65 90
+    base_elevation 3
+}
+create_land {
+    terrain_type SNOW_HEAVY
+    base_layer ICE
+    bottom_border 80
+    right_border 30
+    /* assign_to_player 2 */
+    land_position 65 10
+    base_elevation 3
+}
+create_land {
+    terrain_type SNOW_HEAVY
+    base_layer ICE
+    bottom_border 40
+    top_border 40
+    right_border 35
+    base_elevation 3
+} /* In theory, dirt should be low, but I'll just have to change these from dirt to snow later - maybe have players start on the dirt valleys instead? */
+<ELEVATION_GENERATION>
+
+
+<TERRAIN_GENERATION>
+/* 
+color_correction
+
+CC_AUTUMN
+CC_WINTER
+CC_DESERT
+CC_NIGHT
+no interest in CC_JUNGLE
+*/
+create_terrain SNOW_HEAVY {
+    beach_terrain GRAVEL
+    base_terrain DLC_DESERTGRAVEL
+    land_percent 100
+    number_of_clumps 9320
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1
+}
+color_correction CC_WINTER
+create_terrain ICE_NAVIGABLE {
+    beach_terrain ICYSHORE
+    base_terrain WATER
+    terrain_mask 1
+    land_percent 10
+    number_of_clumps 9320
+}
+
+<OBJECTS_GENERATION>
+create_object TOWN_CENTER {
+    set_place_for_every_player
+    find_closest
+}
+/* figure out how to change to TREE_K */
+create_object SHIPWRECK {
+    number_of_objects 10
+    temp_min_distance_group_placement 20
+    terrain_to_place_on BEACH
+    set_gaia_object_only
+    ignore_terrain_restrictions
+    actor_area 10
+    actor_area_radius 6
+}
+create_object SHEEP {
+    actor_area_to_place_in 10
+    number_of_objects 4
+    number_of_groups 10
+    set_loose_grouping
+    set_gaia_object_only
+}
+create_object TREE_J {
+    actor_area_to_place_in 10
+    number_of_objects 2
+    number_of_groups 10
+    set_loose_grouping
+    set_gaia_object_only
+}
+
+create_object DLC_ORANGEBUSH {
+    actor_area_to_place_in 10
+    number_of_objects 2
+    number_of_groups 10
+    set_loose_grouping
+    set_gaia_object_only
+}
+
+create_object PILE_GOLD {
+    actor_area_to_place_in 10
+    number_of_objects 2
+    number_of_groups 10
+    set_tight_grouping
+    set_gaia_object_only
+}
+create_object MARLIN1 {
+    number_of_groups 5
+    number_of_objects 2
+}
+
+/* DEER become camels, DEERXD become camel corpses,  MARLIN1 become some kind of fish
+create_object TREE_K {
+    actor_area_to_place_in 10
+    number_of_objects 4
+    number_of_groups 10
+    set_loose_grouping
+    set_gaia_object_only
+}
+create_object PILE_STONE {
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 5
+    max_distance_to_players 5
+    number_of_objects 4
+    find_closest
+}
+create_object PILE_GOLD {
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 6
+    max_distance_to_players 6
+    number_of_objects 4
+    find_closest
+}
+create_object PILE_WOOD {
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 7
+    max_distance_to_players 7
+    number_of_objects 4
+    find_closest
+}
+create_object PILE_FOOD {
+    set_gaia_object_only
+    set_place_for_every_player
+    min_distance_to_players 8
+    max_distance_to_players 8
+    number_of_objects 4
+    find_closest
+}
+*/
