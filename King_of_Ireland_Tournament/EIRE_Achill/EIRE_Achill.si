@@ -61,6 +61,7 @@ effect_amount SET_ATTRIBUTE BATTLE_WORKSHOP ATTR_SEARCH_RADIUS 1
 /* Provide Players With Wood Trickle for Controlling at Least one Farm, and Makes Farms Regrow, Changes Search Radius of Farms */
 guard_state FARM_CLASS AMOUNT_WOOD 100 2
 #const DEAD_FARM 357
+effect_amount SET_ATTRIBUTE DEAD_FARM ATTR_STORAGE_VALUE 0
 effect_amount SET_ATTRIBUTE DEAD_FARM ATTR_DEAD_ID 50
 effect_amount SET_ATTRIBUTE FARM_CLASS ATTR_LINE_OF_SIGHT 3
 effect_amount SET_ATTRIBUTE FARM_CLASS ATTR_SEARCH_RADIUS 3
