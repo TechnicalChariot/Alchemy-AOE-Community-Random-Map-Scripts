@@ -3,6 +3,15 @@ Collaborative Random Map Scripting (RMS) Project
 
 Developed by TechChariot#4776 and QFilip#7594
 
+_______________________________________________________________________________
+01/25/22
+
+Important Note:
+
+The process described below is intended for collaborators -- people who wish to upload and share their random map creations with the community through this repository. If all you want to do is automate the download of files, then SETUP_ENJOYER (an alternate readme file) is recommended. 
+
+_______________________________________________________________________________
+
 10/18/22
 
 Introduction:
