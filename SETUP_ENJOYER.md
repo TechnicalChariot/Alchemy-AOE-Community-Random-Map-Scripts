@@ -47,6 +47,6 @@ Download Automation:
 
     Once the command from this step is run, a folder called "Alchemy-AOE-Community-Random-Map-Scripts" will appear inside your directory for random maps. The game will detect any .rms files in this folder or subfolders, and you can select them in the scenario editor or lobby.
 
-5) To update the files in this folder, repeat steps 3-4. Be sure to empty the recycle bin often if you are updating often!
+5) To update the files in this folder, repeat steps 2-4. Be sure to empty the recycle bin often if you are updating often!
 
 6) To clear command history, enter: ``clear``. 
