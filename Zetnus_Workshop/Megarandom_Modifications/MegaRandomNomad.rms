@@ -1,4 +1,5 @@
-
+/* Modification to Megarandom by Zetnus to Guarantee Nomad Start */
+/* This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement */
 #define NOMADIC_WAY
 #include_drs Megarandom.rms2
 <PLAYER_SETUP>

@@ -1,3 +1,5 @@
+/* Modification to MegaRandom by Zetnus to guarantee x256 tech mod */
+/* This map was harvested from a mod in the official AOE2DE mod center, whose licensing agreement with Microsoft supersedes any Github restrictions: https://www.microsoft.com/en-us/servicesagreement */
 #includeXS x256tech.xs
 #include_drs Megarandom.rms2
 <PLAYER_SETUP>
