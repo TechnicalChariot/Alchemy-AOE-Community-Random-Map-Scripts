@@ -596,7 +596,35 @@ else
     create_actor_area 0 478 3 0
     create_actor_area 478 478 4 0
 endif
+#define DISABLE_TRADE
 if DISABLE_TRADE /* TODO create relics in place of the markets? */
+    create_object RELIC {
+        actor_area_to_place_in 1 
+        set_gaia_object_only
+        ignore_terrain_restrictions
+        min_distance_group_placement 3
+    }
+
+    create_object RELIC {
+        actor_area_to_place_in 2 
+        set_gaia_object_only
+        ignore_terrain_restrictions
+        min_distance_group_placement 3
+    }
+
+    create_object RELIC {
+        actor_area_to_place_in 3 
+        set_gaia_object_only
+        ignore_terrain_restrictions
+        min_distance_group_placement 3
+    }
+
+    create_object RELIC {
+        actor_area_to_place_in 4 
+        set_gaia_object_only
+        ignore_terrain_restrictions
+        min_distance_group_placement 3
+    }
 else
     create_object MARKET {
         actor_area_to_place_in 1 
