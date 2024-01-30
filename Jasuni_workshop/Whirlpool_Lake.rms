@@ -15,6 +15,8 @@ move more fish further into the middle lake? (at least for larger map sizes)
 adjust size of middle lake for different map sizes - not really possible to increase the size of the slope, since that is determined by the land's base_elevation, which is what determines the size of the sinkholes, so this is limited to increasing the amount of flat water.
 Adjust amount of fish on various map sizes? (small could have less fish)
 enable EMPIRE_WARS
+add additional themes
+ludikris changes: increase elevation by 1 (for larger sinkholes, lake)
 
 Decided against randomly swapping cracked and rock terrains? - would need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
 Add more neutral golds?
@@ -218,13 +220,18 @@ create_player_lands {
         endif
     endif
     zone 2
-	base_elevation 9 /* 9 is the lowest height at which sinkholes form, and forms the smallest sinkholes. */
-    other_zone_avoidance_distance 9
+    if LUDIKRIS_MAP
+        base_elevation 10 /* slightly increase size of lake and sinkholes. */
+        other_zone_avoidance_distance 10
+    else
+        base_elevation 9 /* 9 is the lowest height at which sinkholes form, and forms the smallest sinkholes. */
+        other_zone_avoidance_distance 9
+    endif
 } 
 <ELEVATION_GENERATION>
 
 /* At high base_elevation, the elevation generation section will go down instead of up, resulting in depressions. */
-create_elevation 10 {
+create_elevation 11 {
     base_terrain TEMP_TERRAIN_A
     spacing 2
         number_of_tiles 100
@@ -426,7 +433,11 @@ create_terrain CRACKED_INNER_MASK {
     land_percent 100
     number_of_clumps 9320
     terrain_mask 1
-    spacing_to_other_terrain_types 1
+    if LUDIKRIS_MAP
+        spacing_to_other_terrain_types 2
+    else
+        spacing_to_other_terrain_types 1
+    endif
 }
 create_terrain CRACKED_INNER_MASK {
     base_terrain DLC_CRACKED
@@ -434,7 +445,11 @@ create_terrain CRACKED_INNER_MASK {
     land_percent 100
     number_of_clumps 9320
     terrain_mask 1
-    spacing_to_other_terrain_types 1
+    if LUDIKRIS_MAP
+        spacing_to_other_terrain_types 2
+    else
+        spacing_to_other_terrain_types 1
+    endif
 }
 create_terrain CRACKED_INNER_MASK {
     base_terrain DLC_CRACKED
@@ -442,7 +457,11 @@ create_terrain CRACKED_INNER_MASK {
     set_scale_by_groups
     number_of_clumps 9320
     terrain_mask 1
-    spacing_to_other_terrain_types 1
+    if LUDIKRIS_MAP
+        spacing_to_other_terrain_types 2
+    else
+        spacing_to_other_terrain_types 1
+    endif
 }
 create_terrain CRACKED_INNER_MASK {
     base_terrain DLC_CRACKED
@@ -450,8 +469,46 @@ create_terrain CRACKED_INNER_MASK {
     number_of_clumps 9320
     set_scale_by_groups
     terrain_mask 1
-    spacing_to_other_terrain_types 1
+    if LUDIKRIS_MAP
+        spacing_to_other_terrain_types 2
+    else
+        spacing_to_other_terrain_types 1
+    endif
 }
+if LUDIKRIS_MAP
+    create_terrain CRACKED_INNER_MASK {
+        set_scale_by_groups
+        base_terrain DLC_CRACKED
+        land_percent 100
+        number_of_clumps 9320
+        terrain_mask 1
+        spacing_to_other_terrain_types 2
+    }
+    create_terrain CRACKED_INNER_MASK {
+        base_terrain DLC_CRACKED
+        set_scale_by_groups
+        land_percent 100
+        number_of_clumps 9320
+        terrain_mask 1
+        spacing_to_other_terrain_types 2
+    }
+    create_terrain CRACKED_INNER_MASK {
+        base_terrain DLC_CRACKED
+        land_percent 100
+        set_scale_by_groups
+        number_of_clumps 9320
+        terrain_mask 1
+        spacing_to_other_terrain_types 2
+    }
+    create_terrain CRACKED_INNER_MASK {
+        base_terrain DLC_CRACKED
+        land_percent 100
+        number_of_clumps 9320
+        set_scale_by_groups
+        terrain_mask 1
+        spacing_to_other_terrain_types 2
+    }
+endif
 
 create_terrain WATER_MASK {
     base_terrain WATER_TERRAIN
@@ -539,7 +596,7 @@ else
     create_actor_area 0 478 3 0
     create_actor_area 478 478 4 0
 endif
-if DISABLE_TRADE
+if DISABLE_TRADE /* TODO create relics in place of the markets? */
 else
     create_object MARKET {
         actor_area_to_place_in 1 
@@ -596,21 +653,20 @@ create_object TERRAIN_BLOCKER {
     terrain_to_place_on FOREST_TERRAIN_B
 }
 if LUDIKRIS_MAP
-
-create_object TERRAIN_BLOCKER {
-    second_object PALMTREE
-    number_of_objects 9320
-    number_of_clumps 9320
-    set_gaia_object_only
-    terrain_to_place_on FOREST_TERRAIN_A
-}
-create_object TERRAIN_BLOCKER { /* needs a third one to get it all. */
-    second_object PALMTREE
-    number_of_objects 9320
-    number_of_clumps 9320
-    set_gaia_object_only
-    terrain_to_place_on FOREST_TERRAIN_A
-}
+    create_object TERRAIN_BLOCKER {
+        second_object PALMTREE
+        number_of_objects 9320
+        number_of_clumps 9320
+        set_gaia_object_only
+        terrain_to_place_on FOREST_TERRAIN_A
+    }
+    create_object TERRAIN_BLOCKER { /* needs a third one to get it all. */
+        second_object PALMTREE
+        number_of_objects 9320
+        number_of_clumps 9320
+        set_gaia_object_only
+        terrain_to_place_on FOREST_TERRAIN_A
+    }
 endif
 
 create_object TOWN_CENTER {
@@ -636,7 +692,7 @@ create_object SCOUT {
     max_distance_to_players 9
     avoid_forest_zone 1
 }
-/* note: restrict fish so that they are only in the whirlpool - place height restriction on them. */
+/* note: only want fish in the whirlpool - easy as these fish can't spawn in shallows. */
 create_object SALMON {
     number_of_objects 9320
     max_distance_to_other_zones 3
