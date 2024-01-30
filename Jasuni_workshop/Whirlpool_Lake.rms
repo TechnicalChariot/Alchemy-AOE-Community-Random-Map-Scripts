@@ -21,11 +21,56 @@ ludikris changes: increase elevation by 1 (for larger sinkholes, lake)
 Decided against randomly swapping cracked and rock terrains? - would need to make a conditional for it, which would then set the sinkhole terrain cost to 0 in the connection section, but not the center terrain. 
 Add more neutral golds?
 
+EMPIRE_WARS changes:
+remove starting box turtles (they're like straggler trees)
+remove half of water buffalos
+remove boar
+
+to add:
+    3 lumber camps
+        10 vils near lumber camps
+    2 mills on berries
+        8 vils on berries
+    4 farms (with vils)
+    mining camp on gold
+        with 4 vils
+    dock
+        with 4 doomed fishing ships
+    blacksmith/barracks
+    houses (probably 7, due to fishing ships)
+    
+
+To change:
+
+    Arabia has: 8 vils on farms around TC
+    10 vils on wood
+    4 vils on gold
+    4 vils on berries
+
+    6 houses
+    blacksmith/barracks
+    mill on berries
+    3 lumber camps
+    mining camp
+    farms
+    1 close herdable
+    no boars
+
+    I'll want:
+    blacksmith/barracks
+    mill on berries
+    3 lumber camps
+    mining camp on gold
+    1 close herdable
+    dock and 4 fishing ships? (likely won't last long)
+
+    careful with straggler trees: create reeds after lumber camps and the like
 */
 
 <PLAYER_SETUP>
 random_placement
 behavior_version 2
+/* #define EMPIRE_WARS  temporary */
 
 if SMALL_MAP
 override_map_size 136
@@ -597,7 +642,6 @@ else
     create_actor_area 0 478 3 0
     create_actor_area 478 478 4 0
 endif
-#define DISABLE_TRADE
 if DISABLE_TRADE /* TODO create relics in place of the markets? */
     create_object RELIC {
         actor_area_to_place_in 1 
@@ -765,7 +809,7 @@ create_object DLC_CROCODILE {
 }
 if DEATH_MATCH
 else
-    create_object DLC_BOXTURTLE {
+    create_object DLC_BOXTURTLE { /* center of map */
         actor_area_to_place_in 5
         min_distance_group_placement 1
         temp_min_distance_group_placement 3
@@ -809,61 +853,82 @@ else
         terrain_to_place_on SHALLOW_TERRAIN
         min_distance_to_players 6
         max_distance_to_players 13
-        min_distance_group_placement 1
+        if EMPIRE_WARS
+            actor_area 100
+            actor_area_radius 1
+        else
+            min_distance_group_placement 1
+        endif
         temp_min_distance_group_placement 6
         set_circular_placement
         avoid_forest_zone 2
     }
+
+    if EMPIRE_WARS
+
+    endif
     create_object DLC_WATERBUFFALO {
         set_place_for_every_player
-        set_gaia_object_only
-        number_of_groups 2
-        terrain_to_place_on SHALLOW_TERRAIN
-        min_distance_to_players 6
-        max_distance_to_players 8
-        temp_min_distance_group_placement 1
-        set_circular_placement
+        if EMPIRE_WARS
+            find_closest
+        else
+            number_of_groups 2
+            set_gaia_object_only
+            terrain_to_place_on SHALLOW_TERRAIN
+            min_distance_to_players 6
+            max_distance_to_players 8
+            temp_min_distance_group_placement 1
+            set_circular_placement
+        endif
 
     }
     create_object DLC_WATERBUFFALO {
         set_place_for_every_player
         set_gaia_object_only
-        number_of_objects 2
-        number_of_groups 2 /* 5 doesn't always generate 5 */
+        number_of_groups 2 
         terrain_to_place_on SHALLOW_TERRAIN
-        min_distance_to_players 8
+        if EMPIRE_WARS
+            min_distance_to_players 10
+        else
+            number_of_objects 2
+            min_distance_to_players 8
+        endif
         max_distance_to_players 14
         min_distance_group_placement 1
         temp_min_distance_group_placement 7
         set_circular_placement
 
     }
-    create_object TERRAIN_BLOCKER {
-        second_object DLC_BOXTURTLE
-        set_place_for_every_player
-        set_gaia_object_only
-        number_of_objects 2
-        terrain_to_place_on SHALLOW_TERRAIN
-        min_distance_to_players 4
-        max_distance_to_players 5
-        ignore_terrain_restrictions
-        min_distance_group_placement 1
-        temp_min_distance_group_placement 3
-        set_circular_placement
-    }
-    create_object TERRAIN_BLOCKER {
-        second_object DLC_BOXTURTLE
-        set_place_for_every_player
-        set_gaia_object_only
-        number_of_objects 3
-        terrain_to_place_on SHALLOW_TERRAIN
-        min_distance_to_players 5
-        max_distance_to_players 7
-        ignore_terrain_restrictions
-        min_distance_group_placement 1
-        temp_min_distance_group_placement 3
-        set_circular_placement
-    }
+    
+    if EMPIRE_WARS
+    else
+        create_object TERRAIN_BLOCKER {
+            second_object DLC_BOXTURTLE
+            set_place_for_every_player
+            set_gaia_object_only
+            number_of_objects 2
+            terrain_to_place_on SHALLOW_TERRAIN
+            min_distance_to_players 4
+            max_distance_to_players 5
+            ignore_terrain_restrictions
+            min_distance_group_placement 1
+            temp_min_distance_group_placement 3
+            set_circular_placement
+        }
+        create_object TERRAIN_BLOCKER {
+            second_object DLC_BOXTURTLE
+            set_place_for_every_player
+            set_gaia_object_only
+            number_of_objects 3
+            terrain_to_place_on SHALLOW_TERRAIN
+            min_distance_to_players 5
+            max_distance_to_players 7
+            ignore_terrain_restrictions
+            min_distance_group_placement 1
+            temp_min_distance_group_placement 3
+            set_circular_placement
+        }
+    endif
 endif
 
 create_object GOLD {
@@ -872,7 +937,13 @@ create_object GOLD {
     set_tight_grouping
     set_place_for_every_player
     set_gaia_object_only
-    min_distance_group_placement 3
+    
+    if EMPIRE_WARS
+        actor_area 101
+        actor_area_radius 1
+    else
+        min_distance_group_placement 3
+    endif
     ignore_terrain_restrictions
     terrain_to_place_on LAND_TERRAIN_A
     max_distance_to_players 14
@@ -921,14 +992,60 @@ else
         avoid_forest_zone 1
         terrain_to_place_on LAND_TERRAIN_A
     }
-    create_object BOAR { /* TODO change with the theme? */
+    if EMPIRE_WARS
+    else
+        create_object BOAR { /* TODO change with the theme? */
+            set_place_for_every_player
+            set_gaia_object_only
+            min_distance_group_placement 3
+            min_distance_to_players 20
+            max_distance_to_players 24
+            set_circular_placement
+            avoid_forest_zone 1
+        }
+    endif
+endif
+if EMPIRE_WARS
+    create_object MILL {
         set_place_for_every_player
-        set_gaia_object_only
-        min_distance_group_placement 3
-        min_distance_to_players 20
-        max_distance_to_players 24
-        set_circular_placement
+        temp_min_distance_group_placement 6
+        find_closest
+        actor_area_to_place_in 100
+        override_actor_radius_if_required
+        number_of_objects 2
         avoid_forest_zone 1
+        /*
+        actor_area 102
+        actor_area_radius 3 */
+    }
+    create_object MINING_CAMP {
+        set_place_for_every_player
+        temp_min_distance_group_placement 6
+        find_closest_to_map_edge /* alternatively, find_closest */
+        actor_area_to_place_in 101
+        override_actor_radius_if_required
+        avoid_forest_zone 1
+        min_distance_to_map_edge 1
+        ignore_terrain_restrictions /* allows for illegal placements, like on beach terrain, but can place beyond the beach terrain. */
+        /*
+        actor_area 103
+        actor_area_radius 3 */
+    }
+    create_object DOCK {
+        terrain_to_place_on WATER_TERRAIN
+        find_closest
+        set_place_for_every_player
+        actor_area 104
+        actor_area_radius 5
+        avoid_forest_zone
+    }
+    create_object FISHING_SHIP {
+        terrain_to_place_on WATER_TERRAIN
+        set_place_for_every_player
+        actor_area_to_place_in 104
+        number_of_objects 4 /* I expect them to be attacked quickly in most games, therefore the fishing ships are extra. */
+        temp_min_distance_group_placement 1
+        avoid_forest_zone
     }
 endif
 /*
