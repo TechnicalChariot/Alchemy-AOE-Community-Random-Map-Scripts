@@ -561,6 +561,7 @@ create_connect_to_nonplayer_land {
     terrain_cost FOREST_TERRAIN_A 4 /* discourage replacing forest terrain. */
     terrain_cost FOREST_TERRAIN_B 7 /* discourage replacing forest terrain. */
 }
+
 <OBJECTS_GENERATION>
 #const ON_GRID 278 /* 278 - dead fish trap  */
 #const TERRAIN_BLOCKER 1613
@@ -701,11 +702,15 @@ create_object TOWN_CENTER {
     set_place_for_every_player
     find_closest
 }
-create_object VILLAGER {
-    set_place_for_every_player
-    min_distance_to_players 6
-    max_distance_to_players 6
-}
+
+if EMPIRE_WARS
+else
+    create_object VILLAGER {
+        set_place_for_every_player
+        min_distance_to_players 6
+        max_distance_to_players 6
+    }
+endif
 if REGICIDE
     create_object KING {
         set_place_for_every_player
@@ -713,13 +718,14 @@ if REGICIDE
         find_closest
         avoid_forest_zone 1
     }
+else
+    create_object SCOUT {
+        set_place_for_every_player
+        min_distance_to_players 7
+        max_distance_to_players 9
+        avoid_forest_zone 1
+    }
 endif
-create_object SCOUT {
-    set_place_for_every_player
-    min_distance_to_players 7
-    max_distance_to_players 9
-    avoid_forest_zone 1
-}
 /* note: only want fish in the whirlpool - easy as these fish can't spawn in shallows. */
 create_object SALMON {
     number_of_objects 9320
