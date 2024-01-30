@@ -31,6 +31,8 @@ I think I may want to craft out a scenario editor map first to get a good idea o
 TODO completely redo lands/terrain
 determine a good number of shipwrecks and amount of resources needed for them.
 Make player starts (either Vils starting near shipwrecks, or alternate between valleys/glaciers) - probably have the nomad start for non-standard team formations (like FFAs), alternate between valley/glaciers for 1v1,2v2,3v3,4v4.
+
+issue: map is very easily lamed: resource nodes can be destroyed by building on top of them.
 */
 <PLAYER_SETUP>
 /* determine if standard start */
@@ -389,7 +391,7 @@ if NOMAD_START
     }
     create_object VILLAGER { /* Why is this not working? I think I should take some time to rewatch the rms videos actor_area_to_place_in 10 */
         set_place_for_every_player
-        
+        temp_min_distance_group_placement 10
         actor_area_to_place_in 10
     }
 else
@@ -403,19 +405,22 @@ else
         max_distance_to_players 6
     }
 endif
+/*
 create_object SHEEP {
     actor_area_to_place_in 10
     number_of_objects 4
     number_of_groups 10
     set_loose_grouping
     set_gaia_object_only
-}
+    set_place_for_every_player
+} */
 create_object TREE_J {
     actor_area_to_place_in 10
     number_of_objects 2
     number_of_groups 10
     set_loose_grouping
     set_gaia_object_only
+    resource_delta 875 /* to 1000 */
 }
 
 create_object DLC_ORANGEBUSH {
@@ -424,6 +429,7 @@ create_object DLC_ORANGEBUSH {
     number_of_groups 10
     set_loose_grouping
     set_gaia_object_only
+    resource_delta 375 /* to 500 */
 }
 
 create_object PILE_GOLD {
@@ -432,6 +438,7 @@ create_object PILE_GOLD {
     number_of_groups 10
     set_tight_grouping
     set_gaia_object_only
+    resource_delta 999 /* to 1000 */
 }
 
 /* 
