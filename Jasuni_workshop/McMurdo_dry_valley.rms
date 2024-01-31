@@ -80,6 +80,8 @@ Could consider having nomad_resources and force_nomad_treaty, with players start
 I think that the wood pile is also too small, but that may be due to popular mods. */
 #const PILE_FOOD 262 /* looks like forage bush, which is too small */
 /* appear to have other issues as well, like being off-grid and capable of building over. */
+#const ROCK_GOLD 841
+#const ROCK_STONE 839
 #const STORM_DOG 862 /* the optional bird replacement. */
 /* 
 
@@ -125,12 +127,20 @@ effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DYING_GRAPHIC 4354
 effect_amount SET_ATTRIBUTE TREE_K ATTR_NAME_ID 729
 /* effect_amount GAIA_SET_ATTRIBUTE TREE_K ATTR_DEAD_GRAPHIC 4354 */
 
+/* Usable, but has two downsides: it is lamable (like a straggler tree) and villagers won't auto-gather from it. */
 effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_STANDING_GRAPHIC 7640
 effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_WALKING_GRAPHIC 7640
 effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_DYING_GRAPHIC 7640
 /* effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_DEAD_GRAPHIC 7640 */
 
-/* changes orange bush into a diffent (usable) pile */
+/* The rock_gold object is not lamable and supports villager auto-tasking, therefore it is a better choice */
+effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_STANDING_GRAPHIC 7640
+effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_WALKING_GRAPHIC 7640
+effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_DYING_GRAPHIC 7640
+effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_HITPOINTS 12 /* Gold miners appear to do 13 damage */
+effect_amount SET_ATTRIBUTE ROCK_GOLD ATTR_NAME_ID 5321 /* "Pile of gold" */
+
+/* changes orange bush into a diffent (usable) pile. TODO see if I can figure out a way to change the partially depleted graphics. */
 effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_STANDING_GRAPHIC 8245
 effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_WALKING_GRAPHIC 8245
 effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_DYING_GRAPHIC 8245
@@ -432,13 +442,13 @@ create_object DLC_ORANGEBUSH {
     resource_delta 375 /* to 500 */
 }
 
-create_object PILE_GOLD {
+create_object ROCK_GOLD {
     actor_area_to_place_in 10
     number_of_objects 2
     number_of_groups 10
     set_tight_grouping
     set_gaia_object_only
-    resource_delta 999 /* to 1000 */
+    /* resource_delta 999 unneeded due to rock gold having 800 gold in it already. */
 }
 
 /* 
