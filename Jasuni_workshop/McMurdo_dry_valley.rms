@@ -28,11 +28,43 @@ katabatic winds evaporate water/ice/snow (can reach over 200 mph)
 
 I think I may want to craft out a scenario editor map first to get a good idea of what I want it to look like
 
+TODO ensure wood sources aren't deletable (there likely won't be much wood anyways)
 TODO completely redo lands/terrain
 determine a good number of shipwrecks and amount of resources needed for them.
 Make player starts (either Vils starting near shipwrecks, or alternate between valleys/glaciers) - probably have the nomad start for non-standard team formations (like FFAs), alternate between valley/glaciers for 1v1,2v2,3v3,4v4.
 
 issue: map is very easily lamed: resource nodes can be destroyed by building on top of them.
+
+Blood Falls is really small - basically a tongue on the snow that moves onto dry ground (a very thin strip - like one or two tiles) that then goes onto the water (perhaps red, icy shallows)
+
+So basically have a glacier go to the middle, which is separated from the Lake Bonnie (in the center of the map) by a tile  or two of bedrock. Lake Bonnie is an ice terrain, possibly with a shallows terrain mask. Could add the blood objects for coloring (probably with force_placement, but would need to prolong their survival), or explore using a custom lava terrain as a terrain mask.
+
+Something like: (S is snow, D is dirt/bedrock, W is water/ice, l is blood terrain/lava)
+SSSSSS
+SSllSS
+SSllSS
+DDllDD
+WllllW
+WllllW
+WWllWW
+WWWWWW
+
+Caveat: Blood falls is on Lake Bonnie, which is on the western end of Taylor Glacier (so opposite of the ocean) - or more likely, Taylor Glacier doesn't extend to the water, so I could have a small lake in the middle of the map. Would it be possible to make a long-lasting (permanent) blood object that I could use as a covering? Or I could use the corruption terrain (it glows red, which is quite fitting here, but is too black for my liking)
+
+gravel with rock terrain mask? Look through the terrain scenario mod
+rock terrain is a little too green for my liking here
+
+Gravel Desert mixed with Dirt (mud)
+or Gravel mixed with Dirt (mud)
+
+Gravel with beach (wet gravel)
+note: beach (wet rock) is like rock terrain - has a touch of greenery to it
+beach (wet) mixed with a gravel terrain is a bit off
+gravel mixed with beach (wet gravel)
+
+
+
+
 */
 <PLAYER_SETUP>
 /* determine if standard start */
@@ -137,7 +169,7 @@ effect_amount GAIA_SET_ATTRIBUTE PILE_GOLD ATTR_DYING_GRAPHIC 7640
 effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_STANDING_GRAPHIC 7640
 effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_WALKING_GRAPHIC 7640
 effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_DYING_GRAPHIC 7640
-effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_HITPOINTS 12 /* Gold miners appear to do 13 damage */
+effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_HITPOINTS 12 /* Gold miners appear to do 13 damage TODO consider changing to 0 */
 effect_amount SET_ATTRIBUTE ROCK_GOLD ATTR_NAME_ID 5321 /* "Pile of gold" */
 
 /* changes orange bush into a diffent (usable) pile. TODO see if I can figure out a way to change the partially depleted graphics. */
