@@ -31,6 +31,8 @@ endif
 #const MULECART 1808
 #const WARRIORPRIEST 1811
 #const FOREST_BAOBAB 49
+
+#const LOOT 472
  
 /*
 effect_amount ENABLE_OBJECT FISHERM ATTR_ENABLE 				0
@@ -1161,7 +1163,7 @@ create_object TREE_K {
 }
 */
 
-create_object PGOLD {
+create_object GOLD {
 	number_of_objects 2
 	set_place_for_every_player
 	set_gaia_object_only
@@ -1171,9 +1173,10 @@ create_object PGOLD {
 	min_distance_group_placement 1
 	temp_min_distance_group_placement 3
 	set_facet 1
-		resource_delta 1999
+		resource_delta 1200
 		avoid_forest_zone 4
 		terrain_to_place_on DESERT
+		second_object LOOT
 }
 
 create_object DEER
