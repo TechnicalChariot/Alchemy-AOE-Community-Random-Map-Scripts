@@ -71,9 +71,9 @@ To change:
 random_placement
 behavior_version 2
 
-/*
+/* for testing empire wars 
 #define EMPIRE_WARS  
-temporary */
+ */
 
 if SMALL_MAP
 override_map_size 136
@@ -183,6 +183,11 @@ else
     #const ROCK_MASK 54
     #const FOREST_MASK 11 /* Dirt 2 */
 endif
+
+/* TODO fold into theme - is a temporary tree for empire wars */
+effect_amount SET_ATTRIBUTE OAKTREE ATTR_HITPOINTS 0
+effect_amount SET_ATTRIBUTE OAKTREE ATTR_STORAGE_VALUE 0
+effect_amount SET_ATTRIBUTE OAKTREE ATTR_DEAD_ID -1
 
 if LARGE_MAP
     #define AT_LEAST_LARGE
@@ -645,7 +650,7 @@ else
     create_actor_area 0 478 3 0
     create_actor_area 478 478 4 0
 endif
-if DISABLE_TRADE /* TODO create relics in place of the markets? */
+if DISABLE_TRADE /* create relics in place of the markets TODO move the relics to be exactly in the corners rather than slightly biased.  */
     create_object RELIC {
         actor_area_to_place_in 1 
         set_gaia_object_only
@@ -714,7 +719,7 @@ else
         min_distance_group_placement 3
     }
 endif
-/* TODO place EMPIRE_WARS lumber camps now? */
+/* place EMPIRE_WARS lumber camps now, before the palm trees - results in a few less trees, but places them well in a unique way. */
 if EMPIRE_WARS
     create_object LUMBER_CAMP {
         number_of_objects 3
@@ -733,6 +738,10 @@ create_object TERRAIN_BLOCKER {
     number_of_clumps 9320
     set_gaia_object_only
     terrain_to_place_on FOREST_TERRAIN_A
+    if EMPIRE_WARS
+        actor_area 109
+        actor_area_radius 1
+    endif
 }
 if LUDIKRIS_MAP
     create_object TERRAIN_BLOCKER {
@@ -763,7 +772,10 @@ if EMPIRE_WARS
         number_of_objects 10
         actor_area_to_place_in 106
         place_on_forest_zone
+        force_placement
         temp_min_distance_group_placement 1 /* can potentially be blocked by reeds from lumber camp, but it does work. */
+        actor_area 108
+        actor_area_radius 1
     }
 else
     create_object VILLAGER {
@@ -779,6 +791,10 @@ create_object TERRAIN_BLOCKER {
     number_of_clumps 9320
     set_gaia_object_only
     terrain_to_place_on FOREST_TERRAIN_B
+    if EMPIRE_WARS
+        actor_area 109
+        actor_area_radius 2
+    endif
 }
 /* note: only want fish in the whirlpool - easy as these fish can't spawn in shallows. */
 create_object SALMON {
@@ -855,7 +871,6 @@ no player stone
 if DEATH_MATCH
 else
     create_object FORAGE {
-        /* TODO second_object OAKTREE */
         set_place_for_every_player
         set_gaia_object_only
         number_of_objects 5
@@ -865,17 +880,16 @@ else
         min_distance_to_players 6
         max_distance_to_players 13
         if EMPIRE_WARS
+            second_object OAKTREE /* lumber vils already placed, nothing else is placed on the true forest zone. */
             actor_area 100
-            actor_area_radius 2 /* needed for Folwark, but not ideal for civs that aren't Poles. Could improve by making a forest zone with trees that die immediately.
-            effect_amount SET_ATTRIBUTE tree_name ATTR_HITPOINTS 0
-            ... ATTR_STORAGE_VALUE 0
-            ... ATTR_DEAD_ID -1 */
+            actor_area_radius 2 /* needed for Folwark, but not ideal for civs that aren't Poles. Could improve by making a forest zone with trees that die immediately. */
         else
             min_distance_group_placement 1
         endif
         temp_min_distance_group_placement 6
         set_circular_placement
         avoid_forest_zone 2
+        avoid_actor_area 108
     }
 
     if EMPIRE_WARS
@@ -884,6 +898,7 @@ else
     create_object DLC_WATERBUFFALO {
         set_place_for_every_player
         avoid_actor_area 100
+        avoid_actor_area 108
         if EMPIRE_WARS
             find_closest
         else
@@ -900,6 +915,7 @@ else
     create_object DLC_WATERBUFFALO {
         set_place_for_every_player
         avoid_actor_area 100
+        avoid_actor_area 108
         set_gaia_object_only
         number_of_groups 2 
         terrain_to_place_on SHALLOW_TERRAIN
@@ -954,6 +970,8 @@ create_object GOLD {
     set_place_for_every_player
     set_gaia_object_only
     avoid_actor_area 100
+    avoid_actor_area 106
+    avoid_actor_area 108
     
     if EMPIRE_WARS
         actor_area 101
@@ -976,9 +994,13 @@ if EMPIRE_WARS
         min_distance_to_players 6
         find_closest
         actor_area_to_place_in 100
+        avoid_actor_area 106
+        avoid_actor_area 108
+        avoid_actor_area 109
         override_actor_radius_if_required
         number_of_objects 2
-        avoid_forest_zone 1
+        /* avoid_forest_zone 1 */
+        place_on_forest_zone
         actor_area 102
         actor_area_radius 3
     }
@@ -987,6 +1009,9 @@ if EMPIRE_WARS
         temp_min_distance_group_placement 6
         find_closest_to_map_edge /* alternatively, find_closest */
         actor_area_to_place_in 101
+        avoid_actor_area 100
+        avoid_actor_area 106
+        avoid_actor_area 108
         override_actor_radius_if_required /* might have a side effect of causing off-grid placements, particularly in conjunction with min_distance_to_map_edge. */
         avoid_forest_zone 1
         min_distance_to_map_edge 2
@@ -1010,7 +1035,7 @@ if EMPIRE_WARS
         temp_min_distance_group_placement 1
         avoid_forest_zone 1
     }
-    /* No idea why using a flare would cause fishing ships to turn into gaia objects, but it does, so I use ON_GRID instead. */
+    /* No idea why using a flare would cause fishing ships to turn into gaia objects, but it does, so I use ON_GRID instead. This is to create an inverse actor area for mills/gold mines */
     create_object ON_GRID { 
         set_place_for_every_player
         set_gaia_object_only
@@ -1025,29 +1050,43 @@ if EMPIRE_WARS
         actor_area 105
         actor_area_radius 1
     }
-    create_object VILLAGER {
-        set_place_for_every_player
-        number_of_objects 8
-        actor_area_to_place_in 100 /* berry vils */
-        avoid_actor_area 105
-        find_closest /* not needed, but I think it will improve placement, particularly since the mills also have find_closest. Might also be possible for a berry vil to be placed near the mining camp. */
-        actor_area 107
-        actor_area_radius 1
-    }
-    create_object VILLAGER {
-        set_place_for_every_player
-        number_of_objects 4
-        actor_area_to_place_in 101 /* gold vils */
-        avoid_actor_area 105
-        find_closest_to_map_edge /* not needed, but I think it will improve placement. TODO test this */
-        actor_area 107
-        actor_area_radius 1
-    }
+    /* place farms before berry vils, otherwise berry vil can spawn directly on top of farm vil */
     create_object FARM {
         set_place_for_every_player
         number_of_objects 4
         find_closest
         second_object VILLAGER
+    }
+    /* bug: there is a slight chance that a berry vil will become a woodcutter */
+    create_object VILLAGER {
+        set_place_for_every_player
+        number_of_objects 8
+        actor_area_to_place_in 100 /* berry vils */
+        force_placement
+        place_on_forest_zone
+        avoid_actor_area 101
+        avoid_actor_area 103
+        avoid_actor_area 105
+        avoid_actor_area 106
+        avoid_actor_area 108
+        avoid_actor_area 109
+        find_closest /* not needed, but I think it will improve placement, particularly since the mills also have find_closest. Might also be possible for a berry vil to be placed near the mining camp. */
+        actor_area 107
+        actor_area_radius 2
+    }
+    create_object VILLAGER {
+        set_place_for_every_player
+        number_of_objects 4
+        actor_area_to_place_in 101 /* gold vils */
+        force_placement
+        avoid_actor_area 100
+        avoid_actor_area 105
+        avoid_actor_area 106
+        avoid_actor_area 108
+        find_closest_to_map_edge /* not needed, but I think it will improve placement. TODO test this */
+        actor_area 107
+        actor_area_radius 2
+        avoid_forest_zone 2
     }
 endif
 
@@ -1062,6 +1101,9 @@ if REGICIDE
         avoid_actor_area 102
         avoid_actor_area 103
         avoid_actor_area 104
+        avoid_actor_area 106
+        avoid_actor_area 107
+        avoid_actor_area 108
     }
 else
     create_object SCOUT {
@@ -1074,6 +1116,9 @@ else
         avoid_actor_area 102
         avoid_actor_area 103
         avoid_actor_area 104
+        avoid_actor_area 106
+        avoid_actor_area 107
+        avoid_actor_area 108
     }
 endif
 
@@ -1088,6 +1133,9 @@ create_object GOLD {
     avoid_actor_area 102
     avoid_actor_area 103
     avoid_actor_area 104
+    avoid_actor_area 106
+    avoid_actor_area 107
+    avoid_actor_area 108
     ignore_terrain_restrictions
     terrain_to_place_on LAND_TERRAIN_A
     min_distance_to_players 16
@@ -1106,6 +1154,9 @@ create_object GOLD {
     avoid_actor_area 102
     avoid_actor_area 103
     avoid_actor_area 104
+    avoid_actor_area 106
+    avoid_actor_area 107
+    avoid_actor_area 108
     ignore_terrain_restrictions
     terrain_to_place_on LAND_TERRAIN_A
     min_distance_to_players 20
@@ -1158,6 +1209,7 @@ if EMPIRE_WARS
         avoid_actor_area 103
         avoid_actor_area 104
         avoid_actor_area 107
+        avoid_actor_area 108
         avoid_forest_zone 1
     }
     create_object BARRACKS {
@@ -1173,6 +1225,7 @@ if EMPIRE_WARS
         avoid_actor_area 103
         avoid_actor_area 104
         avoid_actor_area 107
+        avoid_actor_area 108
         avoid_forest_zone 1
         min_distance_group_placement 1
         min_distance_to_map_edge 2
@@ -1208,6 +1261,7 @@ create_object STONE { /* result is plenty of scattered stone piles */
     avoid_actor_area 103
     avoid_actor_area 104
     avoid_actor_area 107
+    avoid_actor_area 108
 }
 create_object GOLD {
     temp_min_distance_group_placement 25
@@ -1250,6 +1304,7 @@ create_object GOLD {
     avoid_actor_area 103
     avoid_actor_area 104
     avoid_actor_area 107
+    avoid_actor_area 108
     terrain_to_place_on LAND_TERRAIN_A
 }
 create_object TERRAIN_BLOCKER {
