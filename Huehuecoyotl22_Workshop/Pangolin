@@ -2,6 +2,10 @@
 <PLAYER_SETUP>
 random_placement
 
+if EMPIRE_WARS
+else nomad_resources
+endif
+
 #const WATER_AZURE 58
 #const BEACH_UNSAILABLE 79
 #const BEACH_WET_UNSAILABLE 80
