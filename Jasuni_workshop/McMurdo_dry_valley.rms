@@ -252,34 +252,25 @@ create_land {
 }
 if NOMAD_START
 
-create_land {
-    terrain_type SNOW_HEAVY
-    base_layer ICE
-    top_border 80
-    right_border 30
-    /* assign_to_player 1 */
-    land_position 65 90
-    base_elevation 3
-}
-create_land {
-    terrain_type SNOW_HEAVY
-    base_layer ICE
-    bottom_border 80
-    right_border 30
-    /* assign_to_player 2 */
-    land_position 65 10
-    base_elevation 3
-}
-create_land {
-    terrain_type SNOW_HEAVY
-    base_layer ICE
-    bottom_border 40
-    top_border 40
-    right_border 35
-    base_elevation 3
-} /* In theory, dirt should be low, but I'll just have to change these from dirt to snow later - maybe have players start on the dirt valleys instead?
-These next 8 lands are needed to ensure that players can spawn
- */
+    create_land {
+        terrain_type SNOW_HEAVY
+        base_layer ICE
+        top_border 80
+        right_border 30
+        land_position 65 90
+        base_elevation 3
+    }
+    create_land {
+        terrain_type SNOW_HEAVY
+        base_layer ICE
+        bottom_border 80
+        right_border 30
+        land_position 65 10
+        base_elevation 3
+    }
+     /* 
+    These next 8 lands are needed to ensure that players can spawn
+    */
     create_land {
         terrain_type WATER
         base_layer ICE_NAVIGABLE
@@ -673,7 +664,7 @@ if all else fails, avoid_actor_area works well (as an inverse actor area)
 create_object SHIPWRECK {
     number_of_objects 10
     temp_min_distance_group_placement 20
-    terrain_to_place_on BEACH
+    terrain_to_place_on BEACH /* TODO change here and elsewhere - no longer have normal beach terrain */
     set_gaia_object_only
     ignore_terrain_restrictions
     actor_area 10
