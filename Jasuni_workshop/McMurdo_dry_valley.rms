@@ -1,5 +1,5 @@
 /*
-Title: McMurdo Dry Valley
+Title: McMurdo Dry Valleys
 author: Jasuni (primary), Huehuecoyotl22 (requested map, gave basic concept, provided code samples)
 
 Have a few ideas for how to do the McMurdo one. I'm thinking direct placement with players near the water, borders for the terrain, stone piles all on an icy snow terrain (imagine ice fortifications). Not certain where I'd put gold yet. I also recall there being some kind of wood/food stockpile object, which should work for starting resources. I think I'd like to see what I can make for this map.
@@ -63,7 +63,10 @@ beach (wet) mixed with a gravel terrain is a bit off
 gravel mixed with beach (wet gravel)
 
 
+idea: players on the snow start with a different setup than players on the bedrock. I'm thinking something like the bedrock players start a certain distance from the water, and the snow bank player starts with a castle. Implementation would be something along these lines: TC with max distance 0 on snow terrain with a actor area. Temp object with max distance 0 that avoids the TC actor area and has its own actor area. Shipwreck on water/beach using find_closest to create a new actor area for players not on the snow. TC placed in the water object's actor area (for bedrock players) that has another actor area (which is used for object placement). Castle placed on snow terrain with find_closest_to_map_center, within snow TC actor area, and with a max_distance_to_player attribute that ensures only the snowbank players get a castle.
+Giving the snowbank players a castle (essentially the back player) should give them extra strategic options, since they would have an easier time providing support with their unique unit or getting their UT than other players will. 
 
+TODO rename to McMurdo Dry Valleys (i.e. add a s)
 
 */
 <PLAYER_SETUP>
@@ -208,8 +211,8 @@ defined terrains
 #const ICE_NAVIGABLE 26
 #const GRAVEL 70
 
-base_terrain GRAVEL
-base_layer DLC_DESERTGRAVEL
+base_terrain SNOW_LIGHT
+
 
 /*
 create_land {
@@ -349,9 +352,9 @@ else
             base_layer ICE
             top_border 80
             right_border 30
-            bottom_border -10
+            /* bottom_border -10 */
             assign_to_player 1 /* TODO randomize */
-            land_position 65 95
+            land_position 65 90
             base_elevation 3
         }
         create_land {
@@ -359,9 +362,9 @@ else
             base_layer ICE
             bottom_border 80
             right_border 30
-            top_border -10
+            /* top_border -10 */
             assign_to_player 2
-            land_position 65 5
+            land_position 65 10
             base_elevation 3
         }
     elseif 4_PLAYER_GAME /* TODO change to 2V2 */
@@ -370,9 +373,9 @@ else
             base_layer ICE
             top_border 80
             right_border 30
-            bottom_border -10
+            /* bottom_border -10 */
             assign_to_player 1 /* TODO randomize */
-            land_position 65 95
+            land_position 65 90
             base_elevation 3
         }
         create_land {
@@ -380,21 +383,21 @@ else
             base_layer ICE
             bottom_border 80
             right_border 30
-            top_border -10
+            /* top_border -10 */
             assign_to_player 2
-            land_position 65 5
+            land_position 65 10
             base_elevation 3
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 65
             assign_to_player 3
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 35
             assign_to_player 4
             land_percent 0
@@ -405,9 +408,9 @@ else
             base_layer ICE
             top_border 80
             right_border 30
-            bottom_border -10
+            /* bottom_border -10 */
             assign_to_player 1 /* TODO randomize */
-            land_position 65 95
+            land_position 65 90
             base_elevation 3
         }
         create_land {
@@ -415,48 +418,49 @@ else
             base_layer ICE
             bottom_border 80
             right_border 30
-            top_border -10
+            /* top_border -10 */
             assign_to_player 2
-            land_position 65 5
+            land_position 65 10
             base_elevation 3
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
-            land_position 62 77
+            terrain_type SNOW_LIGHT
+            
+            land_position 62 75
             assign_to_player 3
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
-            land_position 62 23
+            terrain_type SNOW_LIGHT
+            
+            land_position 62 25
             assign_to_player 4
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 60
             assign_to_player 5
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 40
             assign_to_player 6
             land_percent 0
         }
+
     elseif 8_PLAYER_GAME /* TODO change to 4V4 */
         create_land {
             terrain_type SNOW_HEAVY
             base_layer ICE
             top_border 80
             right_border 30
-            bottom_border -10
+            /* bottom_border -10 */
             assign_to_player 1 /* TODO randomize */
-            land_position 65 95
+            land_position 65 90
             base_elevation 3
         }
         create_land {
@@ -464,53 +468,54 @@ else
             base_layer ICE
             bottom_border 80
             right_border 30
-            top_border -10
+            /* top_border -10 */
             assign_to_player 2
-            land_position 65 5
+            land_position 65 10
             base_elevation 3
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 77
             assign_to_player 3
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 23
             assign_to_player 4
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 66
             assign_to_player 5
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 33
             assign_to_player 6
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 56
             assign_to_player 7
             land_percent 0
         }
         create_land {
-            terrain_type GRAVEL
-            base_layer DLC_DESERTGRAVEL
+            terrain_type SNOW_LIGHT
+            
             land_position 62 44
             assign_to_player 8
             land_percent 0
         }
+
     endif
 endif
 
@@ -534,6 +539,7 @@ create_land {
 
 
 <TERRAIN_GENERATION>
+#const DIRT_MUD 76
 /* 
 color_correction
 
@@ -544,20 +550,10 @@ CC_NIGHT
 no interest in CC_JUNGLE
 */
 color_correction CC_WINTER
-
 /*
-create_terrain DIRT_SNOW {
-    base_terrain GRAVEL
-    base_layer DLC_DESERTGRAVEL
-    beach_terrain ICYSHORE
-    land_percent 100
-    number_of_clumps 9320
-}
-
 create_terrain SNOW_HEAVY {
-    base_terrain GRAVEL
-    base_layer DLC_DESERTGRAVEL
-    beach_terrain ICYSHORE
+    beach_terrain SNOW_LIGHT
+    base_terrain DLC_DESERTGRAVEL
     land_percent 100
     number_of_clumps 9320
     set_flat_terrain_only
@@ -570,7 +566,89 @@ create_terrain ICE_NAVIGABLE {
     land_percent 10
     number_of_clumps 9320
 } */
+create_terrain DIRT_MUD {
+    base_terrain SNOW_LIGHT
+    land_percent 100
+    number_of_clumps 99
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1
+}
+create_terrain DIRT_MUD {
+    base_terrain WATER
+    land_percent 100
+    terrain_mask 2
+}
+create_terrain SNOW_HEAVY { /* chance it won't replace everything, but since they look the same, it won't be obvious */
+    base_terrain SNOW_LIGHT
+    number_of_clumps 99
+    land_percent 100
+}
+create_terrain SNOW_HEAVY {
+    base_terrain ICE
+    land_percent 100
+}
+/* plan: change ice to snow, then the snow at height 0 back to ice with spacing limit 1, then remaining snow at height 0 to dirt. */
+create_terrain ICE {
+    base_terrain SNOW_HEAVY
+    land_percent 100
+    set_flat_terrain_only
+    spacing_to_other_terrain_types 1
+    height_limits 0 0
+}
+create_terrain DIRT_MUD {
+    base_terrain SNOW_HEAVY
+    land_percent 100
+    number_of_clumps 99
+    height_limits 0 0
+}
+create_terrain DIRT_MUD {
+    base_terrain SNOW_HEAVY
+    land_percent 100
+    number_of_clumps 9320
+    height_limits 0 0
+}
+/* downside: dirt will go up a little, but alternative is snow out a bit, which isn't great either. */
+create_terrain WATER {
+    base_terrain DIRT_MUD
+    base_layer WATER
+    beach_terrain DLC_WETROCKBEACH
+    land_percent 100
+    spacing_to_other_terrain_types 1
+    set_flat_terrain_only
+}
+create_terrain SNOW_HEAVY {
+    base_terrain DIRT_MUD
+    base_layer WATER
+    beach_terrain ICYSHORE
+    land_percent 100
+    number_of_clumps 99
 
+}
+create_terrain MED_WATER {
+    spacing_to_other_terrain_types 5
+    base_terrain WATER
+    land_percent 100
+}
+create_terrain GRAVEL {
+    base_terrain DIRT_MUD
+    land_percent 100
+    number_of_clumps 99
+    beach_terrain DLC_WETROCKBEACH
+    terrain_mask 1
+} 
+create_terrain GRAVEL {
+    base_terrain DIRT_MUD
+    land_percent 100
+    number_of_clumps 9320
+    beach_terrain DLC_WETROCKBEACH
+    terrain_mask 1
+} 
+/*
+create_terrain DLC_NEWSHALLOW {
+    base_terrain ICE
+    land_percent 10
+    terrain_mask 1
+} */
 <OBJECTS_GENERATION>
 /*
 create_object VILLAGER {
