@@ -1,7 +1,8 @@
 /* ****************************************************** */
+/* PANGOLIN by Huehueycoyotl22 */
+/* ****************************************************** */
 <PLAYER_SETUP>
 random_placement
-
 if EMPIRE_WARS
 else nomad_resources
 endif
@@ -71852,10 +71853,17 @@ if LUDIKRIS_MAP
 else
   temp_min_distance_group_placement  15
 endif
+if TINY_MAP
+avoid_forest_zone 5
+elseif SMALL_MAP
+avoid_forest_zone 6
+else
   avoid_forest_zone 8
+ endif
   min_distance_group_placement 2
   actor_area 981
   actor_area_radius 38
+
  }
  
  
