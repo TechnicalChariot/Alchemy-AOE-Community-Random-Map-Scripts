@@ -377,7 +377,6 @@ create_object VILLAGER
 {
 	set_place_for_every_player
 	avoid_forest_zone 2
-	terrain_to_place_on DLC_MANGROVESHALLOW
 }
 create_object TRANSPORT_SHIP
 {

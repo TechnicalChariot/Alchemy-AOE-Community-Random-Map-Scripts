@@ -11,6 +11,44 @@
 #const ROCK2 1323
 #const ROCK3 389
 #const ROCK4 396
+#const PHOTON_MAN 1292
+
+/* Remove Visual Effect of Dead Fish Trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552
+	#const SILK_ROAD 499
+	effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
+/* Photon Man */
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING2_GRAPHIC 1914
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043 
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 4
+
+effect_amount GAIA_SET_ATTRIBUTE OFT ATTR_TERRAIN_ID 13
 
 <PLAYER_SETUP>
 random_placement
@@ -18,6 +56,7 @@ behavior_version 1
 
 
 <ELEVATION_GENERATION>
+
 
 <TERRAIN_GENERATION>
 create_terrain DLC_MANGROVESHALLOW
@@ -101,63 +140,254 @@ create_terrain DESERT
 
 <OBJECTS_GENERATION>
 #const OG 647
+
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 6 actor_area_radius 5 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 7 actor_area_radius 6 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 8 actor_area_radius 7 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 9 actor_area_radius 8 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 14 actor_area_radius 13 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 18 actor_area_radius 17 }
+create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 20 actor_area_radius 19 }
+
+if REGICIDE
+create_object KING
+{
+	set_place_for_every_player
+	min_distance_to_players 6
+	max_distance_to_players 6
+}
+endif
+create_object VILLAGER
+{
+	set_place_for_every_player
+	avoid_actor_area 6
+	max_distance_to_players 6
+}
+create_object TOWN_CENTER
+{
+	set_place_for_every_player
+	find_closest
+}
+create_object PHOTON_MAN
+{
+	set_place_for_every_player
+	avoid_actor_area 8
+	max_distance_to_players 9
+}
+create_object DLC_GOAT
+{
+	number_of_objects 4
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 7
+	max_distance_to_players 8
+	find_closest
+	set_circular_placement
+}
+create_object DLC_RHINO
+{
+	number_of_objects 2
+	set_gaia_object_only
+	set_place_for_every_player
+	max_distance_to_players 12
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 10
+	avoid_forest_zone 2
+}
+create_object DLC_ELEPHANT
+{
+	number_of_groups 1
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 2
+	avoid_actor_area 14
+	max_distance_to_players 16
+}
+create_object OAKTREE
+{
+	number_of_objects  2
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 6
+	max_distance_to_players 8
+	min_distance_group_placement 2
+}
+create_object DLC_AFRICANBUSH
+{
+	number_of_objects 3
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 6
+	max_distance_to_players 8
+	min_distance_group_placement 2
+}
+/* Player gold */
+create_object GOLD 
+{
+	number_of_objects 7
+	group_placement_radius 2
+	set_tight_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_actor_area 18
+	max_distance_to_players 20
+	set_circular_placement
+	temp_min_distance_group_placement 10
+	avoid_forest_zone 4
+}
+/* neutral res */
+create_object GOLD 
+{
+	number_of_objects 4
+	number_of_groups 9320
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 24
+	if TINY_MAP
+	temp_min_distance_group_placement 20
+	elseif SMALL_MAP
+	temp_min_distance_group_placement 20
+	elseif MEDIUM_MAP
+	temp_min_distance_group_placement 30
+	elseif LARGE_MAP
+	temp_min_distance_group_placement 40
+	else
+	temp_min_distance_group_placement 55
+	endif
+	avoid_forest_zone 10
+	actor_area 40
+	actor_area_radius 8
+	terrain_to_place_on DESERT
+}
+
+create_object STONE
+{
+	number_of_objects 3
+	number_of_groups 9320
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	min_distance_to_players 24
+	if TINY_MAP
+	temp_min_distance_group_placement 20
+	elseif SMALL_MAP
+	temp_min_distance_group_placement 20
+	elseif MEDIUM_MAP
+	temp_min_distance_group_placement 30
+	elseif LARGE_MAP
+	temp_min_distance_group_placement 40
+	else
+	temp_min_distance_group_placement 55
+	endif
+	avoid_forest_zone 10
+	avoid_actor_area 40
+	terrain_to_place_on DESERT
+}
+
+create_object RELIC 
+{
+	set_gaia_object_only
+	max_distance_to_other_zones 2
+	min_distance_to_players 30
+	set_circular_placement
+	min_distance_group_placement 2
+	avoid_forest_zone 2
+	avoid_actor_area 25
+	if TINY_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 35
+	elseif SMALL_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif MEDIUM_MAP
+		number_of_objects 5
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 7
+		temp_min_distance_group_placement 48
+	else
+		number_of_objects 8
+		temp_min_distance_group_placement 52
+	endif
+}
+
 /* Fish */
 create_object TRAP
 {
 	number_of_objects 2
-	number_of_groups 1000
+	number_of_groups 9320
 	set_gaia_object_only
-	min_distance_group_placement 3
-	temp_min_distance_group_placement 10
+	temp_min_distance_group_placement 6
 	ignore_terrain_restrictions
 	second_object DLC_BOXTURTLE
 	avoid_forest_zone 2
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
-create_object DLC_BOXTURTLE
+create_object TRAP
 {
-	number_of_objects 1
-	number_of_groups 1000
 	set_gaia_object_only
-	min_distance_group_placement 2
-	temp_min_distance_group_placement 8
+	number_of_objects 1
+	number_of_groups 9320
+	set_loose_grouping
+	set_scaling_to_map_size
 	terrain_to_place_on WATER
+	temp_min_distance_group_placement 7
+	find_closest
+	actor_area 70
+	actor_area_radius 6
+	second_object DLC_BOXTURTLE
 }
 create_object DOLPHIN
 {
-	number_of_objects 1
-	number_of_groups 1000
 	set_gaia_object_only
-	min_distance_group_placement 2
-	temp_min_distance_group_placement 12
+	number_of_objects 1
+	number_of_groups 9320
+	set_scaling_to_map_size
 	terrain_to_place_on DEEP_WATER
+	avoid_actor_area 70
+	if TINY_MAP
+	temp_min_distance_group_placement 8
+	elseif SMALL_MAP
+	temp_min_distance_group_placement 8
+	elseif MEDIUM_MAP
+	temp_min_distance_group_placement 8
+	elseif LARGE_MAP
+	temp_min_distance_group_placement 10
+	elseif HUGE_MAP
+	temp_min_distance_group_placement 10
+	else
+	temp_min_distance_group_placement 12
+	endif
 }
 /* Aesthetic */
 create_object ROCK3
 {
 	number_of_objects 1
-	number_of_groups 9999
+	number_of_groups 9320
 	temp_min_distance_group_placement 12
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
 create_object ROCK4
 {
 	number_of_objects 1
-	number_of_groups 9999
+	number_of_groups 9320
 	temp_min_distance_group_placement 12
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
 create_object ROCK3
 {
 	number_of_objects 1
-	number_of_groups 9999
+	number_of_groups 9320
 	temp_min_distance_group_placement 15
 	terrain_to_place_on DEEP_WATER
 }
 create_object ROCK4
 {
 	number_of_objects 1
-	number_of_groups 9999
+	number_of_groups 9320
 	temp_min_distance_group_placement 15
 	terrain_to_place_on DEEP_WATER
 }
