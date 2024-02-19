@@ -1,0 +1,870 @@
+/* Mars */
+/* A Random Map Script by CookiePirate */
+/* Released 02/XX/2024 */
+/* Land and Elevation Generation by TechChariot, Everything Else by CookiePirate */
+/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-10.pdf */
+
+<PLAYER_SETUP>
+
+#const L 32 /* Defining Land Creation Command */
+behavior_version 1
+grouped_by_team
+
+/* Defining Terrains */
+#const BT 14
+#const STRIPES_TER 3
+#const MARTIAN_BORDER_TER 42
+#const SATELLITE_TER 82
+
+#const GRAVEL 70
+#const STORM_TER 42
+#const VOID_TER 79
+
+/* Defining Player Terrains */
+#const PT1 14
+#const PT2 14
+#const PT3 14
+#const PT4 14
+#const PT5 14
+#const PT6 14
+#const PT7 14
+#const PT8 14
+
+/* Remove Visual Effect of Dead Fish Trap */
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+grouped_by_team
+nomad_resources
+behavior_version 1
+ai_info_map_type CUSTOM 1 0 0
+
+#const NNB 79 /* Non-navigable regular beach */
+#const NNRB 82 /* Non-Navigable Rock Beach  */
+#const PALM 112 /* Palm forest grass */
+#const RNW 825 /* Amazon 'Rapa Nui' warrior */
+#const RNA 850 /* Amazon 'Rapa Nui' archer */
+#const RNF 304 /* Campfire */
+#const PH 647 /* Placeholder to avoid relics spawning on mountaintop */
+#const DOLPHIN 61
+#const PHOTONMAN 1577
+#const GAZELLE 1796
+#const PILEFOOD 262
+#const LSNOW 73
+#const HSNOW 74
+
+#const PHOTON_MAN 1292 /* 430 if no attack */
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING2_GRAPHIC 1914
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 4
+
+effect_amount GAIA_SET_ATTRIBUTE DLC_BAOBABTREE ATTR_TERRAIN_ID 13
+
+#const RUBBLE_AQUEDUCT 1522
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STANDING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_WALKING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DYING_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_ID 1522
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_AQUEDUCT ATTR_STORAGE_VALUE 99999999
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_NAME_ID 5393
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_ICON_ID 856
+
+effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_ATTACK_GRAPHIC 7336
+effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_STANDING_GRAPHIC 7338
+effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_STANDING2_GRAPHIC 7338
+effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_DYING_GRAPHIC 7337
+effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_UNDEAD_GRAPHIC 7337
+effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_WALKING_GRAPHIC 7341
+effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_RUNNING_GRAPHIC 7341
+effect_amount GAIA_SET_ATTRIBUTE MONK ATTR_MAX_RANGE 3
+effect_amount GAIA_SET_ATTRIBUTE RNA ATTR_LINE_OF_SIGHT 3
+effect_amount GAIA_SET_ATTRIBUTE FALCON ATTR_LINE_OF_SIGHT 0
+effect_amount GAIA_SET_ATTRIBUTE SEAGULL ATTR_LINE_OF_SIGHT 0
+
+/* Disable trade for matches with more than 2 teams or FFA */
+if 2_TEAM_GAME
+else
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552
+    #const SILK_ROAD 499
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+    effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+endif
+
+<ELEVATION_GENERATION>
+
+/* Creating Pitted Border */
+create_elevation 2 { base_terrain GRASS number_of_tiles 9230 number_of_clumps 32 set_scale_by_groups enable_balanced_elevation }
+
+if TINY_MAP
+    create_elevation 3 { base_terrain DLC_DIRT4 number_of_tiles 1400 number_of_clumps 32 set_scale_by_groups enable_balanced_elevation spacing 2 }
+elseif SMALL_MAP
+    create_elevation 3 { base_terrain DLC_DIRT4 number_of_tiles 1050 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+elseif MEDIUM_MAP
+    create_elevation 3 { base_terrain DLC_DIRT4 number_of_tiles 1400 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+elseif LARGE_MAP
+    create_elevation 3 { base_terrain DLC_DIRT4 number_of_tiles 2000 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+elseif HUGE_MAP
+    create_elevation 3 { base_terrain DLC_DIRT4 number_of_tiles 2400 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+elseif GIGANTIC_MAP
+    create_elevation 3 { base_terrain DLC_DIRT4 number_of_tiles 2900 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+elseif LUDIKRIS_MAP
+    create_elevation 3 { base_terrain DLC_DIRT4 number_of_tiles 11500 number_of_clumps 8 set_scale_by_groups enable_balanced_elevation }
+endif
+
+create_elevation 7 { base_terrain GRASS2 number_of_tiles 9230 number_of_clumps 32 set_scale_by_groups enable_balanced_elevation spacing 3 }
+
+
+
+<TERRAIN_GENERATION>
+
+
+#define ELEVATION_PLACEHOLDER_REMOVAL
+if ELEVATION_PLACEHOLDER_REMOVAL
+  /* Border */
+  create_terrain DLC_DIRT4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  /* Olympus Mons */
+  create_terrain DLC_DIRT4 { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+  create_terrain DLC_DIRT4 { base_terrain GRASS2 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+endif
+
+#define OCEAN_LAYERING
+if OCEAN_LAYERING
+    create_terrain DLC_WETROCKBEACH { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 1 }
+    create_terrain DLC_WATER5 { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 1 set_flat_terrain_only }
+    create_terrain WATER { base_terrain DLC_WATER5 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 2 }
+    create_terrain MED_WATER { base_terrain WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 3 }
+    create_terrain DEEP_WATER { base_terrain MED_WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 5 }
+    create_terrain DLC_WATER4 { base_terrain DEEP_WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 spacing_to_other_terrain_types 7 }
+endif
+
+#define MARTIAN_COAST_CONVERSION
+if MARTIAN_COAST_CONVERSION
+  /* Non-Navigable Beach */
+  create_terrain NNB { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain NNB { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain NNB { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain NNB { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain NNB { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain NNB { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain NNB { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain NNB { base_terrain NNRB number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  /* Navigable Beach */
+  create_terrain BEACH { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain BEACH { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain BEACH { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain BEACH { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain BEACH { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain BEACH { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain BEACH { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+  create_terrain BEACH { base_terrain DLC_WETROCKBEACH number_of_clumps 9320 set_scale_by_groups land_percent 100 set_avoid_player_start_areas 9 }
+
+endif
+
+#define SPACE_WATER
+if SPACE_WATER
+    create_terrain DLC_BLACK { base_terrain DLC_WATER5 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 terrain_mask 1 }
+    create_terrain DLC_BLACK { base_terrain WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 terrain_mask 1 }
+    create_terrain DLC_BLACK { base_terrain MED_WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 terrain_mask 1 }
+    create_terrain DLC_BLACK { base_terrain DEEP_WATER number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 terrain_mask 1 }
+    create_terrain DLC_BLACK { base_terrain DLC_WATER4 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 0 0 terrain_mask 1 }
+endif
+
+#define ISLAND_LOWLANDS
+if ISLAND_LOWLANDS
+    create_terrain NNB { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain NNB { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 }
+    create_terrain DIRT { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 0 terrain_mask 1 }
+    create_terrain DLC_DIRT4 { base_terrain NNB number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 2 }
+    create_terrain DIRT { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 spacing_to_other_terrain_types 0 terrain_mask 1 }
+endif
+
+#define ISLAND_HIGHLANDS
+if ISLAND_HIGHLANDS
+    create_terrain DIRT { base_terrain DLC_DIRT4 number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 4 15 spacing_to_other_terrain_types 0 }
+    create_terrain LSNOW { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 6 7 spacing_to_other_terrain_types 0 terrain_mask 1 }
+    create_terrain SNOW { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 8 15 spacing_to_other_terrain_types 0 terrain_mask 1 }
+    create_terrain HSNOW { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 8 9 spacing_to_other_terrain_types 0 terrain_mask 1 }
+    create_terrain SNOW { base_terrain DIRT number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 10 15 spacing_to_other_terrain_types 0 terrain_mask 0 }
+    create_terrain ICE { base_terrain SNOW number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 12 14 spacing_to_other_terrain_types 0 terrain_mask 1 }
+    create_terrain ICE { base_terrain SNOW number_of_clumps 9320 set_scale_by_groups land_percent 100 height_limits 15 15 spacing_to_other_terrain_types 0 terrain_mask 0 }
+endif
+
+#define NEUTRAL_FORESTS
+if NEUTRAL_FORESTS
+    if TINY_MAP
+        create_terrain DLC_BAOBABFOREST { base_terrain DLC_DIRT4 number_of_clumps 10 set_scale_by_groups number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+        create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 6 set_scale_by_groups number_of_tiles 15 clumping_factor 10 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+    elseif SMALL_MAP
+        create_terrain DLC_BAOBABFOREST { base_terrain DLC_DIRT4 number_of_clumps 10 set_scale_by_groups number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+        create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 6 set_scale_by_groups number_of_tiles 15 clumping_factor 10 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+    elseif MEDIUM_MAP
+        create_terrain DLC_BAOBABFOREST { base_terrain DLC_DIRT4 number_of_clumps 10 set_scale_by_groups number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+        create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 6 set_scale_by_groups number_of_tiles 15 clumping_factor 10 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+    elseif LARGE_MAP
+        create_terrain DLC_BAOBABFOREST { base_terrain DLC_DIRT4 number_of_clumps 10 set_scale_by_groups number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+        create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 6 set_scale_by_groups number_of_tiles 15 clumping_factor 10 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+    elseif HUGE_MAP
+        create_terrain DLC_BAOBABFOREST { base_terrain DLC_DIRT4 number_of_clumps 10 set_scale_by_groups number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 28 spacing_to_other_terrain_types 1 }
+        create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 6 set_scale_by_groups number_of_tiles 15 clumping_factor 10 set_avoid_player_start_areas 28 spacing_to_other_terrain_types 1 }
+    elseif GIGANTIC_MAP
+        create_terrain DLC_BAOBABFOREST { base_terrain DLC_DIRT4 number_of_clumps 10 set_scale_by_groups number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+        create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 6 set_scale_by_groups number_of_tiles 15 clumping_factor 10 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+    elseif LUDIKRIS_MAP
+        create_terrain DLC_BAOBABFOREST { base_terrain DLC_DIRT4 number_of_clumps 10 set_scale_by_groups number_of_tiles 60 clumping_factor 20 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+        create_terrain DLC_BAOBABFOREST { base_terrain DIRT number_of_clumps 6 set_scale_by_groups number_of_tiles 15 clumping_factor 10 set_avoid_player_start_areas 24 spacing_to_other_terrain_types 1 }
+    endif   
+endif
+
+<OBJECTS_GENERATION>
+
+/* PLAYER assigned objects */
+#const IPH 647
+
+create_object VILLAGER { set_place_for_every_player find_closest }
+create_object PHOTON_MAN { set_place_for_every_player find_closest }
+create_object IPH { set_place_for_every_player find_closest terrain_to_place_on DLC_WATER5 second_object TRANSPORT_SHIP }
+
+if REGICIDE
+    create_object KING { set_place_for_every_player find_closest }
+endif
+
+create_object TREE_A { set_gaia_object_only find_closest number_of_groups 2 min_distance_to_players 4 max_distance_to_players 5 }
+create_object TREE_A { set_gaia_object_only find_closest number_of_groups 3 min_distance_to_players 6 max_distance_to_players 8 }
+
+create_object TREE_A { set_gaia_object_only number_of_groups 9320 number_of_objects 1 set_scaling_to_map_size terrain_to_place_on DLC_BAOBABFOREST }
+
+
+create_object DLC_GOAT { set_gaia_object_only number_of_objects 4 number_of_groups 1 }
+create_object BOAR { set_gaia_object_only number_of_objects 2 }
+create_object GAZELLE { set_gaia_object_only number_of_objects 4 group_placement_radius 4 }
+
+/* Neutral Starting Relic placement */
+
+create_object RELIC { set_gaia_object_only number_of_groups 4 avoid_forest_zone 1 temp_min_distance_group_placement 35 terrain_to_place_on DLC_DIRT4 }
+create_object RELIC { set_gaia_object_only number_of_groups 1 terrain_to_place_on ICE }
+
+
+/* More PLAYER assigned objects */
+
+create_object PILEFOOD { set_gaia_object_only number_of_objects 6 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement }
+create_object PILEFOOD { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size set_tight_grouping number_of_objects 4 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 10 }
+
+
+create_object GOLD { set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 6 temp_min_distance_group_placement 6 set_circular_placement terrain_to_place_on SNOW }
+create_object GOLD { set_gaia_object_only set_scaling_to_map_size number_of_groups 9320 number_of_objects 2 set_tight_grouping avoid_forest_zone 2 temp_min_distance_group_placement 14 terrain_to_place_on DIRT }
+create_object GOLD { set_gaia_object_only number_of_objects 2 set_tight_grouping number_of_groups 9320 avoid_forest_zone 1 temp_min_distance_group_placement 20 terrain_to_place_on DLC_DIRT4 }
+
+
+create_object STONE { set_gaia_object_only number_of_objects 5 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 12 max_distance_to_players 13 min_distance_group_placement 6 set_circular_placement }
+create_object STONE { set_gaia_object_only number_of_groups 9320 number_of_objects 2 avoid_forest_zone 2 min_distance_to_players 20 temp_min_distance_group_placement 12 terrain_to_place_on NNB }
+create_object STONE { set_gaia_object_only number_of_groups 9320 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 8 min_distance_group_placement 4 terrain_to_place_on DIRT3 }
+
+
+create_object DLC_BOXTURTLE { number_of_groups 9320 temp_min_distance_group_placement 4 }
+create_object DOLPHIN { number_of_groups 9320 min_distance_group_placement 8 terrain_to_place_on DLC_WATER4 }
+create_object DOLPHIN { number_of_groups 9320 set_scaling_to_map_size min_distance_group_placement 6 terrain_to_place_on DEEP_WATER }
+create_object DOLPHIN { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 4 terrain_to_place_on MED_WATER }
+
+<LAND_GENERATION>
+
+base_terrain GRASS
+create_player_lands { terrain_type NNRB circle_radius 80 0 base_size 1 number_of_tiles 9 clumping_factor 32 base_elevation 1 }
+
+/*
+if TINY_MAP
+    create_land { terrain_type DLC_DIRT4 circle_radius 29 0 left_border 18 right_border 18 top_border 18 bottom_border 18 border_fuzziness 7 base_size 12 land_percent 80 clumping_factor 32 base_elevation 1 }
+    create_land { terrain_type DIRT land_position 50 50 left_border 38 right_border 38 top_border 38 bottom_border 38 border_fuzziness 85 base_size 9 number_of_tiles 599 clumping_factor 20 base_elevation 15 }
+elseif SMALL_MAP
+    create_land { terrain_type DLC_DIRT4 circle_radius 29 0 left_border 17 right_border 17 top_border 17 bottom_border 17 border_fuzziness 6 base_size 13 land_percent 80 clumping_factor 32 base_elevation 1 }
+    create_land { terrain_type DLC_DIRT4 land_position 50 50 left_border 38 right_border 38 top_border 38 bottom_border 38 border_fuzziness 88 base_size 9 number_of_tiles 899 clumping_factor 20 base_elevation 15 }
+elseif MEDIUM_MAP
+    create_land { terrain_type DLC_DIRT4 circle_radius 30 0 left_border 16 right_border 16 top_border 16 bottom_border 16 border_fuzziness 5 base_size 14 land_percent 80 clumping_factor 32 base_elevation 1 }
+    create_land { terrain_type DLC_DIRT4 land_position 50 50 left_border 38 right_border 38 top_border 38 bottom_border 38 border_fuzziness 90 base_size 9 number_of_tiles 1198 clumping_factor 20 base_elevation 15 }
+elseif LARGE_MAP
+    create_land { terrain_type DLC_DIRT4 circle_radius 30 0 left_border 15 right_border 15 top_border 15 bottom_border 15 border_fuzziness 5 base_size 15 land_percent 80 clumping_factor 32 base_elevation 1 }
+    create_land { terrain_type DLC_DIRT4 land_position 50 50 left_border 38 right_border 38 top_border 38 bottom_border 38 border_fuzziness 92 base_size 9 number_of_tiles 1712 clumping_factor 20 base_elevation 15 }
+elseif HUGE_MAP
+    create_land { terrain_type DLC_DIRT4 circle_radius 30 0 left_border 14 right_border 14 top_border 14 bottom_border 14 border_fuzziness 4 base_size 15 land_percent 100 clumping_factor 32 base_elevation 1 }
+    create_land { terrain_type DLC_DIRT4 land_position 50 50 left_border 38 right_border 38 top_border 38 bottom_border 38 border_fuzziness 95 base_size 9 number_of_tiles 2054 clumping_factor 20 base_elevation 15 }
+elseif GIGANTIC_MAP
+    create_land { terrain_type DLC_DIRT4 circle_radius 31 0 left_border 14 right_border 14 top_border 14 bottom_border 14 border_fuzziness 3 base_size 15 land_percent 80 clumping_factor 32 base_elevation 1 }
+    create_land { terrain_type DLC_DIRT4 land_position 50 50 left_border 38 right_border 38 top_border 38 bottom_border 38 border_fuzziness 97 base_size 9 number_of_tiles 2482 clumping_factor 20 base_elevation 15 }
+elseif LUDIKRIS_MAP 
+    create_land { terrain_type DLC_DIRT4 circle_radius 32 0 left_border 13 right_border 13 top_border 13 bottom_border 13 border_fuzziness 2 base_size 15 land_percent 80 clumping_factor 32 base_elevation 1 }
+    create_land { terrain_type DLC_DIRT4 land_position 50 50 left_border 25 right_border 25 top_border 25 bottom_border 25 border_fuzziness 99 base_size 9 number_of_tiles 9844 clumping_factor 20 base_elevation 15 }
+endif
+*/
+
+/* LAND_AUTOSCRIBE */
+start_random
+percent_chance 100  #define C1
+end_random
+if C1
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 50 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 40  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 58 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 77 19  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 47 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 19 76  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 20 77  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 80 22  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 82 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 89 37  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 36 89  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 79 79  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 16 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 44  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 52  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 51 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 89 63  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 42 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 60 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 43 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 63 89  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 41 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 22 79  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 60 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 39  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 86 30  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 19 24  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 24 18  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 81 24  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 16 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 13 32  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 64 11  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 61  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 55 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 16  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 89 39  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 19 23  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 18 24  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 67 13  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 23 80  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 87 67  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 54  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 43 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 58 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 59  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 15  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 85  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 15 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 77 80  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 83 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 87 33  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 88 65  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 89 38  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 76 19  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 85 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 16 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 49 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 35 88  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 46 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 22 80  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 41  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 83  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 13 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 50 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 61 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 84 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 83 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 14 30  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 62 89  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 39 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 68 87  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 58  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 33 87  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 31 14  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 56  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 41  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 82  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 57  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 29 85  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 40  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 59 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 83  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 17 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 48 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 56 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 30 86  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 52 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 20 22  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 86 71  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 15  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 22 21  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 50  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 84 27  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 41 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 21 79  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 79 21  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 61 11  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 11 39  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 57 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 11 62  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 60  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 71 15  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 78 79  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 14 71  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 54 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 16 73  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 18 76  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 89 64  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 16  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 39  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 73 16  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 52 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 56  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 48  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 78 21  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 17  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 46  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 49  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 11 36  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 18  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 45 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 69 86  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 17  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 87 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 30 14  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 87 68  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 80 77  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 85 29  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 82 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 53 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 83 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 35 12  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 77 20  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 48  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 81 77  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 56 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 77 81  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 16 27  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 21 78  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 68 13  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 40 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 42  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 65 88  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 81 23  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 31 86  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 27 16  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 17  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 51  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 84  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 51 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 31 13  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 54 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 85 71  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 76 18  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 66 88  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 53  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 89 62  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 83  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 20 78  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 44 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 12 34  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 57 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 56  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 79 22  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 47 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 21 21  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 37 11  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 13 68  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 64 89  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 14 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 65 12  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 83  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 46 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 89 61  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 40 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 78 80  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 13 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 61  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 16 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 49 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 57  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 86 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 58  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 44  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 55 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 45  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 50  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 12 35  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 23 20  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 71 86  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 70 86  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 61 89  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 20 23  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 39 89  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 88 34  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 17  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 44 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 80 78  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 17 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 56 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 82 24  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 13 33  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 15 29  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 88 35  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 16  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 43  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 24 81  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 61 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 11 61  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 90 59  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 24 19  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 37 89  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 73 84  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 53 91  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 62 11  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 49  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 18  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 80 23  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 38 89  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 44 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 84  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 34 88  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 85  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 71 85  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 66 12  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 42 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 46  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 21 22  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 69 14  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 67 87  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 13 67  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 86 70  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 84  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 39 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 78 20  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 69 13  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 48 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 60  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 84 73  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 55  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 76 82  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 34 12  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 31 87  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 44  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 32 13  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 89 36  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 84  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 69 87  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 56 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 43  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 23 19  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 55  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 16  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 14 70  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 24 82  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 83 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 32 87  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 53  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 14 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 38 11  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 15 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 29 15  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 12 66  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 88 66  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 47  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 85 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 36 11  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 15 71  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 22 20  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 10 42  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 84 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 71 14  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 45  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 59 10  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 12 65  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 39 11  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 17 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 56  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 17 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 70 14  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 86 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 11 63  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 63 11  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 47  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 33 13  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 82  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 82 76  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 27 84  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 52  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 84 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 54  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 19 77  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 18 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 11 37  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 18 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 9 44  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 45 9  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 79 78  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 91 51  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 44 90  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 23 81  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 87 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 81 76  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 84 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 87 32  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 76 81  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 11 64  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 11 38  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 77 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 83 51  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 20 36  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 67 22  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 40 18  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 80 37  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 60 82  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 24 30  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 66 79  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 17 49  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 33 78  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 53 83  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 18 56  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 80 64  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 20 63  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 82 44  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 39 81  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 28 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 61 19  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 46 83  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 54 17  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 82 57  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 18 43  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 72 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 47 17  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 23 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 27 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 76 70  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 34 21  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 if TINY_MAP number_of_tiles 35  elseif SMALL_MAP number_of_tiles 50  elseif MEDIUM_MAP number_of_tiles 69  elseif LARGE_MAP number_of_tiles 97  elseif HUGE_MAP number_of_tiles 118  else number_of_tiles 140  endif land_position 73 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 63  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 46  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 39 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 67 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 64 29  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 56 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 48 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 52  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 59 27  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 56 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 57 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 70 35  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 30 35  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 50 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 55  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 55 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 36 29  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 47  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 61  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 71 36  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 49  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 47 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 42  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 38  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 32 33  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 51 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 31 66  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 43  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 64 30  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 45  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 51  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 60 27  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 44 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 47 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 62 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 55  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 60 73  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 54  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 61 27  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 57 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 64 71  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 51  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 32 32  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 33 68  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 36 30  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 45 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 39 27  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 48 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 63  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 73 60  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 71 37  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 31 33  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 27 59  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 44 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 57  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 68 33  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 66 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 71 64  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 68 68  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 27 60  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 34 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 29 36  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 42 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 58 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 31 67  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 45  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 73 41  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 66 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 67 32  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 55  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 37 29  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 73 61  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 41 27  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 53  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 32 67  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 38  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 41 73  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 42  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 37 71  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 29 37  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 39 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 27 40  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 55 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 69 66  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 43  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 32 68  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 46 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 67 68  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 58  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 50 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 69 67  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 34 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 29 64  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 55 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 70 36  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 48  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 27 61  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 65 30  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 43 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 55 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 50  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 58 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 27 41  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 69 34  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 70 65  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 69 33  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 45  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 43 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 45 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 48  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 73 40  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 49  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 56  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 50  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 46  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 39 73  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 29 63  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 63 29  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 31 34  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 44  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 62  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 61  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 56  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 62 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 74 45  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 40 73  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 46 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 35 30  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 73 59  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 30 64  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 49 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 54 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 58  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 53 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 62  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 52 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 65 70  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 47  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 57  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 45 26  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 51 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 70 64  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 38 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 38 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 68 67  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 33 69  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 52 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 27 39  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 63 71  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 26 44  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 61 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 36 70  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 49 75  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 33 32  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 73 39  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 52  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 35 70  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 30 65  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 75 55  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 72 39  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 40 27  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 53  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 33 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 53 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 59 73  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 30 36  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 64 70  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 61 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 61 73  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 71 63  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 45 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 25 54  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 42 74  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 63 28  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 67 31  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 28 39  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 54 25  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 63 72  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 36 71  clumping_factor 0 }
+L {  terrain_type  MARTIAN_BORDER_TER base_elevation 2 base_size 1 number_of_tiles 0 if TINY_MAP elseif SMALL_MAP elseif MEDIUM_MAP elseif LARGE_MAP elseif HUGE_MAP else endif land_position 68 32  clumping_factor 0 }
+endif
+L {  terrain_type  GRASS2 base_elevation 15 if TINY_MAP base_size 9  number_of_tiles 600  elseif SMALL_MAP base_size 11  number_of_tiles 864  elseif MEDIUM_MAP base_size 13  number_of_tiles 1176  elseif LARGE_MAP base_size 15  number_of_tiles 1667  elseif HUGE_MAP base_size 17  number_of_tiles 2017  else base_size 18  number_of_tiles 2400  endif land_position 50 50  clumping_factor 25 }
+L {  terrain_type  GRASS2 base_elevation 2 base_size 0 land_position 65 65  }
+L {  terrain_type  GRASS2 base_elevation 2 base_size 0 land_position 35 35  }
+L {  terrain_type  GRASS2 base_elevation 2 base_size 0 land_position 35 65  }
+L {  terrain_type  NNRB base_size 0 land_position 99 99  }
+L {  terrain_type  NNRB base_size 0 land_position 1 1  }
+L {  terrain_type  NNRB base_size 0 land_position 1 99  }
+L {  terrain_type  GRASS2 base_elevation 2 base_size 0 land_position 65 35  }
+L {  terrain_type  NNRB base_size 0 land_position 99 1  }
