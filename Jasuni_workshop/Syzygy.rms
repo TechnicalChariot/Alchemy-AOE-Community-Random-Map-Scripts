@@ -7,6 +7,15 @@ Syzygy randomizing: when selecting terrains, do a random chance for first 1, the
 /* date:  */
 
 <PLAYER_SETUP>
+
+if EQUAL_SIZED_PLANETS /* currently deactivated */
+else
+	#define SNOWMAN_PLANET_SHAPE
+	if TINY_MAP
+		override_map_size 121 /* 1 extra tile creates even spacing between planets and map edge. Otherwise, right side has one less tile, which is notable on smaller map sizes. Doesn't appear to occur on larger map sizes. */
+	endif
+endif
+
 direct_placement
 #const L 32
 /* Defining Terrains */
@@ -5062,7 +5071,7 @@ L { terrain_type PN3 land_position 1 5 base_size 0 land_percent 100 }
 L { terrain_type PN3 land_position 85 96 base_size 0 land_percent 100 }
 L { terrain_type PN4 land_position  1 99 base_size 0 land_percent 100 }
 
-else
+else /* SNOWMAN_PLANET_SHAPE */
 
 base_terrain DLC_BLACK
 
@@ -5592,5 +5601,5 @@ L { land_position 10 65 land_percent 100 terrain_type DESERT }
 else
 endif
 
-endif
+endif /* EQUAL_SIZED_PLANETS or SNOWMAN_PLANET_SHAPE */
 
