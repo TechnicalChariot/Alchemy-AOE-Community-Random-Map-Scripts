@@ -276,72 +276,72 @@ if NOMAD_START
         right_border 30
         land_position 65 10
         base_elevation 3
+        land_id 1
     }
-     /* 
-    These next 8 lands are needed to ensure that players can spawn
-    */
+    
+    /* Create Lake Bonnie, where Blood Falls is found as player lands */
     create_land {
-        terrain_type WATER
-        base_layer ICE_NAVIGABLE
-        land_percent 0
-        left_border 70 /* may adjust */
-        land_position 90 90
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         assign_to_player 1
     }
     create_land {
-        terrain_type WATER
-        base_layer ICE_NAVIGABLE
-        land_percent 0
-        left_border 70 /* may adjust */
-        land_position 90 90
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         assign_to_player 2
     }
     create_land {
-        terrain_type WATER
-        base_layer ICE_NAVIGABLE
-        land_percent 0
-        left_border 70 /* may adjust */
-        land_position 90 90
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         assign_to_player 3
     }
     create_land {
-        terrain_type WATER
-        base_layer ICE_NAVIGABLE
-        land_percent 0
-        left_border 70 /* may adjust */
-        land_position 90 90
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         assign_to_player 4
     }
     create_land {
-        terrain_type WATER
-        base_layer ICE_NAVIGABLE
-        land_percent 0
-        left_border 70 /* may adjust */
-        land_position 90 90
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         assign_to_player 5
     }
     create_land {
-        terrain_type WATER
-        base_layer ICE_NAVIGABLE
-        land_percent 0
-        left_border 70 /* may adjust */
-        land_position 90 90
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         assign_to_player 6
     }
     create_land {
-        terrain_type WATER
-        base_layer ICE_NAVIGABLE
-        land_percent 0
-        left_border 70 /* may adjust */
-        land_position 90 90
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         assign_to_player 7
     }
     create_land {
-        terrain_type WATER
-        base_layer ICE_NAVIGABLE
-        land_percent 0
-        left_border 70 /* may adjust */
-        land_position 90 90
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         assign_to_player 8
     }
 else
@@ -517,6 +517,15 @@ else
         }
 
     endif
+    /* Create Lake Bonnie, where Blood Falls is found */
+    create_land {
+        terrain_type ICE
+        left_border 30
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        land_id 1
+    }
 endif
 
 create_land {
@@ -527,15 +536,6 @@ create_land {
     right_border 70
     base_elevation 3
 } 
-/* Create Lake Bonnie, where Blood Falls is found */
-create_land {
-    terrain_type ICE
-    left_border 30
-    bottom_border 45
-    top_border 45
-    right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
-    land_id 1
-}
 <ELEVATION_GENERATION>
 
 
@@ -737,21 +737,17 @@ if NOMAD_START
         temp_min_distance_group_placement 20
         terrain_to_place_on DLC_WETROCKBEACH /* TODO change here and elsewhere - no longer have normal beach terrain */
         set_gaia_object_only
-        ignore_terrain_restrictions
         actor_area 10
         actor_area_radius 9
         resource_delta 975
     }
-    create_object FLAG_B {
-        set_place_for_every_player
-        actor_area_to_place_in 10
-        number_of_objects 93
-        terrain_to_place_on BEACH
-    }
-    create_object VILLAGER { /* Why is this not working? I think I should take some time to rewatch the rms videos actor_area_to_place_in 10 */
+    
+    create_object VILLAGER {
         set_place_for_every_player
         temp_min_distance_group_placement 10
         actor_area_to_place_in 10
+        min_distance_group_placement 1
+        max_distance_to_other_zones 2
     }
     /*
     create_object SHEEP {
@@ -762,22 +758,24 @@ if NOMAD_START
         set_gaia_object_only
         set_place_for_every_player
     } */
-    create_object TREE_J {
+    create_object TREE_J { /* pile of wood */
         actor_area_to_place_in 10
         number_of_objects 2
         number_of_groups 10
         set_loose_grouping
         set_gaia_object_only
         resource_delta 875 /* to 1000 */
+        max_distance_to_other_zones 3
     }
 
-    create_object DLC_ORANGEBUSH {
+    create_object DLC_ORANGEBUSH { /* goods */
         actor_area_to_place_in 10
-        number_of_objects 2
+        number_of_objects 4
         number_of_groups 10
         set_loose_grouping
         set_gaia_object_only
         resource_delta 375 /* to 500 */
+        max_distance_to_other_zones 3
     }
 
     create_object ROCK_GOLD {
@@ -787,7 +785,8 @@ if NOMAD_START
         set_tight_grouping
         set_gaia_object_only
         /* resource_delta 999 unneeded due to rock gold having 800 gold in it already. */
-    }
+        max_distance_to_other_zones 3
+    } 
 
 else
     /* create TC and starting resources for snow players */
