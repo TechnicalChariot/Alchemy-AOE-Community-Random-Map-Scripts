@@ -584,11 +584,13 @@ create_terrain DIRT_MUD {
 create_terrain DIRT_MUD {
     base_terrain WATER
     land_percent 100
+    number_of_clumps 99
     terrain_mask 2
 }
 create_terrain DIRT_MUD {
     base_terrain WATER
     land_percent 99
+    number_of_clumps 99
     terrain_mask 2
 }
 create_terrain SNOW_HEAVY { /* chance it won't replace everything, but since they look the same, it won't be obvious */
@@ -788,14 +790,253 @@ if NOMAD_START
     }
 
 else
+    /* create TC and starting resources for snow players */
     create_object TOWN_CENTER {
+        second_object CASTLE /* almost certainly a terrible idea */
+        set_place_for_every_player
+        max_distance_to_players 0
+        terrain_to_place_on SNOW_HEAVY
+        actor_area 1003
+        actor_area_radius 26
+        set_circular_placement
+    }
+    create_object DLC_ORANGEBUSH {
+        actor_area_to_place_in 1003 /* Only places for players that had a TC spawn with actor area 1003 */
+        number_of_objects 5
+        number_of_groups 3
+        temp_min_distance_group_placement 10
+        min_distance_group_placement 3
+        set_place_for_every_player
+        set_gaia_object_only
+        set_tight_grouping
+        min_distance_to_players 7
+        max_distance_to_players 13
+        set_circular_placement
+    }
+    create_object TREE_J {
+        actor_area_to_place_in 1003
+        number_of_objects 2
+        number_of_groups 10
+        set_place_for_every_player
+        set_gaia_object_only
+        set_tight_grouping
+        min_distance_to_players 7
+        max_distance_to_players 10
+        temp_min_distance_group_placement 5
+        min_distance_group_placement 2
+        set_circular_placement
+        resource_delta 875 /* to 1000 */
+    }
+    create_object ROCK_GOLD {
+        actor_area_to_place_in 1003
+        number_of_objects 2
+        number_of_groups 10
+        set_place_for_every_player
+        set_gaia_object_only
+        set_tight_grouping
+        min_distance_to_players 10
+        max_distance_to_players 13
+        temp_min_distance_group_placement 5
+        min_distance_group_placement 2
+        set_circular_placement
+        /* resource_delta 999 unneeded due to rock gold having 800 gold in it already. */
+    }
+    /* snow fort? Maybe place castle in the center as a second object for the TC
+    create_object CASTLE { /* not satisifed with current placement - perhaps create a reverse actor area to avoid? */
+        actor_area_to_place_in 1003
+        find_closest_to_map_center
+        /* max_distance_to_players 12 */
+        set_circular_placement
+        set_place_for_every_player
+        max_distance_to_other_zones 5
+        terrain_to_place_on SNOW_HEAVY
+    } */
+    create_object SHIPWRECK {
         set_place_for_every_player
         find_closest
+        actor_area_to_place_in 1003
+        terrain_to_place_on ICYSHORE
+        set_circular_placement
     }
+
+
+    /* Create TCs and starting resources for other players - those not on snow terrain */
+    create_object FLAG_B {
+        set_place_for_every_player
+        max_distance_to_players 0
+        terrain_to_place_on DIRT_MUD
+        actor_area 1020
+        actor_area_radius 45
+    }
+    create_object SHIPWRECK {
+        terrain_to_place_on DLC_WETROCKBEACH
+        find_closest
+        set_circular_placement
+        actor_area_to_place_in 1020
+        set_place_for_every_player
+        set_gaia_object_only
+        actor_area 1001 /* for placing TC */
+        actor_area_radius 8
+    }
+    create_object FLAG_C {
+        actor_area_to_place_in 1001
+        find_closest
+        set_circular_placement
+        set_place_for_every_player
+        actor_area 0
+        actor_area_radius 0
+    }
+    create_object FLAG_B {
+        actor_area_to_place_in 1001
+        find_closest
+        set_circular_placement
+        set_place_for_every_player
+        force_placement
+        actor_area 1
+        actor_area_radius 1
+    }
+    create_object FLAG_A {
+        set_place_for_every_player
+        actor_area_to_place_in 1
+        find_closest
+        set_circular_placement
+        force_placement
+        actor_area 3
+        actor_area_radius 3
+    }
+    create_object FLAG_A {
+        set_place_for_every_player
+        actor_area_to_place_in 1
+        find_closest
+        set_circular_placement
+        force_placement
+        actor_area 5
+        actor_area_radius 5
+    }
+    create_object FLAG_A {
+        set_place_for_every_player
+        actor_area_to_place_in 1
+        find_closest
+        set_circular_placement
+        force_placement
+        actor_area 6
+        actor_area_radius 6
+    }
+    create_object FLAG_A {
+        set_place_for_every_player
+        actor_area_to_place_in 1
+        find_closest
+        set_circular_placement
+        force_placement
+        actor_area 8
+        actor_area_radius 8
+    }
+    create_object FLAG_A {
+        set_place_for_every_player
+        actor_area_to_place_in 1
+        find_closest
+        set_circular_placement
+        force_placement
+        actor_area 9
+        actor_area_radius 9
+    }
+    create_object FLAG_A {
+        set_place_for_every_player
+        actor_area_to_place_in 1
+        find_closest
+        set_circular_placement
+        force_placement
+        actor_area 11
+        actor_area_radius 11
+    }
+    create_object FLAG_A {
+        set_place_for_every_player
+        actor_area_to_place_in 1
+        find_closest
+        set_circular_placement
+        force_placement
+        actor_area 13
+        actor_area_radius 13
+    }
+    create_object TOWN_CENTER {
+        set_place_for_every_player
+        actor_area_to_place_in 1
+        find_closest
+        set_circular_placement
+    }
+    create_object DLC_ORANGEBUSH {
+        set_place_for_every_player
+        number_of_objects 3
+        set_tight_grouping
+        actor_area_to_place_in 1001
+        avoid_actor_area 5
+        set_gaia_object_only
+        min_distance_group_placement 2
+        max_distance_to_other_zones 2
+    }
+    create_object TREE_J {
+        set_place_for_every_player
+        number_of_objects 2
+        set_loose_grouping
+        actor_area_to_place_in 1001
+        avoid_actor_area 5
+        set_gaia_object_only
+        min_distance_group_placement 2
+        max_distance_to_other_zones 2
+
+    }
+    create_object ROCK_GOLD {
+        set_place_for_every_player
+        number_of_objects 2
+        set_loose_grouping
+        actor_area_to_place_in 1001
+        avoid_actor_area 5
+        set_gaia_object_only
+        min_distance_group_placement 2
+        max_distance_to_other_zones 2
+    }
+    create_object VILLAGER {
+        set_place_for_every_player
+        actor_area_to_place_in 6
+        avoid_actor_area 5
+    }
+
+    create_object SCOUT {
+        set_place_for_every_player
+        actor_area_to_place_in 9
+        avoid_actor_area 6
+    }
+
+    /* TODO place other resources that aren't guaranteed to be near the shoreline */
+
+    /*
+    create_object FLAG_A {
+        actor_area_to_place_in 1020
+        number_of_objects 9320
+        set_place_for_every_player
+        set_circular_placement
+        temp_min_distance_group_placement 1
+    }
+    create_object TOWN_CENTER {
+        second_object FLAG_A
+        set_place_for_every_player
+        max_distance_to_players 0
+        avoid_actor_area 1003
+    } */
+    
     create_object VILLAGER {
         set_place_for_every_player
         min_distance_to_players 6
         max_distance_to_players 6
+        terrain_to_place_on SNOW_HEAVY
+        avoid_actor_area 8
+    }
+    create_object SCOUT {
+        set_place_for_every_player
+        min_distance_to_players 7
+        max_distance_to_players 9
+        terrain_to_place_on SNOW_HEAVY
+        avoid_actor_area 13
     }
 endif
 
