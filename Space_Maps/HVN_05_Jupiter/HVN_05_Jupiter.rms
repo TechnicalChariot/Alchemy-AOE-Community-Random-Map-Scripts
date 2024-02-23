@@ -2,7 +2,7 @@
 /* A Random Map Script by TechChariot */
 /* Released 02/05/2024 */
 /* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
-
+/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-05.pdf */
 
 <PLAYER_SETUP>
 
@@ -56,7 +56,7 @@ effect_amount GAIA_SET_ATTRIBUTE ROCK ATTR_OCCLUSION_MODE 2
 effect_amount GAIA_SET_ATTRIBUTE ROCK2 ATTR_OCCLUSION_MODE 2
 
 /* Photon Man Definitions */
-#const PHOTON_MAN 1292
+#const PHOTON_MAN 430
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
@@ -70,6 +70,10 @@ effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
 effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 1
+effect_percent ADD_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 10
+
+
 
 /* Remove Traditional Trees */
 effect_amount GAIA_SET_ATTRIBUTE PALMTREE ATTR_TERRAIN_ID 19
