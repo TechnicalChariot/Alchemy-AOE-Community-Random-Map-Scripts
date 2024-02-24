@@ -3,12 +3,47 @@
 #const MUD 76
 #const F 69
 #const WRB 82
+#const WGB 108
 
 #const DOLPHIN 61
 #const TRAP 278
 #const ROCK2 1323
 #const ROCK3 389
 #const ROCK4 396
+#const PHOTON_MAN 1292
+
+/* Removing Trade Carts and Cogs for Multi-team Games */
+if 2_TEAM_GAME
+else
+    #const TRADE_CART_ENABLER 161
+    #const TRADE_COG_ENABLER 180
+    #const TRADE_CARAVAN_ENABLER 48
+    #const HINDU_CARAVANSERAI_ENABLER 518
+    #const PERSIAN_CARAVANSERAI_ENABLER 552
+	#const SILK_ROAD 499
+	effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
+    effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+    effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+    effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+    effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+    effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+endif
+
+/* Photon Man */
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING2_GRAPHIC 1914
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043 
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 2
 
 <PLAYER_SETUP>
 random_placement
@@ -18,13 +53,13 @@ ai_info_map_type NOMAD 1 0 1
 behavior_version 1
 
 <LAND_GENERATION>
-base_terrain DLC_JUNGLELEAVES
+base_terrain WGB
 
 enable_waves 0
 
 create_player_lands
 {
-	base_terrain DLC_JUNGLELEAVES
+	base_terrain WGB
 	land_percent 0
 	base_size 0
 	other_zone_avoidance_distance 12
@@ -137,7 +172,7 @@ create_land
 create_land
 { terrain_type GRAVEL1 base_size 8 number_of_tiles 500 clumping_factor 30 land_position 75 75 }
 end_random
-elseif HUGE_MAP
+else
 start_random
 percent_chance 25
 create_land
@@ -179,6 +214,7 @@ end_random
 endif
 
 <ELEVATION_GENERATION>
+
 if TINY_MAP
 create_elevation 2
 { base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
@@ -191,14 +227,14 @@ create_elevation 3
 elseif LARGE_MAP
 create_elevation 3
 { base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
-elseif HUGE_MAP
+else
 create_elevation 3
 { base_terrain GRAVEL1 number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
 endif
 
 create_elevation 1
 {
-	base_terrain DLC_JUNGLELEAVES
+	base_terrain WGB
 if TINY_MAP
 	number_of_tiles 2500
 	number_of_clumps 50
@@ -208,7 +244,7 @@ elseif MEDIUM_MAP
 elseif LARGE_MAP
 	number_of_tiles 9000
 	number_of_clumps 40
-elseif HUGE_MAP
+else
 	number_of_tiles 11000
 	number_of_clumps 45
 endif
@@ -217,7 +253,7 @@ endif
 }
 create_elevation 2
 {
-	base_terrain DLC_JUNGLELEAVES
+	base_terrain WGB
 if TINY_MAP
 	number_of_tiles 500
 	number_of_clumps 10
@@ -230,6 +266,9 @@ elseif LARGE_MAP
 elseif HUGE_MAP
 	number_of_tiles 1600
 	number_of_clumps 12
+else
+	number_of_tiles 2000
+	number_of_clumps 20
 endif
 	set_scale_by_groups
 	enable_balanced_elevation
@@ -237,7 +276,7 @@ endif
 /*
 create_elevation 3
 {
-	base_terrain DLC_JUNGLELEAVES
+	base_terrain WGB
 if TINY_MAP
 	number_of_tiles 250
 	number_of_clumps 10
@@ -255,43 +294,43 @@ endif
 	enable_balanced_elevation
 }
 */
-
 <TERRAIN_GENERATION>
-create_terrain DLC_ROCK
-{ base_terrain GRAVEL1 land_percent 100 number_of_clumps 100 terrain_mask 1 }
-create_terrain DLC_ROCK
-{ base_terrain GRAVEL1 land_percent 100 number_of_clumps 100 terrain_mask 1 }
 
-create_terrain DLC_MANGROVESHALLOW
-{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
-create_terrain DLC_MANGROVESHALLOW
-{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
-create_terrain DLC_MANGROVESHALLOW
-{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
-create_terrain DLC_MANGROVESHALLOW
-{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
-create_terrain DLC_MANGROVESHALLOW
-{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
-create_terrain DLC_MANGROVESHALLOW
-{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
-create_terrain DLC_MANGROVESHALLOW
-{ base_terrain DLC_JUNGLELEAVES land_percent 100 number_of_clumps 100 set_flat_terrain_only height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_ROCK
+{ base_terrain GRAVEL1 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain DLC_ROCK
+{ base_terrain GRAVEL1 land_percent 100 number_of_clumps 9320 terrain_mask 1 }
 
-create_terrain DLC_RAINFOREST
+create_terrain DLC_MANGROVESHALLOW { base_terrain WGB land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW { base_terrain WGB land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
+
+create_terrain FOREST
 {
-	base_terrain DLC_JUNGLELEAVES
-	land_percent 9
-	number_of_clumps 15
+	base_terrain WGB
+	land_percent 12
+	number_of_clumps 20
 	set_scale_by_groups
 	spacing_to_other_terrain_types 1
 }
+create_terrain DLC_JUNGLELEAVES
+{ base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain DLC_JUNGLELEAVES
+{ base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+create_terrain DLC_JUNGLELEAVES
+{ base_terrain FOREST land_percent 100 number_of_clumps 9320 set_scale_by_groups }
 
 create_terrain GRASS
-{ base_terrain DLC_JUNGLELEAVES land_percent 5 clumping_factor -10 number_of_clumps 14 set_scale_by_groups }
+{ base_terrain WGB land_percent 10 number_of_clumps 10 set_scale_by_groups spacing_to_other_terrain_types 1 }
 create_terrain GRASS2
-{ base_terrain DLC_JUNGLELEAVES land_percent 5 clumping_factor -10 number_of_clumps 14 set_scale_by_groups }
+{ base_terrain WGB land_percent 10 number_of_clumps 10 set_scale_by_groups spacing_to_other_terrain_types 1 }
+
 create_terrain DLC_BOGLAND
-{ base_terrain DLC_JUNGLELEAVES land_percent 6 clumping_factor 5 number_of_clumps 10 set_scale_by_groups terrain_mask 1 }
+{ base_terrain GRASS land_percent 3 number_of_clumps 10  clumping_factor -10 set_scale_by_groups terrain_mask 1 }
+
+create_terrain DLC_BOGLAND
+{ base_terrain DLC_MANGROVESHALLOW land_percent 6 clumping_factor -10 number_of_clumps 10 set_scale_by_groups terrain_mask 1 }
+create_terrain SHALLOW
+{ base_terrain DLC_MANGROVESHALLOW land_percent 6 clumping_factor -10 number_of_clumps 10 set_scale_by_groups terrain_mask 1 }
 
 /* Water */
 create_terrain DLC_WATER5
@@ -328,55 +367,101 @@ create_terrain WATER
 { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
 endif
 
+*/
 /* Space Masking */
-create_terrain DLC_BLACK
-{ base_terrain DLC_MANGROVESHALLOW land_percent 3 number_of_clumps 10 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
 create_terrain F
-{ base_terrain DLC_MANGROVEFOREST land_percent 3 number_of_clumps 10 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
+{ base_terrain DLC_MANGROVESHALLOW land_percent 22 number_of_clumps 100 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
 
-create_terrain F
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
 
-create_terrain F
-{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F
-{ base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
+create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
 
 <OBJECTS_GENERATION>
+
+create_object JUNGLETREE 
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on DLC_JUNGLELEAVES
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+	actor_area 120
+	actor_area_radius 2
+}
+create_object DLC_RAINTREE 
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on DLC_JUNGLELEAVES
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+}
+create_object TREE_L
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on DLC_JUNGLELEAVES
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+}
+create_object DLC_ACACIATREE
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on DLC_JUNGLELEAVES
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+}
+create_object DLC_RAINTREE 
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on DLC_JUNGLELEAVES
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+}
+
 if REGICIDE
 create_object KING
 {
 	set_place_for_every_player
-	avoid_forest_zone 2
-	terrain_to_place_on DLC_MANGROVESHALLOW
+	avoid_forest_zone 4
+	avoid_actor_area 120
 }
 endif
 create_object VILLAGER
 {
 	set_place_for_every_player
-	avoid_forest_zone 2
+	avoid_forest_zone 4
+	avoid_actor_area 120
+}
+create_object PHOTON_MAN
+{
+	set_place_for_every_player
+	avoid_forest_zone 4
+	avoid_actor_area 120
 }
 create_object TRANSPORT_SHIP
 {
@@ -384,6 +469,51 @@ create_object TRANSPORT_SHIP
 	avoid_forest_zone 3
 	terrain_to_place_on WATER
 }
+/* Star Resources */
+create_object GOLD 
+{
+	number_of_objects 3
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 6
+	actor_area 115
+	actor_area_radius 10
+	terrain_to_place_on GRAVEL1
+}
+create_object STONE
+{
+	number_of_objects 3
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	set_scaling_to_map_size
+	temp_min_distance_group_placement 10
+	min_distance_group_placement 5
+	actor_area 116
+	actor_area_radius 10
+	terrain_to_place_on GRAVEL1
+}
+create_object RELIC 
+{
+	min_distance_group_placement 1
+	if TINY_MAP
+		number_of_objects 2
+		temp_min_distance_group_placement 35
+	elseif MEDIUM_MAP
+		number_of_objects 3
+		temp_min_distance_group_placement 38
+	elseif LARGE_MAP
+		number_of_objects 3
+		temp_min_distance_group_placement 48
+	elseif HUGE_MAP
+		number_of_objects 4
+		temp_min_distance_group_placement 52
+	endif
+	terrain_to_place_on GRAVEL1
+}
+/* neutral Resources */
 create_object FORAGE
 {
 	number_of_objects 3
@@ -395,12 +525,12 @@ create_object FORAGE
 	avoid_actor_area 66
     avoid_actor_area 67
 	actor_area_radius 2
-	avoid_forest_zone 2
-	terrain_to_place_on DLC_JUNGLELEAVES
+	avoid_actor_area 120
+	terrain_to_place_on GRASS
 }
 create_object GOLD 
 {
-	number_of_objects 4
+	number_of_objects 3
 	number_of_groups 1000
 	set_tight_grouping
 	set_gaia_object_only
@@ -413,17 +543,18 @@ create_object GOLD
 		temp_min_distance_group_placement 30
 	elseif LARGE_MAP
 		temp_min_distance_group_placement 32
-	elseif HUGE_MAP
+	else
 		temp_min_distance_group_placement 35
 	endif
 	actor_area 66
     actor_area_radius 4
-    avoid_forest_zone 2
-	terrain_to_place_on DLC_JUNGLELEAVES
+	avoid_actor_area 115
+	avoid_actor_area 116
+	avoid_actor_area 120
 }
 create_object STONE
 {
-	number_of_objects 4
+	number_of_objects 3
 	number_of_groups 1000
 	set_tight_grouping
 	set_gaia_object_only
@@ -436,24 +567,15 @@ create_object STONE
 		temp_min_distance_group_placement 30
 	elseif LARGE_MAP
 		temp_min_distance_group_placement 32
-	elseif HUGE_MAP
+	else
 		temp_min_distance_group_placement 35
 	endif
     actor_area 67
     actor_area_radius 3
 	avoid_actor_area 66
-    avoid_forest_zone 2
-	terrain_to_place_on DLC_JUNGLELEAVES
-}
-create_object JUNGLETREE
-{
-    number_of_objects 15
-    set_gaia_object_only
-    set_scaling_to_map_size
-    avoid_actor_area 66
-    avoid_actor_area 67
-    avoid_forest_zone 2
-	terrain_to_place_on DLC_JUNGLELEAVES
+	avoid_actor_area 115
+	avoid_actor_area 116
+	avoid_actor_area 120
 }
 create_object RELIC 
 {
@@ -467,12 +589,12 @@ create_object RELIC
 	elseif LARGE_MAP
 		number_of_objects 4
 		temp_min_distance_group_placement 65
-	elseif HUGE_MAP
+	else
 		number_of_objects 4
 		temp_min_distance_group_placement 75
 	endif
 	avoid_forest_zone 3
-	terrain_to_place_on DLC_JUNGLELEAVES
+	terrain_to_place_on WGB
 }
 create_object DOLPHIN
 {
@@ -503,7 +625,7 @@ create_object DLC_WATERBUFFALO
 	set_scaling_to_map_size
 	temp_min_distance_group_placement 20
 	avoid_forest_zone 2
-	terrain_to_place_on DLC_JUNGLELEAVES
+	terrain_to_place_on WGB
 }
 create_object BOAR
 {
@@ -513,7 +635,7 @@ create_object BOAR
 	set_gaia_object_only
 	temp_min_distance_group_placement 24
 	avoid_forest_zone 2
-	terrain_to_place_on DLC_JUNGLELEAVES
+	terrain_to_place_on WGB
 }
 create_object TRAP
 {
@@ -529,46 +651,6 @@ create_object TRAP
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
 
-/* Star Resources */
-create_object GOLD 
-{
-	number_of_objects 3
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	temp_min_distance_group_placement 6
-	terrain_to_place_on GRAVEL1
-}
-create_object STONE
-{
-	number_of_objects 3
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	temp_min_distance_group_placement 10
-	min_distance_group_placement 5
-	terrain_to_place_on GRAVEL1
-}
-create_object RELIC 
-{
-	min_distance_group_placement 1
-	if TINY_MAP
-		number_of_objects 2
-		temp_min_distance_group_placement 35
-	elseif MEDIUM_MAP
-		number_of_objects 3
-		temp_min_distance_group_placement 38
-	elseif LARGE_MAP
-		number_of_objects 3
-		temp_min_distance_group_placement 48
-	elseif HUGE_MAP
-		number_of_objects 4
-		temp_min_distance_group_placement 52
-	endif
-	terrain_to_place_on GRAVEL1
-}
 /* Aesthetic Objects */
 create_object ROCK
 {

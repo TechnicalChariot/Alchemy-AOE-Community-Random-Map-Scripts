@@ -15,6 +15,7 @@ direct_placement
 #const GW   95
 #const SOC 111
 #const ON_GRID 278
+#const PHOTON_MAN 1292
 /* Defining Player Terrain Types */
 #const PT1 6
 #const PT2 6
@@ -43,6 +44,21 @@ else
     effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
     effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
 endif
+/* Photon Man */
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING2_GRAPHIC 1914
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043 
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 2
 
 <ELEVATION_GENERATION>
 create_elevation 1
@@ -543,7 +559,7 @@ avoid_actor_area 4
 avoid_actor_area 16
 find_closest
 }
-create_object SCOUT
+create_object PHOTON_MAN
 {
 set_place_for_every_player
 number_of_groups 1
