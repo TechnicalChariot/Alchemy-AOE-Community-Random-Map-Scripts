@@ -66,8 +66,8 @@ gravel mixed with beach (wet gravel)
 idea: players on the snow start with a different setup than players on the bedrock. I'm thinking something like the bedrock players start a certain distance from the water, and the snow bank player starts with a castle. Implementation would be something along these lines: TC with max distance 0 on snow terrain with a actor area. Temp object with max distance 0 that avoids the TC actor area and has its own actor area. Shipwreck on water/beach using find_closest to create a new actor area for players not on the snow. TC placed in the water object's actor area (for bedrock players) that has another actor area (which is used for object placement). Castle placed on snow terrain with find_closest_to_map_center, within snow TC actor area, and with a max_distance_to_player attribute that ensures only the snowbank players get a castle.
 Giving the snowbank players a castle (essentially the back player) should give them extra strategic options, since they would have an easier time providing support with their unique unit or getting their UT than other players will. 
 
-TODO rename to McMurdo Dry Valleys (i.e. add a s)
-
+TCs have been moved farther from shore (as per feedback), but I may consider undoing the special system I've set up in favor of always using the natural player spot.
+TODO consider moving neutral gold to snow terrain? There may be advantages to having the elevated terrain lack resources (would make good farmland, for example, since little else would want to be ther))
 */
 <PLAYER_SETUP>
 /* determine if standard start */
@@ -199,6 +199,8 @@ effect_amount SET_ATTRIBUTE MARLIN1 ATTR_NAME_ID 5173
 effect_amount SET_ATTRIBUTE MARLIN1 ATTR_ICON_ID 282 */
 
 effect_amount SET_ATTRIBUTE GOLD ATTR_TERRAIN_ID 0 /* 0 is all, 7 is All - water, foot dust */
+/*
+effect_amount SET_ATTRIBUTE STONE ATTR_TERRAIN_ID 7  0 is all, 7 is All - water, foot dust */
 
 <LAND_GENERATION>
 /* 
@@ -212,45 +214,19 @@ defined terrains
 */
 if DEBUG_MODE
     #const SNOW_LIGHT 9 /* Grass 3 */
+    #const ICE_NAVIGABLE 30 /* 26 is ICE_NAVIGABLE, 30 is a farm terrain  */
 else
     #const SNOW_LIGHT 73 /* this does appear to change a few things, which may be bad for debugging. */
+    #const ICE_NAVIGABLE 26 /* 26 is ICE_NAVIGABLE, 30 is a farm terrain  */
 endif
 #const SNOW_HEAVY 74
 #const SNOW_FOUNDATION 36 /* like SNOW_DIRT; no beaches; still dockable; left behind by buildings on snowy terrains */
-#const ICE_NAVIGABLE 26
 #const GRAVEL 70
+#const WATER_WALKABLE 28
+#const DIRT_MUD 76
 
 base_terrain SNOW_LIGHT
 
-
-/*
-create_land {
-    terrain_type WATER
-    base_layer ICE_NAVIGABLE
-    land_percent 100
-    left_border 70 /* may adjust
-    land_position 90 10  */
-    top_border 20
-    bottom_border 20
-    land_position 80 50
-}
-create_land {
-    terrain_type WATER
-    base_layer ICE_NAVIGABLE
-    land_percent 100
-    left_border 90 /* may adjust
-    land_position 90 10  */
-    land_position 95 90
-}
-create_land {
-    terrain_type WATER
-    base_layer ICE_NAVIGABLE
-    land_percent 100
-    left_border 90 /* may adjust
-    land_position 90 10  */
-    land_position 95 10
-}
- */
 create_land {
     terrain_type WATER
     base_layer ICE_NAVIGABLE
@@ -260,7 +236,6 @@ create_land {
     
 }
 if NOMAD_START
-
     create_land {
         terrain_type SNOW_HEAVY
         base_layer ICE
@@ -281,11 +256,20 @@ if NOMAD_START
     
     /* Create Lake Bonnie, where Blood Falls is found as player lands */
     create_land {
+        terrain_type ICE_NAVIGABLE
+        left_border 40
+        bottom_border 45
+        top_border 45
+        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        land_id 1
+        land_position 50 50 /* probably not needed */
+    }
+    create_land {
         terrain_type ICE
         left_border 30
         bottom_border 45
         top_border 45
-        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        right_border 60 /* Will barely touch the other half of the length, but the shape of Lake Bonney is basically two parts that are barely connected, so that is fine. */
         assign_to_player 1
     }
     create_land {
@@ -293,7 +277,7 @@ if NOMAD_START
         left_border 30
         bottom_border 45
         top_border 45
-        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        right_border 61  
         assign_to_player 2
     }
     create_land {
@@ -301,7 +285,7 @@ if NOMAD_START
         left_border 30
         bottom_border 45
         top_border 45
-        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        right_border 60 
         assign_to_player 3
     }
     create_land {
@@ -309,7 +293,7 @@ if NOMAD_START
         left_border 30
         bottom_border 45
         top_border 45
-        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        right_border 61   /* change to 61 from here on out - makes lake halves more likely to be connected by a thin strip, just like it appears to be in real life. */
         assign_to_player 4
     }
     create_land {
@@ -317,7 +301,7 @@ if NOMAD_START
         left_border 30
         bottom_border 45
         top_border 45
-        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        right_border 61  
         assign_to_player 5
     }
     create_land {
@@ -325,7 +309,7 @@ if NOMAD_START
         left_border 30
         bottom_border 45
         top_border 45
-        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        right_border 61  
         assign_to_player 6
     }
     create_land {
@@ -333,7 +317,7 @@ if NOMAD_START
         left_border 30
         bottom_border 45
         top_border 45
-        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        right_border 61  
         assign_to_player 7
     }
     create_land {
@@ -341,7 +325,7 @@ if NOMAD_START
         left_border 30
         bottom_border 45
         top_border 45
-        right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
+        right_border 61  
         assign_to_player 8
     }
 else
@@ -391,14 +375,14 @@ else
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 65
+            land_position 60 65
             assign_to_player 3
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 35
+            land_position 60 35
             assign_to_player 4
             land_percent 0
         }
@@ -426,28 +410,28 @@ else
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 75
+            land_position 60 75
             assign_to_player 3
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 25
+            land_position 60 25
             assign_to_player 4
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 60
+            land_position 60 60
             assign_to_player 5
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 40
+            land_position 60 40
             assign_to_player 6
             land_percent 0
         }
@@ -476,55 +460,63 @@ else
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 77
+            land_position 60 77
             assign_to_player 3
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 23
+            land_position 60 23
             assign_to_player 4
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 66
+            land_position 60 66
             assign_to_player 5
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 33
+            land_position 60 33
             assign_to_player 6
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 56
+            land_position 60 56
             assign_to_player 7
             land_percent 0
         }
         create_land {
             terrain_type SNOW_LIGHT
             
-            land_position 62 44
+            land_position 60 44
             assign_to_player 8
             land_percent 0
         }
 
     endif
-    /* Create Lake Bonnie, where Blood Falls is found */
+
     create_land {
-        terrain_type ICE
-        left_border 30
+        terrain_type ICE_NAVIGABLE
+        left_border 40
         bottom_border 45
         top_border 45
         right_border 46 /* stretches a bit close to players, but works fine in my opinion. */
         land_id 1
+        land_position 50 50 /* probably not needed */
+    }
+    create_land {
+        terrain_type ICE
+        left_border 28
+        bottom_border 45
+        top_border 45
+        right_border 60 /* Will barely touch the other half of the length, but the shape of Lake Bonney is basically two parts that are barely connected, so that is fine. */
     }
 endif
 
@@ -540,7 +532,6 @@ create_land {
 
 
 <TERRAIN_GENERATION>
-#const DIRT_MUD 76
 /* 
 color_correction
 
@@ -551,22 +542,28 @@ CC_NIGHT
 no interest in CC_JUNGLE
 */
 color_correction CC_WINTER
-/*
-create_terrain SNOW_HEAVY {
-    beach_terrain SNOW_LIGHT
-    base_terrain DLC_DESERTGRAVEL
+create_terrain ICE {
+    base_terrain ICE_NAVIGABLE
     land_percent 100
-    number_of_clumps 9320
-    set_flat_terrain_only
-    spacing_to_other_terrain_types 1
+    terrain_mask 2 /* under */
 }
-create_terrain ICE_NAVIGABLE {
-    beach_terrain ICYSHORE
-    base_terrain WATER
-    terrain_mask 1
-    land_percent 10
-    number_of_clumps 9320
-} */
+create_terrain LEAVES {
+    base_terrain ICE
+    land_percent 100
+    terrain_mask 1 /* over */
+}
+create_terrain SNOW_HEAVY {
+    base_terrain SNOW_LIGHT
+    land_percent 100
+    number_of_clumps 99
+    height_limits 1 3
+}
+create_terrain SNOW_HEAVY {
+    base_terrain SNOW_LIGHT
+    land_percent 100
+    number_of_clumps 98
+    height_limits 1 3
+} 
 create_terrain DIRT_MUD {
     base_terrain SNOW_LIGHT
     land_percent 100
@@ -605,19 +602,30 @@ create_terrain SNOW_HEAVY {
 }
 create_terrain SNOW_HEAVY {
     base_terrain ICE
+    base_layer LEAVES
+    terrain_mask 2 /* under TODO clear out the terrain mask */
     land_percent 100
 }
 create_terrain SNOW_HEAVY {
     base_terrain ICE
+    base_layer LEAVES
+    terrain_mask 2 /* under */
     land_percent 99
 }
 /* plan: change ice to snow, then the snow at height 0 back to ice with spacing limit 1, then remaining snow at height 0 to dirt. */
 create_terrain ICE {
     base_terrain SNOW_HEAVY
     land_percent 100
+    number_of_clumps 932
     set_flat_terrain_only
     spacing_to_other_terrain_types 1
     height_limits 0 0
+}
+create_terrain LEAVES {
+    base_terrain SNOW_HEAVY
+    base_layer ICE
+    land_percent 100
+    number_of_clumps 932
 }
 create_terrain DIRT_MUD {
     base_terrain SNOW_HEAVY
@@ -630,6 +638,12 @@ create_terrain DIRT_MUD {
     land_percent 100
     number_of_clumps 9320
     height_limits 0 0
+}
+create_terrain SNOW_HEAVY { /* don't think this is doing anything */
+    base_terrain SNOW_HEAVY
+    base_layer ICE
+    land_percent 100
+    number_of_clumps 250
 }
 /* downside: dirt will go up a little, but alternative is snow out a bit, which isn't great either. */
 create_terrain WATER {
@@ -682,14 +696,80 @@ create_terrain GRAVEL {
     beach_terrain DLC_WETROCKBEACH
     terrain_mask 1
 } 
-/*
-*/
-/*
-create_terrain DLC_NEWSHALLOW {
+create_terrain ICE_NAVIGABLE {
     base_terrain ICE
-    land_percent 10
-    terrain_mask 1
-} */
+    base_layer ICE_NAVIGABLE
+    land_percent 100
+}
+
+/* next 4 statements provided by Huehuecoyotl22, modified by Jasuni  */
+create_terrain WATER_WALKABLE {
+    base_terrain ICE
+    land_percent 100
+    number_of_clumps 9320
+    beach_terrain ICE
+    terrain_mask 0
+} 
+create_terrain ICE {
+    base_terrain WATER_WALKABLE
+    number_of_tiles 24
+    number_of_clumps 8
+    set_scale_by_groups
+    beach_terrain ICE
+    terrain_mask 1 /* over */
+} 
+create_terrain ICE {
+    base_terrain WATER_WALKABLE
+    number_of_tiles 24
+    number_of_clumps 8
+    set_scale_by_groups
+    beach_terrain ICE
+    terrain_mask 0
+} 
+create_terrain LEAVES { /* TODO want more leaves on the beach terrain */
+    base_terrain WATER_WALKABLE
+    land_percent 100
+    number_of_clumps 9320
+    beach_terrain ICE
+    terrain_mask 1 /* over */
+} 
+/* end statements provided by Huehuecoyotl22 */
+
+create_terrain ICE {
+    base_terrain ICE_NAVIGABLE
+    number_of_tiles 72
+    number_of_clumps 12
+    set_scale_by_groups
+    beach_terrain ICE
+    terrain_mask 0
+} 
+create_terrain WATER_WALKABLE {
+    base_terrain ICE_NAVIGABLE
+    land_percent 100
+    number_of_clumps 932
+}
+create_terrain ICE {
+    base_terrain WATER_WALKABLE
+    number_of_tiles 128
+    number_of_clumps 8
+    set_scale_by_groups
+    beach_terrain ICE
+    terrain_mask 1 /* over */
+} 
+create_terrain GRAVEL {
+    land_percent 100
+    base_terrain LEAVES
+    height_limits 0 0
+    number_of_clumps 9320
+    terrain_mask 2 /* under */
+}
+create_terrain SNOW_HEAVY {
+    land_percent 100
+    base_terrain LEAVES
+    number_of_clumps 9320
+    terrain_mask 2 /* under */
+}
+
 <OBJECTS_GENERATION>
 /*
 create_object VILLAGER {
@@ -710,26 +790,6 @@ generic objects in generic actor areas: minimize commands between actor area cre
 
 if all else fails, avoid_actor_area works well (as an inverse actor area)
 */
-/* figure out how to change to TREE_K without breaking the map */
-/*
-create_object FLAG_C {
-    avoid_actor_area 10
-    temp_min_distance_group_placement 1
-    actor_area 11
-    actor_area_radius 2
-    number_of_objects 9320
-    set_scale_to_map_size
-}
-create_object FLAG_A { 
-    set_place_for_every_player
-    avoid_actor_area 11
-    actor_area_to_place_in 10
-    number_of_objects 3
-    ignore_terrain_restrictions
-    terrain_to_place_on BEACH
-    place_on_specific_land_id 1
-    second_object VILLAGER
-} */
 if NOMAD_START
     
     create_object TREE_K { /* shipwreck */
@@ -749,15 +809,6 @@ if NOMAD_START
         min_distance_group_placement 1
         max_distance_to_other_zones 2
     }
-    /*
-    create_object SHEEP {
-        actor_area_to_place_in 10
-        number_of_objects 4
-        number_of_groups 10
-        set_loose_grouping
-        set_gaia_object_only
-        set_place_for_every_player
-    } */
     create_object TREE_J { /* pile of wood */
         actor_area_to_place_in 10
         number_of_objects 2
@@ -875,7 +926,7 @@ else
         set_place_for_every_player
         set_gaia_object_only
         actor_area 1001 /* for placing TC */
-        actor_area_radius 8
+        actor_area_radius 13
     }
     create_object FLAG_C {
         actor_area_to_place_in 1001
@@ -885,7 +936,7 @@ else
         actor_area 0
         actor_area_radius 0
     }
-    create_object FLAG_B {
+    create_object FLAG_C {
         actor_area_to_place_in 1001
         find_closest
         set_circular_placement
@@ -1002,6 +1053,7 @@ else
 
     create_object SCOUT {
         set_place_for_every_player
+        terrain_to_place_on DIRT_MUD
         actor_area_to_place_in 9
         avoid_actor_area 6
     }
@@ -1036,6 +1088,7 @@ else
         max_distance_to_players 9
         terrain_to_place_on SNOW_HEAVY
         avoid_actor_area 13
+        actor_area_to_place_in 1003 /* ensures on snow players get this scout */
     }
 endif
 
@@ -1059,6 +1112,95 @@ create_object OFF_GRID {
 	terrain_to_place_on ICE
 }
 */
+create_object GOLD {
+    second_object BLOOD_SMALL
+    number_of_objects 32
+    temp_min_distance_group_placement 1
+    layer_to_place_on LEAVES
+    set_scaling_to_map_size
+}
+create_object GOLD {
+    second_object BLOOD_SMALL
+    number_of_objects 32
+    temp_min_distance_group_placement 1
+    terrain_to_place_on LEAVES
+    set_scaling_to_map_size
+}
+create_object GOLD {
+    second_object BLOOD_SMALL
+    number_of_objects 32
+    min_distance_group_placement 1
+    terrain_to_place_on LEAVES
+    set_scaling_to_map_size
+}
+create_object GOLD {
+    second_object BLOOD_SMALL
+    number_of_objects 32
+    temp_min_distance_group_placement 2
+    layer_to_place_on LEAVES
+    set_scaling_to_map_size
+}
+create_object SALMON { /* TODO determine proper type of fish */
+    number_of_objects 9320
+    temp_min_distance_group_placement 6
+    terrain_to_place_on MED_WATER
+    set_scaling_to_map_size
+}
+create_object SHORE_FISH {
+    terrain_to_place_on WATER
+    number_of_objects 9320
+    set_scaling_to_map_size
+    temp_min_distance_group_placement 5
+    actor_area 1030
+    actor_area_radius 20
+}
+
+create_object STONE {
+    number_of_objects 2
+    number_of_groups 16
+    temp_min_distance_group_placement 10
+    min_distance_group_placement 5
+    min_distance_to_players 13
+    terrain_to_place_on DIRT_MUD
+    set_gaia_object_only
+    set_tight_grouping
+    max_distance_to_other_zones 2
+    set_scaling_to_map_size
+    avoid_actor_area 13
+    avoid_actor_area 10
+    avoid_actor_area 1000
+    avoid_actor_area 1030
+    /*
+    avoid_actor_area 13
+    avoid_actor_area 10
+    set_place_for_every_player */
+}
+create_object GOLD {
+    number_of_objects 1
+    number_of_groups 8
+    temp_min_distance_group_placement 20
+    min_distance_to_players 19
+    terrain_to_place_on DIRT_MUD
+    set_gaia_object_only
+    set_tight_grouping
+    set_scaling_to_map_size
+    avoid_actor_area 13
+    avoid_actor_area 10
+    avoid_actor_area 1000
+    avoid_actor_area 1030
+    /*
+    avoid_actor_area 13
+    avoid_actor_area 10
+    set_place_for_every_player */
+}
+create_object STORM_DOG { /* TODO untested change */
+    number_of_objects 2
+    set_scaling_to_map_size
+    set_gaia_object_only
+}
+/* 
+
+Old version
 create_object ON_GRID {
     /* second_object FLAG_C */
     resource_delta -60
@@ -1195,72 +1337,5 @@ create_object OFF_GRID {
     actor_area_to_place_in 105
     force_placement
     group_placement_radius 2
-}
-/*
-create_object FLAG_C {
-    actor_area_to_place_in 102
-    number_of_objects 9320
-    place_on_specific_land_id 1
-} */
-/*
- create_object FLAG_A {
-    terrain_to_place_on ICE
-    number_of_objects 99
-    temp_min_distance_group_placement 2
- }
- create_object BLOOD_SMALL {
-    second_object BLOOD_SMALL
-    terrain_to_place_on ICE
-    number_of_objects 9320
-    force_placement
- }
-
- create_object BLOOD_LARGE {
-    second_object BLOOD_LARGE
-    terrain_to_place_on ICE
-    number_of_objects 9320
-    force_placement
- }
-*/
-
-/* 
-create_object TREE_K {
-    actor_area_to_place_in 10
-    number_of_objects 4
-    number_of_groups 10
-    set_loose_grouping
-    set_gaia_object_only
-}
-create_object PILE_STONE {
-    set_gaia_object_only
-    set_place_for_every_player
-    min_distance_to_players 5
-    max_distance_to_players 5
-    number_of_objects 4
-    find_closest
-}
-create_object PILE_GOLD {
-    set_gaia_object_only
-    set_place_for_every_player
-    min_distance_to_players 6
-    max_distance_to_players 6
-    number_of_objects 4
-    find_closest
-}
-create_object PILE_WOOD {
-    set_gaia_object_only
-    set_place_for_every_player
-    min_distance_to_players 7
-    max_distance_to_players 7
-    number_of_objects 4
-    find_closest
-}
-create_object PILE_FOOD {
-    set_gaia_object_only
-    set_place_for_every_player
-    min_distance_to_players 8
-    max_distance_to_players 8
-    number_of_objects 4
-    find_closest
 }
 */
