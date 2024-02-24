@@ -37,7 +37,7 @@ R2 = LandScribeV5([{'DESERT'}],[{0}],{CC},{45},{M2},{3});
 
 COMMAND = [RMS_Processor_V4([R; R1; R2],LPM_exp); ];
 
-MLA = [{'create_player_lands { terrain_type DIRT 0 base_size 6 base_elevation 1 land_percent 100 clumping_factor 15 zone 1 other_zone_avoidance_distance 0 if TINY_MAP circle_radius 15 0 elseif SMALL_MAP circle_radius 18 0 elseif MEDIUM_MAP circle_radius 18 0 elseif LARGE_MAP circle_radius 22 0 elseif HUGE_MAP circle_radius 23 0 endif }'}];
+MLA = [{'create_player_lands { terrain_type DIRT 0 base_size 6 base_elevation 1 land_percent 100 clumping_factor 15 zone 1 other_zone_avoidance_distance 0 if TINY_MAP circle_radius 15 0 elseif SMALL_MAP circle_radius 18 0 elseif MEDIUM_MAP circle_radius 18 0 elseif LARGE_MAP circle_radius 19 0 elseif HUGE_MAP circle_radius 20 0 else circle_radius 20 0 endif }'}];
 
 
 %ObjectAutoscribeV8('ObjectDatabase.ods')
