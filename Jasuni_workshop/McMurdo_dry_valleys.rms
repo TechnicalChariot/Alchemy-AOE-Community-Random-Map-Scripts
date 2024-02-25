@@ -1,6 +1,6 @@
 /*
 Title: McMurdo Dry Valleys
-author: Jasuni (primary), Huehuecoyotl22 (requested map, gave basic concept, provided code samples)
+authors: Jasuni (primary), Huehuecoyotl22 (requested map, gave basic concept, provided some code)
 
 Have a few ideas for how to do the McMurdo one. I'm thinking direct placement with players near the water, borders for the terrain, stone piles all on an icy snow terrain (imagine ice fortifications). Not certain where I'd put gold yet. I also recall there being some kind of wood/food stockpile object, which should work for starting resources. I think I'd like to see what I can make for this map.
 
@@ -351,34 +351,80 @@ if NOMAD_START
 else
     /* TODO currently spawns first player in the back - should I reverse this? */
     if 2_PLAYER_GAME /* TODO randomize between snow start and bedrock start */
-        create_land {
-            terrain_type SNOW_HEAVY
-            base_layer ICE
-            top_border 80
-            right_border 30
-            /* bottom_border -10 */
-            if ORIENTATION_A
-                assign_to_player 1
-            else
+        start_random 
+            percent_chance 50 #define SNOW_START /* TODO create bedrock start */
+        end_random 
+        if SNOW_START
+            create_land {
+                terrain_type SNOW_HEAVY
+                base_layer ICE
+                top_border 80
+                right_border 30
+                /* bottom_border -10 */
+                if ORIENTATION_A
+                    assign_to_player 1
+                else
+                    assign_to_player 2
+                endif
+                land_position 65 90
+                base_elevation 3
+            }
+            create_land {
+                terrain_type SNOW_HEAVY
+                base_layer ICE
+                bottom_border 80
+                right_border 30
+                /* top_border -10 */
+                if ORIENTATION_A
+                    assign_to_player 2
+                else
+                    assign_to_player 1
+                endif
+                land_position 65 10
+                base_elevation 3
+            }
+        else
+            #define BEDROCK_START
+            create_land {
+                terrain_type SNOW_HEAVY
+                base_layer ICE
+                top_border 80
+                right_border 30
+                /* bottom_border -10 */
+                land_position 65 90
+                base_elevation 3
+            }
+            create_land {
+                terrain_type SNOW_HEAVY
+                base_layer ICE
+                bottom_border 80
+                right_border 30
+                /* top_border -10 */
+                land_position 65 10
+                base_elevation 3
+            }
+            create_land {
+                terrain_type SNOW_LIGHT
+                land_position 60 65
+                if ORIENTATION_A
+                    assign_to_player 1
+                else
+                    assign_to_player 2
+                endif
+                land_percent 0
+            }
+            create_land {
+                terrain_type SNOW_LIGHT
+                land_position 60 35
                 assign_to_player 2
-            endif
-            land_position 65 90
-            base_elevation 3
-        }
-        create_land {
-            terrain_type SNOW_HEAVY
-            base_layer ICE
-            bottom_border 80
-            right_border 30
-            /* top_border -10 */
-            if ORIENTATION_A
-                assign_to_player 2
-            else
-                assign_to_player 1
-            endif
-            land_position 65 10
-            base_elevation 3
-        }
+                if ORIENTATION_A
+                    assign_to_player 2
+                else
+                    assign_to_player 1
+                endif
+                land_percent 0
+            }
+        endif
     elseif 2V2 
         create_land {
             terrain_type SNOW_HEAVY
