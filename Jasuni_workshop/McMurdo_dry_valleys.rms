@@ -191,6 +191,7 @@ effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_WALKING_GRAPHIC 7640
 effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_DYING_GRAPHIC 7640
 effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_HITPOINTS 0 /* Gold miners appear to do 13 damage TODO consider changing to 0 */
 effect_amount SET_ATTRIBUTE ROCK_GOLD ATTR_NAME_ID 5321 /* "Pile of gold" */
+effect_amount GAIA_SET_ATTRIBUTE ROCK_GOLD ATTR_STORAGE_VALUE 1000
 
 /* changes orange bush into a diffent (usable) pile. TODO see if I can figure out a way to change the partially depleted graphics. */
 effect_amount GAIA_SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_STANDING_GRAPHIC 8245
@@ -979,7 +980,7 @@ else
     create_object ROCK_GOLD {
         actor_area_to_place_in 1003
         number_of_objects 2
-        number_of_groups 10
+        number_of_groups 3
         set_place_for_every_player
         set_gaia_object_only
         set_tight_grouping
@@ -1053,7 +1054,7 @@ else
     }
     create_object ROCK_GOLD {
         set_place_for_every_player
-        number_of_objects 2
+        number_of_objects 3
         set_loose_grouping
         actor_area_to_place_in 1001
         avoid_actor_area 5
