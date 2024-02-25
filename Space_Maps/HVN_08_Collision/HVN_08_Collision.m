@@ -207,7 +207,7 @@ for i1 = 1:1
     %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
     G = [{R*[0.75 0.85]}; {[40 45 50]}; {[175 180 190]}; {Y(i2)}; {[0]}; {[0]}; {[cenpl(1,1) cenpl(1,2); cenpl(end,1) cenpl(end,2)]}];
-    C = [{1}; {4}; {14400}; {[1 0; 2 0; 1 0; 0 2; 1 0; 2 0; 1 0; 2 0]}];
+    C = [{1}; {4}; {14400}; {[1 0; 2 0; 1 0; 2 0; 1 0; 2 0; 1 0; 2 0]}];
 
     [PL] = RMS_CPL_V10(G,C);
 
