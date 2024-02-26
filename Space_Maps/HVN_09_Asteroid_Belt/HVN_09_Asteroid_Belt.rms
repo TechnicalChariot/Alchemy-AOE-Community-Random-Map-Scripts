@@ -13,26 +13,16 @@ direct_placement
 /* Defining Terrains */
 #const BT 82
 
-/* Defining Player Terrains */
-#const PT1 14
-#const PT2 14
-#const PT3 14
-#const PT4 14
-#const PT5 14
-#const PT6 14
-#const PT7 14
-#const PT8 14
-
 /* Defining Terrains */
 #const CORE_TER 0
 #const RIM_TER 6
 #const ASTEROID_TER 70
 #const ASTEROID_MASK1 81
 #const ASTEROID_MASK2 82
+#const ASTEROID_MASK3 40
 #const ASTEROID_BEACH 109
-#const ASTEROID_FOREST 106
+#const ASTEROID_FOREST 48
 #const PLANET_FOREST 10
-
 #const BROWN_WATER 96
 
 /* Remove Visual Effect of Dead Fish Trap */
@@ -74,6 +64,41 @@ else
     effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499
 endif
 
+/* Disabling Dragon Tree From Dragon Forest, Make it Spawn on Grass Jungle Instead */
+effect_amount GAIA_SET_ATTRIBUTE DLC_DRAGONTREE ATTR_TERRAIN_ID 83 
+
+/* Columnar Forests */
+#const RUBBLE_AQUEDUCT 1522
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STANDING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_WALKING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DYING_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_ID 1522
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_AQUEDUCT ATTR_STORAGE_VALUE 99999999
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_NAME_ID 5393
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_ICON_ID 856
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STORAGE_VALUE 350
+
+/* Large Rock Object Occlusion */
+#const ROCK2 1323
+effect_amount GAIA_SET_ATTRIBUTE ROCK ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE DLC_ROCKBEACH ATTR_OCCLUSION_MODE 2
+effect_amount GAIA_SET_ATTRIBUTE ROCK2 ATTR_OCCLUSION_MODE 2
+
+/* Planetary Eye Candy */
+#const PLANET_EC1   818    /* Planet Eye Candy 1  */
+#const PLANET_EC2   1353   /* Planet Eye Candy 2  */
+#const PLANET_EC3   1360   /* Planet Eye Candy 3  */
+#const PLANET_EC4   1362   /* Planet Eye Candy 4  */
+#const PLANET_EC5   1363   /* Planet Eye Candy 5  */
+#const PLANET_EC6   1364   /* Planet Eye Candy 6  */
+#const PLANET_EC7   1366   /* Planet Eye Candy 7  */
+#const PLANET_EC8   301    /* Planet Eye Candy 8  */
+#const PLANET_EC9   1358   /* Planet Eye Candy 9  */
+#const PLANET_EC10  1608   /* Planet Eye Candy 10 */
+#const PLANET_EC11  1609   /* Planet Eye Candy 11 */
+#const PLANET_EC12  1610   /* Planet Eye Candy 12 */
+
 <ELEVATION_GENERATION>
 
 /* Creating Pitted Border */
@@ -83,7 +108,6 @@ create_elevation 1 { base_terrain BORDER_TER2 number_of_tiles 9230 number_of_clu
 /* Creating Small Rocky Outlying Islands */
 create_elevation 1 { base_terrain BT number_of_clumps 36 set_scale_by_groups if TINY_MAP number_of_tiles 300 elseif SMALL_MAP number_of_tiles 360 elseif MEDIUM_MAP number_of_tiles 480 elseif LARGE_MAP number_of_tiles 600 elseif HUGE_MAP number_of_tiles 800 else number_of_tiles 1000 endif enable_balanced_elevation }
 create_elevation 2 { base_terrain CORE_TER number_of_clumps 24 set_scale_by_groups if TINY_MAP number_of_tiles 300 elseif SMALL_MAP number_of_tiles 360 elseif MEDIUM_MAP number_of_tiles 480 elseif LARGE_MAP number_of_tiles 600 elseif HUGE_MAP number_of_tiles 800 else number_of_tiles 1000 endif enable_balanced_elevation }
-
 
 <TERRAIN_GENERATION>
 
@@ -95,16 +119,50 @@ if TERRAIN_PREPARATION
     create_terrain BT { base_terrain RIM_TER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
     create_terrain BT { base_terrain RIM_TER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
 
+    /* Convert All Asteroid Terrain to Base Terrain */
+    create_terrain BT { base_terrain ASTEROID_TER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain BT { base_terrain ASTEROID_TER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain BT { base_terrain ASTEROID_TER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain BT { base_terrain ASTEROID_TER land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+    /* Application Placeholder Terrain */
+    create_terrain DLC_BLACK { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+    create_terrain DLC_BLACK { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+    create_terrain DLC_BLACK { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+    create_terrain DLC_BLACK { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 2 }
+
+    /* Application Planet Masking */
+    create_terrain CORE_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain CORE_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain CORE_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
+    create_terrain CORE_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 terrain_mask 2 }
+
+    /* Revert Placeholder */
+    create_terrain BT { base_terrain DLC_BLACK land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+    create_terrain BT { base_terrain DLC_BLACK land_percent 100 number_of_clumps 9320 set_scale_by_groups }
+
+    /* Application of Asteroid Terrain */
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 }
+
 endif
 
 #define WATER_CREATION
 if WATER_CREATION
 
     /* Application of Beach Terrain */
-    create_terrain ASTEROID_BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
-    create_terrain ASTEROID_BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
-    create_terrain ASTEROID_BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
-    create_terrain ASTEROID_BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 0 0 spacing_to_other_terrain_types 1 }
+    create_terrain ASTEROID_BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain ASTEROID_BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain ASTEROID_BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+    create_terrain ASTEROID_BEACH { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
 
     /* Application of Mangrove Shallow */
     create_terrain DLC_MANGROVESHALLOW { base_terrain ASTEROID_BEACH land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
@@ -211,7 +269,7 @@ if PLAYER_ASSIGNED_FORESTS
     end_random
     
     /* Layering Outer Limits, Creating Circles of Terrain Around Each Player Land */
-    create_terrain DIRT  { base_terrain ASTEROID_TER number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 17 }
+    create_terrain DIRT  { base_terrain ASTEROID_TER number_of_clumps 9320 land_percent 100 set_scale_by_groups set_avoid_player_start_areas 16 }
     create_terrain DIRT2 { base_terrain ASTEROID_TER number_of_clumps 9320 land_percent 100 set_scale_by_groups spacing_to_other_terrain_types 1 }
     /* Reverting Choppy Grass Ring Back to New Base Terrain */
     create_terrain DIRT  { base_terrain ASTEROID_TER number_of_clumps 9320 land_percent 100 set_scale_by_groups }
@@ -282,31 +340,581 @@ if NEUTRAL_FOREST_CREATION
     /* Forest Masking, Planet */
     create_terrain PLANET_FOREST { base_terrain CORE_TER number_of_clumps 9320 land_percent 6 set_scale_by_groups terrain_mask 1 }
 
-
 endif
 
 #define ASTEROID_TERRAIN
 if ASTEROID_TERRAIN
     /* Asteroid Edge Masking */
-    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1  terrain_mask 1 }
-    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1  terrain_mask 1 }
-    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1  terrain_mask 1 }
-    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1  terrain_mask 1 }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 terrain_mask 1  }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 terrain_mask 1  }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 terrain_mask 1  }
+    create_terrain ASTEROID_TER { base_terrain BT land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 1 terrain_mask 1  }
+
     /* Asteroid Generic Masking */
     create_terrain ASTEROID_MASK2 { base_terrain ASTEROID_TER land_percent 1 number_of_clumps 20 set_scale_by_groups terrain_mask 1 }
     create_terrain ASTEROID_MASK1 { base_terrain ASTEROID_TER land_percent 1 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-
+    create_terrain ASTEROID_MASK3 { base_terrain ASTEROID_TER land_percent 1 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
 
 endif
 
 
-
 <OBJECTS_GENERATION>
-create_object TOWN_CENTER { set_place_for_every_player find_closest }
 
 /* BEGIN_OBJECTS_AUTOSCRIBE */
+#const OFF_GRID 647
+create_object OFF_GRID
+{
+set_place_for_every_player
+second_object TOWN_CENTER
+find_closest
+actor_area 1
+actor_area_radius 24
+}
+create_object FLAG_A
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 3
+actor_area 2
+actor_area_radius 8
+}
+create_object FLAG_B
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on PLANET_FOREST
+temp_min_distance_group_placement 3
+actor_area 3
+actor_area_radius 0
+avoid_actor_area 4
+find_closest
+}
+#const PH3_1 647
+create_object PH3_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 4
+actor_area_radius 4
+actor_area_to_place_in 3
+force_placement
+find_closest
+}
+#const PH4_1 647
+create_object PH4_1
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 5
+actor_area_radius 8
+actor_area_to_place_in 3
+force_placement
+find_closest
+}
+create_object TREE_A
+{
+set_gaia_object_only
+set_gaia_unconvertible
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on ASTEROID_FOREST
+}
+create_object DLC_ROCKBEACH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVEFOREST
+temp_min_distance_group_placement 4
+avoid_actor_area 2
+avoid_actor_area 5
+find_closest
+}
+create_object ROCK
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVEFOREST
+temp_min_distance_group_placement 4
+avoid_actor_area 2
+avoid_actor_area 5
+find_closest
+}
+create_object DLC_ROCKBEACH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 36
+actor_area 6
+actor_area_radius 0
+}
+#const PH6_2 647
+create_object PH6_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 7
+actor_area_radius 12
+actor_area_to_place_in 6
+force_placement
+find_closest
+}
+#const PH7_2 647
+create_object PH7_2
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 8
+actor_area_radius 4
+actor_area_to_place_in 6
+force_placement
+find_closest
+}
+create_object ROCK
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 36
+actor_area 9
+actor_area_radius 0
+avoid_actor_area 7
+find_closest
+}
+#const PH9_3 647
+create_object PH9_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 10
+actor_area_radius 12
+actor_area_to_place_in 9
+force_placement
+find_closest
+}
+#const PH10_3 647
+create_object PH10_3
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 11
+actor_area_radius 4
+actor_area_to_place_in 9
+force_placement
+find_closest
+}
+create_object ROCK2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 36
+actor_area 12
+actor_area_radius 4
+avoid_actor_area 7
+avoid_actor_area 10
+find_closest
+}
+create_object DLC_ROCKBEACH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on BT
+temp_min_distance_group_placement 36
+actor_area 13
+actor_area_radius 0
+avoid_actor_area 2
+avoid_actor_area 4
+avoid_actor_area 8
+avoid_actor_area 11
+avoid_actor_area 12
+find_closest
+}
+#const PH13_4 647
+create_object PH13_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 14
+actor_area_radius 12
+actor_area_to_place_in 13
+force_placement
+find_closest
+}
+#const PH14_4 647
+create_object PH14_4
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 15
+actor_area_radius 4
+actor_area_to_place_in 13
+force_placement
+find_closest
+}
+create_object ROCK
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on BT
+temp_min_distance_group_placement 36
+actor_area 16
+actor_area_radius 0
+avoid_actor_area 2
+avoid_actor_area 4
+avoid_actor_area 8
+avoid_actor_area 11
+avoid_actor_area 12
+avoid_actor_area 14
+find_closest
+}
+#const PH16_5 647
+create_object PH16_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 17
+actor_area_radius 12
+actor_area_to_place_in 16
+force_placement
+find_closest
+}
+#const PH17_5 647
+create_object PH17_5
+{
+number_of_groups 9320
+set_scaling_to_map_size
+actor_area 18
+actor_area_radius 4
+actor_area_to_place_in 16
+force_placement
+find_closest
+}
+create_object ROCK2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on BT
+temp_min_distance_group_placement 36
+actor_area 19
+actor_area_radius 4
+avoid_actor_area 2
+avoid_actor_area 4
+avoid_actor_area 8
+avoid_actor_area 11
+avoid_actor_area 12
+avoid_actor_area 14
+avoid_actor_area 17
+find_closest
+}
+create_object DLC_ROCKBEACH
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on ASTEROID_TER
+temp_min_distance_group_placement 36
+actor_area 20
+actor_area_radius 12
+avoid_actor_area 1
+avoid_actor_area 8
+avoid_actor_area 11
+avoid_actor_area 12
+avoid_actor_area 15
+avoid_actor_area 18
+avoid_actor_area 19
+find_closest
+}
+create_object ROCK
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on ASTEROID_TER
+temp_min_distance_group_placement 36
+actor_area 21
+actor_area_radius 12
+avoid_actor_area 1
+avoid_actor_area 8
+avoid_actor_area 11
+avoid_actor_area 12
+avoid_actor_area 15
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+find_closest
+}
+create_object ROCK2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on ASTEROID_TER
+temp_min_distance_group_placement 36
+avoid_actor_area 1
+avoid_actor_area 8
+avoid_actor_area 11
+avoid_actor_area 12
+avoid_actor_area 15
+avoid_actor_area 18
+avoid_actor_area 19
+avoid_actor_area 20
+avoid_actor_area 21
+find_closest
+}
+create_object SEA_ROCKS_1
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on BT
+temp_min_distance_group_placement 12
+avoid_actor_area 2
+avoid_actor_area 5
+find_closest
+}
+create_object SEA_ROCKS_2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on BT
+temp_min_distance_group_placement 12
+avoid_actor_area 2
+avoid_actor_area 5
+find_closest
+}
+create_object SEA_ROCKS_1
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 12
+avoid_actor_area 2
+avoid_actor_area 5
+find_closest
+}
+create_object SEA_ROCKS_2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on DLC_MANGROVESHALLOW
+temp_min_distance_group_placement 12
+avoid_actor_area 2
+avoid_actor_area 5
+find_closest
+}
+create_object PLANET_EC1
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 22
+actor_area_radius 3
+}
+create_object PLANET_EC2
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 23
+actor_area_radius 3
+avoid_actor_area 22
+find_closest
+}
+create_object PLANET_EC3
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 24
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+find_closest
+}
+create_object PLANET_EC4
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 25
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+find_closest
+}
+create_object PLANET_EC5
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 26
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+find_closest
+}
+create_object PLANET_EC6
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 27
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+find_closest
+}
+create_object PLANET_EC7
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 28
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+avoid_actor_area 27
+find_closest
+}
+create_object PLANET_EC8
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 29
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+find_closest
+}
+create_object PLANET_EC9
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 30
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+find_closest
+}
+create_object PLANET_EC10
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 31
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+find_closest
+}
+create_object PLANET_EC11
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+actor_area 32
+actor_area_radius 3
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+find_closest
+}
+create_object PLANET_EC12
+{
+set_gaia_object_only
+number_of_groups 9320
+set_scaling_to_map_size
+terrain_to_place_on CORE_TER
+temp_min_distance_group_placement 36
+avoid_actor_area 22
+avoid_actor_area 23
+avoid_actor_area 24
+avoid_actor_area 25
+avoid_actor_area 26
+avoid_actor_area 27
+avoid_actor_area 28
+avoid_actor_area 29
+avoid_actor_area 30
+avoid_actor_area 31
+avoid_actor_area 32
+find_closest
+}
 /* END_OBJECTS_AUTOSCRIBE */
 
+if REGICIDE create_object KING { set_place_for_every_player find_closest } else endif
 
 <LAND_GENERATION>
 base_terrain BT
