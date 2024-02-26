@@ -59,6 +59,8 @@ endif
      effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
      effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
      effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 2
+	 
+effect_amount GAIA_SET_ATTRIBUTE SNOWPINETREE ATTR_TERRAIN_ID 13
 
 <ELEVATION_GENERATION>
 create_elevation 1
@@ -114,31 +116,22 @@ create_terrain DLC_MANGROVESHALLOW
 create_terrain DLC_MANGROVESHALLOW
 { base_terrain GRASS land_percent 100 number_of_clumps 100 height_limits 0 0 set_flat_terrain_only spacing_to_other_terrain_types 1 }
 
-create_terrain DIRT_SNOW
-{ base_terrain GRASS land_percent 100 number_of_clumps 100 }
-create_terrain DIRT_SNOW
-{ base_terrain GRASS land_percent 100 number_of_clumps 100 }
-create_terrain DIRT_SNOW
-{ base_terrain GRASS land_percent 100 number_of_clumps 100 }
-create_terrain DIRT_SNOW
-{ base_terrain GRASS land_percent 100 number_of_clumps 100 }
-create_terrain DIRT_SNOW
-{ base_terrain GRASS land_percent 100 number_of_clumps 100 }
-create_terrain DIRT_SNOW
-{ base_terrain GRASS land_percent 100 number_of_clumps 100 }
+create_terrain GRAVEL { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+create_terrain GRAVEL { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+create_terrain GRAVEL { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
 
 create_terrain ICYSHORE
-{ base_terrain DIRT_SNOW land_percent 100 number_of_clumps 100 height_limits 0 0 }
+{ base_terrain GRAVEL land_percent 100 number_of_clumps 100 height_limits 0 0 }
 create_terrain ICYSHORE
-{ base_terrain DIRT_SNOW land_percent 100 number_of_clumps 100 height_limits 0 0 }
+{ base_terrain GRAVEL land_percent 100 number_of_clumps 100 height_limits 0 0 }
 create_terrain ICYSHORE
-{ base_terrain DIRT_SNOW land_percent 100 number_of_clumps 100 height_limits 0 0 }
+{ base_terrain GRAVEL land_percent 100 number_of_clumps 100 height_limits 0 0 }
 create_terrain ICYSHORE
-{ base_terrain DIRT_SNOW land_percent 100 number_of_clumps 100 height_limits 0 0 }
+{ base_terrain GRAVEL land_percent 100 number_of_clumps 100 height_limits 0 0 }
 create_terrain ICYSHORE
-{ base_terrain DIRT_SNOW land_percent 100 number_of_clumps 100 height_limits 0 0 }
+{ base_terrain GRAVEL land_percent 100 number_of_clumps 100 height_limits 0 0 }
 create_terrain ICYSHORE
-{ base_terrain DIRT_SNOW land_percent 100 number_of_clumps 100 height_limits 0 0 }
+{ base_terrain GRAVEL land_percent 100 number_of_clumps 100 height_limits 0 0 }
 
 create_terrain ICYSHORE
 { base_terrain DIRT land_percent 100 number_of_clumps 100 height_limits 0 0 }
@@ -149,7 +142,7 @@ create_terrain ICYSHORE
 
 create_terrain SNOW_FOREST
 {
-	base_terrain DIRT_SNOW
+	base_terrain GRAVEL
 	land_percent 1
 	number_of_clumps 5
 	set_scale_by_groups
@@ -172,19 +165,41 @@ else
 endif
 }
 
+create_terrain DLC_DESERTGRAVEL { base_terrain DIRT land_percent 100 number_of_clumps 9320 }
+
+create_terrain DLC_DESERTGRAVEL { base_terrain SNOW_FOREST land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+create_terrain DLC_DESERTGRAVEL { base_terrain SNOW_FOREST land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
 create_terrain ICE
 {
-	base_terrain DIRT
+	base_terrain DLC_DESERTGRAVEL
 	land_percent 7
+	number_of_clumps 20
+	clumping_factor -10
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain ICE
+{
+	base_terrain GRAVEL
+	land_percent 2
 	number_of_clumps 10
 	clumping_factor -10
 	set_scale_by_groups
 	terrain_mask 1
 }
-create_terrain DIRT_SNOW
+create_terrain SNOW
 {
-	base_terrain DIRT
-	land_percent 6
+	base_terrain DLC_DESERTGRAVEL
+	land_percent 5
+	number_of_clumps 10
+	set_scale_by_groups
+	terrain_mask 1
+}
+create_terrain SNOW
+{
+	base_terrain GRAVEL
+	land_percent 2
 	number_of_clumps 5
 	set_scale_by_groups
 	terrain_mask 1
@@ -205,9 +220,9 @@ create_terrain ICE
 }
 create_terrain GRAVEL
 {
-	base_terrain DIRT
-	land_percent 2
-	number_of_clumps 10
+	base_terrain DLC_DESERTGRAVEL
+	land_percent 4
+	number_of_clumps 20
 	clumping_factor -10
 	set_scale_by_groups
 	terrain_mask 1
@@ -257,6 +272,7 @@ create_terrain WATER
 #const ROCK3 389
 #const ROCK4 396
 #const TRAP 278
+
 if TINY_MAP
 elseif SMALL_MAP
 elseif MEDIUM_MAP
@@ -423,7 +439,7 @@ number_of_objects rnd(2,3)
 number_of_groups 9320
 set_tight_grouping
 set_scaling_to_map_size
-terrain_to_place_on DIRT_SNOW
+terrain_to_place_on GRAVEL
 temp_min_distance_group_placement 8
 }
 create_object OG
@@ -431,7 +447,7 @@ create_object OG
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on DIRT
+terrain_to_place_on DLC_DESERTGRAVEL
 temp_min_distance_group_placement 10
 actor_area 14
 actor_area_radius 20
@@ -453,7 +469,7 @@ create_object ROCK
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on DIRT
+terrain_to_place_on DLC_DESERTGRAVEL
 temp_min_distance_group_placement 22
 min_distance_to_players 25
 actor_area 15
@@ -477,7 +493,7 @@ create_object ROCK2
 set_gaia_object_only
 number_of_groups 9320
 set_scaling_to_map_size
-terrain_to_place_on DIRT
+terrain_to_place_on DLC_DESERTGRAVEL
 temp_min_distance_group_placement 22
 min_distance_to_players 25
 avoid_actor_area 15
@@ -516,10 +532,67 @@ set_scaling_to_map_size
 terrain_to_place_on DEEP_WATER
 temp_min_distance_group_placement 30
 }
-create_object SNOWPINETREE
+create_object TREE_I
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on SNOW_FOREST
+	temp_min_distance_group_placement 1
+	second_object DLC_AUTUMNSNOWTREE
+	set_scaling_to_map_size
+}
+create_object DLC_AFRICANBUSH_2
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on SNOW_FOREST
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+}
+create_object BIRCH_TREE
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_facet 22
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on SNOW_FOREST
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+}
+create_object BIRCH_TREE
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_facet 30
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on SNOW_FOREST
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+	second_object DLC_AUTUMNSNOWTREE
+}
+create_object BIRCH_TREE
+{
+	number_of_objects 1
+	number_of_groups 1000
+	set_facet 30
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on SNOW_FOREST
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+	second_object DLC_AUTUMNSNOWTREE
+}
+create_object BIRCH_TREE
 {
 set_place_for_every_player
 set_gaia_object_only
+set_facet 30
 number_of_objects 2
 number_of_groups 1
 set_loose_grouping
@@ -527,7 +600,7 @@ temp_min_distance_group_placement 2
 actor_area_to_place_in 3
 avoid_actor_area 2
 }
-create_object SNOWPINETREE
+create_object DLC_AFRICANBUSH_2
 {
 set_place_for_every_player
 set_gaia_object_only
@@ -682,7 +755,7 @@ set_gaia_object_only
 number_of_objects 3
 number_of_groups 9320
 set_tight_grouping
-terrain_to_place_on DIRT_SNOW
+terrain_to_place_on GRAVEL
 max_distance_to_other_zones 2
 avoid_forest_zone 1
 actor_area 22
@@ -698,7 +771,7 @@ set_scaling_to_map_size
 terrain_to_place_on DLC_MANGROVESHALLOW
 max_distance_to_other_zones 1
 avoid_forest_zone 1
-temp_min_distance_group_placement 10
+temp_min_distance_group_placement 9
 second_object DLC_BOXTURTLE
 }
 create_object DOLPHIN
@@ -708,7 +781,7 @@ number_of_groups 9320
 set_scaling_to_map_size
 terrain_to_place_on DEEP_WATER
 max_distance_to_other_zones 1
-temp_min_distance_group_placement 8
+temp_min_distance_group_placement 6
 }
 create_object RELIC
 {

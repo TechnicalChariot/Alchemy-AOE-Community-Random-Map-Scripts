@@ -80,7 +80,7 @@ create_terrain DLC_MANGROVESHALLOW
 create_terrain DLC_MANGROVEFOREST
 {
 	base_terrain DLC_MANGROVESHALLOW
-	land_percent 10
+	land_percent 15
 	number_of_clumps 20
 	clumping_factor -10
 	set_scale_by_groups
@@ -239,7 +239,7 @@ create_object DLC_MANGROVE_TREE
 	max_distance_to_players 8
 	min_distance_group_placement 2
 }
-create_object DLC_MANGROVE_TREE
+create_object DLC_RAINTREE
 {
 	number_of_objects 3
 	set_gaia_object_only
@@ -269,12 +269,36 @@ create_object GOLD
 	else
 	temp_min_distance_group_placement 55
 	endif
-	avoid_forest_zone 4
+	avoid_forest_zone 2
 	actor_area 40
 	actor_area_radius 8
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
-
+create_object ROCK2
+{
+	number_of_objects 2
+	number_of_groups 1000
+	set_tight_grouping
+	set_scaling_to_map_size
+	set_gaia_object_only
+	avoid_forest_zone 10
+	min_distance_to_players 40
+	if TINY_MAP
+	temp_min_distance_group_placement 20
+	elseif MEDIUM_MAP
+	temp_min_distance_group_placement 25
+	elseif LARGE_MAP
+	temp_min_distance_group_placement 30
+	else
+	temp_min_distance_group_placement 40
+	endif
+	avoid_forest_zone 2
+	actor_area 25
+	actor_area_radius 2
+	avoid_actor_area 40
+	ignore_terrain_restrictions
+	terrain_to_place_on DLC_MANGROVESHALLOW
+}
 create_object STONE
 {
 	number_of_objects 3
@@ -294,8 +318,7 @@ create_object STONE
 	else
 	temp_min_distance_group_placement 55
 	endif
-	avoid_forest_zone 4
-	avoid_actor_area 40
+	actor_area_to_place_in 25
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
 

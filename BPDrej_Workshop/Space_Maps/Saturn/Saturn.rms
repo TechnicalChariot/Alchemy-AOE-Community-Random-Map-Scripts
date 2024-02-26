@@ -61,9 +61,6 @@ behavior_version 1
 
 <ELEVATION_GENERATION>
 
-create_elevation 1
-{ base_terrain WATER number_of_tiles 10000 number_of_clumps 9320 }
-
 <TERRAIN_GENERATION>
 create_terrain DLC_MANGROVESHALLOW
 {
