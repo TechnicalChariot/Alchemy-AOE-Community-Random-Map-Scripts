@@ -81,13 +81,20 @@ create_terrain DLC_MANGROVEFOREST
 {
 	base_terrain DLC_MANGROVESHALLOW
 	land_percent 15
-	number_of_clumps 20
+	number_of_clumps 25
 	clumping_factor -10
 	set_scale_by_groups
 	set_avoid_player_start_areas 18
 	spacing_to_other_terrain_types 1
 }
 create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 9320 terrain_mask 2 }
+
+/* Masking */
+create_terrain DLC_BOGLAND { base_terrain DLC_MANGROVEFOREST land_percent 20 number_of_clumps 30 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
+create_terrain F { base_terrain DLC_MANGROVESHALLOW land_percent 15 number_of_clumps 30 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
+create_terrain DEEP_WATER { base_terrain WATER land_percent 3 number_of_clumps 5 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
+create_terrain DLC_WATER5 { base_terrain WATER land_percent 4 number_of_clumps 10 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
+
 
 <OBJECTS_GENERATION>
 #const OG 647
@@ -135,7 +142,7 @@ create_object TRANSPORT_SHIP
 }
 create_object TRAP
 {
-	number_of_objects 4
+	number_of_objects 3
 	number_of_groups 1
 	set_place_for_every_player
 	set_gaia_object_only
@@ -173,7 +180,7 @@ create_object DLC_PIG
 	find_closest
 	set_circular_placement
 }
-create_object BOAR
+create_object DLC_RHINO
 {
 	number_of_groups 2
 	set_gaia_object_only
@@ -239,7 +246,7 @@ create_object DLC_MANGROVE_TREE
 	max_distance_to_players 8
 	min_distance_group_placement 2
 }
-create_object DLC_RAINTREE
+create_object DLC_MANGROVE_TREE
 {
 	number_of_objects 3
 	set_gaia_object_only
@@ -259,9 +266,9 @@ create_object GOLD
 	set_scaling_to_map_size
 	min_distance_to_players 30
 	if TINY_MAP
-	temp_min_distance_group_placement 20
+	temp_min_distance_group_placement 25
 	elseif SMALL_MAP
-	temp_min_distance_group_placement 20
+	temp_min_distance_group_placement 25
 	elseif MEDIUM_MAP
 	temp_min_distance_group_placement 30
 	elseif LARGE_MAP
@@ -277,14 +284,13 @@ create_object GOLD
 create_object ROCK2
 {
 	number_of_objects 2
-	number_of_groups 1000
+	number_of_groups 9320
 	set_tight_grouping
-	set_scaling_to_map_size
 	set_gaia_object_only
-	avoid_forest_zone 10
-	min_distance_to_players 40
+	set_scaling_to_map_size
+	min_distance_to_players 30
 	if TINY_MAP
-	temp_min_distance_group_placement 20
+	temp_min_distance_group_placement 25
 	elseif MEDIUM_MAP
 	temp_min_distance_group_placement 25
 	elseif LARGE_MAP
@@ -292,9 +298,9 @@ create_object ROCK2
 	else
 	temp_min_distance_group_placement 40
 	endif
-	avoid_forest_zone 2
+	avoid_forest_zone 4
 	actor_area 25
-	actor_area_radius 2
+	actor_area_radius 1
 	avoid_actor_area 40
 	ignore_terrain_restrictions
 	terrain_to_place_on DLC_MANGROVESHALLOW
@@ -306,7 +312,6 @@ create_object STONE
 	set_tight_grouping
 	set_gaia_object_only
 	set_scaling_to_map_size
-	min_distance_to_players 30
 	if TINY_MAP
 	temp_min_distance_group_placement 20
 	elseif SMALL_MAP
@@ -359,28 +364,6 @@ create_object TRAP
 	second_object DLC_BOXTURTLE
 	avoid_forest_zone 2
 	terrain_to_place_on DLC_MANGROVESHALLOW
-}
-create_object DOLPHIN
-{
-	set_gaia_object_only
-	number_of_objects 1
-	number_of_groups 9320
-	set_scaling_to_map_size
-	terrain_to_place_on DEEP_WATER
-	avoid_actor_area 70
-	if TINY_MAP
-	temp_min_distance_group_placement 8
-	elseif SMALL_MAP
-	temp_min_distance_group_placement 8
-	elseif MEDIUM_MAP
-	temp_min_distance_group_placement 8
-	elseif LARGE_MAP
-	temp_min_distance_group_placement 10
-	elseif HUGE_MAP
-	temp_min_distance_group_placement 10
-	else
-	temp_min_distance_group_placement 12
-	endif
 }
 /* Aesthetic */
 create_object ROCK3
