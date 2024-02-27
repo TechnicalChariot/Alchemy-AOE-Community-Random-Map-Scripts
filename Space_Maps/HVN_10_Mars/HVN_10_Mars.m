@@ -16,35 +16,35 @@ files = {filestruc.name}; [filename] = RMS_GetLatest(files,'rms');
 
 [Preface,LPM_exp,~] = RMS_Manual_Land(filename);
 
+    %% -- Section on Player Lands -- %%
 
-%% -- Section on Player Lands -- %%
+  % G = [{Vector of Radii}; ...
+  %      {Vector of Angular Offsets Between Flank and Pocket}; ...
+  %      {Vector of Angular Distance to Centroid of Teams}; ...
+  %      {Vector of Clocking "Seed Angles"}; ...
+  %      {Vector of Team Biases}; ...
+  %      {Vector of Eccentricities}; ...
+  %      {Matrix of Team Centers}] (geometric inputs)
 
-% G = [{Vector of Radii}; ...
-%      {Vector of Angular Offsets Between Flank and Pocket}; ...
-%      {Vector of Angular Distance to Centroid of Teams}; ...
-%      {Vector of Clocking "Seed Angles"}; ...
-%      {Vector of Team Biases}; ...
-%      {Vector of Eccentricities}; ...
-%      {Matrix of Team Centers}] (geometric inputs)
+  % C = [{Base Elevation}; ...
+  %      {Base Size}; ...
+  %      {Number of Tiles}; ...
+  %      {Zone Avoidance}; ...
+  %      {Linear Slop};
+  %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
-% C = [{Base Elevation}; ...
-%      {Base Size}; ...
-%      {Number of Tiles}; ...
-%      {Zone Avoidance}; ...
-%      {Linear Slop};
-%      {[left right top bottom] border avoidances}]  (characteristic inputs)
+G = [{[28 29 30 31]}; {[42 45 48]}; {[172 176 180 184 188]}; {[-45 45]}; {[0.05 0.075]}];
+C = [{2}; {2}];
 
-%G = [{[28 29 30 31]}; {[40 45 50]}; {[170 175 180 185 190]}; {-45}; {[0 0.05]}];
-%C = [{2}; {10}];
+[PL] = RMS_CPL_V10(G,C);
 
-%[PL] = RMS_CPL_V9(G,C);
-PL = [];
 
 %% -- Section on Space -- %%
 
-SPC.TT = {'NNRB'};  %terrain type
+SPC.TT = {'NNB'};   %terrain type
 SPC.BE = 0;         %base elevation
 SPC.BS = 0;
+%SPC.Z = 1; SPC.OZA = 0;
 SPC.X = [1 99; 1 99]; SPC.Y = [1 1; 99 99];
 [LM_SPC,SPC] = LandScribeV6(SPC,[1 1]);
 
@@ -93,9 +93,7 @@ tilecount = 35*s;
 
 K = 1;
 for i1 = 1:1
-
   for i2 = 1:1
-
     for j = 1:length(R)
 
       BORDER.TT = {'MARTIAN_BORDER_TER'};  %terrain type
@@ -105,7 +103,7 @@ for i1 = 1:1
       BORDER.BS = 1;
       BORDER.SS = 2;
       BORDER.CF = 0;
-%      k = 1;
+
       BORDER_X = []; BORDER_Y = [];
       for i = 1:spacing(j):360
         BORDER_X = [BORDER_X; R(j)*cosd(i)+50]; BORDER_Y = [BORDER_Y; R(j)*sind(i)+50];
@@ -122,18 +120,55 @@ for i1 = 1:1
       clear BORDER
     end
     %
-
     clear LM_BORDER
     K += 1;
   end
 
 end
 %
-Dynamic_List = RMS_RS_V2(1,1,{'C'},COMMAND);
-%Dynamic_List = [];
+Neutral_Dynamic_List = RMS_RS_V2(1,1,{'C'},COMMAND);
+clear COMMAND
+
+K = 1; d = 9;
+V = [1:2];
+for i1 = V
+
+  MOON.TT = {'NNB'}; MOON.BE = 1; BORDER.CF = 25;
+
+  MOON.NT = 50;
+  MOON.BS = 2;
+  MOON.SS = 3;
+%  MOON.Z = 1;
+%  MOON.OZA = 0;
+  MOON.w = [1]; MOON.v = [1];
+
+  if   i1 == 1
+    MOON.XB = [d 100-d];
+    MOON.YB = [d 100-d];
+    CLK = 45
+  else i1 == 2
+    MOON.XB = [d 100-d];
+    MOON.YB = [100-d d];
+    CLK = -45;
+  end
+  %
+  MOON.XG = MOON.XB; MOON.YG = MOON.YB;
+
+  [LM_MOON,~] = LandScribeV6(MOON,[1 1]);
+
+  [COMMAND(K).XY] = [RMS_Processor_V6([LM_MOON])];
+  clear MOON LM_MOON
+  K += 1;
+
+end
+%
+Moon_Dynamic_List = RMS_RS_V2(V,{'D'},COMMAND);
+clear COMMAND
+
+
 Static_List  = RMS_Processor_V6([LM_SPC; LM_MTN; LM_PK]);
 
-CODE = [Preface; PL; Dynamic_List; Static_List]; %Adding Preface, Definitions, Random Statement to beginning of CODE
+CODE = [Preface; PL; Neutral_Dynamic_List; Moon_Dynamic_List; Static_List]; %Adding Preface, Definitions, Random Statement to beginning of CODE
 
 RMS_ForgeV4(filename,CODE);
 
