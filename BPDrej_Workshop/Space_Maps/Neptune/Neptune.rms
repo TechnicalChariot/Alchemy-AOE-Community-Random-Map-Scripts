@@ -13,10 +13,6 @@
 #const ROCK4 396
 #const PHOTON_MAN 1292
 
-/* Removing Oak Forest Tree */
-#const OFT 411
-effect_amount GAIA_SET_ATTRIBUTE OFT ATTR_TERRAIN_ID 13
-
 /* Remove Visual Effect of Dead Fish Trap */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
@@ -50,7 +46,7 @@ endif
      effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
      effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
      effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
-     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 4
+     effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 2
 
 effect_amount GAIA_SET_ATTRIBUTE OFT ATTR_TERRAIN_ID 13
 
@@ -58,6 +54,21 @@ effect_amount GAIA_SET_ATTRIBUTE OFT ATTR_TERRAIN_ID 13
 random_placement
 behavior_version 1
 
+#const INVIS_COMBATANT 281
+
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_MOVE_SPEED 0
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_TERRAIN_ID 0
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_MAX_RANGE 15
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_RELOAD_TIME 5
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_SHOWN_RANGE 15
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_LINE_OF_SIGHT 20
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_SEARCH_RADIUS 20
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_ACCURACY_PERCENT 100
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_PROJECTILE_ID 676
+effect_percent GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_BLAST_RADIUS 50
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_HITPOINTS 30000    
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_REGENERATION_RATE 30000    
+effect_amount GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_COMBAT_ABILITY 1
 
 <ELEVATION_GENERATION>
 
@@ -91,7 +102,7 @@ create_terrain DLC_MANGROVESHALLOW { base_terrain DLC_WATER5 land_percent 100 nu
 
 /* Masking */
 create_terrain DLC_BOGLAND { base_terrain DLC_MANGROVEFOREST land_percent 20 number_of_clumps 30 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
-create_terrain F { base_terrain DLC_MANGROVESHALLOW land_percent 15 number_of_clumps 30 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
+create_terrain F { base_terrain DLC_MANGROVESHALLOW land_percent 25 number_of_clumps 30 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
 create_terrain DEEP_WATER { base_terrain WATER land_percent 3 number_of_clumps 5 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
 create_terrain DLC_WATER5 { base_terrain WATER land_percent 4 number_of_clumps 10 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
 
@@ -107,6 +118,27 @@ create_object OG { set_place_for_every_player max_distance_to_players 0 actor_ar
 create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 18 actor_area_radius 17 }
 create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 19 actor_area_radius 18 }
 create_object OG { set_place_for_every_player max_distance_to_players 0 actor_area 20 actor_area_radius 19 }
+
+create_object OG
+{
+	number_of_groups 9320
+	set_scaling_to_map_size
+	terrain_to_place_on DLC_MANGROVESHALLOW
+	temp_min_distance_group_placement 4
+	actor_area 1
+	actor_area_radius 16
+}
+
+create_object INVIS_COMBATANT
+{
+	number_of_groups 9320
+	set_scaling_to_map_size
+	set_gaia_object_only
+	set_gaia_unconvertible
+	terrain_to_place_on WATER
+	temp_min_distance_group_placement 2
+	avoid_actor_area 1
+}
 
 if REGICIDE
 create_object KING

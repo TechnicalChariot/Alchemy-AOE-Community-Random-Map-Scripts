@@ -45,7 +45,7 @@ tag = [{'if P2'};{'elseif P4'};{'elseif P6'};{'elseif P8'};{'endif'}];
 %      {Linear Slop};
 %      {[left right top bottom] border avoidances}]  (characteristic inputs)
 
-G = [{[20 24]}; {45}; {180}; {45}; {[0.15]}; {0.6}; {[CC; CC]}];
+G = [{[20 22]}; {45}; {[170 180 190]}; {45}; {[0.15]}; {0.6}; {[CC; CC]}];
 C = [{1}; {0}; {14400}; {0}; {0}; {[0 0 0 0]}];
 
 [create_player_lands] = RMS_CPL_V9(G,C);
