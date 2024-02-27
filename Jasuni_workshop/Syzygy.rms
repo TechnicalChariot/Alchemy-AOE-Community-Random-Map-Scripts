@@ -3,8 +3,49 @@
 
 idea: randomize the terrains for each planet so that players have to scout it out - nomad start, with 1 vil on top planet, 1 vil bottom planet, and 1 vil somewhere else (place via actor area?) Could also have players start with a fishing ship (good for scouting) in a map corner (either top/bottom or left/right: likely left/right)
 Syzygy randomizing: when selecting terrains, do a random chance for first 1, then random chance with one removed (remove last 1, check for duplicate) for second planet; 3rd planet remove last 2, if get duplicate check which planet it was (first removed if first planet, otherwise second); remove 3 for last planet (handle like 3rd planet)
+
+terrain ideas: 
+Barren (guarantee gold/stone, gravel or desert gravel terrain; no trees, no food, but will have plenty of stone and an randomized amount of gold - possibly lots, possibly little)
+Radioactive (evil fog on/under ___ terrain, have fish/wildlife/vils avoid the terrain through use of actor areas - no food/wood, little-to-no stone, but give plenty of gold)
+City (Road terrain, has forests, berry bushes, neutral capturable outposts, neutral trading posts, and ruins of buildings - would include stone piles, possibly in some alternative form. Also may include gold piles - guaranteed extra relics on this terrain)
+Marsh (mangrove forest terrain? mangrove terrain should be separated from outside of the planet, but would have plenty of wood and food/berries/hunt. May have some gold. No stone. Predators fit thematically, but nomad start prohibits that).
+Jungle terrain: (lush jungle forests, plenty of wildlife, maybe a little gold, no stone)
+Grassland/plains: has horses (give players a wild horse that only starts on this terrain as a scout). Has some trees, but not too many. Plenty of hunt.
+Desert: has desert palm trees, some thematic hunts, gold and stone, 
+Farmland: (can I get away with neutral farms? have berry bushes of both kinds, livestock, trees of a kind used for agriculture, low stone, low gold) - use with MEDITERRANEAN_FOREST
+Mountains/alpine (have mountains take up some space; plenty of stone and gold, trees, goats, etc. - would also have some elevation - use Snow light terrain as base)
+Snowy: (some wildlife to hunt, dead forests, some gold/stone, but not an abundance)
+
+terrains that I could use:
+GRASS, GRASS2, GRASS3, DIRT, DIRT2, DIRT3, DLC_DIRT4, LEAVES, FARM (several, but probably only want 1), DESERT, ROAD (would require change in resource terrain table, pair with ROAD2 which is broken road), SNOW, snow_foundation (4th snow terrain, should looklike snow dirt), DLC_SAVANNAH, DLC_CRACKED, DLC_QUICKSAND (would require change in resource terrain table), DLC_JUNGLEGRASS, Corruption, Gravel, underbrush-leaves, underbrush-snow, (see defined terrains)..., DLC_DRYGRASS, DLC_BOGLAND (require change in resource terrain table), DLC_DESERTGRAVEL
+DLC_ROADGRAVEL
+tricky terrains: DLC_MANGROVESHALLOW, rice farm terrains
+obsolete terrains that don't layer: DIRT_SNOW, GRASS_SNOW, DLC_DRYROAD, DLC_MOORLAND, DLC_JUNGLEROAD, DLC_JUNGLELEAVES
+not really usable as a base terrain: DLC_ROCK, ICE, MUDDY_SHALLOW
+
+forest terrains: JUNGLE, BAMBOO, etc.
  */
 /* date:  */
+#const FARM 29 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
+#const SNOW_FOUNDATION 36
+#const SNOW_ROAD 38
+#const ROAD_FUNGUS 39
+#const CORRUPTION 69 
+#const GRAVEL 70 
+#const UNDERBRUSH_LEAVES 71 
+#const UNDERBRUSH_SNOW 72 
+#const SNOW_LIGHT 73
+#const SNOW_HEAVY 74
+#const ROAD_FUNGUS 75
+#const DIRT_MUD 76
+#const UNDERBRUSH_JUNGLE 77
+#const ROAD_GRAVEL 78
+#const GRASS_JUNGLE 83 /* SIMLAR TO DLC_JUNGLEGRASS */
+#const FOREST_BUSH 89
+#const WATER_GREEN 95
+#const WATER_BROWN 96
+ 
+
 
 <PLAYER_SETUP>
 
@@ -34,13 +75,13 @@ direct_placement
 
 
 /* Defining Planet Terrains */
-#const PN1  79 /* beach (non-navigable) */
+#const PN1  12 /* GRASS2 */
 #const PN1B 2 /* beach */
-#const PN2  80  /* beach (non-navigable), wet sand */
+#const PN2  40  /* DLC_ROCK */
 #const PN2B 107 /* DLC_WETBEACH */
-#const PN3  81 /* beach (non-navigable), wet gravel */
+#const PN3  17 /* JUNGLE */
 #const PN3B 108 /* DLC_GRAVELBEACH */
-#const PN4  82  /* beach (non-navigable), wet rock */
+#const PN4  14  /* DESERT */
 #const PN4B 109 /* DLC_WETROCKBEACH */
 
 /* Defining Player Terrain Types */
@@ -58,7 +99,42 @@ direct_placement
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
 <ELEVATION_GENERATION>
+/*
+create_elevation 2 {
+	base_terrain PN1
+	number_of_tiles 9320
+	set_scale_by_size
+	enable_balanced_elevation
 
+}
+create_elevation 2 {
+	base_terrain PN2
+	number_of_tiles 9320
+	set_scale_by_size
+	enable_balanced_elevation
+
+}
+create_elevation 2 {
+	base_terrain PN3
+	number_of_tiles 9320
+	set_scale_by_size
+	enable_balanced_elevation
+
+}
+create_elevation 2 {
+	base_terrain PN4
+	number_of_tiles 9320
+	set_scale_by_size
+	enable_balanced_elevation
+
+}
+create_elevation 2 {
+	number_of_tiles 9320
+	set_scale_by_size
+	enable_balanced_elevation
+
+}
+*/
 
 <TERRAIN_GENERATION>
 /*
@@ -135,18 +211,21 @@ if BORDER_CLEANUP
 
 endif
 
-#define REAL_BEACH_APPLICATION
-
-if REAL_BEACH_APPLICATION
-	create_terrain PN1B { base_terrain PN1 land_percent 100 number_of_clumps 9320 height_limits 0 1 }	
-	create_terrain PN2B { base_terrain PN2 land_percent 100 number_of_clumps 9320 height_limits 0 1 }
-	create_terrain PN3B { base_terrain PN3 land_percent 100 number_of_clumps 9320 height_limits 0 1 }
-	create_terrain PN4B { base_terrain PN4 land_percent 100 number_of_clumps 9320 height_limits 0 1 }
+if EQUAL_SIZED_PLANETS /* only needed in this case, as unequal planets uses a different coding method */
+	#define REAL_BEACH_APPLICATION
 endif
-
+if REAL_BEACH_APPLICATION
+	create_terrain PN1B { base_terrain PN1 land_percent 100 number_of_clumps 9320 height_limits 0 0 }	
+	create_terrain PN2B { base_terrain PN2 land_percent 100 number_of_clumps 9320 height_limits 0 0 }
+	create_terrain PN3B { base_terrain PN3 land_percent 100 number_of_clumps 9320 height_limits 0 0 }
+	create_terrain PN4B { base_terrain PN4 land_percent 100 number_of_clumps 9320 height_limits 0 0 }
+endif
 #define OCEAN_APPLICATION
 
 if OCEAN_APPLICATION
+
+	/*	original code provided to me by BP_Drej
+ */
 	create_terrain WATER { base_terrain PN1B land_percent 100 number_of_clumps 9320 height_limits 0 0 }	
 	create_terrain WATER { base_terrain PN2B land_percent 100 number_of_clumps 9320 height_limits 0 0 }	
 	create_terrain WATER { base_terrain PN3B land_percent 100 number_of_clumps 9320 height_limits 0 0 }	
@@ -154,6 +233,7 @@ if OCEAN_APPLICATION
 
 endif
 
+/*
 #define GENERIC_LAND_LAYERING
 
 if GENERIC_LAND_LAYERING
@@ -162,12 +242,396 @@ if GENERIC_LAND_LAYERING
 	create_terrain MUD { base_terrain PN2 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 terrain_mask 2 }	
 	create_terrain DESERT { base_terrain PN1 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 terrain_mask 2 }	
 
-
-
 endif
 
+*/
+#define PLANET_TO_ELEVATION_0
+if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, with holes at the intersections. TODO test for equal sized planets. */
+	#const PLACEHOLDER 84
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		base_layer DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		spacing_to_other_terrain_types 3
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain PN1
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 0 0
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	} 
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN1
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN1 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	/*
+	So what I did:
+	terrain mask on the planet
+	black terrain mask on water away from the planet, with spacing to other terrain type 3
+	planet terrain mask on the water (which won't include the black terrain, since masks don't overwrite each other)
+	planet terrain on the water with black terrain mask
+	planet terrain on remaining water, with spacing to other terrain types 3
+	replace the water
+	add placeholder terrain mask to remainder of planet terrain with spacing to other terrain type 1
+	replace planet terrain with placeholder terrain mask with placeholder terrain
+	replace water with planet terrain
+	replace planet terrain with water
+	replace placeholder with planet terrain
+	*/
+	/* start second planet */
+	create_terrain PLACEHOLDER {
+		base_terrain PN2
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		base_layer DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		spacing_to_other_terrain_types 3
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain PN2
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 0 0
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN2
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	} 
+	create_terrain PLACEHOLDER {
+		base_terrain PN2
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN2
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN2 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	/* start planet 3 */
+	create_terrain PLACEHOLDER {
+		base_terrain PN3
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		base_layer DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		spacing_to_other_terrain_types 3
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain PN3
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 0 0
+	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN3
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	} 
+	create_terrain PLACEHOLDER {
+		base_terrain PN3
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN3
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN3 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	/* start planet 4 TODO might be able to alter it to avoid certain issues due to it being last */
+	create_terrain PLACEHOLDER {
+		base_terrain PN4
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		base_layer DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		spacing_to_other_terrain_types 3
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain WATER {
+		base_terrain PN4
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 0 0
+	}
+	/* TODO might not need this line - it's meant to get rid of an outline */
+	create_terrain PLACEHOLDER {
+		base_terrain PN4
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	} 
+	create_terrain PLACEHOLDER {
+		base_terrain PN4
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain WATER {
+		base_terrain PN4
+		land_percent 100
+		number_of_clumps 9320
+	} 
+	create_terrain PN4 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
 
+endif
+/*
 
+create_terrain PLACEHOLDER {
+	base_terrain PN2
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+create_terrain DLC_BLACK { /* might not need */
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+}
+/* skipped command - wasn't doing anything this time, and likely unneeded */
+create_terrain PN2 {
+	base_terrain WATER
+	base_layer DLC_BLACK
+	land_percent 100
+	number_of_clumps 9320
+}
+create_terrain PN2 {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+}
+create_terrain WATER {
+	base_terrain PN2
+	spacing_to_other_terrain_types 1
+	set_flat_terrain_only
+	land_percent 100
+	number_of_clumps 9320
+	height_limits 0 0
+}
+create_terrain PLACEHOLDER {
+	base_terrain PN1
+	base_layer PLACEHOLDER
+	land_percent 100
+	number_of_clumps 9320
+}
+create_terrain PN1 {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+} 
+create_terrain WATER {
+	base_terrain PN1
+	land_percent 100
+	number_of_clumps 9320
+}
+create_terrain PLACEHOLDER {
+	base_terrain PN2
+	land_percent 100
+	number_of_clumps 9320
+	terrain_mask 1
+} 
+create_terrain PN2 {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	
+}
+create_terrain PN2 {
+	base_terrain PN1
+	land_percent 100
+	number_of_clumps 9320
+	
+}
+*/
+
+/*
+create_terrain WATER {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+}
+create_terrain PN1 {
+	base_terrain WATER
+	land_percent 100
+	number_of_clumps 9320
+	height_limits 0 0
+}
+create_terrain PN1 {
+	base_terrain WATER
+	base_layer DLC_BLACK
+	land_percent 100
+	number_of_clumps 9320
+	spacing_to_other_terrain_types 1
+}
+create_terrain WATER {
+	base_terrain PN1
+	land_percent 100
+	number_of_clumps 9320
+	height_limits 0 0
+}
+*/
 <OBJECTS_GENERATION>
 /* BEGIN_OBJECTS_AUTOSCRIBE */
 
@@ -5073,532 +5537,547 @@ L { terrain_type PN4 land_position  1 99 base_size 0 land_percent 100 }
 
 else /* SNOWMAN_PLANET_SHAPE */
 
-base_terrain DLC_BLACK
+base_terrain WATER
+/*
+base_layer DLC_BLACK */
 
 
 /*
 Planets are in order from top to bottom. Higher planets are smaller in radius. This current setup works for tiny map size, but could use some smoothing out. Larger map sizes will require additional lands to ensure that the planets connect to each other.  
+
+/* Defining Planet Terrains */
+#const PN1  79 /* beach (non-navigable) */
+#const PN1B 2 /* beach */
+#const PN2  80  /* beach (non-navigable), wet sand */
+#const PN2B 107 /* DLC_WETBEACH */
+#const PN3  81 /* beach (non-navigable), wet gravel */
+#const PN3B 108 /* DLC_GRAVELBEACH */
+#const PN4  82  /* beach (non-navigable), wet rock */
+#const PN4B 109 /* DLC_WETROCKBEACH */
 */
 /* Generated with MadLands v5.9.xlsm: I: 3 R: 15 XO: 30 YO: -30 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
-L { base_size 4 land_position 95 20 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 95 21 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 95 22 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 95 22 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 95 23 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 94 24 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 94 25 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 94 25 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 94 26 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 93 27 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 93 28 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 93 28 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 92 29 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 92 29 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 91 30 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 91 31 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 90 31 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 89 32 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 89 32 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 88 33 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 88 33 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 87 33 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 86 34 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 85 34 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 85 34 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 84 34 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 83 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 82 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 82 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 81 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 80 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 79 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 78 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 78 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 77 35 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 76 34 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 75 34 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 75 34 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 74 34 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 73 33 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 73 33 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 72 33 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 71 32 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 71 32 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 70 31 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 69 31 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 69 30 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 68 29 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 68 29 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 67 28 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 67 28 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 67 27 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 66 26 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 66 25 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 66 25 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 66 24 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 23 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 22 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 22 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 21 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 20 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 19 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 18 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 18 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 65 17 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 66 16 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 66 15 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 66 15 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 66 14 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 67 13 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 67 13 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 67 12 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 68 11 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 68 11 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 69 10 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 69 9 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 70 9 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 71 8 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 71 8 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 72 7 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 73 7 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 73 7 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 74 6 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 75 6 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 75 6 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 76 6 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 77 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 78 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 78 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 79 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 80 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 81 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 82 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 82 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 83 5 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 84 6 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 85 6 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 85 6 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 86 6 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 87 7 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 88 7 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 88 7 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 89 8 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 89 8 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 90 9 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 91 9 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 91 10 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 92 11 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 92 11 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 93 12 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 93 13 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 93 13 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 94 14 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 94 15 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 94 15 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 94 16 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 95 17 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 95 18 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 95 18 number_of_tiles 0 terrain_type GRASS2 }
-L { base_size 4 land_position 95 19 number_of_tiles 0 terrain_type GRASS2 }
+L { base_size 4 base_elevation 2 land_position 95 20 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 95 21 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 95 22 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 95 22 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 95 23 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 94 24 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 94 25 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 94 25 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 94 26 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 93 27 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 93 28 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 93 28 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 92 29 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 92 29 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 91 30 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 91 31 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 90 31 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 89 32 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 89 32 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 88 33 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 88 33 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 87 33 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 86 34 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 85 34 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 85 34 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 84 34 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 83 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 82 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 82 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 81 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 80 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 79 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 78 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 78 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 77 35 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 76 34 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 75 34 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 75 34 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 74 34 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 73 33 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 73 33 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 72 33 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 71 32 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 71 32 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 70 31 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 69 31 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 69 30 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 68 29 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 68 29 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 67 28 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 67 28 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 67 27 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 66 26 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 66 25 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 66 25 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 66 24 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 23 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 22 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 22 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 21 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 20 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 19 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 18 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 18 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 65 17 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 66 16 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 66 15 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 66 15 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 66 14 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 67 13 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 67 13 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 67 12 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 68 11 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 68 11 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 69 10 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 69 9 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 70 9 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 71 8 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 71 8 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 72 7 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 73 7 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 73 7 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 74 6 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 75 6 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 75 6 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 76 6 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 77 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 78 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 78 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 79 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 80 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 81 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 82 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 82 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 83 5 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 84 6 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 85 6 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 85 6 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 86 6 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 87 7 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 88 7 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 88 7 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 89 8 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 89 8 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 90 9 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 91 9 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 91 10 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 92 11 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 92 11 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 93 12 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 93 13 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 93 13 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 94 14 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 94 15 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 94 15 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 94 16 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 95 17 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 95 18 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 95 18 number_of_tiles 0 terrain_type PN1 }
+L { base_size 4 base_elevation 2 land_position 95 19 number_of_tiles 0 terrain_type PN1 }
 
 
-L { land_position 90 20 land_percent 100 terrain_type GRASS2 }
+L { land_position 90 20 land_percent 100 base_elevation 2 terrain_type PN1 }
 
 
 /* Generated with MadLands v5.9.xlsm: I: 3 R: 22 XO: 17 YO: -17 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
 /*
-L { base_size 4 land_position 89 33 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 89 34 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 89 35 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 89 36 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 89 38 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 88 39 number_of_tiles 0 terrain_type DLC_ROCK }
+L { base_size 4 base_elevation 2 land_position 89 33 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 89 34 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 89 35 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 89 36 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 89 38 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 88 39 number_of_tiles 0 terrain_type PN2 }
 */
-L { base_size 4 land_position 88 40 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 88 41 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 87 42 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 87 43 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 86 44 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 85 45 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 85 46 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 84 47 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 83 48 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 83 49 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 82 49 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 81 50 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 80 51 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 79 51 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 78 52 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 77 53 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 76 53 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 75 54 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 74 54 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 73 54 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 72 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 70 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 69 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 68 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 67 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 66 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 65 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 64 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 62 55 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 61 54 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 60 54 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 59 54 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 58 53 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 57 53 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 56 52 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 55 51 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 54 51 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 53 50 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 52 49 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 51 49 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 51 48 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 50 47 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 49 46 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 49 45 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 48 44 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 47 43 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 47 42 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 46 41 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 46 40 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 46 39 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 38 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 36 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 35 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 34 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 33 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 32 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 31 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 30 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 45 28 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 46 27 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 46 26 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 46 25 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 47 24 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 47 23 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 48 22 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 49 21 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 49 20 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 50 19 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 51 18 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 51 17 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 52 17 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 53 16 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 54 15 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 55 15 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 56 14 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 57 13 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 58 13 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 59 12 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 60 12 number_of_tiles 0 terrain_type DLC_ROCK }
+L { base_size 4 base_elevation 2 land_position 88 40 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 88 41 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 87 42 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 87 43 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 86 44 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 85 45 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 85 46 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 84 47 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 83 48 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 83 49 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 82 49 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 81 50 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 80 51 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 79 51 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 78 52 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 77 53 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 76 53 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 75 54 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 74 54 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 73 54 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 72 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 70 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 69 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 68 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 67 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 66 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 65 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 64 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 62 55 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 61 54 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 60 54 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 59 54 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 58 53 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 57 53 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 56 52 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 55 51 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 54 51 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 53 50 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 52 49 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 51 49 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 51 48 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 50 47 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 49 46 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 49 45 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 48 44 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 47 43 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 47 42 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 46 41 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 46 40 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 46 39 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 38 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 36 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 35 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 34 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 33 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 32 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 31 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 30 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 45 28 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 46 27 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 46 26 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 46 25 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 47 24 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 47 23 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 48 22 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 49 21 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 49 20 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 50 19 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 51 18 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 51 17 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 52 17 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 53 16 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 54 15 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 55 15 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 56 14 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 57 13 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 58 13 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 59 12 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 60 12 number_of_tiles 0 terrain_type PN2 }
 /*
-L { base_size 4 land_position 61 12 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 62 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 64 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 65 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 66 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 67 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 68 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 69 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 70 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 72 11 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 73 12 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 74 12 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 75 12 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 76 13 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 77 13 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 78 14 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 79 15 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 80 15 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 81 16 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 82 17 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 83 17 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 83 18 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 84 19 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 85 20 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 85 21 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 86 22 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 87 23 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 87 24 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 88 25 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 88 26 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 88 27 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 89 28 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 89 30 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 89 31 number_of_tiles 0 terrain_type DLC_ROCK }
-L { base_size 4 land_position 89 32 number_of_tiles 0 terrain_type DLC_ROCK }
+L { base_size 4 base_elevation 2 land_position 61 12 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 62 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 64 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 65 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 66 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 67 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 68 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 69 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 70 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 72 11 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 73 12 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 74 12 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 75 12 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 76 13 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 77 13 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 78 14 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 79 15 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 80 15 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 81 16 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 82 17 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 83 17 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 83 18 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 84 19 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 85 20 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 85 21 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 86 22 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 87 23 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 87 24 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 88 25 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 88 26 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 88 27 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 89 28 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 89 30 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 89 31 number_of_tiles 0 terrain_type PN2 }
+L { base_size 4 base_elevation 2 land_position 89 32 number_of_tiles 0 terrain_type PN2 }
 */
 
 if TINY_MAP
-L { land_position 50 40 land_percent 100 terrain_type DLC_ROCK }
-else
+L { land_position 50 40 land_percent 100 base_elevation 2 terrain_type PN2 }
+elseif SMALL_MAP
+L { land_position 50 40 land_percent 100 base_elevation 2 terrain_type PN2 }
 endif
 
 
 /* Generated with MadLands v5.9.xlsm: I: 3 R: 26 XO: 1 YO: -1 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
 /*
-L { base_size 4 land_position 77 49 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 77 50 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 77 52 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 77 53 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 76 54 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 76 56 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 76 57 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 75 58 number_of_tiles 0 terrain_type ICE }
+L { base_size 4 base_elevation 2 land_position 77 49 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 77 50 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 77 52 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 77 53 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 76 54 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 76 56 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 76 57 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 75 58 number_of_tiles 0 terrain_type PN3 }
 */
-L { base_size 4 land_position 75 60 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 74 61 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 74 62 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 73 63 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 72 64 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 71 65 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 70 66 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 69 67 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 68 68 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 67 69 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 66 70 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 65 71 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 64 72 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 63 72 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 62 73 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 60 73 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 59 74 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 58 74 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 56 74 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 55 75 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 54 75 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 52 75 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 51 75 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 50 75 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 48 75 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 47 75 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 46 74 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 44 74 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 43 74 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 42 73 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 40 73 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 39 72 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 38 72 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 37 71 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 36 70 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 35 69 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 34 68 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 33 67 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 32 66 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 31 65 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 30 64 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 29 63 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 28 62 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 28 61 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 27 60 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 27 58 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 26 57 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 26 56 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 26 54 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 25 53 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 25 52 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 25 50 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 25 49 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 25 48 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 25 46 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 25 45 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 26 44 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 26 42 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 26 41 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 27 40 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 27 38 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 28 37 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 28 36 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 29 35 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 30 34 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 31 33 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 32 32 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 33 31 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 34 30 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 35 29 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 36 28 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 37 27 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 38 26 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 39 26 number_of_tiles 0 terrain_type ICE }
+L { base_size 4 base_elevation 2 land_position 75 60 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 74 61 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 74 62 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 73 63 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 72 64 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 71 65 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 70 66 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 69 67 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 68 68 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 67 69 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 66 70 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 65 71 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 64 72 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 63 72 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 62 73 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 60 73 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 59 74 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 58 74 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 56 74 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 55 75 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 54 75 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 52 75 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 51 75 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 50 75 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 48 75 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 47 75 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 46 74 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 44 74 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 43 74 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 42 73 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 40 73 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 39 72 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 38 72 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 37 71 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 36 70 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 35 69 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 34 68 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 33 67 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 32 66 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 31 65 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 30 64 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 29 63 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 28 62 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 28 61 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 27 60 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 27 58 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 26 57 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 26 56 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 26 54 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 25 53 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 25 52 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 25 50 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 25 49 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 25 48 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 25 46 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 25 45 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 26 44 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 26 42 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 26 41 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 27 40 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 27 38 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 28 37 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 28 36 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 29 35 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 30 34 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 31 33 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 32 32 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 33 31 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 34 30 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 35 29 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 36 28 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 37 27 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 38 26 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 39 26 number_of_tiles 0 terrain_type PN3 }
 /*
-L { base_size 4 land_position 40 25 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 42 25 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 43 24 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 44 24 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 46 24 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 47 23 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 48 23 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 50 23 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 51 23 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 52 23 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 54 23 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 55 23 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 56 24 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 58 24 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 59 24 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 60 25 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 62 25 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 63 26 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 64 26 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 65 27 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 66 28 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 67 29 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 68 30 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 69 31 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 70 32 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 71 33 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 72 34 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 73 35 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 74 36 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 74 37 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 75 38 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 75 40 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 76 41 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 76 42 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 76 44 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 77 45 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 77 46 number_of_tiles 0 terrain_type ICE }
-L { base_size 4 land_position 77 48 number_of_tiles 0 terrain_type ICE }
+L { base_size 4 base_elevation 2 land_position 40 25 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 42 25 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 43 24 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 44 24 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 46 24 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 47 23 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 48 23 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 50 23 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 51 23 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 52 23 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 54 23 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 55 23 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 56 24 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 58 24 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 59 24 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 60 25 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 62 25 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 63 26 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 64 26 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 65 27 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 66 28 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 67 29 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 68 30 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 69 31 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 70 32 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 71 33 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 72 34 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 73 35 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 74 36 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 74 37 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 75 38 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 75 40 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 76 41 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 76 42 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 76 44 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 77 45 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 77 46 number_of_tiles 0 terrain_type PN3 }
+L { base_size 4 base_elevation 2 land_position 77 48 number_of_tiles 0 terrain_type PN3 }
 */
 
 if TINY_MAP
-L { land_position 27 50 land_percent 100 terrain_type ICE }
-else
+L { land_position 27 50 land_percent 100 base_elevation 2 terrain_type PN3 }
+elseif SMALL_MAP
+L { land_position 27 50 land_percent 100 base_elevation 2 terrain_type PN3 }
 endif
 
 
 
 /* Generated with MadLands v5.9.xlsm: I: 3 R: 30 XO: -15 YO: 15 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
 /*
-L { base_size 4 land_position 65 65 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 65 67 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 65 68 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 65 70 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 64 71 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 64 73 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 64 74 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 63 76 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 62 77 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 62 79 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 61 80 number_of_tiles 0 terrain_type DESERT }
+L { base_size 4 base_elevation 2 land_position 65 65 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 65 67 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 65 68 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 65 70 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 64 71 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 64 73 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 64 74 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 63 76 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 62 77 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 62 79 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 61 80 number_of_tiles 0 terrain_type PN4 }
 */
-L { base_size 4 land_position 60 81 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 59 83 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 58 84 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 57 85 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 56 86 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 55 87 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 54 88 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 53 89 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 51 90 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 50 91 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 49 92 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 47 92 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 46 93 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 44 94 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 43 94 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 41 94 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 40 95 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 38 95 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 37 95 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 35 95 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 33 95 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 32 95 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 30 95 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 29 94 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 27 94 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 26 94 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 24 93 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 23 92 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 21 92 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 20 91 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 19 90 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 17 89 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 16 88 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 15 87 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 14 86 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 13 85 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 12 84 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 11 83 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 10 81 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 9 80 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 8 79 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 8 77 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 7 76 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 6 74 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 6 73 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 6 71 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 5 70 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 5 68 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 5 67 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 5 65 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 5 63 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 5 62 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 5 60 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 6 59 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 6 57 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 6 56 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 7 54 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 8 53 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 8 51 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 9 50 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 10 49 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 11 47 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 12 46 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 13 45 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 14 44 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 15 43 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 16 42 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 17 41 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 19 40 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 20 39 number_of_tiles 0 terrain_type DESERT }
+L { base_size 4 base_elevation 2 land_position 60 81 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 59 83 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 58 84 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 57 85 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 56 86 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 55 87 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 54 88 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 53 89 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 51 90 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 50 91 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 49 92 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 47 92 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 46 93 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 44 94 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 43 94 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 41 94 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 40 95 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 38 95 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 37 95 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 35 95 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 33 95 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 32 95 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 30 95 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 29 94 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 27 94 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 26 94 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 24 93 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 23 92 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 21 92 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 20 91 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 19 90 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 17 89 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 16 88 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 15 87 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 14 86 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 13 85 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 12 84 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 11 83 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 10 81 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 9 80 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 8 79 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 8 77 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 7 76 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 6 74 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 6 73 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 6 71 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 5 70 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 5 68 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 5 67 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 5 65 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 5 63 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 5 62 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 5 60 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 6 59 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 6 57 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 6 56 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 7 54 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 8 53 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 8 51 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 9 50 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 10 49 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 11 47 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 12 46 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 13 45 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 14 44 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 15 43 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 16 42 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 17 41 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 19 40 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 20 39 number_of_tiles 0 terrain_type PN4 }
 /*
-L { base_size 4 land_position 21 38 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 23 38 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 24 37 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 26 36 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 27 36 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 29 36 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 30 35 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 32 35 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 33 35 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 35 35 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 37 35 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 38 35 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 40 35 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 41 36 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 43 36 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 44 36 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 46 37 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 47 38 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 49 38 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 50 39 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 51 40 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 53 41 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 54 42 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 55 43 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 56 44 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 57 45 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 58 46 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 59 47 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 60 49 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 61 50 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 62 51 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 62 53 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 63 54 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 64 56 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 64 57 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 64 59 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 65 60 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 65 62 number_of_tiles 0 terrain_type DESERT }
-L { base_size 4 land_position 65 63 number_of_tiles 0 terrain_type DESERT }
+L { base_size 4 base_elevation 2 land_position 21 38 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 23 38 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 24 37 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 26 36 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 27 36 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 29 36 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 30 35 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 32 35 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 33 35 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 35 35 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 37 35 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 38 35 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 40 35 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 41 36 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 43 36 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 44 36 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 46 37 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 47 38 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 49 38 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 50 39 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 51 40 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 53 41 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 54 42 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 55 43 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 56 44 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 57 45 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 58 46 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 59 47 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 60 49 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 61 50 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 62 51 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 62 53 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 63 54 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 64 56 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 64 57 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 64 59 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 65 60 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 65 62 number_of_tiles 0 terrain_type PN4 }
+L { base_size 4 base_elevation 2 land_position 65 63 number_of_tiles 0 terrain_type PN4 }
 */
 
 if TINY_MAP
-L { land_position 10 65 land_percent 100 terrain_type DESERT }
-else
+L { land_position 23 77 land_percent 100 base_elevation 2 terrain_type PN4 }
+elseif SMALL_MAP
+L { land_position 23 77 land_percent 100 base_elevation 2 terrain_type PN4 }
 endif
 
 endif /* EQUAL_SIZED_PLANETS or SNOWMAN_PLANET_SHAPE */
