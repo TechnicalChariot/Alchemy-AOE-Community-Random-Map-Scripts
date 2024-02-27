@@ -26,6 +26,7 @@ not really usable as a base terrain: DLC_ROCK, ICE, MUDDY_SHALLOW
 forest terrains: JUNGLE, BAMBOO, etc.
  */
 /* date:  */
+#const ICE_NAVIGABLE 26
 #const FARM 29 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
 #const SNOW_FOUNDATION 36
 #const SNOW_ROAD 38
@@ -48,8 +49,10 @@ forest terrains: JUNGLE, BAMBOO, etc.
 
 
 <PLAYER_SETUP>
-
-if EQUAL_SIZED_PLANETS /* currently deactivated */
+/*
+#define EQUAL_SIZED_PLANETS
+*/
+if EQUAL_SIZED_PLANETS
 else
 	#define SNOWMAN_PLANET_SHAPE
 	if TINY_MAP
@@ -77,7 +80,7 @@ direct_placement
 /* Defining Planet Terrains */
 #const PN1  12 /* GRASS2 */
 #const PN1B 2 /* beach */
-#const PN2  40  /* DLC_ROCK */
+#const PN2  3  /* DIRT3 */
 #const PN2B 107 /* DLC_WETBEACH */
 #const PN3  17 /* JUNGLE */
 #const PN3B 108 /* DLC_GRAVELBEACH */
@@ -535,6 +538,47 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		number_of_clumps 9320
 	}
 
+	/* add terrain for the odd */
+	create_terrain DLC_BLACK {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+	}
+	if EQUAL_SIZED_PLANETS
+		create_terrain ICYSHORE { /* basically want some terrain to fill in for the planet intersections. - much more noticeable with SNOWMAN_PLANET_SHAPE */
+			base_terrain WATER
+			land_percent 100
+			number_of_clumps 9320
+		}
+	else /* SNOWMAN_PLANET_SHAPE */
+		create_terrain DLC_ROCK { /* basically want some terrain to fill in for the planet intersections. - much more noticeable with SNOWMAN_PLANET_SHAPE */
+			base_terrain WATER
+			land_percent 100
+			number_of_clumps 9320
+		}
+	endif
+	create_terrain WATER {
+		base_terrain DLC_BLACK
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 2
+	}
+	create_terrain DLC_BLACK {
+		base_terrain ICYSHORE
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	/*
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+		beach_terrain ICYSHORE
+	} */
 endif
 /*
 
