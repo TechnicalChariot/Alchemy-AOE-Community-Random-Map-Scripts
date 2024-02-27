@@ -78,14 +78,29 @@ direct_placement
 
 
 /* Defining Planet Terrains */
-#const PN1  12 /* GRASS2 */
-#const PN1B 2 /* beach */
-#const PN2  3  /* DIRT3 */
-#const PN2B 107 /* DLC_WETBEACH */
-#const PN3  17 /* JUNGLE */
-#const PN3B 108 /* DLC_GRAVELBEACH */
-#const PN4  14  /* DESERT */
-#const PN4B 109 /* DLC_WETROCKBEACH */
+#define NONRANDOM_PLANETS
+if NONRANDOM_PLANETS
+	#const PN1  12 /* GRASS2 */
+	#const PN1B 2 /* beach */
+	#const PN2  3  /* DIRT3 */
+	#const PN2B 107 /* DLC_WETBEACH */
+	#const PN3  69 /* Corruption */
+	#define RADIOACTIVE_PLANET
+	#define RADIOACTIVE_PLANET_3
+	#const PN3B 108 /* DLC_GRAVELBEACH */
+	#const PN4  14  /* DESERT */
+	#const PN4B 109 /* DLC_WETROCKBEACH */
+else /* TODO randomize */
+	
+	#const PN1  12 /* GRASS2 */
+	#const PN1B 2 /* beach */
+	#const PN2  3  /* DIRT3 */
+	#const PN2B 107 /* DLC_WETBEACH */
+	#const PN3  17 /* JUNGLE */
+	#const PN3B 108 /* DLC_GRAVELBEACH */
+	#const PN4  14  /* DESERT */
+	#const PN4B 109 /* DLC_WETROCKBEACH */
+endif
 
 /* Defining Player Terrain Types */
 #const PT1 6 /* DIRT */
@@ -272,6 +287,18 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 	}
 	create_terrain PN1 {
 		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN1 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN1 {
+		base_terrain WATER
 		base_layer DLC_BLACK
 		land_percent 100
 		number_of_clumps 9320
@@ -303,6 +330,12 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN1
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	} /* TODO copy out for every other instance */
 	create_terrain PN1 {
 		base_terrain WATER
 		land_percent 100
@@ -313,6 +346,11 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 	} 
+	create_terrain PN1 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
 	create_terrain PN1 {
 		base_terrain PLACEHOLDER
 		land_percent 100
@@ -354,6 +392,18 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 	}
 	create_terrain PN2 {
 		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN2 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN2 {
+		base_terrain WATER
 		base_layer DLC_BLACK
 		land_percent 100
 		number_of_clumps 9320
@@ -385,6 +435,12 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN2
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
 	create_terrain PN2 {
 		base_terrain WATER
 		land_percent 100
@@ -395,6 +451,11 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 	} 
+	create_terrain PN2 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
 	create_terrain PN2 {
 		base_terrain PLACEHOLDER
 		land_percent 100
@@ -422,6 +483,18 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 	}
 	create_terrain PN3 {
 		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN3 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN3 {
+		base_terrain WATER
 		base_layer DLC_BLACK
 		land_percent 100
 		number_of_clumps 9320
@@ -453,6 +526,12 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN3
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
 	create_terrain PN3 {
 		base_terrain WATER
 		land_percent 100
@@ -463,6 +542,11 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 	} 
+	create_terrain PN3 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
 	create_terrain PN3 {
 		base_terrain PLACEHOLDER
 		land_percent 100
@@ -480,6 +564,18 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 		spacing_to_other_terrain_types 3
+		terrain_mask 1
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+	create_terrain PN4 {
+		base_terrain WATER
+		land_percent 100
+		number_of_clumps 9320
 		terrain_mask 1
 	}
 	create_terrain PN4 {
@@ -522,6 +618,12 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 	}
+	create_terrain PLACEHOLDER {
+		base_terrain PN4
+		base_layer PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
 	create_terrain PN4 {
 		base_terrain WATER
 		land_percent 100
@@ -532,6 +634,11 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		land_percent 100
 		number_of_clumps 9320
 	} 
+	create_terrain PN4 {
+		base_terrain PLACEHOLDER
+		land_percent 100
+		number_of_clumps 9320
+	}
 	create_terrain PN4 {
 		base_terrain PLACEHOLDER
 		land_percent 100
@@ -580,13 +687,182 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		beach_terrain ICYSHORE
 	} */
 endif
+/*
+*/
+/* Begin terrains for individual planets. */
 
+/* radioactive planet is always last to be generated in terrain, but always first in objects */
+if RADIOACTIVE_PLANET
+	create_terrain DLC_DESERTGRAVEL {
+		base_terrain CORRUPTION
+		land_percent 100 /* TODO consider making a little more scarce */
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 1 /* reduce spillover effect by forcing placement on a terrain mask as well. */
+	}
+endif
+*/
+/* end terrain generation */
 <OBJECTS_GENERATION>
-/* BEGIN_OBJECTS_AUTOSCRIBE */
+/* 
+Rules of object generation for this map:
+	1. All animal life (including villagers, hunt, sheep, fish, etc) should avoid actor area 1
+	2. Nothing should be placed before the corruption terrain ON_GRIDs (which create actor area 1)
+	3. assume that forests and cliffs may be added to adjacent planets
 
-/* END_OBJECTS_AUTOSCRIBE */
+note that there may be a little overflow between planets */
+/* Corruption terrain is placed first, because it is the only terrain that should affect other terrains */
+create_object ON_GRID {
+	terrain_to_place_on CORRUPTION
+	temp_min_distance_group_placement 1
+	number_of_objects 9320
+	actor_area 1
+	actor_area_radius 7
+}
+create_object GOLD {
+	terrain_to_place_on CORRUPTION
+	layer_to_place_on DLC_DESERTGRAVEL
+	/* at 4 and 7, extremely gold rich; at 10 and 2, rather gold-poor; result is a wide amount of variation in how much gold there can be. */
+	temp_min_distance_group_placement rnd(4,10)
+	number_of_objects rnd(2,7)
+	group_variance 1
+	set_tight_grouping
+	set_gaia_object_only
+	number_of_groups 9320
+	avoid_forest_zone 3
+	avoid_cliff_zone 3
+	group_placement_radius rnd(1,2)
+	set_circular_placement
+	max_distance_to_other_zones 2
+	actor_area 2
+	actor_area_radius 3
+}
+start_random
+	percent_chance 50 create_object STONE {
+		terrain_to_place_on CORRUPTION
+		layer_to_place_on DLC_DESERTGRAVEL
+		temp_min_distance_group_placement 10
+		number_of_objects rnd(0,3)
+		set_tight_grouping
+		set_gaia_object_only
+		number_of_groups 9320
+		avoid_forest_zone 3
+		avoid_cliff_zone 3
+		max_distance_to_other_zones 2
+		avoid_actor_area 2
+	}
+end_random
+
+create_object SHORE_FISH {
+	number_of_objects 9320
+	temp_min_distance_group_placement 5
+	avoid_actor_area 1
+	/* TODO add actor area for villager placement on heavy forested planets */
+}
+#const DOLPHIN 61 /* TODO move */
+create_object DOLPHIN {
+	number_of_objects 9320
+	temp_min_distance_group_placement 5
+	avoid_actor_area 1
+	max_distance_to_other_zones 5
+	/* TODO add actor area */
+}
+/* create villagers for each player, 1 on each planet, avoiding radioactive planet aura. */
+create_object VILLAGER {
+	number_of_objects 1
+	number_of_groups 1
+	set_place_for_every_player /* TODO will need to add "player lands" */
+	avoid_actor_area 1
+	terrain_to_place_on PN1
+	temp_min_distance_group_placement 300 /* for some reason, refused to spawn just 1 villager. */
+	min_distance_group_placement 1
+	avoid_forest_zone 1
+	avoid_cliff_zone 1
+}
+create_object VILLAGER {
+	number_of_objects 1
+	number_of_groups 1
+	set_place_for_every_player /* TODO will need to add "player lands" */
+	avoid_actor_area 1
+	terrain_to_place_on PN2
+	temp_min_distance_group_placement 300
+	min_distance_group_placement 1
+	avoid_forest_zone 1
+	avoid_cliff_zone 1
+}
+create_object VILLAGER {
+	number_of_objects 1
+	number_of_groups 1
+	set_place_for_every_player /* TODO will need to add "player lands" */
+	avoid_actor_area 1
+	terrain_to_place_on PN3
+	temp_min_distance_group_placement 300
+	min_distance_group_placement 1
+	avoid_forest_zone 1
+	avoid_cliff_zone 1
+}
+create_object VILLAGER {
+	number_of_objects 1
+	number_of_groups 1
+	set_place_for_every_player /* TODO will need to add "player lands" */
+	avoid_actor_area 1
+	terrain_to_place_on PN4
+	temp_min_distance_group_placement 300 
+	min_distance_group_placement 1
+	avoid_forest_zone 1
+	avoid_cliff_zone 1
+}
 
 <LAND_GENERATION>
+
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 1
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 2
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 3
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 4
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 5
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 6
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 7
+}
+L {
+	terrain_type WATER
+	land_percent 0
+	land_position 0 0
+	assign_to_player 8
+}
 
 if EQUAL_SIZED_PLANETS
 
@@ -5490,6 +5766,7 @@ base_terrain WATER
 
 /*
 
+TODO redo with consistent thickness disabled: I think that will make for a rounder planet. but will extend the planet out a little longer, which will require redoing the madlands generation (which is not something I have time for right now). Might be able to fudge things a little by increasing map size
 TODO make new cuts for sizes other than tiny. Only functioning for tiny map size right now 
 Planets are in order from top to bottom. Higher planets are smaller in radius. This current setup works for tiny map size, but could use some smoothing out. Larger map sizes will require additional lands to ensure that the planets connect to each other.  
 */
