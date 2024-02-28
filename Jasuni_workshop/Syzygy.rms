@@ -797,14 +797,16 @@ Rules of object generation for this map:
 	6. Gold/stone should avoid actor areas 2 and 3. Actor area 2 is gold mines. 3 is stone mines.
 
 note that there may be a little overflow between planets */
-/* Corruption terrain is placed first, because it is the only terrain that should affect other terrains */
-create_object ON_GRID {
-	terrain_to_place_on CORRUPTION
-	temp_min_distance_group_placement 1
-	number_of_objects 9320
-	actor_area 1
-	actor_area_radius 7
-}
+/* Corruption terrain is placed first, because it is the only terrain that should affect other terrains - two parts, so that kings can generate before the resources. */
+if RADIOACTIVE_PLANET
+	create_object ON_GRID {
+		terrain_to_place_on CORRUPTION
+		temp_min_distance_group_placement 1
+		number_of_objects 9320
+		actor_area 1
+		actor_area_radius 7
+	}
+endif
 if REGICIDE
 	create_object KING {
 		avoid_actor_area 1
@@ -818,42 +820,44 @@ if REGICIDE
 		max_distance_to_other_zones 1
 	}
 endif
-create_object GOLD {
-	terrain_to_place_on CORRUPTION
-	layer_to_place_on DLC_DESERTGRAVEL
-	/* at 4 and 7, extremely gold rich; at 10 and 2, rather gold-poor; result is a wide amount of variation in how much gold there can be. */
-	temp_min_distance_group_placement rnd(4,10)
-	number_of_objects rnd(2,7)
-	group_variance 1
-	set_tight_grouping
-	set_gaia_object_only
-	number_of_groups 9320
-	avoid_forest_zone 3
-	avoid_cliff_zone 3
-	group_placement_radius rnd(1,2)
-	set_circular_placement
-	max_distance_to_other_zones 2
-	actor_area 2
-	actor_area_radius 3
-}
-start_random
-	percent_chance 50 create_object STONE {
+if RADIOACTIVE_PLANET
+	/* maybe add a small chance of there being no resources on the radioactive planet? */
+	create_object GOLD {
 		terrain_to_place_on CORRUPTION
 		layer_to_place_on DLC_DESERTGRAVEL
-		temp_min_distance_group_placement 10
-		number_of_objects rnd(0,3)
+		/* at 4 and 7, extremely gold rich; at 10 and 2, rather gold-poor; result is a wide amount of variation in how much gold there can be. */
+		temp_min_distance_group_placement rnd(4,10)
+		number_of_objects rnd(2,7)
+		group_variance 1
 		set_tight_grouping
 		set_gaia_object_only
 		number_of_groups 9320
 		avoid_forest_zone 3
 		avoid_cliff_zone 3
+		group_placement_radius rnd(1,2)
+		set_circular_placement
 		max_distance_to_other_zones 2
-		avoid_actor_area 2
-		actor_area 3
+		actor_area 2
 		actor_area_radius 3
 	}
-end_random
-
+	start_random
+		percent_chance 50 create_object STONE {
+			terrain_to_place_on CORRUPTION
+			layer_to_place_on DLC_DESERTGRAVEL
+			temp_min_distance_group_placement 10
+			number_of_objects rnd(0,3)
+			set_tight_grouping
+			set_gaia_object_only
+			number_of_groups 9320
+			avoid_forest_zone 3
+			avoid_cliff_zone 3
+			max_distance_to_other_zones 2
+			avoid_actor_area 2
+			actor_area 3
+			actor_area_radius 3
+		}
+	end_random
+endif
 create_object SHORE_FISH {
 	number_of_objects 9320
 	temp_min_distance_group_placement 5
@@ -912,8 +916,7 @@ create_object VILLAGER {
 	avoid_forest_zone 1
 	avoid_cliff_zone 1
 }
-if DESERT
-
+if DESERT_PLANET
 	create_object GOLD {
 		avoid_actor_area 2
 		avoid_actor_area 3
@@ -1170,6 +1173,7 @@ if BARREN_PLANET
 		actor_area 2
 		actor_area_radius 3
 	}
+	/* TODO add a chance of a small amount of a modified trees, like columns - see other space map scripts. */
 endif
 /* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
 create_object RELIC {
