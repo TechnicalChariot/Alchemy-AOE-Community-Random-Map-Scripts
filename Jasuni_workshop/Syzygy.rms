@@ -7,15 +7,15 @@ Syzygy randomizing: when selecting terrains, do a random chance for first 1, the
 ideas implemented:
 Barren (guarantee gold/stone, gravel terrain with rock and desert gravel terrain mask; no trees, no food, but will have stone (often in abundance) and an randomized amount of gold. Biased towards having a larger amount of stone than of gold.
 Radioactive (evil fog mostly under desert gravel terrain, have fish/wildlife/vils avoid the terrain through use of actor areas - no food/wood, stone randomized with a good chance of no stone, gold guaranteed but widely varies. May be extremely gold-rich, may be gold-poor)
-
-Desert: has desert palm trees, some thematic hunts, gold and stone, 
+Desert: has desert palm trees, some thematic hunts (rhinos, ostrichs, elephants), gold and (probably) stone, and a small chance of a dromedary scout
+Farmland: Has berry bushes of both kinds, livestock (1 random type of herdable), mediterranean forest, low/no stone, low/no gold
 
 terrain ideas yet to be added: 
 City (Road terrain, has forests, berry bushes, neutral capturable outposts, neutral trading posts, and ruins of buildings - would include stone piles, possibly in some alternative form. Also may include gold piles - guaranteed extra relics on this terrain)
 Marsh (mangrove forest terrain? mangrove terrain should be separated from outside of the planet, but would have plenty of wood and food/berries/hunt. May have some gold. No stone. Predators fit thematically, but nomad start prohibits that).
 Jungle terrain: (lush jungle forests, plenty of wildlife, maybe a little gold, no stone)
 Grassland/plains: has horses (give players a wild horse that only starts on this terrain as a scout). Has some trees, but not too many. Plenty of hunt.
-Farmland: (can I get away with neutral farms? have berry bushes of both kinds, livestock, trees of a kind used for agriculture, low stone, low gold) - use with MEDITERRANEAN_FOREST
+
 Mountains/alpine (have mountains take up some space; plenty of stone and gold, trees, goats, etc. - would also have some elevation - use Snow light terrain as base)
 Snowy: (some wildlife to hunt, dead forests, some gold/stone, but not an abundance)
 
@@ -47,7 +47,11 @@ direct_placement
 #const L 32
 /* Defining Terrains */
 #const ICE_NAVIGABLE 26
-#const FARM 29 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
+#const FARMLAND1 29 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
+#const FARMLAND2 30 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
+#const FARMLAND3 31 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
+#const FARMLAND_FULL 7
+#const FARMLAND_DEAD 8
 #const SNOW_FOUNDATION 36
 #const SNOW_ROAD 38
 #const ROAD_FUNGUS 39
@@ -81,7 +85,9 @@ direct_placement
 /* Defining Planet Terrains */
 #define NONRANDOM_PLANETS
 if NONRANDOM_PLANETS
-	#const PN1  12 /* GRASS2 */
+	#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
+	#define FARMLAND_PLANET
+	#define FARMLAND_PLANET_1
 	#const PN1B 2 /* beach */
 
 	#const PN2  70  /* GRAVEL  */
@@ -121,6 +127,7 @@ endif
 #const PT8 6
 
 /* Remove Visual Effect of Dead Fish Trap */
+#const DOLPHIN 61
 #const ON_GRID 278 /* dead fish trap */
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
@@ -343,7 +350,7 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		base_layer PLACEHOLDER
 		land_percent 100
 		number_of_clumps 9320
-	} /* TODO copy out for every other instance */
+	} 
 	create_terrain PN1 {
 		base_terrain WATER
 		land_percent 100
@@ -700,14 +707,14 @@ endif
 if BARREN_PLANET
 	create_terrain DLC_ROCK {
 		base_terrain GRAVEL
-		land_percent 4 /* TODO consider making a little more scarce */
+		land_percent rnd(2,4) /* TODO do full test for this */
 		number_of_clumps 9320
 		terrain_mask 1
 		spacing_to_other_terrain_types 2 /* reduce spillover effect by forcing placement on a terrain mask as well. */
 	}
 	create_terrain DLC_DESERTGRAVEL {
 		base_terrain GRAVEL
-		land_percent 4 /* TODO consider making a little more scarce */
+		land_percent rnd(2,4) /* TODO do full test for this */
 		number_of_clumps 9320
 		terrain_mask 1
 	}
@@ -721,6 +728,52 @@ if DESERT_PLANET
 		spacing_to_other_terrain_types rnd(1,2)
 	}
 	/* optional: add terrain masks for desert terrain */
+endif
+if FARMLAND_PLANET 
+	create_terrain FARMLAND_FULL {
+		base_terrain FARMLAND1
+		land_percent 2
+		number_of_clumps 40
+		terrain_mask 1
+		spacing_to_other_terrain_types 3
+	}
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 6
+		terrain_mask 1
+	}
+	create_terrain FARMLAND_FULL {
+		base_terrain FARMLAND1
+		land_percent rnd(2,3)
+		number_of_clumps 40
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	}
+	create_terrain FARMLAND3 {
+		base_terrain FARMLAND1
+		land_percent rnd(2,3)
+		number_of_clumps 40
+		terrain_mask 1
+	}
+	create_terrain FARMLAND2 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	}
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		land_percent 100
+		number_of_clumps 932
+		terrain_mask 1
+	}
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		base_layer MEDITERRANEAN_FOREST
+		land_percent 100
+		number_of_clumps 932
+	}
 endif
 if RADIOACTIVE_PLANET
 	create_terrain DLC_DESERTGRAVEL {
@@ -794,19 +847,18 @@ create_object SHORE_FISH {
 	avoid_actor_area 1
 	/* TODO add actor area for villager placement on heavy forested planets */
 }
-#const DOLPHIN 61 /* TODO move */
 create_object DOLPHIN {
 	number_of_objects 9320
 	temp_min_distance_group_placement 5
 	avoid_actor_area 1
 	max_distance_to_other_zones 5
-	/* TODO add actor area */
+	/* TODO add actor area? */
 }
 /* create villagers for each player, 1 on each planet, avoiding radioactive planet aura. */
 create_object VILLAGER {
 	number_of_objects 1
 	number_of_groups 1
-	set_place_for_every_player /* TODO will need to add "player lands" */
+	set_place_for_every_player
 	avoid_actor_area 1
 	terrain_to_place_on PN1
 	temp_min_distance_group_placement 300 /* for some reason, refused to spawn just 1 villager. */
@@ -817,7 +869,7 @@ create_object VILLAGER {
 create_object VILLAGER {
 	number_of_objects 1
 	number_of_groups 1
-	set_place_for_every_player /* TODO will need to add "player lands" */
+	set_place_for_every_player 
 	avoid_actor_area 1
 	terrain_to_place_on PN2
 	temp_min_distance_group_placement 300
@@ -828,7 +880,7 @@ create_object VILLAGER {
 create_object VILLAGER {
 	number_of_objects 1
 	number_of_groups 1
-	set_place_for_every_player /* TODO will need to add "player lands" */
+	set_place_for_every_player 
 	avoid_actor_area 1
 	terrain_to_place_on PN3
 	temp_min_distance_group_placement 300
@@ -839,7 +891,7 @@ create_object VILLAGER {
 create_object VILLAGER {
 	number_of_objects 1
 	number_of_groups 1
-	set_place_for_every_player /* TODO will need to add "player lands" */
+	set_place_for_every_player 
 	avoid_actor_area 1
 	terrain_to_place_on PN4
 	temp_min_distance_group_placement 300 
@@ -864,21 +916,23 @@ if DESERT
 		actor_area 2
 		actor_area_radius 3
 	}
-	create_object STONE {
-		avoid_actor_area 2
-		avoid_actor_area 3
-		number_of_objects rnd(2,3)
-		set_tight_grouping
-		number_of_groups rnd(2,6)
-		set_scaling_to_map_size
-		temp_min_distance_group_placement rnd(25,45)
-		min_distance_group_placement 2
-		terrain_to_place_on DESERT
-		avoid_forest_zone 1
-		avoid_cliff_zone 1
-		actor_area 3
-		actor_area_radius 3
-	}
+	start_random
+		percent_chance 60 create_object STONE {
+			avoid_actor_area 2
+			avoid_actor_area 3
+			number_of_objects rnd(2,3)
+			set_tight_grouping
+			number_of_groups rnd(2,6)
+			set_scaling_to_map_size
+			temp_min_distance_group_placement rnd(25,45)
+			min_distance_group_placement 2
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			actor_area 3
+			actor_area_radius 3
+		}
+	end_random
 
 	start_random
 		percent_chance 30 #define NO_DESERT_ELEPHANT
@@ -954,6 +1008,116 @@ if DESERT
 		terrain_to_place_on DESERT
 	}
 endif
+if FARMLAND_PLANET
+	effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
+	effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
+	
+	create_object FORAGE {
+		number_of_objects rnd(3,6)
+		number_of_groups rnd(3,12)
+		group_variance rnd(1,2)
+		set_tight_grouping
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 5
+		min_distance_group_placement 2
+		terrain_to_place_on FARMLAND1
+		layer_to_place_on FARMLAND_FULL
+		set_gaia_object_only
+		place_on_specific_land_id 4
+		max_distance_to_other_zones 3
+	}
+	create_object DLC_ORANGEBUSH { /* change to terrain table 4? land (from 8, land-farm) */
+		number_of_objects rnd(3,6)
+		number_of_groups rnd(3,12)
+		group_variance rnd(1,2)
+		set_tight_grouping
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 5
+		min_distance_group_placement 2
+		terrain_to_place_on FARMLAND1
+		layer_to_place_on FARMLAND3
+		set_gaia_object_only
+		place_on_specific_land_id 1
+		max_distance_to_other_zones 3
+
+	}
+	/* 
+	also add farm animals
+	*/
+	start_random
+		percent_chance 20 #define FARMLAND_GOLD
+		percent_chance 20 #define FARMLAND_STONE
+		percent_chance 20 #define FARMLAND_GOLD_AND_STONE
+	end_random
+	if FARMLAND_GOLD_AND_STONE
+		#define FARMLAND_GOLD
+		#define FARMLAND_STONE
+	endif
+	if FARMLAND_STONE 
+		create_object ON_GRID {
+			second_object STONE
+			number_of_groups 4
+			set_scaling_to_map_size
+			number_of_objects (1,2)
+			terrain_to_place_on FARMLAND1
+			layer_to_place_on FARMLAND2
+			max_distance_to_other_zones 3
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+			avoid_cliff_zone 1
+			avoid_forest_zone 1
+			temp_min_distance_group_placement 5
+			min_distance_group_placement 1
+		}
+	endif
+	if FARMLAND_GOLD
+		create_object ON_GRID {
+			second_object GOLD
+			number_of_groups 4
+			set_scaling_to_map_size
+			number_of_objects (1,2)
+			terrain_to_place_on FARMLAND1
+			layer_to_place_on FARMLAND2
+			max_distance_to_other_zones 3
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+			avoid_cliff_zone 1
+			avoid_forest_zone 1
+			temp_min_distance_group_placement 5
+			min_distance_group_placement 1
+		}
+	endif
+	start_random
+		percent_chance 10 #const FARMLAND_HERDABLE 305 /* llama */
+		percent_chance 12 #const FARMLAND_HERDABLE 594 /* sheep */
+		percent_chance 6 #const FARMLAND_HERDABLE 705 /* cow */
+		percent_chance 10 #const FARMLAND_HERDABLE 833 /* turkey */
+		percent_chance 12 #const FARMLAND_HERDABLE 1060 /* goat */
+		percent_chance 10 #const FARMLAND_HERDABLE 1142 /* water buffalo */
+		percent_chance 10 #const FARMLAND_HERDABLE 1243 /* goose */
+		percent_chance 12 #const FARMLAND_HERDABLE 1245 /* pig */
+		percent_chance 6 #const FARMLAND_HERDABLE 1596 /* cow */
+		percent_chance 6 #const FARMLAND_HERDABLE 1598 /* cow */
+		percent_chance 6 #const FARMLAND_HERDABLE 1600 /* cow */
+	end_random
+	create_object FARMLAND_HERDABLE {
+		avoid_actor_area 1
+		number_of_groups rnd(3,16)
+		number_of_objects rnd(1,4)
+		temp_min_distance_group_placement rnd(8,25)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		set_gaia_object_only
+		set_loose_grouping
+		terrain_to_place_on FARMLAND1
+	}
+endif
 if BARREN_PLANET
 	create_object STONE { 
 		terrain_to_place_on GRAVEL
@@ -994,6 +1158,14 @@ if BARREN_PLANET
 		actor_area_radius 3
 	}
 endif
+/* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
+create_object RELIC {
+	number_of_objects rnd(2,6)
+	temp_min_distance_group_placement rnd(30,50)  /*  scale for different map sizes */
+	max_distance_to_other_zones 3
+	avoid_cliff_zone 1
+	avoid_forest_zone 1
+}
 <LAND_GENERATION>
 
 L {
@@ -6074,7 +6246,7 @@ L { base_size 3 land_position 93 78 number_of_tiles 0 base_elevation 2 terrain_t
 L { base_size 3 land_position 93 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
 L { base_size 3 land_position 93 79 number_of_tiles 0 base_elevation 2 terrain_type PN1 }
 
-L { land_position 80 80 land_percent 100 base_elevation 2 terrain_type PN1 }
+L { land_position 80 80 land_percent 100 base_elevation 2 terrain_type PN1 land_id 1 }
 
 
 /* Generated with MadLands v5.9.xlsm: I: 3 R: 20 XO: 17 YO: 17 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
@@ -6467,7 +6639,7 @@ L { base_size 3 land_position 64 33 number_of_tiles 0 base_elevation 2 terrain_t
 L { base_size 3 land_position 64 35 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 */
 
-L { land_position 25 25 land_percent 100 base_elevation 2 terrain_type PN4 }
+L { land_position 25 25 land_percent 100 base_elevation 2 terrain_type PN4 land_id 4 }
 
 
 endif /* else of EQUAL_SIZED_PLANETS, or effectively SNOWMAN_PLANET_SHAPE */
