@@ -4,14 +4,17 @@
 idea: randomize the terrains for each planet so that players have to scout it out - nomad start, with 1 vil on top planet, 1 vil bottom planet, and 1 vil somewhere else (place via actor area?) Could also have players start with a fishing ship (good for scouting) in a map corner (either top/bottom or left/right: likely left/right)
 Syzygy randomizing: when selecting terrains, do a random chance for first 1, then random chance with one removed (remove last 1, check for duplicate) for second planet; 3rd planet remove last 2, if get duplicate check which planet it was (first removed if first planet, otherwise second); remove 3 for last planet (handle like 3rd planet)
 
-terrain ideas: 
-Barren (guarantee gold/stone, gravel or desert gravel terrain; no trees, no food, but will have plenty of stone and an randomized amount of gold - possibly lots, possibly little)
-Radioactive (evil fog on/under ___ terrain, have fish/wildlife/vils avoid the terrain through use of actor areas - no food/wood, little-to-no stone, but give plenty of gold)
+ideas implemented:
+Barren (guarantee gold/stone, gravel terrain with rock and desert gravel terrain mask; no trees, no food, but will have stone (often in abundance) and an randomized amount of gold. Biased towards having a larger amount of stone than of gold.
+Radioactive (evil fog mostly under desert gravel terrain, have fish/wildlife/vils avoid the terrain through use of actor areas - no food/wood, stone randomized with a good chance of no stone, gold guaranteed but widely varies. May be extremely gold-rich, may be gold-poor)
+
+Desert: has desert palm trees, some thematic hunts, gold and stone, 
+
+terrain ideas yet to be added: 
 City (Road terrain, has forests, berry bushes, neutral capturable outposts, neutral trading posts, and ruins of buildings - would include stone piles, possibly in some alternative form. Also may include gold piles - guaranteed extra relics on this terrain)
 Marsh (mangrove forest terrain? mangrove terrain should be separated from outside of the planet, but would have plenty of wood and food/berries/hunt. May have some gold. No stone. Predators fit thematically, but nomad start prohibits that).
 Jungle terrain: (lush jungle forests, plenty of wildlife, maybe a little gold, no stone)
 Grassland/plains: has horses (give players a wild horse that only starts on this terrain as a scout). Has some trees, but not too many. Plenty of hunt.
-Desert: has desert palm trees, some thematic hunts, gold and stone, 
 Farmland: (can I get away with neutral farms? have berry bushes of both kinds, livestock, trees of a kind used for agriculture, low stone, low gold) - use with MEDITERRANEAN_FOREST
 Mountains/alpine (have mountains take up some space; plenty of stone and gold, trees, goats, etc. - would also have some elevation - use Snow light terrain as base)
 Snowy: (some wildlife to hunt, dead forests, some gold/stone, but not an abundance)
@@ -80,7 +83,7 @@ direct_placement
 if NONRANDOM_PLANETS
 	#const PN1  12 /* GRASS2 */
 	#const PN1B 2 /* beach */
-	
+
 	#const PN2  70  /* GRAVEL  */
 	#define BARREN_PLANET
 	#define BARREN_PLANET_2
@@ -92,6 +95,8 @@ if NONRANDOM_PLANETS
 	#const PN3B 108 /* DLC_GRAVELBEACH */
 
 	#const PN4  14  /* DESERT */
+	#define DESERT_PLANET
+	#define DESERT_PLANET_4
 	#const PN4B 109 /* DLC_WETROCKBEACH */
 else /* TODO randomize */
 	
@@ -690,10 +695,8 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 		beach_terrain ICYSHORE
 	} */
 endif
-/*
-*/
-/* Begin terrains for individual planets. */
 
+/* Begin terrains for individual planets. */
 if BARREN_PLANET
 	create_terrain DLC_ROCK {
 		base_terrain GRAVEL
@@ -708,6 +711,16 @@ if BARREN_PLANET
 		number_of_clumps 9320
 		terrain_mask 1
 	}
+endif
+if DESERT_PLANET
+	create_terrain PALM_DESERT {
+		base_terrain DESERT
+		land_percent rnd(1,4)
+		number_of_clumps rnd(6,40)
+		/* 4 is the highest land_percent I'd want, 1 is wood-scarce but acceptable imo, 40 is about as many clumps as I'd want to have max, and 5/6 is as low as I'd want. */
+		spacing_to_other_terrain_types rnd(1,2)
+	}
+	/* optional: add terrain masks for desert terrain */
 endif
 if RADIOACTIVE_PLANET
 	create_terrain DLC_DESERTGRAVEL {
@@ -726,6 +739,9 @@ Rules of object generation for this map:
 	1. All animal life (including villagers, hunt, sheep, fish, etc) should avoid actor area 1
 	2. Nothing should be placed before the corruption terrain ON_GRIDs (which create actor area 1)
 	3. assume that forests and cliffs may be added to adjacent planets
+	4. Gold mines should create actor area 2 with at least radius 3
+	5. Stone mines should create actor area 3 with at least radius 3
+	6. Gold/stone should avoid actor areas 2 and 3. Actor area 2 is gold mines. 3 is stone mines.
 
 note that there may be a little overflow between planets */
 /* Corruption terrain is placed first, because it is the only terrain that should affect other terrains */
@@ -767,6 +783,8 @@ start_random
 		avoid_cliff_zone 3
 		max_distance_to_other_zones 2
 		avoid_actor_area 2
+		actor_area 3
+		actor_area_radius 3
 	}
 end_random
 
@@ -829,6 +847,113 @@ create_object VILLAGER {
 	avoid_forest_zone 1
 	avoid_cliff_zone 1
 }
+if DESERT
+
+	create_object GOLD {
+		avoid_actor_area 2
+		avoid_actor_area 3
+		number_of_objects rnd(2,5)
+		set_tight_grouping
+		number_of_groups rnd(6,12)
+		set_scaling_to_map_size
+		temp_min_distance_group_placement rnd(15,45)
+		min_distance_group_placement 2
+		terrain_to_place_on DESERT
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		actor_area 2
+		actor_area_radius 3
+	}
+	create_object STONE {
+		avoid_actor_area 2
+		avoid_actor_area 3
+		number_of_objects rnd(2,3)
+		set_tight_grouping
+		number_of_groups rnd(2,6)
+		set_scaling_to_map_size
+		temp_min_distance_group_placement rnd(25,45)
+		min_distance_group_placement 2
+		terrain_to_place_on DESERT
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		actor_area 3
+		actor_area_radius 3
+	}
+
+	start_random
+		percent_chance 30 #define NO_DESERT_ELEPHANT
+		percent_chance 30 #define NO_DESERT_RHINO
+		percent_chance 20 #define NO_DESERT_OSTRICH
+	end_random /* 20% chance of all 3 */
+
+	if NO_DESERT_ELEPHANT
+	else
+		create_object DLC_ELEPHANT { 
+			avoid_actor_area 1
+			number_of_objects 10
+			set_scaling_to_map_size
+			temp_min_distance_group_placement rnd(15,40)
+			min_distance_group_placement 2
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			actor_area 4
+			actor_area_radius 4
+		}
+	endif
+	if NO_DESERT_RHINO
+	else
+		create_object DLC_RHINO { /* or rhino rnd(15,40) */
+			avoid_actor_area 1
+			avoid_actor_area 4
+			number_of_objects 10
+			set_scaling_to_map_size
+			temp_min_distance_group_placement rnd(15,40)
+			min_distance_group_placement 2
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			actor_area 4
+			actor_area_radius 4
+		}
+	endif
+	if NO_DESERT_OSTRICH
+	else
+		create_object DLC_OSTRICH {
+			avoid_actor_area 1
+			avoid_actor_area 4
+			number_of_objects rnd(2,4)
+			set_scaling_to_map_size
+			number_of_groups 10
+			temp_min_distance_group_placement rnd(15,40)
+			min_distance_group_placement 2
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			actor_area 4
+			actor_area_radius 4
+		}
+	endif
+	start_random
+	percent_chance 20 create_object DLC_DROMEDARY {
+			avoid_actor_area 1
+			set_place_for_every_player
+			terrain_to_place_on DESERT
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+		} 
+	end_random
+	/* eye-candy */
+	create_object DLC_WILD_CAMEL {
+		avoid_actor_area 1
+		avoid_actor_area 4
+		number_of_objects 2
+		number_of_groups 2
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 45
+		terrain_to_place_on DESERT
+	}
+endif
 if BARREN_PLANET
 	create_object STONE { 
 		terrain_to_place_on GRAVEL
@@ -863,7 +988,10 @@ if BARREN_PLANET
 		group_placement_radius 1
 		set_circular_placement
 		max_distance_to_other_zones 2
+		avoid_actor_area 2
 		avoid_actor_area 3
+		actor_area 2
+		actor_area_radius 3
 	}
 endif
 <LAND_GENERATION>
