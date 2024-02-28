@@ -807,12 +807,15 @@ create_object ON_GRID {
 }
 if REGICIDE
 	create_object KING {
+		avoid_actor_area 1
 		set_place_for_every_player
 		if EQUAL_SIZED_PLANETS
 			terrain_to_place_on ICYSHORE
 		else /* SNOWMAN_PLANET_SHAPE */
 			terrain_to_place_on DLC_ROCK
 		endif
+		min_distance_group_placement 1
+		max_distance_to_other_zones 1
 	}
 endif
 create_object GOLD {
