@@ -43,6 +43,36 @@ else
 	endif
 endif
 
+/* AT_LEAST_TINY is always true */
+if SMALL_MAP
+    #define AT_LEAST_SMALL
+elseif MEDIUM_MAP
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+elseif LARGE_MAP
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_LARGE
+elseif HUGE_MAP
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+elseif GIGANTIC_MAP
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIGANTIC
+elseif LUDIKRIS_MAP
+    #define AT_LEAST_SMALL
+    #define AT_LEAST_MEDIUM
+    #define AT_LEAST_LARGE
+    #define AT_LEAST_HUGE
+    #define AT_LEAST_GIGANTIC
+    /* LUDIKRIS_MAP */
+endif
+
 direct_placement
 #const L 32
 /* Defining Terrains */
@@ -6269,7 +6299,6 @@ L { land_position 80 80 land_percent 100 base_elevation 2 terrain_type PN1 land_
 /* Generated with MadLands v5.9.xlsm: I: 3 R: 20 XO: 17 YO: 17 OA: 0 XS: 1 YS: 1 A: 0 F: 0 SF: 0 */
 
 /*
-L { base_size 4 land_position 87 67 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 87 68 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 87 69 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 87 70 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
@@ -6299,14 +6328,26 @@ L { base_size 3 land_position 71 87 number_of_tiles 0 base_elevation 2 terrain_t
 L { base_size 4 land_position 70 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 69 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 68 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+*/
+if LUDIKRIS_MAP
 L { base_size 4 land_position 67 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 66 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_GIGANTIC
+endif
+if AT_LEAST_HUGE
 L { base_size 4 land_position 65 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_LARGE
 L { base_size 4 land_position 64 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 63 87 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-*/
+endif
+if AT_LEAST_MEDIUM
 L { base_size 4 land_position 62 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_SMALL
 L { base_size 4 land_position 61 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
 L { base_size 4 land_position 60 86 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 59 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 58 85 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
@@ -6384,14 +6425,25 @@ L { base_size 4 land_position 84 57 number_of_tiles 0 base_elevation 2 terrain_t
 L { base_size 4 land_position 85 58 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 85 59 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 86 60 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-/*
+if AT_LEAST_SMALL
 L { base_size 4 land_position 86 61 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_MEDIUM
 L { base_size 4 land_position 86 62 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_LARGE
 L { base_size 4 land_position 87 63 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
 L { base_size 4 land_position 87 64 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_HUGE
 L { base_size 4 land_position 87 65 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
+if AT_LEAST_GIGANTIC
+endif
+if LUDIKRIS_MAP
 L { base_size 4 land_position 87 66 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
-*/
+L { base_size 4 land_position 87 67 number_of_tiles 0 base_elevation 2 terrain_type PN2 }
+endif
 
 L { land_position 61 61 land_percent 100 base_elevation 2 terrain_type PN2 }
 
@@ -6434,12 +6486,24 @@ L { base_size 4 land_position 51 75 number_of_tiles 0 base_elevation 2 terrain_t
 L { base_size 4 land_position 50 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 48 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 47 75 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+*/
+if LUDIKRIS_MAP
 L { base_size 4 land_position 46 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 45 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_GIGANTIC
+endif
+if AT_LEAST_HUGE
+endif
+if AT_LEAST_LARGE
 L { base_size 4 land_position 44 74 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_MEDIUM
 L { base_size 4 land_position 42 73 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_SMALL
 L { base_size 4 land_position 41 73 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-*/
+endif
 L { base_size 4 land_position 40 72 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 39 72 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 3 land_position 38 71 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
@@ -6513,18 +6577,31 @@ L { base_size 3 land_position 70 37 number_of_tiles 0 base_elevation 2 terrain_t
 L { base_size 3 land_position 71 38 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 72 39 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 72 40 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
-/*
+if AT_LEAST_SMALL
 L { base_size 4 land_position 73 41 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_MEDIUM
 L { base_size 4 land_position 73 42 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_LARGE
 L { base_size 4 land_position 74 44 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+if AT_LEAST_HUGE
+endif
+if AT_LEAST_GIGANTIC
+endif
+if LUDIKRIS_MAP
 L { base_size 4 land_position 74 45 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 74 46 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
+endif
+/*
 L { base_size 4 land_position 75 47 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 75 48 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 L { base_size 4 land_position 75 50 number_of_tiles 0 base_elevation 2 terrain_type PN3 }
 */
 
-L { land_position 41 41 land_percent 100 base_elevation 2 terrain_type PN3 }
+L { land_position 41 41 land_percent 15 base_elevation 2 terrain_type PN3 }
+/* TODO breaks free on ludikris map size */
 
 
 
@@ -6567,14 +6644,27 @@ L { base_size 3 land_position 35 64 number_of_tiles 0 base_elevation 2 terrain_t
 L { base_size 3 land_position 33 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 3 land_position 32 64 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 3 land_position 30 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+*/
+if LUDIKRIS_MAP
 L { base_size 3 land_position 29 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+L { base_size 3 land_position 28 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 } /* added manually */
+endif
+if AT_LEAST_GIGANTIC
 L { base_size 3 land_position 27 63 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_HUGE
+endif
+if AT_LEAST_LARGE
 L { base_size 4 land_position 26 62 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 4 land_position 25 62 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_MEDIUM
 L { base_size 4 land_position 23 61 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-*/
+endif
+if AT_LEAST_SMALL
 L { base_size 4 land_position 22 60 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 4 land_position 21 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
 L { base_size 4 land_position 20 59 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 4 land_position 18 58 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 4 land_position 17 57 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
@@ -6642,21 +6732,35 @@ L { base_size 4 land_position 56 16 number_of_tiles 0 base_elevation 2 terrain_t
 L { base_size 4 land_position 57 17 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 4 land_position 58 18 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 4 land_position 59 20 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
-/*
+if AT_LEAST_SMALL
 L { base_size 4 land_position 59 21 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 4 land_position 60 22 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_MEDIUM
 L { base_size 4 land_position 61 23 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_LARGE
 L { base_size 4 land_position 62 25 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 4 land_position 62 26 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if AT_LEAST_HUGE
+endif
+if AT_LEAST_GIGANTIC
 L { base_size 3 land_position 63 27 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+if LUDIKRIS_MAP
+L { base_size 3 land_position 63 28 number_of_tiles 0 base_elevation 2 terrain_type PN4 } /* added manually */
 L { base_size 3 land_position 63 29 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
+endif
+/*
 L { base_size 3 land_position 63 30 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 3 land_position 64 32 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 3 land_position 64 33 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 L { base_size 3 land_position 64 35 number_of_tiles 0 base_elevation 2 terrain_type PN4 }
 */
 
-L { land_position 25 25 land_percent 100 base_elevation 2 terrain_type PN4 land_id 4 }
+L { land_position 25 25 land_percent 20 base_elevation 2 terrain_type PN4 land_id 4 }
+/* TODO breaks free on ludikris map size */
 
 
 endif /* else of EQUAL_SIZED_PLANETS, or effectively SNOWMAN_PLANET_SHAPE */
