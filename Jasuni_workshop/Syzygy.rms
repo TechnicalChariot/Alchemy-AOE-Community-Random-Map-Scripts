@@ -26,6 +26,23 @@ not really usable as a base terrain: DLC_ROCK, ICE, MUDDY_SHALLOW
 forest terrains: JUNGLE, BAMBOO, etc.
  */
 /* date:  */
+
+
+<PLAYER_SETUP>
+/*
+#define EQUAL_SIZED_PLANETS
+*/
+if EQUAL_SIZED_PLANETS
+else
+	#define SNOWMAN_PLANET_SHAPE
+	if TINY_MAP
+		override_map_size 121 /* 1 extra tile creates even spacing between planets and map edge. Otherwise, right side has one less tile, which is notable on smaller map sizes. Doesn't appear to occur on larger map sizes. */
+	endif
+endif
+
+direct_placement
+#const L 32
+/* Defining Terrains */
 #const ICE_NAVIGABLE 26
 #const FARM 29 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
 #const SNOW_FOUNDATION 36
@@ -46,27 +63,9 @@ forest terrains: JUNGLE, BAMBOO, etc.
 #const WATER_GREEN 95
 #const WATER_BROWN 96
  
-
-
-<PLAYER_SETUP>
-/*
-#define EQUAL_SIZED_PLANETS
-*/
-if EQUAL_SIZED_PLANETS
-else
-	#define SNOWMAN_PLANET_SHAPE
-	if TINY_MAP
-		override_map_size 121 /* 1 extra tile creates even spacing between planets and map edge. Otherwise, right side has one less tile, which is notable on smaller map sizes. Doesn't appear to occur on larger map sizes. */
-	endif
-endif
-
-direct_placement
-#const L 32
-/* Defining Terrains */
 #const G 0 /* GRASS */
 #const WNI  15 /* Water 2D, shoreless */
 #const URB  40 /* DLC_ROCK */
-#const GRAVEL 70
 #const BNN  79 /* beach (non-navigable) */
 #const NNRB 82 /* beach (non-navigable), wet rock */
 #const GW   95 /* Water, Green */
@@ -74,7 +73,6 @@ direct_placement
 #const WG 81 /* beach (non-navigable), wet gravel */
 #const B3 52 /* DLC_BEACH3 */
 #const WRB 109 /* DLC_WETROCKBEACH */
-#const MUD 76 /* Dirt, Mud */
 
 
 /* Defining Planet Terrains */
@@ -82,12 +80,17 @@ direct_placement
 if NONRANDOM_PLANETS
 	#const PN1  12 /* GRASS2 */
 	#const PN1B 2 /* beach */
-	#const PN2  3  /* DIRT3 */
+	
+	#const PN2  70  /* GRAVEL  */
+	#define BARREN_PLANET
+	#define BARREN_PLANET_2
 	#const PN2B 107 /* DLC_WETBEACH */
+
 	#const PN3  69 /* Corruption */
 	#define RADIOACTIVE_PLANET
 	#define RADIOACTIVE_PLANET_3
 	#const PN3B 108 /* DLC_GRAVELBEACH */
+
 	#const PN4  14  /* DESERT */
 	#const PN4B 109 /* DLC_WETROCKBEACH */
 else /* TODO randomize */
@@ -257,7 +260,7 @@ endif
 if GENERIC_LAND_LAYERING
 	create_terrain DLC_ROCK { base_terrain PN4 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 terrain_mask 2 }	
 	create_terrain GRASS { base_terrain PN3 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 terrain_mask 2 }	
-	create_terrain MUD { base_terrain PN2 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 terrain_mask 2 }	
+	create_terrain DIRT_MUD { base_terrain PN2 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 terrain_mask 2 }	
 	create_terrain DESERT { base_terrain PN1 land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 terrain_mask 2 }	
 
 endif
@@ -691,7 +694,21 @@ endif
 */
 /* Begin terrains for individual planets. */
 
-/* radioactive planet is always last to be generated in terrain, but always first in objects */
+if BARREN_PLANET
+	create_terrain DLC_ROCK {
+		base_terrain GRAVEL
+		land_percent 4 /* TODO consider making a little more scarce */
+		number_of_clumps 9320
+		terrain_mask 1
+		spacing_to_other_terrain_types 2 /* reduce spillover effect by forcing placement on a terrain mask as well. */
+	}
+	create_terrain DLC_DESERTGRAVEL {
+		base_terrain GRAVEL
+		land_percent 4 /* TODO consider making a little more scarce */
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+endif
 if RADIOACTIVE_PLANET
 	create_terrain DLC_DESERTGRAVEL {
 		base_terrain CORRUPTION
@@ -812,7 +829,43 @@ create_object VILLAGER {
 	avoid_forest_zone 1
 	avoid_cliff_zone 1
 }
-
+if BARREN_PLANET
+	create_object STONE { 
+		terrain_to_place_on GRAVEL
+		layer_to_place_on DLC_ROCK
+		/* at 4 and 7, extremely stone rich; at 10 and 2, rather stone-poor; result is a wide amount of variation in how much stone there can be. Code was basically copied from the radioactive gold, and then altered to match the barren planet. Note that the terrain mask for the barren planet is a bit more restrictive. */
+		temp_min_distance_group_placement rnd(4,10) /* the difference between 3 and 4 is significant */
+		number_of_objects rnd(2,7)
+		group_variance 1
+		set_tight_grouping
+		set_gaia_object_only
+		number_of_groups 9320
+		avoid_forest_zone 3
+		avoid_cliff_zone 3
+		group_placement_radius rnd(1,2)
+		set_circular_placement
+		max_distance_to_other_zones 2
+		actor_area 3
+		actor_area_radius 3
+	}
+	create_object GOLD { 
+		terrain_to_place_on GRAVEL
+		layer_to_place_on DLC_DESERTGRAVEL
+		/* at 10 and 1, not much in the way of gold; at 5 and 4 there's a good amount of gold. 0 ends up acting as 1 */
+		temp_min_distance_group_placement rnd(6,10)
+		number_of_objects rnd(0,4)
+		group_variance 1
+		set_tight_grouping
+		set_gaia_object_only
+		number_of_groups 9320
+		avoid_forest_zone 3
+		avoid_cliff_zone 3
+		group_placement_radius 1
+		set_circular_placement
+		max_distance_to_other_zones 2
+		avoid_actor_area 3
+	}
+endif
 <LAND_GENERATION>
 
 L {
