@@ -140,7 +140,7 @@ for i1 = V
   MOON.SS = 3;
 %  MOON.Z = 1;
 %  MOON.OZA = 0;
-  MOON.w = [1]; MOON.v = [1];
+  MOON.w = [95]; MOON.v = [95];
 
   if   i1 == 1
     MOON.XB = [d 100-d];
@@ -152,7 +152,7 @@ for i1 = V
     CLK = -45;
   end
   %
-  MOON.XG = MOON.XB; MOON.YG = MOON.YB;
+  MOON.XG = 50; MOON.YG = 50;
 
   [LM_MOON,~] = LandScribeV6(MOON,[1 1]);
 
