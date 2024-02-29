@@ -34,6 +34,11 @@ forest terrains: JUNGLE, BAMBOO, etc.
 
 
 <PLAYER_SETUP>
+behavior_version 2
+nomad_resources
+force_nomad_treaty
+direct_placement
+
 /*
 #define EQUAL_SIZED_PLANETS
 */
@@ -114,9 +119,10 @@ direct_placement
 #const WRB 109 /* DLC_WETROCKBEACH */
 
 
-/* Defining Planet Terrains */
-#define NONRANDOM_PLANETS
+/* Defining Planet Terrains
+#define NONRANDOM_PLANETS */
 if NONRANDOM_PLANETS
+
 	#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
 	#define FARMLAND_PLANET
 	#define FARMLAND_PLANET_1
@@ -137,7 +143,52 @@ if NONRANDOM_PLANETS
 	#define DESERT_PLANET_4
 	#const PN4B 109 /* DLC_WETROCKBEACH */
 else /* TODO randomize */
-	
+ /* temporary measure for development */
+	start_random
+		percent_chance 100 #define CONFIG2
+		percent_chance 50 #define CONFIG1
+	end_random
+	if CONFIG1
+		#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
+		#define FARMLAND_PLANET
+		#define FARMLAND_PLANET_1
+		#const PN1B 2 /* beach */
+
+		#const PN2  70  /* GRAVEL  */
+		#define BARREN_PLANET
+		#define BARREN_PLANET_2
+		#const PN2B 107 /* DLC_WETBEACH */
+
+		#const PN3  69 /* Corruption */
+		#define RADIOACTIVE_PLANET
+		#define RADIOACTIVE_PLANET_3
+		#const PN3B 108 /* DLC_GRAVELBEACH */
+
+		#const PN4  14  /* DESERT */
+		#define DESERT_PLANET
+		#define DESERT_PLANET_4
+		#const PN4B 109 /* DLC_WETROCKBEACH */
+	elseif CONFIG2 /* TODO currently working on: thinking snowy mountains? */
+		#const PN1  69 /* Corruption */
+		#define RADIOACTIVE_PLANET
+		#define RADIOACTIVE_PLANET_1
+		#const PN3B 108 /* DLC_GRAVELBEACH */
+
+		#const PN2  74  /* SNOW_HEAVY  */
+		#define SNOW_HEAVY_PLANET
+		#define SNOW_HEAVY_PLANET_2
+		#const PN2B 107 /* DLC_WETBEACH */
+
+		#const PN3  29 /* Farmland, 0%, aka FARMLAND1 */
+		#define FARMLAND_PLANET
+		#define FARMLAND_PLANET_3
+		#const PN1B 2 /* beach */
+
+		#const PN4  14  /* DESERT */
+		#define DESERT_PLANET
+		#define DESERT_PLANET_4
+		#const PN4B 109 /* DLC_WETROCKBEACH */
+	endif
 	#const PN1  12 /* GRASS2 */
 	#const PN1B 2 /* beach */
 	#const PN2  3  /* DIRT3 */
@@ -164,42 +215,31 @@ endif
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
 <ELEVATION_GENERATION>
-/*
-create_elevation 2 {
-	base_terrain PN1
-	number_of_tiles 9320
-	set_scale_by_size
-	enable_balanced_elevation
-
-}
-create_elevation 2 {
-	base_terrain PN2
-	number_of_tiles 9320
-	set_scale_by_size
-	enable_balanced_elevation
-
-}
-create_elevation 2 {
-	base_terrain PN3
-	number_of_tiles 9320
-	set_scale_by_size
-	enable_balanced_elevation
-
-}
-create_elevation 2 {
-	base_terrain PN4
-	number_of_tiles 9320
-	set_scale_by_size
-	enable_balanced_elevation
-
-}
-create_elevation 2 {
-	number_of_tiles 9320
-	set_scale_by_size
-	enable_balanced_elevation
-
-}
-*/
+if SNOW_HEAVY_PLANET
+	create_elevation 5 {
+		base_terrain SNOW_HEAVY
+		number_of_clumps 16
+		number_of_tiles 300
+		set_scale_by_size
+		enable_balanced_elevation
+		spacing 2
+	}
+	create_elevation 4 {
+		base_terrain SNOW_HEAVY
+		number_of_clumps 16
+		number_of_tiles 300
+		set_scale_by_size
+		enable_balanced_elevation
+		spacing 3
+	}
+	create_elevation 3 {
+		base_terrain SNOW_HEAVY
+		number_of_clumps 16
+		number_of_tiles 150
+		set_scale_by_size
+		enable_balanced_elevation
+	}
+endif /* would add cliffs, except wouldn't be able to really control where they go */
 
 <TERRAIN_GENERATION>
 /*
@@ -735,6 +775,43 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 	} */
 endif
 
+if SNOW_HEAVY_PLANET
+	create_terrain SNOW { /* for placing mountains */
+		base_terrain SNOW_HEAVY
+		terrain_mask 1
+		number_of_clumps 2
+		height_limits 5 5
+	}
+	start_random
+		percent_chance 50 #define SNOW_HEAVY_USE_ROCK
+	end_random
+	if SNOW_HEAVY_USE_ROCK
+		create_terrain DLC_ROCK { /* rock or gravel */
+			base_terrain SNOW_HEAVY
+			land_percent 5
+			number_of_clumps 932
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+			height_limits 2 6
+		}
+	else
+		create_terrain GRAVEL { /* rock or gravel */
+			base_terrain SNOW_HEAVY
+			land_percent 5
+			number_of_clumps 932
+			terrain_mask 1
+			spacing_to_other_terrain_types 1
+			height_limits 2 6
+		}
+	endif
+	create_terrain SNOW_FOREST {
+		base_terrain SNOW_HEAVY
+		land_percent rnd(1,5)
+		number_of_clumps rnd(5,60)
+		height_limits 1 3
+		terrain_mask 2
+	} 
+endif
 /* Begin terrains for individual planets. */
 if BARREN_PLANET
 	create_terrain DLC_ROCK {
@@ -912,8 +989,8 @@ create_object VILLAGER {
 	terrain_to_place_on PN1
 	temp_min_distance_group_placement 300 /* for some reason, refused to spawn just 1 villager. */
 	min_distance_group_placement 1
-	avoid_forest_zone 1
-	avoid_cliff_zone 1
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
 }
 create_object VILLAGER {
 	number_of_objects 1
@@ -923,8 +1000,8 @@ create_object VILLAGER {
 	terrain_to_place_on PN2
 	temp_min_distance_group_placement 300
 	min_distance_group_placement 1
-	avoid_forest_zone 1
-	avoid_cliff_zone 1
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
 }
 create_object VILLAGER {
 	number_of_objects 1
@@ -934,8 +1011,8 @@ create_object VILLAGER {
 	terrain_to_place_on PN3
 	temp_min_distance_group_placement 300
 	min_distance_group_placement 1
-	avoid_forest_zone 1
-	avoid_cliff_zone 1
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
 }
 create_object VILLAGER {
 	number_of_objects 1
@@ -945,8 +1022,8 @@ create_object VILLAGER {
 	terrain_to_place_on PN4
 	temp_min_distance_group_placement 300 
 	min_distance_group_placement 1
-	avoid_forest_zone 1
-	avoid_cliff_zone 1
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
 }
 if DESERT_PLANET
 	create_object GOLD {
@@ -1166,6 +1243,121 @@ if FARMLAND_PLANET
 		terrain_to_place_on FARMLAND1
 	}
 endif
+if SNOW_HEAVY_PLANET
+	/*  add wildlife, goats? DLC_GOAT, DLC_IBEX, DEER
+	DLC_SNOWLEOPARD - can't due to nomad start (would be so unfair to lose a vil like that)
+	 */ 
+	start_random
+		percent_chance 40 #define SNOW_HEAVY_M11
+		percent_chance 40 #define SNOW_HEAVY_M10
+	end_random
+	if SNOW_HEAVY_M11
+		create_object DLC_MOUNTAIN_11 {
+			terrain_to_place_on SNOW_HEAVY
+			layer_to_place_on SNOW
+			actor_area 5
+			actor_area_radius 8
+		}
+	endif
+	if SNOW_HEAVY_M10
+		create_object DLC_MOUNTAIN_10 {
+			terrain_to_place_on SNOW_HEAVY
+			layer_to_place_on SNOW
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+	endif
+	create_object DLC_MOUNTAIN_9 {
+		terrain_to_place_on SNOW_HEAVY
+		layer_to_place_on SNOW
+		avoid_actor_area 5
+	}
+	create_object DLC_GOAT {
+		avoid_actor_area 1
+		number_of_objects rnd(1,4)
+		number_of_groups rnd(2,6)
+		temp_min_distance_group_placement rnd(14,40)
+		min_distance_group_placement 2
+		set_scaling_to_map_size
+		terrain_to_place_on SNOW_HEAVY
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+	}
+	start_random
+		percent_chance 60 #define SNOW_HEAVY_IBEX
+		percent_chance 40 #define SNOW_HEAVY_DEER
+	end_random
+	/* TODO sometimes not very many deer spawn, and I have no idea why. */
+	if SNOW_HEAVY_DEER 
+		create_object DEER {
+			avoid_actor_area 1
+			terrain_to_place_on SNOW_HEAVY
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,2)
+			set_loose_grouping
+			set_gaia_object_only
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			max_distance_to_other_zones 1
+			avoid_actor_area 4
+			actor_area 4
+			actor_area_radius 4
+		} 
+	elseif SNOW_HEAVY_IBEX
+		create_object DLC_IBEX {
+			avoid_actor_area 1
+			terrain_to_place_on SNOW_HEAVY
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,2)
+			set_loose_grouping
+			set_gaia_object_only
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			max_distance_to_other_zones 1
+			avoid_actor_area 4
+			actor_area 4
+			actor_area_radius 4
+		}
+	endif
+	/* somewhat standard stone/gold low to moderate
+	 */
+	create_object GOLD {
+		terrain_to_place_on SNOW_HEAVY
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,10)
+		group_variance rnd(0,1)
+		temp_min_distance_group_placement rnd(20,40)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		max_distance_to_other_zones 1
+		set_gaia_object_only
+		avoid_forest_zone 1
+		set_tight_grouping
+	}
+	create_object STONE {
+		terrain_to_place_on SNOW_HEAVY
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,10)
+		group_variance rnd(0,1)
+		temp_min_distance_group_placement rnd(16,40)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		max_distance_to_other_zones 1
+		set_gaia_object_only
+		avoid_forest_zone 1
+		set_tight_grouping
+	}
+endif
 if BARREN_PLANET
 	create_object STONE { 
 		terrain_to_place_on GRAVEL
@@ -1205,7 +1397,7 @@ if BARREN_PLANET
 		actor_area 2
 		actor_area_radius 3
 	}
-	/* TODO add a chance of a small amount of a modified trees, like columns - see other space map scripts. */
+	/* TODO add a chance of a small amount of a modified trees, like columns - see other space map scripts. BP_Drej mentioned column forests from Mars and Singularity. Also noted dead white birch.  */
 endif
 /* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
 create_object RELIC {
