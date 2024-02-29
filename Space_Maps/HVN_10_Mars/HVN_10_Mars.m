@@ -140,7 +140,7 @@ for i1 = V
   MOON.SS = 3;
 %  MOON.Z = 1;
 %  MOON.OZA = 0;
-  MOON.w = [95]; MOON.v = [95];
+  MOON.w = [93]; MOON.v = [93];
 
   if   i1 == 1
     MOON.XB = [d 100-d];
