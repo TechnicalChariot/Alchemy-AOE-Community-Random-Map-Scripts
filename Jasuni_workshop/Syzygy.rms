@@ -118,6 +118,9 @@ direct_placement
 #const B3 52 /* DLC_BEACH3 */
 #const WRB 109 /* DLC_WETROCKBEACH */
 
+/* set berry bushes land id to all land - needed for farmland terrain, I think. */
+effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
+effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
 
 /* Defining Planet Terrains
 #define NONRANDOM_PLANETS */
@@ -168,10 +171,18 @@ else /* TODO randomize */
 		#define DESERT_PLANET
 		#define DESERT_PLANET_4
 		#const PN4B 109 /* DLC_WETROCKBEACH */
-	elseif CONFIG2 /* TODO currently working on: thinking snowy mountains? */
-		#const PN1  69 /* Corruption */
-		#define RADIOACTIVE_PLANET
-		#define RADIOACTIVE_PLANET_1
+	elseif CONFIG2 /* TODO currently working on: 
+		DLC_DRAGONFOREST - DIRT
+		DLC_BAOBABFOREST - DLC_DIRT4
+		DLC_ACACIAFOREST - DLC_SAVANNAH
+		unlisted
+		also do mangrove terrain (how to implement)? - DLC_BOGLAND?
+		some road terrain
+		DLC_CRACKED (can I get away with doing this one in two different ways? Or maybe it would be easier to give this terrain a larger percentage so that it is more likely to be picked)
+	*/
+		#const PN1  6 /* DIRT */
+		#define DIRT_PLANET
+		#define DIRT_PLANET_1
 		#const PN3B 108 /* DLC_GRAVELBEACH */
 
 		#const PN2  74  /* SNOW_HEAVY  */
@@ -179,14 +190,14 @@ else /* TODO randomize */
 		#define SNOW_HEAVY_PLANET_2
 		#const PN2B 107 /* DLC_WETBEACH */
 
-		#const PN3  29 /* Farmland, 0%, aka FARMLAND1 */
-		#define FARMLAND_PLANET
-		#define FARMLAND_PLANET_3
+		#const PN3  49 /* DLC_BAOBABFOREST */
+		#define BAOBABFOREST_PLANET
+		#define BAOBABFOREST_PLANET_3
 		#const PN1B 2 /* beach */
 
-		#const PN4  14  /* DESERT */
-		#define DESERT_PLANET
-		#define DESERT_PLANET_4
+		#const PN4  41  /* DLC_SAVANNAH */
+		#define SAVANNAH_PLANET
+		#define SAVANNAH_PLANET_4
 		#const PN4B 109 /* DLC_WETROCKBEACH */
 	endif
 	#const PN1  12 /* GRASS2 */
@@ -747,7 +758,12 @@ if PLANET_TO_ELEVATION_0 /* downside: transitions between planets becomes ugly, 
 			number_of_clumps 9320
 		}
 	else /* SNOWMAN_PLANET_SHAPE */
-		create_terrain DLC_ROCK { /* basically want some terrain to fill in for the planet intersections. - much more noticeable with SNOWMAN_PLANET_SHAPE */
+		create_terrain DLC_ROCK { /* basically want some terrain to fill in for the planet intersections. - much more noticeable with SNOWMAN_PLANET_SHAPE - repeat to ensure water is filled in. */
+			base_terrain WATER
+			land_percent 100
+			number_of_clumps 9320
+		}
+		create_terrain DLC_ROCK { 
 			base_terrain WATER
 			land_percent 100
 			number_of_clumps 9320
@@ -884,6 +900,74 @@ if FARMLAND_PLANET
 		number_of_clumps 932
 	}
 endif
+if SAVANNAH_PLANET
+	create_terrain DLC_ACACIAFOREST {
+		base_terrain DLC_SAVANNAH
+		land_percent 5
+		number_of_clumps 30
+		spacing_to_other_terrain_types 1
+	}
+	/*
+	create_terrain DLC_ACACIAFOREST {
+		base_terrain DLC_SAVANNAH
+		land_percent rnd(1,5)
+		number_of_clumps rnd(4,30)
+	} */
+endif
+if DIRT_PLANET
+	create_terrain DLC_DRAGONFOREST { /* note potential issue of villager getting trapped in a forest. */
+		base_terrain DIRT
+		land_percent rnd(1,5)
+		number_of_clumps rnd(4,30)
+		spacing_to_other_terrain_types 1
+		
+	}
+	create_terrain DLC_SAVANNAH {
+		base_terrain DIRT
+		land_percent rnd(1,5)
+		number_of_clumps 60
+		terrain_mask 1
+	}
+	create_terrain DIRT2 {
+		base_terrain DIRT
+		land_percent rnd(1,4)
+		number_of_clumps 60
+		terrain_mask 1
+	}
+	create_terrain DLC_DRYGRASS {
+		base_terrain DIRT
+		land_percent rnd(1,4)
+		number_of_clumps 60
+		terrain_mask 1
+	}
+	create_terrain DLC_SAVANNAH {
+		base_terrain DLC_DRAGONFOREST
+		land_percent 1
+		number_of_clumps 6
+		terrain_mask 1
+	}
+	/*
+	create_terrain DLC_ACACIAFOREST {
+		base_terrain DLC_SAVANNAH
+		land_percent rnd(1,5)
+		number_of_clumps rnd(4,30)
+	} */
+endif
+if BAOBABFOREST_PLANET  /* redo this one: note: may want to increase villager avoid_forest_zone to 3, but with caveat that an "extra vil" is placed for the DLC_BAOBABFOREST planet, since those vils wouldn't spawn at all. Alternatively, switch back to dirt4 planet */
+	create_terrain DLC_DIRT4 {
+		base_terrain DLC_BAOBABFOREST
+		land_percent 25
+		number_of_clumps 30
+		
+	}
+	create_terrain DLC_BAOBABFOREST {
+		base_terrain DLC_DIRT4
+		land_percent 25
+		number_of_clumps 30
+		spacing_to_other_terrain_types 1
+		
+	}
+endif
 if RADIOACTIVE_PLANET
 	create_terrain DLC_DESERTGRAVEL {
 		base_terrain CORRUPTION
@@ -893,19 +977,58 @@ if RADIOACTIVE_PLANET
 		spacing_to_other_terrain_types 1 /* reduce spillover effect by forcing placement on a terrain mask as well. */
 	}
 endif
-*/
 /* end terrain generation */
 <OBJECTS_GENERATION>
 /* 
 Rules of object generation for this map:
 	1. All animal life (including villagers, hunt, sheep, fish, etc) should avoid actor area 1
 	2. Nothing should be placed before the corruption terrain ON_GRIDs (which create actor area 1)
-	3. assume that forests and cliffs may be added to adjacent planets
+	3. assume that forests may be added to adjacent planets
 	4. Gold mines should create actor area 2 with at least radius 3
 	5. Stone mines should create actor area 3 with at least radius 3
 	6. Gold/stone should avoid actor areas 2 and 3. Actor area 2 is gold mines. 3 is stone mines.
 
-note that there may be a little overflow between planets */
+note that there may be a little overflow between planets
+
+standard gold/stone code - for planets that don't have any special reason to carry gold/stone, and for which I'd like a small-medium amount of gold/stone.
+
+	start_random
+		percent_chance 5 #define NO_TERRAIN_GOLD
+		percent_chance 10 #define NO_TERRAIN_STONE
+	end_random 
+	if NO_TERRAIN_GOLD
+	else
+		create_object GOLD {
+			terrain_to_place_on DIRT
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+		}
+	endif
+	if NO_TERRAIN_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on DIRT
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+		}
+	endif
+	 */
 /* Corruption terrain is placed first, because it is the only terrain that should affect other terrains - two parts, so that kings can generate before the resources. */
 if RADIOACTIVE_PLANET
 	create_object ON_GRID {
@@ -1133,11 +1256,169 @@ if DESERT_PLANET
 		terrain_to_place_on DESERT
 	}
 endif
-if FARMLAND_PLANET
-	effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
-	effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
-	
+if DIRT_PLANET	
 	create_object FORAGE {
+		number_of_objects rnd(2,6)
+		number_of_groups rnd(2,6)
+		group_variance rnd(0,1)
+		set_tight_grouping
+		set_scaling_to_map_size
+		temp_min_distance_group_placement rnd(9,30)
+		min_distance_group_placement 2
+		terrain_to_place_on DIRT
+		set_gaia_object_only
+		max_distance_to_other_zones 2
+		avoid_forest_zone 1
+	}
+	start_random
+		percent_chance 33 #define DIRT_ZEBRA
+		percent_chance 30 #define DIRT_DEER
+		percent_chance 33 #define DIRT_GAZELLE
+	end_random 
+	/* small chance of no hunt is intentional */
+	if DIRT_GAZELLE
+		create_object GAZELLE {
+			avoid_actor_area 1
+			number_of_objects rnd(3,6)
+			number_of_groups rnd(3,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(8,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DIRT
+			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_loose_grouping
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	if DIRT_DEER
+		create_object DEER {
+			avoid_actor_area 1
+			number_of_objects rnd(3,6)
+			number_of_groups rnd(3,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(8,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DIRT
+			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_loose_grouping
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	if DIRT_ZEBRA
+		create_object DLC_ZEBRA {
+			avoid_actor_area 1
+			number_of_objects rnd(3,6)
+			number_of_groups rnd(3,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(8,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DIRT
+			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_loose_grouping
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	
+	start_random
+		percent_chance 30 #define DIRT_RHINO
+		percent_chance 30 #define DIRT_ELEPHANT
+	end_random 
+	if DIRT_RHINO
+		create_object DLC_RHINO {
+			avoid_actor_area 1
+			number_of_groups rnd(3,10)
+			temp_min_distance_group_placement rnd(12,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DIRT
+			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	if DIRT_ELEPHANT
+		create_object DLC_ELEPHANT {
+			avoid_actor_area 1
+			number_of_groups rnd(3,10)
+			temp_min_distance_group_placement rnd(12,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DIRT
+			set_gaia_object_only
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* add standard stone/gold */
+	start_random
+		percent_chance 5 #define NO_DIRT_GOLD
+		percent_chance 10 #define NO_DIRT_STONE
+	end_random 
+	if NO_DIRT_GOLD
+	else
+		create_object GOLD {
+			terrain_to_place_on DIRT
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_DIRT_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on DIRT
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+if FARMLAND_PLANET
+	
+	create_object FORAGE { /* TODO add avoid_forest_zone */
 		number_of_objects rnd(3,6)
 		number_of_groups rnd(3,12)
 		group_variance rnd(1,2)
@@ -1331,32 +1612,50 @@ if SNOW_HEAVY_PLANET
 	endif
 	/* somewhat standard stone/gold low to moderate
 	 */
-	create_object GOLD {
-		terrain_to_place_on SNOW_HEAVY
-		number_of_objects rnd(2,4)
-		number_of_groups rnd(4,10)
-		group_variance rnd(0,1)
-		temp_min_distance_group_placement rnd(20,40)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		max_distance_to_other_zones 1
-		set_gaia_object_only
-		avoid_forest_zone 1
-		set_tight_grouping
-	}
-	create_object STONE {
-		terrain_to_place_on SNOW_HEAVY
-		number_of_objects rnd(2,4)
-		number_of_groups rnd(4,10)
-		group_variance rnd(0,1)
-		temp_min_distance_group_placement rnd(16,40)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		max_distance_to_other_zones 1
-		set_gaia_object_only
-		avoid_forest_zone 1
-		set_tight_grouping
-	}
+	start_random
+		percent_chance 5 #define NO_HEAVY_SNOW_GOLD
+		percent_chance 10 #define NO_HEAVY_SNOW_STONE
+	end_random 
+	if NO_HEAVY_SNOW_GOLD
+	else
+		create_object GOLD {
+			terrain_to_place_on SNOW_HEAVY
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_HEAVY_SNOW_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on SNOW_HEAVY
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
 endif
 if BARREN_PLANET
 	create_object STONE { 
