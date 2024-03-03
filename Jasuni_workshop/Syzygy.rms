@@ -208,7 +208,6 @@ else /* TODO randomize */
 		snow planet (DLC_FORESTDEAD - a forest planet similar to leaves biome)
 
 		Done: leaves
-				
 				LEAVES_PLANET
 		Leaves biome: make a forest maze by using two forest terrains. One will be a terrain mask (placed on Leaves terrain). Other will be placed on LEAVES terrain with the other's terrain mask. Repeat with increasing distance to other zones attributes. Eventually, fill entire terrain with the terrain mask (with a spacing_to_other_terrain 5 attribute, followed by filling all the terrain mask in) to ensure the rest of the planet is forested for a heavily forested maze. Leaves biome would need berry bushes (probably a good amount, potentially), hunts, and likely standard gold (mines can be in forests after all), but maybe slightly lowered stone.
 	
@@ -977,6 +976,86 @@ if SAVANNAH_PLANET
 		spacing_to_other_terrain_types 1
 	}
 endif
+if SNOW_PLANET
+
+	start_random
+		percent_chance 30 #const SNOW_TERRAIN_FOREST 21 /* SNOW_FOREST */
+		percent_chance 35 #const SNOW_TERRAIN_FOREST 106  /* DLC_FORESTDEAD */
+		percent_chance 35 #const SNOW_TERRAIN_FOREST 105 /* DLC_FORESTSNOWAUTUMN */
+	end_random
+	/* similar to leaves planet: make a forested maze */
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,3)
+		number_of_clumps rnd(4,20)
+		height_limits 1 3
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 1
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(2,3)
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(4,5)
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent 10
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 6
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+endif
 if LEAVES_PLANET
 	start_random
 		percent_chance 11 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
@@ -1509,46 +1588,150 @@ if DIRT4_PLANET
 	endif
 endif
 
-/*
 
+if SNOW_PLANET /* similar to leaves planet */
+
+	create_object FORAGE { /* same as on leaves terrain - considered having a randomizer for if there are berries, but decided against it. TODO could make more likely when the trees are a dead forest (since those have bushes in them) */
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on SNOW
+		avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+	} 
+	/* Less emphasis on the wildlife than in regular forest, and more gold/stone (at least more stone) 
+	
+	herdables: goats, geese, 
+	huntables: deer, ibex
+	lurable: can have boars (apparently they're pretty good at adapting to cold climates), but make a sizable chance of them not appearing
+
+	*/
+	start_random 
+		percent_chance 1 #const SNOW_HERDABLE 305 /* DLC_LLAMA */
+		percent_chance 4 #const SNOW_HERDABLE 1245 /* DLC_PIG */
+		percent_chance 55 #const SNOW_HERDABLE 1060 /* DLC_GOAT */
+		percent_chance 40 #const SNOW_HERDABLE 1243 /* DLC_GOOSE */
+	end_random
+	create_object SNOW_HERDABLE {
+		avoid_actor_area 1
+		terrain_to_place_on SNOW
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(17,36)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		group_variance rnd(0,1)
+		set_loose_grouping
+		/* no avoid forest zone here */
+		max_distance_to_other_zones 1
+	}
+	start_random 
+		percent_chance 35 #const SNOW_PLANET_HUNTABLE 65 /* DEER */
+		percent_chance 65 #const SNOW_PLANET_HUNTABLE 1239 /* DLC_IBEX */
+	end_random
+	create_object SNOW_PLANET_HUNTABLE {
+		avoid_actor_area 1
+		terrain_to_place_on SNOW
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(17,36)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,2)
+		set_loose_grouping
+		set_gaia_object_only
+		/* avoid_forest_zone 1 */
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+		avoid_actor_area 4
+		actor_area 4
+		actor_area_radius 4
+	} 
+	
+	start_random
+		percent_chance 60 #define NO_SNOW_LURABLE
+	end_random
+	if NO_SNOW_LURABLE
+	else
+		create_object BOAR {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(17,36)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on SNOW
+			/* avoid_forest_zone 1 */
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* slightly better than standard gold/stone */
+	start_random
+		percent_chance 2 #define NO_SNOW_GOLD
+		percent_chance 5 #define NO_SNOW_STONE
+	end_random 
+	if NO_SNOW_GOLD
+	else
+		create_object GOLD {
+			terrain_to_place_on SNOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(15,38)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_SNOW_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on SNOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(15,38)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+
+/*
 		Leaves biome: make a forest maze by using two forest terrains. One will be a terrain mask (placed on Leaves terrain). Other will be placed on LEAVES terrain with the other's terrain mask. Repeat with increasing distance to other zones attributes. Eventually, fill entire terrain with the terrain mask (with a spacing_to_other_terrain 5 attribute, followed by filling all the terrain mask in) to ensure the rest of the planet is forested for a heavily forested maze. Leaves biome would need berry bushes (probably a good amount, potentially), hunts, and likely standard gold (mines can be in forests after all), but maybe slightly lowered stone.
 
-		resources:
-
-		animals: skip sheep, cows
-		pigs are logical
-		turkeys also a good choice
-		goats
-		water buffalo
-		geese
-
-		huntables: deer 65
-
-		lurable: boar 48
-		javelina 822 ()
-
-		forage bushes 59 or orange bushes 1059
 		*/
 if LEAVES_PLANET
-	start_random /* TODO could improve realism by tieing the specific animal to the type of tree somewhat. */
-		percent_chance 10 #const LEAVES_HERDABLE 305 /* DLC_LLAMA */
-		percent_chance 10 #const LEAVES_HERDABLE 833 /* TURKEY */
-		percent_chance 10 #const LEAVES_HERDABLE 1060 /* DLC_GOAT */
-		percent_chance 10 #const LEAVES_HERDABLE 1142 /* DLC_WATERBUFFALO */
-		percent_chance 10 #const LEAVES_HERDABLE 1243 /* DLC_GOOSE */
-		percent_chance 40 #const LEAVES_HERDABLE 1245 /* DLC_PIG */
-		percent_chance 10 #const LEAVES_HERDABLE 833 /* TURKEY */
-	end_random
-
 	start_random
-		percent_chance 45 #const LEAVES_BERRY 59 /* FORAGE */
-		percent_chance 45 #const LEAVES_BERRY 1059 /* orange bush */
-		percent_chance 10 #define NO_LEAVES_BERRY /* only reason I have this is because the berries may block potential TC spots or wall vils in */
+		percent_chance 50 #const LEAVES_BERRY 59 /* FORAGE */
+		percent_chance 50 #const LEAVES_BERRY 1059 /* orange bush */
+		percent_chance 0 #define NO_LEAVES_BERRY /* only reason I have this is because the berries may block potential TC spots or wall vils in */
 	end_random
 	if NO_LEAVES_BERRY
 	else
 		create_object LEAVES_BERRY {
-			number_of_objects rnd(2,4)
+			number_of_objects rnd(2,5)
 			number_of_groups rnd(4,20)
 			temp_min_distance_group_placement rnd(14,35)
 			set_scaling_to_map_size
@@ -1560,6 +1743,15 @@ if LEAVES_PLANET
 			avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
 		} 
 	endif
+	start_random /* TODO could improve realism by tieing the specific animal to the type of tree somewhat. */
+		percent_chance 10 #const LEAVES_HERDABLE 305 /* DLC_LLAMA */
+		percent_chance 10 #const LEAVES_HERDABLE 833 /* TURKEY */
+		percent_chance 10 #const LEAVES_HERDABLE 1060 /* DLC_GOAT */
+		percent_chance 10 #const LEAVES_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 10 #const LEAVES_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 40 #const LEAVES_HERDABLE 1245 /* DLC_PIG */
+		percent_chance 10 #const LEAVES_HERDABLE 833 /* TURKEY */
+	end_random
 	create_object LEAVES_HERDABLE {
 		avoid_actor_area 1
 		terrain_to_place_on LEAVES
@@ -1609,11 +1801,11 @@ if LEAVES_PLANET
 		actor_area_radius 4
 		avoid_actor_area 4
 	}
-		start_random
-		percent_chance 5 #define NO_TERRAIN_GOLD
-		percent_chance 20 #define NO_TERRAIN_STONE
+	start_random
+		percent_chance 5 #define NO_LEAVES_GOLD
+		percent_chance 20 #define NO_LEAVES_STONE
 	end_random 
-	if NO_TERRAIN_GOLD
+	if NO_LEAVES_GOLD
 	else
 		create_object GOLD {
 			terrain_to_place_on LEAVES
@@ -1633,7 +1825,7 @@ if LEAVES_PLANET
 			avoid_actor_area 3
 		}
 	endif
-	if NO_TERRAIN_STONE
+	if NO_LEAVES_STONE
 	else
 		create_object STONE { /* below standard stone */
 			terrain_to_place_on LEAVES
@@ -1653,41 +1845,6 @@ if LEAVES_PLANET
 			avoid_actor_area 3
 		}
 	endif
-	/*
-		create_object DLC_IBEX {
-			avoid_actor_area 1
-			terrain_to_place_on TERRAIN
-			number_of_objects rnd(2,6)
-			number_of_groups rnd(4,20)
-			temp_min_distance_group_placement rnd(14,35)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			group_variance rnd(0,2)
-			set_loose_grouping
-			set_gaia_object_only
-			avoid_forest_zone 1
-			avoid_cliff_zone 1
-			max_distance_to_other_zones 1
-			avoid_actor_area 4
-			actor_area 4
-			actor_area_radius 4
-		}
-
-		create_object SAVANNAH_LURABLE {
-			avoid_actor_area 1
-			number_of_groups rnd(3,8)
-			temp_min_distance_group_placement rnd(14,35)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			terrain_to_place_on TERRAIN
-			avoid_forest_zone 1
-			set_gaia_object_only
-			actor_area 4
-			actor_area_radius 4
-			avoid_actor_area 4
-		}
-
-		*/
 endif
 
 if SAVANNAH_PLANET
@@ -2033,7 +2190,7 @@ if SNOW_HEAVY_PLANET
 		layer_to_place_on SNOW
 		avoid_actor_area 5
 	}
-	create_object DLC_GOAT {
+	create_object DLC_GOAT { /* TODO add chance of it being a llama */
 		avoid_actor_area 1
 		number_of_objects rnd(1,4)
 		number_of_groups rnd(2,6)
