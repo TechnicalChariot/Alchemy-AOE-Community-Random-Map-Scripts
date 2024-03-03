@@ -172,6 +172,7 @@ create_object TRANSPORT_SHIP
 	avoid_actor_area 8
 	max_distance_to_players 9
 }
+/*
 create_object TRAP
 {
 	number_of_objects 3
@@ -187,6 +188,7 @@ create_object TRAP
 	actor_area_radius 5
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
+*/
 create_object FORAGE
 {
 	number_of_objects 6
@@ -212,6 +214,20 @@ create_object DLC_PIG
 	find_closest
 	set_circular_placement
 }
+create_object DLC_PIG
+{
+	number_of_objects 2
+	number_of_groups 2
+	set_loose_grouping
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 2
+	avoid_actor_area 20
+	max_distance_to_players 26
+	temp_min_distance_group_placement 10
+	find_closest
+	set_circular_placement
+}
 create_object DLC_RHINO
 {
 	number_of_groups 2
@@ -221,6 +237,19 @@ create_object DLC_RHINO
 	avoid_actor_area 14
 	avoid_actor_area 31
 	max_distance_to_players 18
+	set_circular_placement
+	min_distance_group_placement 2
+	temp_min_distance_group_placement 6
+}
+create_object DLC_ELEPHANT
+{
+	number_of_groups 1
+	set_gaia_object_only
+	set_place_for_every_player
+	avoid_forest_zone 2
+	avoid_actor_area 19
+	avoid_actor_area 31
+	max_distance_to_players 24
 	set_circular_placement
 	min_distance_group_placement 2
 	temp_min_distance_group_placement 6
@@ -291,22 +320,22 @@ create_object DLC_MANGROVE_TREE
 /* neutral res */
 create_object GOLD 
 {
-	number_of_objects 4
+	number_of_objects 3
 	number_of_groups 9320
 	set_tight_grouping
 	set_gaia_object_only
 	set_scaling_to_map_size
 	min_distance_to_players 30
 	if TINY_MAP
-	temp_min_distance_group_placement 25
+	temp_min_distance_group_placement 35
 	elseif SMALL_MAP
-	temp_min_distance_group_placement 25
+	temp_min_distance_group_placement 35
 	elseif MEDIUM_MAP
-	temp_min_distance_group_placement 30
-	elseif LARGE_MAP
 	temp_min_distance_group_placement 40
+	elseif LARGE_MAP
+	temp_min_distance_group_placement 45
 	else
-	temp_min_distance_group_placement 55
+	temp_min_distance_group_placement 48
 	endif
 	avoid_forest_zone 2
 	actor_area 40
@@ -322,13 +351,15 @@ create_object ROCK2
 	set_scaling_to_map_size
 	min_distance_to_players 30
 	if TINY_MAP
-	temp_min_distance_group_placement 25
-	elseif MEDIUM_MAP
-	temp_min_distance_group_placement 25
-	elseif LARGE_MAP
-	temp_min_distance_group_placement 30
-	else
+	temp_min_distance_group_placement 38
+	elseif SMALL_MAP
 	temp_min_distance_group_placement 40
+	elseif MEDIUM_MAP
+	temp_min_distance_group_placement 45
+	elseif LARGE_MAP
+	temp_min_distance_group_placement 48
+	else
+	temp_min_distance_group_placement 50
 	endif
 	avoid_forest_zone 4
 	actor_area 25
@@ -344,17 +375,7 @@ create_object STONE
 	set_tight_grouping
 	set_gaia_object_only
 	set_scaling_to_map_size
-	if TINY_MAP
-	temp_min_distance_group_placement 20
-	elseif SMALL_MAP
-	temp_min_distance_group_placement 20
-	elseif MEDIUM_MAP
-	temp_min_distance_group_placement 30
-	elseif LARGE_MAP
-	temp_min_distance_group_placement 40
-	else
-	temp_min_distance_group_placement 55
-	endif
+	temp_min_distance_group_placement 10
 	actor_area_to_place_in 25
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
@@ -365,7 +386,7 @@ create_object RELIC
 	min_distance_to_players 30
 	set_circular_placement
 	min_distance_group_placement 2
-	avoid_forest_zone 8
+	avoid_forest_zone 2
 	if TINY_MAP
 		number_of_objects 5
 		temp_min_distance_group_placement 30
@@ -374,27 +395,30 @@ create_object RELIC
 		temp_min_distance_group_placement 30
 	elseif MEDIUM_MAP
 		number_of_objects 5
-		temp_min_distance_group_placement 34
+		temp_min_distance_group_placement 35
 	elseif LARGE_MAP
 		number_of_objects 7
 		temp_min_distance_group_placement 40
 	else
 		number_of_objects 8
-		temp_min_distance_group_placement 48
+		temp_min_distance_group_placement 45
 	endif
 }
 
 /* Fish */
 create_object TRAP
 {
-	number_of_objects 3
+	number_of_objects 4
 	number_of_groups 9320
 	set_gaia_object_only
-	temp_min_distance_group_placement 10
+	set_loose_grouping
+	temp_min_distance_group_placement 14
 	min_distance_to_players 25
 	ignore_terrain_restrictions
 	second_object DLC_BOXTURTLE
 	avoid_forest_zone 2
+	avoid_actor_area 40
+	avoid_actor_area 25
 	terrain_to_place_on DLC_MANGROVESHALLOW
 }
 /* Aesthetic */
