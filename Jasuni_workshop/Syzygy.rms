@@ -250,13 +250,15 @@ else /* TODO randomize */
 	elseif CONFIG4 /* TODO currently working on: Rainforest terrain (JUNGLE 17 on 71 UNDERBRUSH_LEAVES or 77 UNDERBRUSH_JUNGLE)
 	
 		unlisted:
-		some road terrain
+		some road terrain - city terrain
 		DLC_CRACKED (can I get away with doing this one in two different ways? Or maybe it would be easier to give this terrain a larger percentage so that it is more likely to be picked)
 
 		snowy forest biome (dead trees, similar to the leaves biome, but less hunt, chance of less berries, and standard stone/gold)
 
-		Great plains biome
-		Grassy hills biome
+		Great plains biome - will always include a horse scout, and plenty of hunts
+		Grassy hills biome - may include a horse scout, may include mountains 1,2,5,6,7,8
+
+		Mountains 3/4 belong on a drier mountainous biome
 
 		And add straggler trees for the biomes as appropriate.
 
@@ -284,14 +286,14 @@ else /* TODO randomize */
 		#define ROAD_PLANET_4
 		#const PN4B 109 /* DLC_WETROCKBEACH */
 	elseif CONFIG5
-		#const PN1 12 /* temp: GRASS2 */
-		#define GRASS2_PLANET
-		#define GRASS2_PLANET_1
+		#const PN1 12 /* GRASS2 */
+		#define GRASS2_PLAINS_PLANET
+		#define GRASS2_PLAINS_PLANET_1
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 
-		#const PN2 0 /* temp: GRASS */
-		#define GRASS_PLANET
-		#define GRASS_PLANET_2
+		#const PN2 0 /* GRASS - grassy hills biome */
+		#define GRASS_HILLS_PLANET
+		#define GRASS_HILLS_PLANET_2
 		#const PN2B 107 /* DLC_WETBEACH */
 
 		#const PN3  45 /* DLC_CRACKED  */
@@ -1283,6 +1285,7 @@ if JUNGLE_PLANET /* TODO double check that this works as expected when adding el
 		land_percent rnd(1,3)
 		number_of_clumps rnd(5,30)
 		spacing_to_other_terrain_types rnd(1,3)
+		
 	}
 endif
 if LEAVES_PLANET
@@ -1369,7 +1372,7 @@ if LEAVES_PLANET
 		number_of_clumps 9320
 	}
 endif
-if DIRT_PLANET
+if DIRT_PLANET /* TODO is best planet for two of the potential mountains (3 and 4), so may want to add extra elevation to this biome */
 	create_terrain DLC_DRAGONFOREST { /* note potential issue of villager getting trapped in a forest. */
 		base_terrain DIRT
 		land_percent rnd(1,5)
@@ -1708,7 +1711,7 @@ if DESERT_PLANET
 		}
 	endif
 	start_random
-	percent_chance 20 create_object DLC_DROMEDARY {
+	percent_chance 80 create_object DLC_DROMEDARY {
 			avoid_actor_area 1
 			set_place_for_every_player
 			terrain_to_place_on DESERT
@@ -1950,6 +1953,7 @@ endif
 if JUNGLE_PLANET
 	/* UNDERBRUSH_JUNGLE on inside  UNDERBRUSH_LEAVES on outside
 	TODO finish this biome later - is only biome that can have predators, due to the enclosed nature of the UNDERBRUSH_JUNGLE
+	Should have lots of forage (inside and outside perhaps? - will need to avoid the water terrain a little to ensure a walking path for villagers), plenty of hunt buried in the forest, gold/stone buried in the forest, and possibly some predators buried in the forest also. Should be food rich, and could make generally resource rich.
 	 */
 endif
 if LEAVES_PLANET
