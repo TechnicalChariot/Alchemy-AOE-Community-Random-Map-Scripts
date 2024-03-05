@@ -29,6 +29,9 @@ obsolete terrains that don't layer: DIRT_SNOW, GRASS_SNOW, DLC_DRYROAD, DLC_MOOR
 not really usable as a base terrain: DLC_ROCK, ICE, MUDDY_SHALLOW
 
 forest terrains: JUNGLE, BAMBOO, etc.
+
+
+TODO adjust planet sizes so that each terrain has a more equal share (right not the leftmost planet has extra space, while the rightmost seems to have the least)
  */
   /* TODO this would make a fine map idea: a map that is nothing but BAOBOB_FOREST. I could place a TC in the closest spot for each player, and then use actor areas to place villagers, scouts, starting res, etc. Would make for a very unusual map. tentative title: Baobob maze */
 /* date:  */
@@ -51,28 +54,36 @@ else
 	endif
 endif
 
-/* AT_LEAST_TINY is always true */
-if SMALL_MAP
+/* AT_LEAST_TINY is currently unused. */
+if TINY_MAP
+	#define AT_LEAST_TINY
+elseif SMALL_MAP
+	#define AT_LEAST_TINY
     #define AT_LEAST_SMALL
 elseif MEDIUM_MAP
+	#define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
 elseif LARGE_MAP
+	#define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
     #define AT_LEAST_LARGE
 elseif HUGE_MAP
+	#define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
     #define AT_LEAST_LARGE
     #define AT_LEAST_HUGE
 elseif GIGANTIC_MAP
+	#define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
     #define AT_LEAST_LARGE
     #define AT_LEAST_HUGE
     #define AT_LEAST_GIGANTIC
 elseif LUDIKRIS_MAP
+	#define AT_LEAST_TINY
     #define AT_LEAST_SMALL
     #define AT_LEAST_MEDIUM
     #define AT_LEAST_LARGE
@@ -90,6 +101,7 @@ direct_placement
 #const FARMLAND3 31 /* 7 is farm, 8 is dead farm, 29-31 are other farm terrains with increase percentages. Rice farm is 63-67 */ 
 #const FARMLAND_FULL 7
 #const FARMLAND_DEAD 8
+#const FOREST_OAK_BUSH 20
 #const SNOW_FOUNDATION 36
 #const SNOW_ROAD 38
 #const ROAD_FUNGUS 39
@@ -105,9 +117,10 @@ direct_placement
 #const ROAD_GRAVEL 78
 #const GRASS_JUNGLE 83 /* SIMLAR TO DLC_JUNGLEGRASS */
 #const FOREST_BUSH 89
+#const FOREST_REEDS 92
 #const WATER_GREEN 95
 #const WATER_BROWN 96
- 
+
 #const G 0 /* GRASS */
 #const WNI  15 /* Water 2D, shoreless */
 #const URB  40 /* DLC_ROCK */
@@ -149,8 +162,11 @@ if NONRANDOM_PLANETS
 else /* TODO randomize */
  /* temporary measure for development purposes */
 	start_random
-		percent_chance 50 #define CONFIG2
-		percent_chance 50 #define CONFIG1
+		percent_chance 0 #define CONFIG4
+		percent_chance 34 #define CONFIG3
+		percent_chance 0 #define CONFIG5
+		percent_chance 33 #define CONFIG2
+		percent_chance 33 #define CONFIG1
 	end_random
 	if CONFIG1
 		#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
@@ -176,7 +192,7 @@ else /* TODO randomize */
 		#const PN1  6 /* DIRT */
 		#define DIRT_PLANET
 		#define DIRT_PLANET_1
-		#const PN3B 108 /* DLC_GRAVELBEACH */
+		#const PN1B 108 /* DLC_GRAVELBEACH */
 
 		#const PN2  74  /* SNOW_HEAVY  */
 		#define SNOW_HEAVY_PLANET
@@ -186,19 +202,89 @@ else /* TODO randomize */
 		#const PN3  42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
 		#define DIRT4_PLANET
 		#define DIRT4_PLANET_3
-		#const PN1B 2 /* beach */
+		#const PN3B 2 /* beach */
 
 		#const PN4  41  /* DLC_SAVANNAH */
 		#define SAVANNAH_PLANET
 		#define SAVANNAH_PLANET_4
 		#const PN4B 109 /* DLC_WETROCKBEACH */
-	elseif CONFIG3 /* TODO currently working on: __
+	elseif CONFIG3 
+		#const PN1 5 /* LEAVES */
+		#define LEAVES_PLANET
+		#define LEAVES_PLANET_1
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+
+		#const PN4 32  /* SNOW - a snow forest planetary biome. */
+		#define SNOW_PLANET
+		#define SNOW_PLANET_4
+		#const PN2B 107 /* DLC_WETBEACH */
+
+		#const PN3 101 /* DLC_BOGLAND - mangrove terrain */
+		#define BOGLAND_MANGROVE_PLANET
+		#define BOGLAND_MANGROVE_PLANET_3
+		#const PN3B 108 /* DLC_GRAVELBEACH */
+
+		#const PN2  76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+		#define DIRT_MUD_MANGROVE_MAZE_PLANET
+		#define DIRT_MUD_MANGROVE_MAZE_PLANET_2
+		#const PN4B 109 /* DLC_WETROCKBEACH */
+	elseif CONFIG4 /* TODO currently working on:
 	
-		unlisted
-		also do mangrove terrain (how to implement)? - DLC_BOGLAND?
+		unlisted:
 		some road terrain
 		DLC_CRACKED (can I get away with doing this one in two different ways? Or maybe it would be easier to give this terrain a larger percentage so that it is more likely to be picked)
+
+		snowy forest biome (dead trees, similar to the leaves biome, but less hunt, chance of less berries, and standard stone/gold)
+
+		Great plains biome
+		Grassy hills biome
+
+		And add straggler trees for the biomes as appropriate.
+
+		Also, chance of elevation on some of the other biomes (most of the terrains it would make sense for, though not the great plains
+
+		TODO Will want to add support to new map sizes.
 	*/
+		#const PN1 12 /* temp: GRASS2 */
+		#define BOGLAND_PLANET
+		#define BOGLAND_PLANET_1
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+
+		#const PN2 102  /* DLC_DESERTGRAVEL - TODO swap with BARREN planet, and alter barren planet accordingly. */
+		#define DESERTGRAVEL_PLANET
+		#define DESERTGRAVEL_PLANET_2
+		#const PN2B 107 /* DLC_WETBEACH */
+
+		#const PN3  100 /* DLC_DRYGRASS  */
+		#define DRYGRASS_PLANET
+		#define DRYGRASS_PLANET_3
+		#const PN3B 2 /* beach */
+
+		#const PN4  24  /* ROAD */
+		#define ROAD_PLANET
+		#define ROAD_PLANET_4
+		#const PN4B 109 /* DLC_WETROCKBEACH */
+	elseif CONFIG5
+		#const PN1 12 /* temp: GRASS2 */
+		#define BOGLAND_PLANET
+		#define BOGLAND_PLANET_1
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+
+		#const PN2 0 /* temp: GRASS */
+		#define DESERTGRAVEL_PLANET
+		#define DESERTGRAVEL_PLANET_2
+		#const PN2B 107 /* DLC_WETBEACH */
+
+		#const PN3  45 /* DLC_CRACKED  */
+		#define CRACKED_PLANET
+		#define CRACKED_PLANET_3
+		#const PN3B 2 /* beach */
+
+		#const PN4  24  /* ROAD */
+		#define ROAD_PLANET
+		#define ROAD_PLANET_4
+		#const PN4B 109 /* DLC_WETROCKBEACH */
+
 	endif
 	#const PN1  12 /* GRASS2 */
 	#const PN1B 2 /* beach */
@@ -908,6 +994,325 @@ if SAVANNAH_PLANET
 		spacing_to_other_terrain_types 1
 	}
 endif
+if BOGLAND_MANGROVE_PLANET
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+	create_terrain DLC_BOGLAND {
+		base_terrain DLC_MANGROVESHALLOW
+		land_percent rnd(1,5)
+		number_of_clumps rnd(4,30)
+		height_limits 2 2
+		spacing_to_other_terrain_types 1
+		terrain_mask 2
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
+endif
+if SNOW_PLANET
+
+	start_random
+		percent_chance 30 #const SNOW_TERRAIN_FOREST 21 /* SNOW_FOREST */
+		percent_chance 35 #const SNOW_TERRAIN_FOREST 106  /* DLC_FORESTDEAD */
+		percent_chance 35 #const SNOW_TERRAIN_FOREST 105 /* DLC_FORESTSNOWAUTUMN */
+	end_random
+	/* similar to leaves planet: make a forested maze */
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,3)
+		number_of_clumps rnd(4,20)
+		height_limits 1 3
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 1
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(2,3)
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(4,5)
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_SNOW {
+		base_terrain SNOW
+		land_percent 10
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 6
+		terrain_mask 1
+	}
+	create_terrain SNOW_TERRAIN_FOREST {
+		base_terrain SNOW
+		base_layer UNDERBRUSH_SNOW
+		land_percent 100
+		number_of_clumps 9320
+	}
+endif
+if DIRT_MUD_MANGROVE_MAZE_PLANET
+	
+	create_terrain MUDDY_SHALLOW {
+		base_terrain DIRT_MUD
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+	} 
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		height_limits 2 2
+		terrain_mask 1
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent rnd(1,4)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 1
+		height_limits 2 2
+		terrain_mask 1
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(2,3)
+		height_limits 2 2
+		terrain_mask 1
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(3,5)
+		height_limits 2 2
+		terrain_mask 1
+	} 
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent 10
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(5,6)
+		height_limits 2 2
+		terrain_mask 1
+	}
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain MUDDY_SHALLOW
+		base_layer DLC_MANGROVESHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	} 
+	create_terrain DLC_MANGROVESHALLOW {
+		base_terrain MUDDY_SHALLOW
+		land_percent 100
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2 /* under */
+	}
+endif
+if LEAVES_PLANET
+	start_random
+		percent_chance 11 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
+		percent_chance 11 #const LEAVES_FOREST_TERRAIN 17  /* JUNGLE */
+		percent_chance 11 #const LEAVES_FOREST_TERRAIN 18 /* BAMBOO */
+		percent_chance 11 #const LEAVES_FOREST_TERRAIN 19 /* PINE_FOREST */
+		percent_chance 11 #const LEAVES_FOREST_TERRAIN 104 /* DLC_FORESTAUTUMN */
+		percent_chance 11 #const LEAVES_FOREST_TERRAIN 110 /* BIRCH_FOREST */
+		percent_chance 11 #const LEAVES_FOREST_TERRAIN 20 /* FOREST_OAK_BUSH */
+		percent_chance 11 #const LEAVES_FOREST_TERRAIN 89 /* FOREST_BUSH - would be a good one to combine with an increase berry bush chance. */
+		percent_chance 12 #const LEAVES_FOREST_TERRAIN 92 /* FOREST_REEDS - has less wood, so favored as a result of that bias. */
+	end_random
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent rnd(1,3)
+		number_of_clumps rnd(4,20)
+		height_limits 1 3
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 1
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(2,3)
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent rnd(1,2)
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types rnd(4,5)
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+	create_terrain UNDERBRUSH_LEAVES {
+		base_terrain LEAVES
+		land_percent 10
+		number_of_clumps rnd(4,20)
+		spacing_to_other_terrain_types 6
+		terrain_mask 1
+	}
+	create_terrain LEAVES_FOREST_TERRAIN {
+		base_terrain LEAVES
+		base_layer UNDERBRUSH_LEAVES
+		land_percent 100
+		number_of_clumps 9320
+	}
+endif
 if DIRT_PLANET
 	create_terrain DLC_DRAGONFOREST { /* note potential issue of villager getting trapped in a forest. */
 		base_terrain DIRT
@@ -1110,6 +1515,7 @@ create_object DOLPHIN {
 	temp_min_distance_group_placement 5
 	avoid_actor_area 1
 	max_distance_to_other_zones 5
+	terrain_to_place_on WATER
 	/* TODO add actor area? */
 }
 /* create villagers for each player, 1 on each planet, avoiding radioactive planet aura. */
@@ -1356,6 +1762,608 @@ if DIRT4_PLANET
 	endif
 endif
 
+
+if SNOW_PLANET /* similar to leaves planet */
+
+	create_object FORAGE { /* same as on leaves terrain - considered having a randomizer for if there are berries, but decided against it. TODO could make more likely when the trees are a dead forest (since those have bushes in them) */
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on SNOW
+		avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+	} 
+	/* Less emphasis on the wildlife than in regular forest, and more gold/stone (at least more stone) 
+	
+	herdables: goats, geese, 
+	huntables: deer, ibex
+	lurable: can have boars (apparently they're pretty good at adapting to cold climates), but make a sizable chance of them not appearing
+
+	*/
+	start_random 
+		percent_chance 1 #const SNOW_HERDABLE 305 /* DLC_LLAMA */
+		percent_chance 4 #const SNOW_HERDABLE 1245 /* DLC_PIG */
+		percent_chance 55 #const SNOW_HERDABLE 1060 /* DLC_GOAT */
+		percent_chance 40 #const SNOW_HERDABLE 1243 /* DLC_GOOSE */
+	end_random
+	create_object SNOW_HERDABLE {
+		avoid_actor_area 1
+		terrain_to_place_on SNOW
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(17,36)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		group_variance rnd(0,1)
+		set_loose_grouping
+		/* no avoid forest zone here */
+		max_distance_to_other_zones 1
+	}
+	start_random 
+		percent_chance 35 #const SNOW_PLANET_HUNTABLE 65 /* DEER */
+		percent_chance 65 #const SNOW_PLANET_HUNTABLE 1239 /* DLC_IBEX */
+	end_random
+	create_object SNOW_PLANET_HUNTABLE {
+		avoid_actor_area 1
+		terrain_to_place_on SNOW
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(17,36)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,2)
+		set_loose_grouping
+		set_gaia_object_only
+		/* avoid_forest_zone 1 */
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+		avoid_actor_area 4
+		actor_area 4
+		actor_area_radius 4
+	} 
+	
+	start_random
+		percent_chance 60 #define NO_SNOW_LURABLE
+	end_random
+	if NO_SNOW_LURABLE
+	else
+		create_object BOAR {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(17,36)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on SNOW
+			/* avoid_forest_zone 1 */
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
+	/* slightly better than standard gold/stone */
+	start_random
+		percent_chance 2 #define NO_SNOW_GOLD
+		percent_chance 5 #define NO_SNOW_STONE
+	end_random 
+	if NO_SNOW_GOLD
+	else
+		create_object GOLD {
+			terrain_to_place_on SNOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(15,38)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_SNOW_STONE
+	else
+		create_object STONE {
+			terrain_to_place_on SNOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(15,38)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+
+/*
+		Leaves biome: make a forest maze by using two forest terrains. One will be a terrain mask (placed on Leaves terrain). Other will be placed on LEAVES terrain with the other's terrain mask. Repeat with increasing distance to other zones attributes. Eventually, fill entire terrain with the terrain mask (with a spacing_to_other_terrain 5 attribute, followed by filling all the terrain mask in) to ensure the rest of the planet is forested for a heavily forested maze. Leaves biome would need berry bushes (probably a good amount, potentially), hunts, and likely standard gold (mines can be in forests after all), but maybe slightly lowered stone.
+
+		*/
+if LEAVES_PLANET
+	start_random
+		percent_chance 50 #const LEAVES_BERRY 59 /* FORAGE */
+		percent_chance 50 #const LEAVES_BERRY 1059 /* orange bush */
+		percent_chance 0 #define NO_LEAVES_BERRY /* only reason I have this is because the berries may block potential TC spots or wall vils in */
+	end_random
+	if NO_LEAVES_BERRY
+	else
+		create_object LEAVES_BERRY {
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,35)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,1)
+			set_tight_grouping
+			max_distance_to_other_zones 2
+			terrain_to_place_on LEAVES
+			avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+		} 
+	endif
+	start_random /* TODO could improve realism by tieing the specific animal to the type of tree somewhat. */
+		percent_chance 10 #const LEAVES_HERDABLE 305 /* DLC_LLAMA */
+		percent_chance 10 #const LEAVES_HERDABLE 833 /* TURKEY */
+		percent_chance 10 #const LEAVES_HERDABLE 1060 /* DLC_GOAT */
+		percent_chance 10 #const LEAVES_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 10 #const LEAVES_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 40 #const LEAVES_HERDABLE 1245 /* DLC_PIG */
+		percent_chance 10 #const LEAVES_HERDABLE 833 /* TURKEY */
+	end_random
+	create_object LEAVES_HERDABLE {
+		avoid_actor_area 1
+		terrain_to_place_on LEAVES
+		number_of_objects rnd(1,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		group_variance rnd(0,2)
+		set_loose_grouping
+		/* no avoid forest zone here */
+		max_distance_to_other_zones 1
+	}
+	create_object DEER {
+		avoid_actor_area 1
+		terrain_to_place_on LEAVES
+		number_of_objects rnd(2,6)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,2)
+		set_loose_grouping
+		set_gaia_object_only
+		/* avoid_forest_zone 1 */
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+		avoid_actor_area 4
+		actor_area 4
+		actor_area_radius 4
+	} 
+	
+	start_random
+		percent_chance 50 #const LEAVES_LURABLE 48 /* BOAR */
+		percent_chance 50 #const LEAVES_LURABLE 822 /* JAVELINA */
+	end_random
+	create_object LEAVES_LURABLE {
+		avoid_actor_area 1
+		number_of_groups rnd(3,8)
+		temp_min_distance_group_placement rnd(14,35)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on LEAVES
+		/* avoid_forest_zone 1 */
+		set_gaia_object_only
+		actor_area 4
+		actor_area_radius 4
+		avoid_actor_area 4
+	}
+	start_random
+		percent_chance 5 #define NO_LEAVES_GOLD
+		percent_chance 20 #define NO_LEAVES_STONE
+	end_random 
+	if NO_LEAVES_GOLD
+	else
+		create_object GOLD {
+			terrain_to_place_on LEAVES
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_LEAVES_STONE
+	else
+		create_object STONE { /* below standard stone */
+			terrain_to_place_on LEAVES
+			number_of_objects rnd(1,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			avoid_forest_zone 1
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+endif
+/* similar to leaves planet - is a forest maze. However, vils will always start on planet's edge */
+if DIRT_MUD_MANGROVE_MAZE_PLANET
+	create_object FORAGE {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on MUDDY_SHALLOW
+		avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+	create_object DLC_ORANGEBUSH {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on MUDDY_SHALLOW
+		avoid_forest_zone 1 /* discourages the berries from blocking forest paths - can still do so, but much less likely. Unfortunately means berries will also be more likely to block TC spots. */
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+	/* place animals
+	herdables: water buffalo, geese
+	
+	hunts: ostrich
+	lurable: probably could do any of them, though favor javelina?
+	place gold mines in the forest terrain? and maybe stone mines (on the small 5% chance that they appear?)
+	 */
+	start_random
+		percent_chance 60 #const DIRT_MUD_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 40 #const DIRT_MUD_HERDABLE 1243 /* DLC_GOOSE */
+	end_random
+	create_object DIRT_MUD_HERDABLE {
+		avoid_actor_area 1
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on MUDDY_SHALLOW
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(12,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		group_variance rnd(0,1)
+		set_loose_grouping
+		/* no avoid forest zone here */
+		max_distance_to_other_zones 1
+	}
+	start_random
+		percent_chance 40 #const DIRT_MUD_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 30 #const DIRT_MUD_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
+		percent_chance 30 #const DIRT_MUD_HUNTABLE 65 /* DEER */
+	end_random
+
+	create_object DIRT_MUD_HUNTABLE {
+		avoid_actor_area 1
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on MUDDY_SHALLOW
+		number_of_objects rnd(2,6)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,1)
+		set_loose_grouping
+		set_gaia_object_only
+		/* avoid_forest_zone 1 */
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+		avoid_actor_area 4
+		actor_area 4
+		actor_area_radius 4
+	} 
+	start_random
+		percent_chance 20 #const DIRT_MUD_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 20 #const DIRT_MUD_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 20 #const DIRT_MUD_LURABLE 48 /* BOAR */
+		percent_chance 40 #const DIRT_MUD_LURABLE 822 /* JAVELINA */
+	end_random
+	create_object DIRT_MUD_LURABLE {
+		avoid_actor_area 1
+		number_of_groups rnd(3,8)
+		temp_min_distance_group_placement rnd(14,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on MUDDY_SHALLOW
+		/* avoid_forest_zone 1 */
+		set_gaia_object_only
+		actor_area 4
+		actor_area_radius 4
+		avoid_actor_area 4
+	}
+	start_random
+		percent_chance 5 #define NO_DIRT_MUD_GOLD
+		percent_chance 90 #define NO_DIRT_MUD_STONE
+	end_random 
+	if NO_DIRT_MUD_GOLD
+	else
+		create_object GOLD {
+			terrain_to_place_on DLC_MANGROVEFOREST
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(16,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_DIRT_MUD_STONE
+	else
+		create_object STONE { /* well below standard stone */
+			terrain_to_place_on DLC_MANGROVEFOREST
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(1,2)
+			number_of_groups rnd(4,10)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			max_distance_to_other_zones 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+
+	start_random
+		percent_chance 50 #const MANGROVE_MAZE_FISH 69 /* shore fish */
+		percent_chance 50 #const MANGROVE_MAZE_FISH 1141 /* box turtles */
+	end_random
+
+	/* place after stone/gold */
+	create_object ON_GRID {
+		second_object MANGROVE_MAZE_FISH
+		avoid_actor_area 1
+		number_of_groups 50
+		temp_min_distance_group_placement rnd(4,20)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on DLC_MANGROVEFOREST
+		layer_to_place_on MUDDY_SHALLOW
+		ignore_terrain_restrictions
+		set_gaia_object_only
+		place_on_specific_land_id 4
+	}
+endif
+if BOGLAND_MANGROVE_PLANET
+	create_object FORAGE {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		avoid_forest_zone 2 
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+	create_object DLC_ORANGEBUSH {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		avoid_forest_zone 2
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+
+	start_random
+		percent_chance 60 #const SWAMP_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 40 #const SWAMP_HERDABLE 1243 /* DLC_GOOSE */
+	end_random
+	create_object SWAMP_HERDABLE {
+		avoid_actor_area 1
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(12,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		group_variance rnd(0,1)
+		set_loose_grouping
+		avoid_forest_zone 1
+		max_distance_to_other_zones 1
+	}
+	start_random
+		percent_chance 40 #const SWAMP_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 30 #const SWAMP_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
+		percent_chance 30 #const SWAMP_HUNTABLE 65 /* DEER */
+	end_random
+
+	create_object SWAMP_HUNTABLE {
+		avoid_actor_area 1
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		number_of_objects rnd(2,6)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,1)
+		set_loose_grouping
+		set_gaia_object_only
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+		avoid_actor_area 4
+		actor_area 4
+		actor_area_radius 4
+	} 
+	start_random
+		percent_chance 20 #const SWAMP_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 20 #const SWAMP_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 20 #const SWAMP_LURABLE 48 /* BOAR */
+		percent_chance 40 #const SWAMP_LURABLE 822 /* JAVELINA */
+	end_random
+	create_object SWAMP_LURABLE {
+		avoid_actor_area 1
+		number_of_groups rnd(3,8)
+		temp_min_distance_group_placement rnd(14,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		avoid_forest_zone 1
+		set_gaia_object_only
+		actor_area 4
+		actor_area_radius 4
+		avoid_actor_area 4
+	}
+	start_random
+		percent_chance 1 #define NO_SWAMP_GOLD
+		percent_chance 90 #define NO_SWAMP_STONE
+	end_random 
+	if NO_SWAMP_GOLD
+	else
+		create_object GOLD { /* raised gold amounts */
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(5,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(12,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_SWAMP_STONE
+	else
+		create_object STONE { /* well below standard stone */
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(1,2)
+			number_of_groups rnd(4,10)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+
+	start_random
+		percent_chance 50 #const SWAMP_FISH 69 /* shore fish */
+		percent_chance 50 #const SWAMP_FISH 1141 /* box turtles */
+	end_random
+
+	/* place after stone/gold */
+	create_object ON_GRID {
+		second_object SWAMP_FISH
+		avoid_actor_area 1
+		number_of_groups 50
+		temp_min_distance_group_placement rnd(10,34)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		ignore_terrain_restrictions
+		set_gaia_object_only
+		place_on_specific_land_id 4
+	}
+	create_object ON_GRID {
+		second_object SWAMP_FISH
+		avoid_actor_area 1
+		number_of_groups 50
+		temp_min_distance_group_placement rnd(4,20)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on DLC_MANGROVEFOREST
+		layer_to_place_on DLC_BOGLAND
+		ignore_terrain_restrictions
+		set_gaia_object_only
+		place_on_specific_land_id 4
+	}
+endif
 
 if SAVANNAH_PLANET
 	start_random
@@ -1700,7 +2708,7 @@ if SNOW_HEAVY_PLANET
 		layer_to_place_on SNOW
 		avoid_actor_area 5
 	}
-	create_object DLC_GOAT {
+	create_object DLC_GOAT { /* TODO add chance of it being a llama */
 		avoid_actor_area 1
 		number_of_objects rnd(1,4)
 		number_of_groups rnd(2,6)
@@ -1713,10 +2721,9 @@ if SNOW_HEAVY_PLANET
 		max_distance_to_other_zones 1
 	}
 	start_random
-		percent_chance 60 #define SNOW_HEAVY_IBEX
-		percent_chance 40 #define SNOW_HEAVY_DEER
+		percent_chance 70 #define SNOW_HEAVY_IBEX
+		percent_chance 30 #define SNOW_HEAVY_DEER
 	end_random
-	/* TODO sometimes not very many deer spawn, and I have no idea why. */
 	if SNOW_HEAVY_DEER 
 		create_object DEER {
 			avoid_actor_area 1
