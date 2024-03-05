@@ -9,7 +9,7 @@
 /* Description 
 Two planets collide. Player town centers and starting resources are on these, while lots of gold, stone and food plus some trees are scattered around the spread fragments. 
 In-between space is covered by mangrove shallows which can be built on and sailed by ships, but there are no fish on the map. Some areas of the map can still cause damage by fiery explosions.
-Animals roaming the archipelago are a bit strange. Sheep look like wolves, penguins can be hunted by deer and flaming camels are similar to boars. Don't let them explode next to you!
+If you choose a "low recources" start, animals roaming the archipelago will be a bit strange. Sheep look like wolves, penguins can be hunted by deer and flaming camels are similar to boars. Don't let them explode next to you!
 */
 
 <PLAYER_SETUP>
@@ -1289,22 +1289,9 @@ create_object INVIS_COMBATANT
 	set_gaia_object_only
 	set_gaia_unconvertible
 	second_object FLAME_D
+	min_distance_to_players 20
 }
-/* NEAR FORAGE */
-create_object DLC_ORANGEBUSH
-{
-  number_of_objects          6
-  group_placement_radius     3
-  set_tight_grouping
-  set_gaia_object_only
-  set_place_for_every_player
-  min_distance_to_players    10
-  max_distance_to_players    12
-  min_distance_group_placement  2
-  avoid_forest_zone 5
-  avoid_cliff_zone 2
-  avoid_actor_area 812
-}
+
 create_object RELIC
 {
 	number_of_objects 1
@@ -1694,6 +1681,22 @@ create_object TEMP
   actor_area_radius 7
   max_distance_to_other_zones 4
 }
+
+/* NEAR FORAGE */
+create_object DLC_ORANGEBUSH
+{
+  number_of_objects          6
+  group_placement_radius     3
+  set_tight_grouping
+  set_gaia_object_only
+  set_place_for_every_player
+  actor_area_to_place_in 14
+  min_distance_group_placement  2
+  avoid_forest_zone 5
+  avoid_cliff_zone 2
+  avoid_actor_area 812
+}
+
 /* NEAR SHEEP */ 
 create_object SHEEP
 {
