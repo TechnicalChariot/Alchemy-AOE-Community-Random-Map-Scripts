@@ -1036,8 +1036,13 @@ if BOGLAND_MANGROVE_PLANET
 		height_limits 2 2
 		terrain_mask 2
 	}
-	/*
-	*/
+	create_terrain DLC_MANGROVEFOREST {
+		base_terrain DLC_BOGLAND
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 2
+		terrain_mask 2
+	}
 endif
 if SNOW_PLANET
 
@@ -2027,7 +2032,7 @@ if DIRT_MUD_MANGROVE_MAZE_PLANET
 		number_of_groups rnd(6,20)
 		temp_min_distance_group_placement rnd(13,30)
 		set_scaling_to_map_size
-		min_distance_group_placement 2
+		min_distance_group_placement 3
 		group_variance rnd(0,1)
 		set_tight_grouping
 		max_distance_to_other_zones 2
@@ -2043,7 +2048,7 @@ if DIRT_MUD_MANGROVE_MAZE_PLANET
 		number_of_groups rnd(6,20)
 		temp_min_distance_group_placement rnd(13,30)
 		set_scaling_to_map_size
-		min_distance_group_placement 2
+		min_distance_group_placement 3
 		group_variance rnd(0,1)
 		set_tight_grouping
 		max_distance_to_other_zones 2
@@ -2183,6 +2188,182 @@ if DIRT_MUD_MANGROVE_MAZE_PLANET
 		min_distance_group_placement 2
 		terrain_to_place_on DLC_MANGROVEFOREST
 		layer_to_place_on MUDDY_SHALLOW
+		ignore_terrain_restrictions
+		set_gaia_object_only
+		place_on_specific_land_id 4
+	}
+endif
+if BOGLAND_MANGROVE_PLANET
+	create_object FORAGE {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		avoid_forest_zone 2 
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+	create_object DLC_ORANGEBUSH {
+		number_of_objects rnd(2,7)
+		number_of_groups rnd(6,20)
+		temp_min_distance_group_placement rnd(13,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		group_variance rnd(0,1)
+		set_tight_grouping
+		max_distance_to_other_zones 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		avoid_forest_zone 2
+		actor_area 6
+		actor_area_radius 5
+		avoid_actor_area 6
+	} 
+
+	start_random
+		percent_chance 60 #const SWAMP_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 40 #const SWAMP_HERDABLE 1243 /* DLC_GOOSE */
+	end_random
+	create_object SWAMP_HERDABLE {
+		avoid_actor_area 1
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		number_of_objects rnd(2,5)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(12,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		group_variance rnd(0,1)
+		set_loose_grouping
+		avoid_forest_zone 1
+		max_distance_to_other_zones 1
+	}
+	start_random
+		percent_chance 40 #const SWAMP_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 30 #const SWAMP_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
+		percent_chance 30 #const SWAMP_HUNTABLE 65 /* DEER */
+	end_random
+
+	create_object SWAMP_HUNTABLE {
+		avoid_actor_area 1
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		number_of_objects rnd(2,6)
+		number_of_groups rnd(4,20)
+		temp_min_distance_group_placement rnd(14,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		group_variance rnd(0,1)
+		set_loose_grouping
+		set_gaia_object_only
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		max_distance_to_other_zones 1
+		avoid_actor_area 4
+		actor_area 4
+		actor_area_radius 4
+	} 
+	start_random
+		percent_chance 20 #const SWAMP_LURABLE 1139 /* DLC_RHINO */
+		percent_chance 20 #const SWAMP_LURABLE 1301 /* DLC_ELEPHANT */
+		percent_chance 20 #const SWAMP_LURABLE 48 /* BOAR */
+		percent_chance 40 #const SWAMP_LURABLE 822 /* JAVELINA */
+	end_random
+	create_object SWAMP_LURABLE {
+		avoid_actor_area 1
+		number_of_groups rnd(3,8)
+		temp_min_distance_group_placement rnd(14,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		avoid_forest_zone 1
+		set_gaia_object_only
+		actor_area 4
+		actor_area_radius 4
+		avoid_actor_area 4
+	}
+	start_random
+		percent_chance 1 #define NO_SWAMP_GOLD
+		percent_chance 90 #define NO_SWAMP_STONE
+	end_random 
+	if NO_SWAMP_GOLD
+	else
+		create_object GOLD { /* raised gold amounts */
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(5,10)
+			group_variance rnd(0,1)
+			temp_min_distance_group_placement rnd(12,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 2
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+	if NO_SWAMP_STONE
+	else
+		create_object STONE { /* well below standard stone */
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(1,2)
+			number_of_groups rnd(4,10)
+			temp_min_distance_group_placement rnd(20,40)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			max_distance_to_other_zones 1
+			avoid_forest_zone 1
+			set_gaia_object_only
+			set_tight_grouping
+			actor_area 3
+			actor_area_radius 3
+			avoid_actor_area 2
+			avoid_actor_area 3
+		}
+	endif
+
+	start_random
+		percent_chance 50 #const SWAMP_FISH 69 /* shore fish */
+		percent_chance 50 #const SWAMP_FISH 1141 /* box turtles */
+	end_random
+
+	/* place after stone/gold */
+	create_object ON_GRID {
+		second_object SWAMP_FISH
+		avoid_actor_area 1
+		number_of_groups 50
+		temp_min_distance_group_placement rnd(10,34)
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		terrain_to_place_on DLC_MANGROVESHALLOW
+		layer_to_place_on DLC_BOGLAND
+		ignore_terrain_restrictions
+		set_gaia_object_only
+		place_on_specific_land_id 4
+	}
+	create_object ON_GRID {
+		second_object SWAMP_FISH
+		avoid_actor_area 1
+		number_of_groups 50
+		temp_min_distance_group_placement rnd(4,20)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		terrain_to_place_on DLC_MANGROVEFOREST
+		layer_to_place_on DLC_BOGLAND
 		ignore_terrain_restrictions
 		set_gaia_object_only
 		place_on_specific_land_id 4
