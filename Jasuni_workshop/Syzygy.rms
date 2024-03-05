@@ -32,6 +32,25 @@ forest terrains: JUNGLE, BAMBOO, etc.
 
 
 TODO adjust planet sizes so that each terrain has a more equal share (right not the leftmost planet has extra space, while the rightmost seems to have the least)
+
+terrains made/used: 
+Farmland
+Barren (Gravel)
+Evil Fog
+Desert
+
+Dirt
+Snow heavy (mountainous biome)
+Dirt4 (forest biome)
+Savannah
+
+Leaves (forest biome)
+Snow (forest biome)
+Bogland (mangrove)
+Dirt Mud (mangrove and muddy water; forest biome)
+
+
+need to add: city, great plain, cracked, dry mountain, rainforest
  */
   /* TODO this would make a fine map idea: a map that is nothing but BAOBOB_FOREST. I could place a TC in the closest spot for each player, and then use actor areas to place villagers, scouts, starting res, etc. Would make for a very unusual map. tentative title: Baobob maze */
 /* date:  */
@@ -162,10 +181,11 @@ if NONRANDOM_PLANETS
 else /* TODO randomize */
  /* temporary measure for development purposes */
 	start_random
-		percent_chance 100 #define CONFIG3
-		percent_chance 0 #define CONFIG4
-		percent_chance 0 #define CONFIG2
-		percent_chance 0 #define CONFIG1
+		percent_chance 100 #define CONFIG4
+		percent_chance 20 #define CONFIG3
+		percent_chance 0 #define CONFIG5
+		percent_chance 20 #define CONFIG2
+		percent_chance 60 #define CONFIG1
 	end_random
 	if CONFIG1
 		#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
@@ -207,29 +227,7 @@ else /* TODO randomize */
 		#define SAVANNAH_PLANET
 		#define SAVANNAH_PLANET_4
 		#const PN4B 109 /* DLC_WETROCKBEACH */
-	elseif CONFIG3 /* TODO currently working on: leaves
-		snow planet (DLC_FORESTDEAD - a forest planet similar to leaves biome)
-
-		Done: leaves
-				LEAVES_PLANET
-		Leaves biome: make a forest maze by using two forest terrains. One will be a terrain mask (placed on Leaves terrain). Other will be placed on LEAVES terrain with the other's terrain mask. Repeat with increasing distance to other zones attributes. Eventually, fill entire terrain with the terrain mask (with a spacing_to_other_terrain 5 attribute, followed by filling all the terrain mask in) to ensure the rest of the planet is forested for a heavily forested maze. Leaves biome would need berry bushes (probably a good amount, potentially), hunts, and likely standard gold (mines can be in forests after all), but maybe slightly lowered stone.
-	
-		unlisted:
-		also do mangrove terrain (how to implement)? - DLC_BOGLAND?
-		some road terrain
-		DLC_CRACKED (can I get away with doing this one in two different ways? Or maybe it would be easier to give this terrain a larger percentage so that it is more likely to be picked)
-
-		snowy forest biome (dead trees, similar to the leaves biome, but less hunt, chance of less berries, and standard stone/gold)
-
-		Great plains biome
-		Grassy hills biome
-
-		And add straggler trees for the biomes as appropriate.
-
-		Also, chance of elevation on some of the other biomes (most of the terrains it would make sense for, though not the great plains
-
-		Will need to add support to new map sizes.
-	*/
+	elseif CONFIG3 
 		#const PN1 5 /* LEAVES */
 		#define LEAVES_PLANET
 		#define LEAVES_PLANET_1
@@ -249,10 +247,26 @@ else /* TODO randomize */
 		#define DIRT_MUD_MANGROVE_MAZE_PLANET
 		#define DIRT_MUD_MANGROVE_MAZE_PLANET_2
 		#const PN4B 109 /* DLC_WETROCKBEACH */
-	elseif CONFIG4
-		#const PN1 101 /* DLC_BOGLAND */
-		#define BOGLAND_PLANET
-		#define BOGLAND_PLANET_1
+	elseif CONFIG4 /* TODO currently working on: Rainforest terrain (JUNGLE 17 on 71 UNDERBRUSH_LEAVES or 77 UNDERBRUSH_JUNGLE)
+	
+		unlisted:
+		some road terrain
+		DLC_CRACKED (can I get away with doing this one in two different ways? Or maybe it would be easier to give this terrain a larger percentage so that it is more likely to be picked)
+
+		snowy forest biome (dead trees, similar to the leaves biome, but less hunt, chance of less berries, and standard stone/gold)
+
+		Great plains biome
+		Grassy hills biome
+
+		And add straggler trees for the biomes as appropriate.
+
+		Also, chance of elevation on some of the other biomes (most of the terrains it would make sense for, though not the great plains
+
+		TODO Will want to add support to new map sizes.
+	*/
+		#const PN1 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+		#define JUNGLE_PLANET
+		#define JUNGLE_PLANET_1
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 
 		#const PN2 102  /* DLC_DESERTGRAVEL - TODO swap with BARREN planet, and alter barren planet accordingly. */
@@ -265,19 +279,19 @@ else /* TODO randomize */
 		#define DRYGRASS_PLANET_3
 		#const PN3B 2 /* beach */
 
-		#const PN4  76  /* DIRT_MUD TODO may need to change */
-		#define DIRT_MUD_PLANET
-		#define DIRT_MUD_PLANET_4
+		#const PN4  24  /* ROAD */
+		#define ROAD_PLANET
+		#define ROAD_PLANET_4
 		#const PN4B 109 /* DLC_WETROCKBEACH */
 	elseif CONFIG5
 		#const PN1 12 /* temp: GRASS2 */
-		#define BOGLAND_PLANET
-		#define BOGLAND_PLANET_1
+		#define GRASS2_PLANET
+		#define GRASS2_PLANET_1
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 
 		#const PN2 0 /* temp: GRASS */
-		#define DESERTGRAVEL_PLANET
-		#define DESERTGRAVEL_PLANET_2
+		#define GRASS_PLANET
+		#define GRASS_PLANET_2
 		#const PN2B 107 /* DLC_WETBEACH */
 
 		#const PN3  45 /* DLC_CRACKED  */
@@ -1234,6 +1248,43 @@ if DIRT_MUD_MANGROVE_MAZE_PLANET
 		terrain_mask 2 /* under */
 	}
 endif
+if JUNGLE_PLANET /* TODO double check that this works as expected when adding elevation to the various terrains */
+	create_terrain JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 3
+		spacing_to_other_terrain_types 3
+		/* UNDERBRUSH_JUNGLE */
+	}
+	create_terrain JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 3
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		/* UNDERBRUSH_JUNGLE */
+	}
+	create_terrain UNDERBRUSH_JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 932
+		terrain_mask 1
+	}
+	create_terrain UNDERBRUSH_JUNGLE {
+		base_terrain JUNGLE
+		land_percent 20
+		number_of_clumps 932
+		terrain_mask 1
+	}
+	create_terrain UNDERBRUSH_JUNGLE { /* TODO right not is rather inconsistent in results: may have lots of small pockets, may have a few large pockets. Would need to exercise some more manual randomness to ensure object generation, so I'll come back to it later. */ 
+		base_terrain JUNGLE
+		land_percent rnd(1,3)
+		number_of_clumps rnd(5,30)
+		spacing_to_other_terrain_types rnd(1,3)
+	}
+endif
 if LEAVES_PLANET
 	start_random
 		percent_chance 11 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
@@ -1896,11 +1947,11 @@ if SNOW_PLANET /* similar to leaves planet */
 		}
 	endif
 endif
-
-/*
-		Leaves biome: make a forest maze by using two forest terrains. One will be a terrain mask (placed on Leaves terrain). Other will be placed on LEAVES terrain with the other's terrain mask. Repeat with increasing distance to other zones attributes. Eventually, fill entire terrain with the terrain mask (with a spacing_to_other_terrain 5 attribute, followed by filling all the terrain mask in) to ensure the rest of the planet is forested for a heavily forested maze. Leaves biome would need berry bushes (probably a good amount, potentially), hunts, and likely standard gold (mines can be in forests after all), but maybe slightly lowered stone.
-
-		*/
+if JUNGLE_PLANET
+	/* UNDERBRUSH_JUNGLE on inside  UNDERBRUSH_LEAVES on outside
+	TODO finish this biome later - is only biome that can have predators, due to the enclosed nature of the UNDERBRUSH_JUNGLE
+	 */
+endif
 if LEAVES_PLANET
 	start_random
 		percent_chance 50 #const LEAVES_BERRY 59 /* FORAGE */
