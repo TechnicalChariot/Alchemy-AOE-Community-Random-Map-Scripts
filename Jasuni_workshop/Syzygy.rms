@@ -1,7 +1,10 @@
 /* Syzygy */
 /* A Random Map Script initially started by BPDrej, but mostly finished by Jasuni
 
-Authors: Jasuni, BPDrej
+Title: Syzygy
+Authors: Jasuni (primary), BPDrej (started script, secondary)
+Date: March 2024
+Notice: Map developed for Alchemy League Season 2 at their request and may be used for it (and any other tournaments that wish to use it may do so, but I request a notification from any doing so).
 
 idea: randomize the terrains for each planet so that players have to scout it out - nomad start, with 1 vil on top planet, 1 vil bottom planet, and 1 vil somewhere else (place via actor area?) Could also have players start with a fishing ship (good for scouting) in a map corner (either top/bottom or left/right: likely left/right)
 Syzygy randomizing: when selecting terrains, do a random chance for first 1, then random chance with one removed (remove last 1, check for duplicate) for second planet; 3rd planet remove last 2, if get duplicate check which planet it was (first removed if first planet, otherwise second); remove 3 for last planet (handle like 3rd planet)
@@ -151,6 +154,39 @@ direct_placement
 #const B3 52 /* DLC_BEACH3 */
 #const WRB 109 /* DLC_WETROCKBEACH */
 
+/*
+#const PHOTON_MAN 430  Joan the maid */
+
+#const PHOTON_MAN 1292 /* queen 
+The photon man is practically a requirement of the torunament, therefore players will start with a photon scout. The photon scout will prioritize placement on radioactive terrain. If there is no radioactive planet, it will place on the barren planet instead. Finally, if neither planet is available, it will place on the rock terrain between planets. May change after tournament, but that is how it will be for now. */
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING2_GRAPHIC 1914
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 110
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+
+/* TODO A tree option for certain planets: Barren, city
+
+#const RUBBLE_AQUEDUCT 1522
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STANDING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_WALKING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DYING_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_ID 1522
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_AQUEDUCT ATTR_STORAGE_VALUE 99999999
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_NAME_ID 5393
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_ICON_ID 856
+*/
 /* set berry bushes land id to all land - needed for farmland terrain, I think. */
 effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
 effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
@@ -181,7 +217,7 @@ if NONRANDOM_PLANETS
 else /* TODO randomize */
  /* temporary measure for development purposes */
 	start_random
-		percent_chance 100 #define CONFIG4
+		percent_chance 20 #define CONFIG4
 		percent_chance 20 #define CONFIG3
 		percent_chance 0 #define CONFIG5
 		percent_chance 20 #define CONFIG2
@@ -360,40 +396,6 @@ if SNOW_HEAVY_PLANET
 endif /* would add cliffs, except wouldn't be able to really control where they go */
 
 <TERRAIN_GENERATION>
-/*
-create_terrain SNOW
-{
-	base_terrain DLC_GRAVELBEACH
-	land_percent 100
-	number_of_clumps 420
-	set_scale_by_size
-	spacing_to_other_terrain_types 1
-}
-create_terrain GRASS
-{
-	base_terrain B3
-	land_percent 100
-	number_of_clumps 420
-	set_scale_by_size
-	spacing_to_other_terrain_types 1
-}
-create_terrain DIRT
-{
-	base_terrain BEACH
-	land_percent 100
-	number_of_clumps 420
-	set_scale_by_size
-	spacing_to_other_terrain_types 1
-}
-create_terrain GRAVEL
-{
-	base_terrain WRB
-	land_percent 100
-	number_of_clumps 420
-	set_scale_by_size
-	spacing_to_other_terrain_types 1
-}
-*/
 #define BORDER_CLEANUP
 if BORDER_CLEANUP
 	/* PLANET 1 */
@@ -1561,7 +1563,14 @@ if RADIOACTIVE_PLANET
 			actor_area 3
 			actor_area_radius 3
 		}
-	end_random
+	end_random 
+	#define PHOTON_SCOUT_PLACED
+	create_object PHOTON_MAN { /* Photon man has the gear to survive/explore radioactive environments. */
+		set_place_for_every_player
+		terrain_to_place_on CORRUPTION
+		layer_to_place_on DLC_DESERTGRAVEL
+		min_distance_group_placement 2
+	}
 endif
 create_object SHORE_FISH {
 	number_of_objects 9320
@@ -2910,6 +2919,25 @@ if BARREN_PLANET
 		actor_area_radius 3
 	}
 	/* TODO add a chance of a small amount of a modified trees, like columns - see other space map scripts. BP_Drej mentioned column forests from Mars and Singularity. Also noted dead white birch.  */
+	if PHOTON_SCOUT_PLACED 
+	else
+		#define PHOTON_SCOUT_PLACED
+		create_object PHOTON_MAN {
+			set_place_for_every_player
+			terrain_to_place_on GRAVEL
+			min_distance_group_placement 2
+		} 
+	endif
+endif
+
+if PHOTON_SCOUT_PLACED 
+else
+	#define PHOTON_SCOUT_PLACED
+	create_object PHOTON_MAN {
+		set_place_for_every_player
+		terrain_to_place_on DLC_ROCK
+		min_distance_group_placement 1
+	} 
 endif
 /* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
 create_object RELIC {
