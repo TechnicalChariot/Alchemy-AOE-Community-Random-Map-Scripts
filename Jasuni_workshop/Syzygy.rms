@@ -217,11 +217,11 @@ if NONRANDOM_PLANETS
 else /* TODO randomize */
  /* temporary measure for development purposes */
 	start_random
-		percent_chance 20 #define CONFIG4
+		percent_chance 40 #define CONFIG4
 		percent_chance 20 #define CONFIG3
 		percent_chance 0 #define CONFIG5
 		percent_chance 20 #define CONFIG2
-		percent_chance 60 #define CONFIG1
+		percent_chance 20 #define CONFIG1
 	end_random
 	if CONFIG1
 		#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
@@ -395,6 +395,156 @@ if SNOW_HEAVY_PLANET
 	}
 endif /* would add cliffs, except wouldn't be able to really control where they go */
 
+if DIRT_PLANET
+	start_random
+		percent_chance 10 create_elevation 3 {
+			base_terrain DIRT
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+		percent_chance 85 #define HIGH_ELEVATION_DIRT
+	end_random
+	if HIGH_ELEVATION_DIRT
+		create_elevation 5 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 300
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 2
+		}
+		create_elevation 4 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 300
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3
+		}
+		create_elevation 3 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 150
+			set_scale_by_size
+			enable_balanced_elevation
+		}
+	endif
+endif
+/* standard elevation - may be a bit much when it does appear.
+spacing 3 ensures that it won't spill over onto a mangrove terrain
+if TERRAIN_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain TERRAIN
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+
+ */
+if LEAVES_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain LEAVES
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if SNOW_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain SNOW
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if BARREN_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain GRAVEL
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if RADIOACTIVE_PLANET /* a bit hard to see, but whatever */
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain CORRUPTION
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if DESERT_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain DESERT
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if FARMLAND_PLANET /* Farmland planet is relatively flat */
+	start_random
+		percent_chance 10 create_elevation 3 {
+			base_terrain FARMLAND1
+			number_of_clumps rnd(1,10)
+			number_of_tiles rnd(10,100)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if SAVANNAH_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain DLC_SAVANNAH
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if DIRT4_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain DLC_DIRT4
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
 <TERRAIN_GENERATION>
 #define BORDER_CLEANUP
 if BORDER_CLEANUP
@@ -905,7 +1055,7 @@ if SNOW_HEAVY_PLANET
 		base_terrain SNOW_HEAVY
 		terrain_mask 1
 		number_of_clumps 2
-		height_limits 5 5
+		height_limits 5 6
 	}
 	start_random
 		percent_chance 50 #define SNOW_HEAVY_USE_ROCK
@@ -1374,13 +1524,21 @@ if LEAVES_PLANET
 		number_of_clumps 9320
 	}
 endif
-if DIRT_PLANET /* TODO is best planet for two of the potential mountains (3 and 4), so may want to add extra elevation to this biome */
+if DIRT_PLANET 
 	create_terrain DLC_DRAGONFOREST { /* note potential issue of villager getting trapped in a forest. */
 		base_terrain DIRT
 		land_percent rnd(1,5)
 		number_of_clumps rnd(4,30)
 		spacing_to_other_terrain_types 1
-		
+		height_limits 0 4
+	}
+	create_terrain DIRT_MUD {
+		base_terrain DIRT
+		height_limits 5 6
+		spacing_to_other_terrain_types 1
+		number_of_tiles 4
+		number_of_clumps 1
+		terrain_mask 1
 	}
 	create_terrain DLC_SAVANNAH {
 		base_terrain DIRT
@@ -1419,13 +1577,13 @@ if DIRT4_PLANET  /* redo this one: note: may want to increase villager avoid_for
 		base_terrain DLC_DIRT4
 		land_percent 5
 		number_of_clumps 30
-		height_limits 1 2  /* this statement can go below height 2, but will not go right to the water's edge */
+		height_limits 1 3  /* this statement can go below height 2, but will not go right to the water's edge */
 	}
 	create_terrain DLC_BAOBABFOREST {
 		base_terrain DLC_DIRT4
 		land_percent 25
 		number_of_clumps 30
-		height_limits 2 2
+		height_limits 2 3
 	}
 	create_terrain DLC_DIRT4 {
 		base_terrain DLC_BAOBABFOREST
@@ -2531,6 +2689,22 @@ endif
 
 
 if DIRT_PLANET	
+	start_random
+		percent_chance 50 create_object MOUNTAIN_3 {
+			terrain_to_place_on DIRT
+			layer_to_place_on DIRT_MUD
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+		percent_chance 50 create_object MOUNTAIN_4 {
+			terrain_to_place_on DIRT
+			layer_to_place_on DIRT_MUD
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+	end_random
 	create_object FORAGE {
 		number_of_objects rnd(2,6)
 		number_of_groups rnd(2,6)
@@ -2761,6 +2935,7 @@ if SNOW_HEAVY_PLANET
 			layer_to_place_on SNOW
 			actor_area 5
 			actor_area_radius 8
+			avoid_actor_area 5
 		}
 	endif
 	if SNOW_HEAVY_M10
@@ -2775,6 +2950,8 @@ if SNOW_HEAVY_PLANET
 	create_object DLC_MOUNTAIN_9 {
 		terrain_to_place_on SNOW_HEAVY
 		layer_to_place_on SNOW
+		actor_area 5
+		actor_area_radius 8
 		avoid_actor_area 5
 	}
 	create_object DLC_GOAT { /* TODO add chance of it being a llama */
