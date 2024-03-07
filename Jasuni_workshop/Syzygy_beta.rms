@@ -219,11 +219,11 @@ if NONRANDOM_PLANETS
 else /* TODO randomize */
  /* temporary measure for development purposes */
 	start_random
-		percent_chance 40 #define CONFIG4
-		percent_chance 20 #define CONFIG3
+		percent_chance 25 #define CONFIG4
+		percent_chance 25 #define CONFIG3
 		percent_chance 0 #define CONFIG5
-		percent_chance 20 #define CONFIG2
-		percent_chance 20 #define CONFIG1
+		percent_chance 25 #define CONFIG2
+		percent_chance 25 #define CONFIG1
 	end_random
 	if CONFIG1
 
@@ -291,7 +291,7 @@ else /* TODO randomize */
 		#define RADIOACTIVE_PLANET
 		#define RADIOACTIVE_PLANET_1
 		#const PN1B 108 /* DLC_GRAVELBEACH */
-	
+		
 		#const PN2  42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
 		#define DIRT4_PLANET
 		#define DIRT4_PLANET_2
