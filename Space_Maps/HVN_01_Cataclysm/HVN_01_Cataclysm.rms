@@ -138,27 +138,23 @@ create_terrain DLC_CRACKED
 create_terrain FOREST
 {
 	base_terrain GRASS
-	set_scale_by_size
+	land_percent 6
 	clumping_factor 20
+	set_scale_by_groups
 	if TINY_MAP
-	land_percent 7
-	number_of_clumps 12
+	number_of_clumps 8
 	spacing_to_other_terrain_types 4
 	elseif MEDIUM_MAP
-	land_percent 6
 	number_of_clumps 14
 	spacing_to_other_terrain_types 5
 	elseif LARGE_MAP
-	land_percent 6
 	number_of_clumps 14
 	spacing_to_other_terrain_types 7
 	elseif HUGE_MAP
-	land_percent 6
 	number_of_clumps 18
 	clumping_factor 20
 	spacing_to_other_terrain_types 8
 	else
-	land_percent 7
 	number_of_clumps 18
 	spacing_to_other_terrain_types 10
 	endif
@@ -254,7 +250,7 @@ create_object TRAP
 create_object DLC_DEADTREE 
 {
 	number_of_objects 1
-	number_of_groups 1000
+	number_of_groups 9320
 	set_tight_grouping
 	set_gaia_object_only
 	terrain_to_place_on FOREST
@@ -264,7 +260,7 @@ create_object DLC_DEADTREE
 create_object TREE_G 
 {
 	number_of_objects 1
-	number_of_groups 1000
+	number_of_groups 9320
 	set_tight_grouping
 	set_gaia_object_only
 	set_circular_placement
@@ -275,7 +271,7 @@ create_object TREE_G
 create_object TREE_G 
 {
 	number_of_objects 1
-	number_of_groups 1000
+	number_of_groups 9320
 	set_tight_grouping
 	set_gaia_object_only
 	set_circular_placement
@@ -286,7 +282,7 @@ create_object TREE_G
 create_object DLC_AFRICANBUSH 
 {
 	number_of_objects 1
-	number_of_groups 1000
+	number_of_groups 9320
 	set_tight_grouping
 	set_gaia_object_only
 	set_circular_placement
@@ -297,7 +293,7 @@ create_object DLC_AFRICANBUSH
 create_object STUMP
 {
 	number_of_objects 1
-	number_of_groups 1000
+	number_of_groups 9320
 	set_scale_by_groups
 	set_loose_grouping
 	set_gaia_object_only
@@ -308,7 +304,7 @@ create_object STUMP
 create_object DLC_DEADTREE
 {
 	number_of_objects 1
-	number_of_groups 1000
+	number_of_groups 9320
 	set_tight_grouping
 	set_gaia_object_only
 	set_circular_placement

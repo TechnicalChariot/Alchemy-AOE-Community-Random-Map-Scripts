@@ -15,7 +15,6 @@ grouped_by_team
 effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
 direct_placement
-nomad_resources
 behavior_version 1
 ai_info_map_type CUSTOM 1 0 0
 
@@ -1763,52 +1762,7 @@ avoid_actor_area 11
 }
 /* END_OBJECTS_AUTOSCRIBE */
 
-
-if REGICIDE
-    create_object KING { set_place_for_every_player find_closest }
-endif
-
-/* create_object VILLAGER { set_place_for_every_player find_closest } */
-/* create_object PHOTON_MAN { set_place_for_every_player find_closest } */
-/* create_object IPH { set_place_for_every_player find_closest terrain_to_place_on DLC_WATER5 second_object TRANSPORT_SHIP } */
-
-
-
-/* create_object TREE_A { set_gaia_object_only find_closest number_of_groups 2 min_distance_to_players 4 max_distance_to_players 5 }
-create_object TREE_A { set_gaia_object_only find_closest number_of_groups 3 min_distance_to_players 6 max_distance_to_players 8 }
-
-
-
-create_object DLC_GOAT { set_gaia_object_only number_of_objects 4 number_of_groups 1 }
-create_object BOAR { set_gaia_object_only number_of_objects 2 }
-create_object GAZELLE { set_gaia_object_only number_of_objects 4 group_placement_radius 4 } */
-
-/* Neutral Starting Relic placement */
-
-/* create_object RELIC { set_gaia_object_only number_of_groups 4 avoid_forest_zone 1 temp_min_distance_group_placement 35 terrain_to_place_on DLC_DIRT4 }
-create_object RELIC { set_gaia_object_only number_of_groups 1 terrain_to_place_on ICE } */
-
-
-/* More PLAYER assigned objects */
-
-/* create_object PILEFOOD { set_gaia_object_only number_of_objects 6 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 10 max_distance_to_players 11 min_distance_group_placement 6 set_circular_placement }
-create_object PILEFOOD { set_gaia_object_only number_of_groups 4 set_scaling_to_map_size set_tight_grouping number_of_objects 4 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 10 }
-
-
-create_object GOLD { set_gaia_object_only number_of_objects 4 set_tight_grouping number_of_groups 6 temp_min_distance_group_placement 6 set_circular_placement terrain_to_place_on SNOW }
-create_object GOLD { set_gaia_object_only set_scaling_to_map_size number_of_groups 9320 number_of_objects 2 set_tight_grouping avoid_forest_zone 2 temp_min_distance_group_placement 14 terrain_to_place_on DIRT }
-create_object GOLD { set_gaia_object_only number_of_objects 2 set_tight_grouping number_of_groups 9320 avoid_forest_zone 1 temp_min_distance_group_placement 20 terrain_to_place_on DLC_DIRT4 }
-
-
-create_object STONE { set_gaia_object_only number_of_objects 5 set_tight_grouping number_of_groups 1 avoid_forest_zone 4 min_distance_to_players 12 max_distance_to_players 13 min_distance_group_placement 6 set_circular_placement }
-create_object STONE { set_gaia_object_only number_of_groups 9320 number_of_objects 2 avoid_forest_zone 2 min_distance_to_players 20 temp_min_distance_group_placement 12 terrain_to_place_on NNB }
-create_object STONE { set_gaia_object_only number_of_groups 9320 avoid_forest_zone 1 min_distance_to_players 20 temp_min_distance_group_placement 8 min_distance_group_placement 4 terrain_to_place_on DIRT3 }
-
-
-create_object DLC_BOXTURTLE { number_of_groups 9320 temp_min_distance_group_placement 4 }
-create_object DOLPHIN { number_of_groups 9320 min_distance_group_placement 8 terrain_to_place_on DLC_WATER4 }
-create_object DOLPHIN { number_of_groups 9320 set_scaling_to_map_size min_distance_group_placement 6 terrain_to_place_on DEEP_WATER }
-create_object DOLPHIN { number_of_groups 9320 set_scaling_to_map_size temp_min_distance_group_placement 4 terrain_to_place_on MED_WATER } */
+if REGICIDE create_object KING { set_place_for_every_player find_closest } endif
 
 <LAND_GENERATION>
 

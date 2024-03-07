@@ -4,6 +4,7 @@
 #const F 69
 #const WRB 82
 #const WGB 108
+#const WGB2 81
 #const GW 95
 #const BW 96
 #const BUSHA 302
@@ -58,13 +59,13 @@ behavior_version 1
 effect_amount GAIA_SET_ATTRIBUTE DLC_RAINTREE ATTR_TERRAIN_ID 13
 
 <LAND_GENERATION>
-base_terrain WGB
+base_terrain WGB2
 
 enable_waves 0
 
 create_player_lands
 {
-	base_terrain WGB
+	base_terrain WGB2
 	land_percent 0
 	base_size 0
 	other_zone_avoidance_distance 12
@@ -239,7 +240,7 @@ endif
 
 create_elevation 1
 {
-	base_terrain WGB
+	base_terrain WGB2
 if TINY_MAP
 	number_of_tiles 2500
 	number_of_clumps 50
@@ -258,7 +259,7 @@ endif
 }
 create_elevation 2
 {
-	base_terrain WGB
+	base_terrain WGB2
 if TINY_MAP
 	number_of_tiles 500
 	number_of_clumps 10
@@ -281,7 +282,7 @@ endif
 /*
 create_elevation 3
 {
-	base_terrain WGB
+	base_terrain WGB2
 if TINY_MAP
 	number_of_tiles 250
 	number_of_clumps 10
@@ -306,12 +307,12 @@ create_terrain DLC_ROCK
 create_terrain DLC_ROCK
 { base_terrain DLC_DESERTGRAVEL land_percent 100 number_of_clumps 9320 terrain_mask 1 }
 
-create_terrain DLC_MANGROVESHALLOW { base_terrain WGB land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
-create_terrain DLC_MANGROVESHALLOW { base_terrain WGB land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW { base_terrain WGB2 land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
+create_terrain DLC_MANGROVESHALLOW { base_terrain WGB2 land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
 
 create_terrain DLC_RAINFOREST
 {
-	base_terrain WGB
+	base_terrain WGB2
 	land_percent 14
 	number_of_clumps 20
 	set_scale_by_groups
@@ -332,14 +333,13 @@ create_terrain DLC_RAINFOREST
 	spacing_to_other_terrain_types 1
 }
 
-
 create_terrain GRAVEL1 { base_terrain LEAVES land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
 create_terrain GRAVEL1 { base_terrain LEAVES land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
 
 create_terrain GRAVEL1
-{ base_terrain WGB land_percent 100 number_of_clumps 9320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+{ base_terrain WGB2 land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 3 }
 create_terrain GRAVEL1
-{ base_terrain WGB land_percent 100 number_of_clumps 109320 set_scale_by_groups spacing_to_other_terrain_types 1 }
+{ base_terrain WGB2 land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 3 }
 
 create_terrain DLC_ROCK
 { base_terrain GRAVEL1 land_percent 4 number_of_clumps 60 set_scale_by_groups terrain_mask 1 }
@@ -667,7 +667,7 @@ create_object RELIC
 		temp_min_distance_group_placement 75
 	endif
 	avoid_forest_zone 3
-	terrain_to_place_on WGB
+	terrain_to_place_on WGB2
 }
 create_object DOLPHIN
 {
@@ -698,7 +698,7 @@ create_object DLC_WATERBUFFALO
 	set_scaling_to_map_size
 	temp_min_distance_group_placement 20
 	avoid_forest_zone 2
-	terrain_to_place_on WGB
+	terrain_to_place_on WGB2
 }
 create_object BOAR
 {
@@ -708,7 +708,7 @@ create_object BOAR
 	set_gaia_object_only
 	temp_min_distance_group_placement 24
 	avoid_forest_zone 2
-	terrain_to_place_on WGB
+	terrain_to_place_on WGB2
 }
 create_object TRAP
 {
