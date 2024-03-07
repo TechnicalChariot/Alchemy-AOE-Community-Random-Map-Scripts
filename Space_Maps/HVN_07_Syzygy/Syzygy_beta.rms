@@ -1,7 +1,10 @@
 /* Syzygy */
 /* A Random Map Script initially started by BPDrej, but mostly finished by Jasuni
 
-Authors: Jasuni, BPDrej
+Title: Syzygy
+Authors: Jasuni (primary), BPDrej (started script, secondary)
+Date: March 2024
+Notice: Map developed for Alchemy League Season 2 at their request and may be used for it (and any other tournaments that wish to use it may do so, but I request a notification from any doing so).
 
 idea: randomize the terrains for each planet so that players have to scout it out - nomad start, with 1 vil on top planet, 1 vil bottom planet, and 1 vil somewhere else (place via actor area?) Could also have players start with a fishing ship (good for scouting) in a map corner (either top/bottom or left/right: likely left/right)
 Syzygy randomizing: when selecting terrains, do a random chance for first 1, then random chance with one removed (remove last 1, check for duplicate) for second planet; 3rd planet remove last 2, if get duplicate check which planet it was (first removed if first planet, otherwise second); remove 3 for last planet (handle like 3rd planet)
@@ -32,6 +35,27 @@ forest terrains: JUNGLE, BAMBOO, etc.
 
 
 TODO adjust planet sizes so that each terrain has a more equal share (right not the leftmost planet has extra space, while the rightmost seems to have the least)
+
+terrains made/used: 
+Farmland
+Barren (Gravel)
+Evil Fog
+Desert
+
+Dirt
+Snow heavy (mountainous biome)
+Dirt4 (forest biome)
+Savannah
+
+Leaves (forest biome)
+Snow (forest biome)
+Bogland (mangrove)
+Dirt Mud (mangrove and muddy water; forest biome)
+
+
+need to add: great plain, cracked, dry mountain, rainforest
+
+Personal playtest notes: Way overdid it on the food resources from the looks of it. I think that I can safely get rid of the dolphins (probably the shore fish as well).
  */
   /* TODO this would make a fine map idea: a map that is nothing but BAOBOB_FOREST. I could place a TC in the closest spot for each player, and then use actor areas to place villagers, scouts, starting res, etc. Would make for a very unusual map. tentative title: Baobob maze */
 /* date:  */
@@ -104,7 +128,7 @@ direct_placement
 #const FOREST_OAK_BUSH 20
 #const SNOW_FOUNDATION 36
 #const SNOW_ROAD 38
-#const ROAD_FUNGUS 39
+#const OBSOLETE_ROAD_FUNGUS 39
 #const CORRUPTION 69 
 #const GRAVEL 70 
 #const UNDERBRUSH_LEAVES 71 
@@ -132,6 +156,39 @@ direct_placement
 #const B3 52 /* DLC_BEACH3 */
 #const WRB 109 /* DLC_WETROCKBEACH */
 
+/*
+#const PHOTON_MAN 430  Joan the maid */
+
+#const PHOTON_MAN 1292 /* queen 
+The photon man is practically a requirement of the torunament, therefore players will start with a photon scout. The photon scout will prioritize placement on radioactive terrain. If there is no radioactive planet, it will place on the barren planet instead. Finally, if neither planet is available, it will place on the rock terrain between planets. May change after tournament, but that is how it will be for now. */
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_TRAITS 16
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ATTACK_GRAPHIC 1908
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING_GRAPHIC 1913
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_STANDING2_GRAPHIC 1914
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_DYING_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_UNDEAD_GRAPHIC 1911
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_WALKING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_RUNNING_GRAPHIC 1918
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_NAME_ID 5043
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_ICON_ID 300
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_LINE_OF_SIGHT 5
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_SEARCH_RADIUS 5
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HITPOINTS 45
+effect_percent SET_ATTRIBUTE PHOTON_MAN ATTR_MOVE_SPEED 110
+effect_amount SET_ATTRIBUTE PHOTON_MAN ATTR_HERO_STATUS 66
+
+/* TODO A tree option for certain planets: Barren, city
+
+#const RUBBLE_AQUEDUCT 1522
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_STANDING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_WALKING_GRAPHIC 1704
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DYING_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_GRAPHIC 7344
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_DEAD_ID 1522
+effect_amount GAIA_SET_ATTRIBUTE RUBBLE_AQUEDUCT ATTR_STORAGE_VALUE 99999999
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_NAME_ID 5393
+effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_ICON_ID 856
+*/
 /* set berry bushes land id to all land - needed for farmland terrain, I think. */
 effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
 effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
@@ -155,24 +212,25 @@ if NONRANDOM_PLANETS
 	#define RADIOACTIVE_PLANET_3
 	#const PN3B 108 /* DLC_GRAVELBEACH */
 
-	#const PN4  14  /* DESERT */
-	#define DESERT_PLANET
-	#define DESERT_PLANET_4
+	#const PN4  24  /* ROAD */
+	#define CITY_PLANET
+	#define CITY_PLANET_4
 	#const PN4B 109 /* DLC_WETROCKBEACH */
 else /* TODO randomize */
  /* temporary measure for development purposes */
 	start_random
-		percent_chance 0 #define CONFIG4
-		percent_chance 34 #define CONFIG3
+		percent_chance 25 #define CONFIG4
+		percent_chance 25 #define CONFIG3
 		percent_chance 0 #define CONFIG5
-		percent_chance 33 #define CONFIG2
-		percent_chance 33 #define CONFIG1
+		percent_chance 25 #define CONFIG2
+		percent_chance 25 #define CONFIG1
 	end_random
 	if CONFIG1
-		#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
-		#define FARMLAND_PLANET
-		#define FARMLAND_PLANET_1
-		#const PN1B 2 /* beach */
+
+		#const PN1  24  /* ROAD */
+		#define CITY_PLANET
+		#define CITY_PLANET_1
+		#const PN1B 109 /* DLC_WETROCKBEACH */
 
 		#const PN2  70  /* GRAVEL  */
 		#define BARREN_PLANET
@@ -228,51 +286,71 @@ else /* TODO randomize */
 		#define DIRT_MUD_MANGROVE_MAZE_PLANET
 		#define DIRT_MUD_MANGROVE_MAZE_PLANET_2
 		#const PN4B 109 /* DLC_WETROCKBEACH */
-	elseif CONFIG4 /* TODO currently working on:
+	elseif CONFIG4
+		#const PN1 69 /* Corruption */
+		#define RADIOACTIVE_PLANET
+		#define RADIOACTIVE_PLANET_1
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+		
+		#const PN2  42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+		#define DIRT4_PLANET
+		#define DIRT4_PLANET_2
+		#const PN2B 2 /* beach */
+
+		#const PN3 101 /* DLC_BOGLAND - mangrove terrain */
+		#define BOGLAND_MANGROVE_PLANET
+		#define BOGLAND_MANGROVE_PLANET_3
+		#const PN3B 108 /* DLC_GRAVELBEACH */
+		
+		#const PN4  29 /* Farmland, 0%, aka FARMLAND1 */
+		#define FARMLAND_PLANET
+		#define FARMLAND_PLANET_4
+		#const PN4B 2 /* beach */
+	elseif CONFIG6 /* TODO currently working on: Rainforest terrain (JUNGLE 17 on 71 UNDERBRUSH_LEAVES or 77 UNDERBRUSH_JUNGLE)
 	
 		unlisted:
-		some road terrain
+		some road terrain - city terrain
 		DLC_CRACKED (can I get away with doing this one in two different ways? Or maybe it would be easier to give this terrain a larger percentage so that it is more likely to be picked)
 
 		snowy forest biome (dead trees, similar to the leaves biome, but less hunt, chance of less berries, and standard stone/gold)
 
-		Great plains biome
-		Grassy hills biome
+		Great plains biome - will always include a horse scout, and plenty of hunts
+		Grassy hills biome - may include a horse scout, may include mountains 1,2,5,6,7,8
 
-		And add straggler trees for the biomes as appropriate.
+		TODO And add straggler trees for the biomes as appropriate.
 
 		Also, chance of elevation on some of the other biomes (most of the terrains it would make sense for, though not the great plains
 
 		TODO Will want to add support to new map sizes.
 	*/
-		#const PN1 12 /* temp: GRASS2 */
-		#define BOGLAND_PLANET
-		#define BOGLAND_PLANET_1
+		#const PN1 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+		#define JUNGLE_PLANET
+		#define JUNGLE_PLANET_1
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 
-		#const PN2 102  /* DLC_DESERTGRAVEL - TODO swap with BARREN planet, and alter barren planet accordingly. */
-		#define DESERTGRAVEL_PLANET
-		#define DESERTGRAVEL_PLANET_2
+		#const PN2  74  /* SNOW_HEAVY  */
+		#define SNOW_HEAVY_PLANET
+		#define SNOW_HEAVY_PLANET_2
 		#const PN2B 107 /* DLC_WETBEACH */
 
 		#const PN3  100 /* DLC_DRYGRASS  */
 		#define DRYGRASS_PLANET
 		#define DRYGRASS_PLANET_3
 		#const PN3B 2 /* beach */
-
-		#const PN4  24  /* ROAD */
-		#define ROAD_PLANET
-		#define ROAD_PLANET_4
-		#const PN4B 109 /* DLC_WETROCKBEACH */
+		
+		#const PN4  29 /* Farmland, 0%, aka FARMLAND1 */
+		#define FARMLAND_PLANET
+		#define FARMLAND_PLANET_4
+		#const PN4B 2 /* beach */
 	elseif CONFIG5
-		#const PN1 12 /* temp: GRASS2 */
-		#define BOGLAND_PLANET
-		#define BOGLAND_PLANET_1
+		#const PN1 12 /* GRASS2 */
+		#define GRASS2_PLAINS_PLANET
+		#define GRASS2_PLAINS_PLANET_1
 		#const PN1B 108 /* DLC_GRAVELBEACH */
 
-		#const PN2 0 /* temp: GRASS */
-		#define DESERTGRAVEL_PLANET
-		#define DESERTGRAVEL_PLANET_2
+		#const PN2 0 /* GRASS - grassy hills biome */
+		#define GRASS_HILLS_PLANET
+		#define GRASS_HILLS_PLANET_2
 		#const PN2B 107 /* DLC_WETBEACH */
 
 		#const PN3  45 /* DLC_CRACKED  */
@@ -281,8 +359,8 @@ else /* TODO randomize */
 		#const PN3B 2 /* beach */
 
 		#const PN4  24  /* ROAD */
-		#define ROAD_PLANET
-		#define ROAD_PLANET_4
+		#define CITY_PLANET
+		#define CITY_PLANET_4
 		#const PN4B 109 /* DLC_WETROCKBEACH */
 
 	endif
@@ -338,41 +416,170 @@ if SNOW_HEAVY_PLANET
 	}
 endif /* would add cliffs, except wouldn't be able to really control where they go */
 
+if DIRT_PLANET
+	start_random
+		percent_chance 10 create_elevation 3 {
+			base_terrain DIRT
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+		percent_chance 85 #define HIGH_ELEVATION_DIRT
+	end_random
+	if HIGH_ELEVATION_DIRT
+		create_elevation 5 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 300
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 2
+		}
+		create_elevation 4 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 300
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3
+		}
+		create_elevation 3 {
+			base_terrain DIRT
+			number_of_clumps 16
+			number_of_tiles 150
+			set_scale_by_size
+			enable_balanced_elevation
+		}
+	endif
+endif
+/* standard elevation - may be a bit much when it does appear.
+spacing 3 ensures that it won't spill over onto a mangrove terrain
+if TERRAIN_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain TERRAIN
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+
+ */
+if LEAVES_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain LEAVES
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if SNOW_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain SNOW
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if BARREN_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain GRAVEL
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if RADIOACTIVE_PLANET /* a bit hard to see, but whatever */
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain CORRUPTION
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if DESERT_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain DESERT
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if FARMLAND_PLANET /* Farmland planet is relatively flat */
+	start_random
+		percent_chance 10 create_elevation 3 {
+			base_terrain FARMLAND1
+			number_of_clumps rnd(1,10)
+			number_of_tiles rnd(10,100)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if CITY_PLANET /* city planet is more likely to be flat - cities are sometimes built on hilly terrain, but things may get flattened. Not as flat as farmland terrain though. */
+	start_random
+		percent_chance 20 create_elevation 3 {
+			base_terrain ROAD
+			number_of_clumps rnd(2,12)
+			number_of_tiles rnd(40,200)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+
+if SAVANNAH_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain DLC_SAVANNAH
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
+if DIRT4_PLANET
+	start_random
+		percent_chance 30 create_elevation 3 {
+			base_terrain DLC_DIRT4
+			number_of_clumps rnd(3,32)
+			number_of_tiles rnd(30,300)
+			set_scale_by_size
+			enable_balanced_elevation
+			spacing 3 
+		}
+	end_random
+endif
 <TERRAIN_GENERATION>
-/*
-create_terrain SNOW
-{
-	base_terrain DLC_GRAVELBEACH
-	land_percent 100
-	number_of_clumps 420
-	set_scale_by_size
-	spacing_to_other_terrain_types 1
-}
-create_terrain GRASS
-{
-	base_terrain B3
-	land_percent 100
-	number_of_clumps 420
-	set_scale_by_size
-	spacing_to_other_terrain_types 1
-}
-create_terrain DIRT
-{
-	base_terrain BEACH
-	land_percent 100
-	number_of_clumps 420
-	set_scale_by_size
-	spacing_to_other_terrain_types 1
-}
-create_terrain GRAVEL
-{
-	base_terrain WRB
-	land_percent 100
-	number_of_clumps 420
-	set_scale_by_size
-	spacing_to_other_terrain_types 1
-}
-*/
 #define BORDER_CLEANUP
 if BORDER_CLEANUP
 	/* PLANET 1 */
@@ -882,7 +1089,7 @@ if SNOW_HEAVY_PLANET
 		base_terrain SNOW_HEAVY
 		terrain_mask 1
 		number_of_clumps 2
-		height_limits 5 5
+		height_limits 5 6
 	}
 	start_random
 		percent_chance 50 #define SNOW_HEAVY_USE_ROCK
@@ -930,6 +1137,36 @@ if BARREN_PLANET
 		terrain_mask 1
 	}
 endif
+if CITY_PLANET
+/*	road terrains: ROAD, ROAD2, road_snow (38), road_fungus (39), DLC_DRYROAD, DLC_JUNGLEROAD (many of the preceeding are obsolete and can't be layered)
+
+	another road_fungus (75), road gravel (78), DLC_ROADGRAVEL (obsolete, cannot have resources on it)
+
+	TODO could alter to have a snowy variation, using DLC_FORESTDEAD (106) or some snowy forest and a snowy road
+	*/
+
+	create_terrain ROAD_FUNGUS { /* perhaps use this for placing resources? they're parks */
+		base_terrain ROAD
+		land_percent rnd(1,5)
+		number_of_clumps rnd(1,3)
+		set_scale_by_groups
+		height_limits 2 3
+		clumping_factor 100 /* want these to be round, so high clumping factor. */
+	}
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain ROAD_FUNGUS
+		land_percent 100
+		number_of_clumps 932
+		spacing_to_other_terrain_types 1
+		terrain_mask 2
+	}
+	create_terrain ROAD_GRAVEL { /* looks like a ruined road - not as much in disrepair as without a terrain mask, but maybe generalize this one */
+		base_terrain ROAD
+		land_percent 20
+		number_of_clumps 9320
+		terrain_mask 1
+	}
+endif
 if DESERT_PLANET
 	create_terrain PALM_DESERT {
 		base_terrain DESERT
@@ -940,7 +1177,7 @@ if DESERT_PLANET
 	}
 	/* optional: add terrain masks for desert terrain */
 endif
-if FARMLAND_PLANET 
+if FARMLAND_PLANET /* May need to check that this biome doesn't have trapped villager spawns - seems like that may be a risk here, as many locations are often very close to trapped. Believe that I've fixed this now, with the berries being forced away from the forest zones. */
 	create_terrain FARMLAND_FULL {
 		base_terrain FARMLAND1
 		land_percent 2
@@ -975,10 +1212,62 @@ if FARMLAND_PLANET
 	}
 	create_terrain MEDITERRANEAN_FOREST {
 		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 6
+		terrain_mask 1
+	}
+	create_terrain FARMLAND2 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	} 
+	/* these are the terrains that berries are placed on.
+	create_terrain FARMLAND_FULL {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	}
+	create_terrain FARMLAND3 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	} */
+	/*
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 6
+		terrain_mask 1
+	}
+	create_terrain FARMLAND_FULL {
+		base_terrain FARMLAND1
+		land_percent rnd(2,3)
+		number_of_clumps 40
+		terrain_mask 1
+		spacing_to_other_terrain_types 1
+	}
+	create_terrain FARMLAND3 {
+		base_terrain FARMLAND1
+		land_percent rnd(2,3)
+		number_of_clumps 40
+		terrain_mask 1
+	}
+	create_terrain FARMLAND2 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	}  */
+	create_terrain MEDITERRANEAN_FOREST {
+		base_terrain FARMLAND1
 		land_percent 100
 		number_of_clumps 932
 		terrain_mask 1
-	}
+	} 
 	create_terrain MEDITERRANEAN_FOREST {
 		base_terrain FARMLAND1
 		base_layer MEDITERRANEAN_FOREST
@@ -1229,6 +1518,44 @@ if DIRT_MUD_MANGROVE_MAZE_PLANET
 		terrain_mask 2 /* under */
 	}
 endif
+if JUNGLE_PLANET /* TODO double check that this works as expected when adding elevation to the various terrains */
+	create_terrain JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 3
+		spacing_to_other_terrain_types 3
+		/* UNDERBRUSH_JUNGLE */
+	}
+	create_terrain JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 9320
+		height_limits 2 3
+		spacing_to_other_terrain_types 1
+		set_flat_terrain_only
+		/* UNDERBRUSH_JUNGLE */
+	}
+	create_terrain UNDERBRUSH_JUNGLE {
+		base_terrain UNDERBRUSH_LEAVES
+		land_percent 20
+		number_of_clumps 932
+		terrain_mask 1
+	}
+	create_terrain UNDERBRUSH_JUNGLE {
+		base_terrain JUNGLE
+		land_percent 20
+		number_of_clumps 932
+		terrain_mask 1
+	}
+	create_terrain UNDERBRUSH_JUNGLE { /* TODO right not is rather inconsistent in results: may have lots of small pockets, may have a few large pockets. Would need to exercise some more manual randomness to ensure object generation, so I'll come back to it later. */ 
+		base_terrain JUNGLE
+		land_percent rnd(1,3)
+		number_of_clumps rnd(5,30)
+		spacing_to_other_terrain_types rnd(1,3)
+		
+	}
+endif
 if LEAVES_PLANET
 	start_random
 		percent_chance 11 #const LEAVES_FOREST_TERRAIN 10 /* FOREST */
@@ -1313,13 +1640,21 @@ if LEAVES_PLANET
 		number_of_clumps 9320
 	}
 endif
-if DIRT_PLANET
+if DIRT_PLANET 
 	create_terrain DLC_DRAGONFOREST { /* note potential issue of villager getting trapped in a forest. */
 		base_terrain DIRT
 		land_percent rnd(1,5)
 		number_of_clumps rnd(4,30)
 		spacing_to_other_terrain_types 1
-		
+		height_limits 0 4
+	}
+	create_terrain DIRT_MUD {
+		base_terrain DIRT
+		height_limits 5 6
+		spacing_to_other_terrain_types 1
+		number_of_tiles 4
+		number_of_clumps 1
+		terrain_mask 1
 	}
 	create_terrain DLC_SAVANNAH {
 		base_terrain DIRT
@@ -1358,13 +1693,13 @@ if DIRT4_PLANET  /* redo this one: note: may want to increase villager avoid_for
 		base_terrain DLC_DIRT4
 		land_percent 5
 		number_of_clumps 30
-		height_limits 1 2  /* this statement can go below height 2, but will not go right to the water's edge */
+		height_limits 1 3  /* this statement can go below height 2, but will not go right to the water's edge */
 	}
 	create_terrain DLC_BAOBABFOREST {
 		base_terrain DLC_DIRT4
 		land_percent 25
 		number_of_clumps 30
-		height_limits 2 2
+		height_limits 2 3
 	}
 	create_terrain DLC_DIRT4 {
 		base_terrain DLC_BAOBABFOREST
@@ -1502,13 +1837,20 @@ if RADIOACTIVE_PLANET
 			actor_area 3
 			actor_area_radius 3
 		}
-	end_random
+	end_random 
+	#define PHOTON_SCOUT_PLACED
+	create_object PHOTON_MAN { /* Photon man has the gear to survive/explore radioactive environments. */
+		set_place_for_every_player
+		terrain_to_place_on CORRUPTION
+		layer_to_place_on DLC_DESERTGRAVEL
+		min_distance_group_placement 2
+	}
 endif
+/* I think I overdid it on the food, so I can get rid of these.
 create_object SHORE_FISH {
 	number_of_objects 9320
 	temp_min_distance_group_placement 5
 	avoid_actor_area 1
-	/* TODO add actor area for villager placement on heavy forested planets */
 }
 create_object DOLPHIN {
 	number_of_objects 9320
@@ -1516,8 +1858,7 @@ create_object DOLPHIN {
 	avoid_actor_area 1
 	max_distance_to_other_zones 5
 	terrain_to_place_on WATER
-	/* TODO add actor area? */
-}
+} */
 /* create villagers for each player, 1 on each planet, avoiding radioactive planet aura. */
 create_object VILLAGER {
 	number_of_objects 1
@@ -1563,6 +1904,15 @@ create_object VILLAGER {
 	avoid_forest_zone 2
 	avoid_cliff_zone 2
 }
+/* for checking villager placements on a specific terrain - if it ever does happen, it will surely be farmland terrain
+create_object FLAG_A {
+	number_of_objects 9320
+	avoid_actor_area 1
+	terrain_to_place_on FARMLAND1
+	temp_min_distance_group_placement 1
+	avoid_forest_zone 2
+	avoid_cliff_zone 2
+} */
 if DESERT_PLANET
 	create_object GOLD {
 		avoid_actor_area 2
@@ -1652,7 +2002,7 @@ if DESERT_PLANET
 		}
 	endif
 	start_random
-	percent_chance 20 create_object DLC_DROMEDARY {
+	percent_chance 80 create_object DLC_DROMEDARY {
 			avoid_actor_area 1
 			set_place_for_every_player
 			terrain_to_place_on DESERT
@@ -1762,7 +2112,189 @@ if DIRT4_PLANET
 	endif
 endif
 
+if CITY_PLANET
+/* create parks */
+	create_object FORAGE {
+		number_of_objects 9320
+		temp_min_distance_group_placement 2 /* used to be 1, but then I determined I overdid it on the food, and 2 will make wood easier to access. */
+		terrain_to_place_on ROAD_FUNGUS
+		actor_area 7
+		actor_area_radius 5
+	}
+	create_object DLC_ORANGEBUSH {
+		number_of_objects 9320
+		temp_min_distance_group_placement 2
+		terrain_to_place_on ROAD_FUNGUS
+		actor_area 7
+		actor_area_radius 5
+	}
+	/*
+	animals: boar
+	deer (I've seen them at two college campuses)
 
+	herdables: most any fit
+	*/
+	
+	start_random
+		percent_chance 15 #const CITY_HERDABLE 594 /* sheep */
+		percent_chance 15 #const CITY_HERDABLE 833 /* turkey */
+		percent_chance 15 #const CITY_HERDABLE 1060 /* goat */
+		percent_chance 15 #const CITY_HERDABLE 1245 /* pig */
+		percent_chance 5 #const CITY_HERDABLE 705 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1596 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1598 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1600 /* cow */
+		percent_chance 1 #const CITY_HERDABLE 305 /* llama */
+		percent_chance 1 #const CITY_HERDABLE 1142 /* water buffalo */
+		percent_chance 18 #const CITY_HERDABLE 1243 /* goose */
+	end_random
+	create_object CITY_HERDABLE {
+		avoid_actor_area 1
+		number_of_groups rnd(3,16)
+		number_of_objects rnd(1,4)
+		temp_min_distance_group_placement rnd(8,25)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		set_gaia_object_only
+		set_loose_grouping
+		terrain_to_place_on ROAD
+		actor_area_to_place_in 7
+	}
+	create_object DEER {
+		avoid_actor_area 1
+		number_of_groups rnd(3,16) /* TODO change amounts */
+		number_of_objects rnd(1,4)
+		temp_min_distance_group_placement rnd(8,25)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		avoid_forest_zone 1
+		avoid_cliff_zone 1
+		set_gaia_object_only
+		set_loose_grouping
+		terrain_to_place_on ROAD
+		actor_area_to_place_in 7
+	}
+	start_random
+		percent_chance 50 create_object BOAR {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16) /* TODO change amounts */
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
+
+		}
+	end_random
+	create_object OUTPOST {
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(10,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		set_gaia_object_only
+		set_building_capturable
+		terrain_to_place_on ROAD
+		avoid_forest_zone 2 /* specs require 6 */
+		actor_area 8
+		actor_area_radius 2
+	}
+	start_random
+		percent_chance 50 #define CITY_EXTRA_VILS
+	end_random
+	if CITY_EXTRA_VILS
+		create_object ON_GRID {
+			avoid_actor_area 1 
+			resource_delta -60 
+			second_object VILLAGER
+			set_place_for_every_player
+			group_placement_radius 3
+			min_distance_group_placement 1
+			actor_area_to_place_in 8
+			actor_area 9
+			actor_area_radius 6
+			avoid_actor_area 9
+			override_actor_radius_if_required
+			terrain_to_place_on ROAD
+		}
+		create_object VILLAGER {
+			avoid_actor_area 1
+			actor_area_to_place_in 9
+			number_of_objects 4
+			set_place_for_every_player
+			min_distance_group_placement 1
+			terrain_to_place_on ROAD
+		}
+
+	endif
+	create_object ON_GRID { /* TODO - not ideal, since it can place near the water */
+		second_object HOUSE
+		set_place_for_every_player
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 3
+		min_distance_group_placement 2
+		max_distance_to_other_zones 4
+	}
+	/* extra stone, standard gold, but guaranteed to appear. */
+	create_object GOLD {
+		terrain_to_place_on ROAD
+		ignore_terrain_restrictions
+		place_on_specific_land_id 1
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,10)
+		group_variance rnd(0,1)
+		temp_min_distance_group_placement rnd(16,40)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		max_distance_to_other_zones 1
+		set_gaia_object_only
+		avoid_forest_zone 3
+		set_tight_grouping
+		actor_area 2
+		actor_area_radius 3
+		avoid_actor_area 2
+		avoid_actor_area 3
+	}
+	create_object STONE { /* extra stone */
+		terrain_to_place_on ROAD
+		ignore_terrain_restrictions
+		place_on_specific_land_id 1
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,30)
+		group_variance rnd(0,1)
+		temp_min_distance_group_placement rnd(10,25)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		max_distance_to_other_zones 1
+		set_gaia_object_only
+		avoid_forest_zone 3
+		set_tight_grouping
+		actor_area 3
+		actor_area_radius 3
+		avoid_actor_area 2
+		avoid_actor_area 3
+	}
+
+	/* TODO add more neutral buildings, and ruins 
+	Not really satisfied with this, but it will do for now.
+	*/
+	create_object HOUSE {
+		set_gaia_object_only
+		set_gaia_unconvertible
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 3
+		min_distance_group_placement 2
+		temp_min_distance_group_placement rnd(5,10)
+		number_of_objects 9320
+		max_distance_to_other_zones 4
+	}
+endif
 if SNOW_PLANET /* similar to leaves planet */
 
 	create_object FORAGE { /* same as on leaves terrain - considered having a randomizer for if there are berries, but decided against it. TODO could make more likely when the trees are a dead forest (since those have bushes in them) */
@@ -1891,11 +2423,12 @@ if SNOW_PLANET /* similar to leaves planet */
 		}
 	endif
 endif
-
-/*
-		Leaves biome: make a forest maze by using two forest terrains. One will be a terrain mask (placed on Leaves terrain). Other will be placed on LEAVES terrain with the other's terrain mask. Repeat with increasing distance to other zones attributes. Eventually, fill entire terrain with the terrain mask (with a spacing_to_other_terrain 5 attribute, followed by filling all the terrain mask in) to ensure the rest of the planet is forested for a heavily forested maze. Leaves biome would need berry bushes (probably a good amount, potentially), hunts, and likely standard gold (mines can be in forests after all), but maybe slightly lowered stone.
-
-		*/
+if JUNGLE_PLANET
+	/* UNDERBRUSH_JUNGLE on inside  UNDERBRUSH_LEAVES on outside
+	TODO finish this biome later - is only biome that can have predators, due to the enclosed nature of the UNDERBRUSH_JUNGLE
+	Should have lots of forage (inside and outside perhaps? - will need to avoid the water terrain a little to ensure a walking path for villagers), plenty of hunt buried in the forest, gold/stone buried in the forest, and possibly some predators buried in the forest also. Should be food rich, and could make generally resource rich.
+	 */
+endif
 if LEAVES_PLANET
 	start_random
 		percent_chance 50 #const LEAVES_BERRY 59 /* FORAGE */
@@ -2462,6 +2995,22 @@ endif
 
 
 if DIRT_PLANET	
+	start_random
+		percent_chance 50 create_object MOUNTAIN_3 {
+			terrain_to_place_on DIRT
+			layer_to_place_on DIRT_MUD
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+		percent_chance 50 create_object MOUNTAIN_4 {
+			terrain_to_place_on DIRT
+			layer_to_place_on DIRT_MUD
+			actor_area 5
+			actor_area_radius 8
+			avoid_actor_area 5
+		}
+	end_random
 	create_object FORAGE {
 		number_of_objects rnd(2,6)
 		number_of_groups rnd(2,6)
@@ -2585,6 +3134,7 @@ if FARMLAND_PLANET
 		set_gaia_object_only
 		place_on_specific_land_id 4
 		max_distance_to_other_zones 3
+		avoid_forest_zone 1 /* to ensure that vils can escape */
 	}
 	create_object DLC_ORANGEBUSH { /* change to terrain table 4? land (from 8, land-farm) */
 		number_of_objects rnd(3,6)
@@ -2599,6 +3149,7 @@ if FARMLAND_PLANET
 		set_gaia_object_only
 		place_on_specific_land_id 1
 		max_distance_to_other_zones 3
+		avoid_forest_zone 1 /* to ensure that vils can escape */
 
 	}
 	/* 
@@ -2692,6 +3243,7 @@ if SNOW_HEAVY_PLANET
 			layer_to_place_on SNOW
 			actor_area 5
 			actor_area_radius 8
+			avoid_actor_area 5
 		}
 	endif
 	if SNOW_HEAVY_M10
@@ -2706,6 +3258,8 @@ if SNOW_HEAVY_PLANET
 	create_object DLC_MOUNTAIN_9 {
 		terrain_to_place_on SNOW_HEAVY
 		layer_to_place_on SNOW
+		actor_area 5
+		actor_area_radius 8
 		avoid_actor_area 5
 	}
 	create_object DLC_GOAT { /* TODO add chance of it being a llama */
@@ -2850,6 +3404,25 @@ if BARREN_PLANET
 		actor_area_radius 3
 	}
 	/* TODO add a chance of a small amount of a modified trees, like columns - see other space map scripts. BP_Drej mentioned column forests from Mars and Singularity. Also noted dead white birch.  */
+	if PHOTON_SCOUT_PLACED 
+	else
+		#define PHOTON_SCOUT_PLACED
+		create_object PHOTON_MAN {
+			set_place_for_every_player
+			terrain_to_place_on GRAVEL
+			min_distance_group_placement 2
+		} 
+	endif
+endif
+
+if PHOTON_SCOUT_PLACED 
+else
+	#define PHOTON_SCOUT_PLACED
+	create_object PHOTON_MAN {
+		set_place_for_every_player
+		terrain_to_place_on DLC_ROCK
+		min_distance_group_placement 1
+	} 
 endif
 /* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
 create_object RELIC {
