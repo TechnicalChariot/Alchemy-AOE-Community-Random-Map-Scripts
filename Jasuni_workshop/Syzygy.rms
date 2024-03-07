@@ -53,7 +53,9 @@ Bogland (mangrove)
 Dirt Mud (mangrove and muddy water; forest biome)
 
 
-need to add: city, great plain, cracked, dry mountain, rainforest
+need to add: great plain, cracked, dry mountain, rainforest
+
+Personal playtest notes: Way overdid it on the food resources from the looks of it. I think that I can safely get rid of the dolphins (probably the shore fish as well).
  */
   /* TODO this would make a fine map idea: a map that is nothing but BAOBOB_FOREST. I could place a TC in the closest spot for each player, and then use actor areas to place villagers, scouts, starting res, etc. Would make for a very unusual map. tentative title: Baobob maze */
 /* date:  */
@@ -1194,6 +1196,13 @@ if FARMLAND_PLANET /* May need to check that this biome doesn't have trapped vil
 		number_of_clumps 6
 		terrain_mask 1
 	}
+	create_terrain FARMLAND2 {
+		base_terrain FARMLAND1
+		land_percent rnd(1,2)
+		number_of_clumps 40
+		terrain_mask 1
+	} 
+	/* these are the terrains that berries are placed on.
 	create_terrain FARMLAND_FULL {
 		base_terrain FARMLAND1
 		land_percent rnd(1,2)
@@ -1206,7 +1215,7 @@ if FARMLAND_PLANET /* May need to check that this biome doesn't have trapped vil
 		land_percent rnd(1,2)
 		number_of_clumps 40
 		terrain_mask 1
-	}
+	} */
 	/*
 	create_terrain MEDITERRANEAN_FOREST {
 		base_terrain FARMLAND1
@@ -1817,11 +1826,11 @@ if RADIOACTIVE_PLANET
 		min_distance_group_placement 2
 	}
 endif
+/* I think I overdid it on the food, so I can get rid of these.
 create_object SHORE_FISH {
 	number_of_objects 9320
 	temp_min_distance_group_placement 5
 	avoid_actor_area 1
-	/* TODO add actor area for villager placement on heavy forested planets */
 }
 create_object DOLPHIN {
 	number_of_objects 9320
@@ -1829,8 +1838,7 @@ create_object DOLPHIN {
 	avoid_actor_area 1
 	max_distance_to_other_zones 5
 	terrain_to_place_on WATER
-	/* TODO add actor area? */
-}
+} */
 /* create villagers for each player, 1 on each planet, avoiding radioactive planet aura. */
 create_object VILLAGER {
 	number_of_objects 1
@@ -1876,7 +1884,7 @@ create_object VILLAGER {
 	avoid_forest_zone 2
 	avoid_cliff_zone 2
 }
-/* for checking villager placements on a specific terrain
+/* for checking villager placements on a specific terrain - if it ever does happen, it will surely be farmland terrain
 create_object FLAG_A {
 	number_of_objects 9320
 	avoid_actor_area 1
@@ -2088,14 +2096,14 @@ if CITY_PLANET
 /* create parks */
 	create_object FORAGE {
 		number_of_objects 9320
-		temp_min_distance_group_placement 1
+		temp_min_distance_group_placement 2 /* used to be 1, but then I determined I overdid it on the food, and 2 will make wood easier to access. */
 		terrain_to_place_on ROAD_FUNGUS
 		actor_area 7
 		actor_area_radius 5
 	}
 	create_object DLC_ORANGEBUSH {
 		number_of_objects 9320
-		temp_min_distance_group_placement 1
+		temp_min_distance_group_placement 2
 		terrain_to_place_on ROAD_FUNGUS
 		actor_area 7
 		actor_area_radius 5
@@ -2257,6 +2265,7 @@ if CITY_PLANET
 	*/
 	create_object HOUSE {
 		set_gaia_object_only
+		set_gaia_unconvertible
 		terrain_to_place_on ROAD
 		avoid_actor_area 8
 		avoid_forest_zone 3
