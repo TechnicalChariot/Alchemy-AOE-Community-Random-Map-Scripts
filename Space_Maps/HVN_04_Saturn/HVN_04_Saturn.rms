@@ -19,7 +19,7 @@ behavior_version 1
 #const ROCK2 1323
 #const ROCK3 389
 #const ROCK4 396
-#const PHOTON_MAN 1292
+#const PHOTON_MAN 430
 
 /* Removing Oak Forest Tree */
 #const OFT 411
