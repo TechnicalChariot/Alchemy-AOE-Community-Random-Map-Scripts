@@ -20,7 +20,7 @@
 #const ROCK2 1323
 #const ROCK3 389
 #const ROCK4 396
-#const PHOTON_MAN 430
+#const PHOTON_MAN 1292
 
 /* Removing Trade Carts and Cogs for Multi-team Games */
 if 2_TEAM_GAME
