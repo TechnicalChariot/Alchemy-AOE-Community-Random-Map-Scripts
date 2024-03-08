@@ -1,6 +1,8 @@
 /* Cataclysm */
-/* This planet has been hit by its moon, scattering the inhabitants and resources. Players must venture back to their scarred homeworld and rebuild. */
-/* A Random Map Script by BPDrej - 11.11.23 */
+/* A Random Map Script by BPDrej */
+/* Released 11/11/2023 */
+/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-01.pdf */
 
 <PLAYER_SETUP>
 direct_placement

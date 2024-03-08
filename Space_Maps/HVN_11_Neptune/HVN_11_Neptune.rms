@@ -1,4 +1,8 @@
-/*Saturn (3/28/23) by BPDrej */
+/* Neptune */
+/* A Random Map Script by TechChariot */
+/* Released 03/01/24 */
+/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-11.pdf */
 
 #const GRAVEL1 70
 #const MUD 76

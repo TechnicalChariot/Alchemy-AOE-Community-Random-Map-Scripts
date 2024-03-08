@@ -1,4 +1,9 @@
-/*NEBULA (3/24/23) by BPDrej */
+/* Nebula */
+/* A Random Map Script by BPDrej */
+/* Released 03/06/2024 */
+/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-03.pdf */
+
 #const GRAVEL1 70
 #const MUD 76
 #const F 69

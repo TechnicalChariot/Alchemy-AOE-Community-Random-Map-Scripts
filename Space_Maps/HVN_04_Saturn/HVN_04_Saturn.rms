@@ -1,4 +1,8 @@
-/*Saturn (3/28/23) by BPDrej */
+/* Saturn */
+/* A Random Map Script by BPDrej */
+/* Released 02/28/24 */
+/* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
+/* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-04.pdf */
 
 <PLAYER_SETUP>
 random_placement
