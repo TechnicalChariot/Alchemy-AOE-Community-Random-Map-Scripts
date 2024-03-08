@@ -18,7 +18,7 @@ direct_placement
 #const GW   95
 #const SOC 111
 #const ON_GRID 278
-#const PHOTON_MAN 1292
+#const PHOTON_MAN 430
 /* Defining Player Terrain Types */
 #const PT1 6
 #const PT2 6
