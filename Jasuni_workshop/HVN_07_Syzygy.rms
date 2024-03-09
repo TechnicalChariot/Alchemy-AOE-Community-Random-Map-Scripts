@@ -2104,8 +2104,8 @@ note that there may be a little overflow between planets
 standard gold/stone code - for planets that don't have any special reason to carry gold/stone, and for which I'd like a small-medium amount of gold/stone.
 TODO alter these so that gold is less common, but also add gold to rock if each biome rejects gold
 	start_random
-		percent_chance 5 #define NO_TERRAIN_GOLD
-		percent_chance 10 #define NO_TERRAIN_STONE
+		percent_chance 25 #define NO_TERRAIN_GOLD
+		percent_chance 45 #define NO_TERRAIN_STONE
 	end_random 
 	if NO_TERRAIN_GOLD
 	else
@@ -2169,12 +2169,13 @@ if REGICIDE
 endif
 if RADIOACTIVE_PLANET
 	/* maybe add a small chance of there being no resources on the radioactive planet? Feedback: reduce gold/stone (more space). */
+	#define GOLD_PLACED
 	create_object GOLD {
 		terrain_to_place_on CORRUPTION
 		layer_to_place_on DLC_DESERTGRAVEL
-		/* at 4 and 7, extremely gold rich; at 10 and 2, rather gold-poor; result is a wide amount of variation in how much gold there can be. */
+		/* at 4 and 6, extremely gold rich; at 10 and 2, rather gold-poor; result is a wide amount of variation in how much gold there can be. */
 		temp_min_distance_group_placement rnd(4,10)
-		number_of_objects rnd(2,7)
+		number_of_objects rnd(2,6)
 		group_variance 1
 		set_tight_grouping
 		set_gaia_object_only
@@ -2279,8 +2280,11 @@ create_object FLAG_A {
 	avoid_forest_zone 2
 	avoid_cliff_zone 2
 }
+
+
  */
 if DESERT_PLANET
+	#define GOLD_PLACED
 	create_object GOLD {
 		avoid_actor_area 2
 		avoid_actor_area 3
@@ -2434,13 +2438,14 @@ if DIRT4_PLANET
 			avoid_actor_area 4
 		}
 	endif
-	/* low gold and stone */
+	/* low gold and stone 	*/
 	start_random
-		percent_chance 15 #define NO_DIRT4_GOLD
-		percent_chance 60 #define NO_DIRT4_STONE
+		percent_chance 35 #define NO_DIRT4_GOLD
+		percent_chance 55 #define NO_DIRT4_STONE
 	end_random 
 	if NO_DIRT4_GOLD
 	else
+		#define GOLD_PLACED
 		create_object GOLD {
 			terrain_to_place_on DLC_BAOBABFOREST
 			number_of_objects rnd(1,4)
@@ -2483,14 +2488,14 @@ if CITY_PLANET
 	/* create parks */
 	create_object FORAGE {
 		number_of_objects 9320
-		temp_min_distance_group_placement 2 /* used to be 1, but then I determined I overdid it on the food, and 2 will make wood easier to access. */
+		temp_min_distance_group_placement rnd(2,3) /* used to be 1, but then I determined I overdid it on the food, and 2 will make wood easier to access. */
 		terrain_to_place_on ROAD_FUNGUS
 		actor_area 7
 		actor_area_radius 5
 	}
 	create_object DLC_ORANGEBUSH {
 		number_of_objects 9320
-		temp_min_distance_group_placement 2
+		temp_min_distance_group_placement rnd(2,3)
 		terrain_to_place_on ROAD_FUNGUS
 		actor_area 7
 		actor_area_radius 5
@@ -2501,50 +2506,39 @@ if CITY_PLANET
 
 	herdables: most any fit
 	*/
-	
 	start_random
-		percent_chance 15 #const CITY_HERDABLE 594 /* sheep */
-		percent_chance 15 #const CITY_HERDABLE 833 /* turkey */
-		percent_chance 15 #const CITY_HERDABLE 1060 /* goat */
-		percent_chance 15 #const CITY_HERDABLE 1245 /* pig */
+		percent_chance 10 #const CITY_HERDABLE 594 /* sheep */
+		percent_chance 10 #const CITY_HERDABLE 833 /* turkey */
+		percent_chance 10 #const CITY_HERDABLE 1060 /* goat */
+		percent_chance 10 #const CITY_HERDABLE 1245 /* pig */
 		percent_chance 5 #const CITY_HERDABLE 705 /* cow */
 		percent_chance 5 #const CITY_HERDABLE 1596 /* cow */
 		percent_chance 5 #const CITY_HERDABLE 1598 /* cow */
 		percent_chance 5 #const CITY_HERDABLE 1600 /* cow */
 		percent_chance 1 #const CITY_HERDABLE 305 /* llama */
 		percent_chance 1 #const CITY_HERDABLE 1142 /* water buffalo */
-		percent_chance 18 #const CITY_HERDABLE 1243 /* goose */
+		percent_chance 10 #const CITY_HERDABLE 1243 /* goose */
+		percent_chance 28 #define NO_CITY_HERDABLE
 	end_random
-	create_object CITY_HERDABLE {
-		avoid_actor_area 1
-		number_of_groups rnd(3,16)
-		number_of_objects rnd(1,4)
-		temp_min_distance_group_placement rnd(8,25)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		avoid_forest_zone 1
-		avoid_cliff_zone 1
-		set_gaia_object_only
-		set_loose_grouping
-		terrain_to_place_on ROAD
-		actor_area_to_place_in 7
-	}
-	create_object DEER {
-		avoid_actor_area 1
-		number_of_groups rnd(3,16) /* TODO change amounts */
-		number_of_objects rnd(1,4)
-		temp_min_distance_group_placement rnd(8,25)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		avoid_forest_zone 1
-		avoid_cliff_zone 1
-		set_gaia_object_only
-		set_loose_grouping
-		terrain_to_place_on ROAD
-		actor_area_to_place_in 7
-	}
+	if NO_CITY_HERDABLE
+	else
+		create_object CITY_HERDABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16)
+			number_of_objects rnd(1,4)
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
+		}
+	endif
 	start_random
-		percent_chance 50 create_object BOAR {
+		percent_chance 25 create_object BOAR {
 			avoid_actor_area 1
 			number_of_groups rnd(3,16) /* TODO change amounts */
 			temp_min_distance_group_placement rnd(8,25)
@@ -2555,7 +2549,20 @@ if CITY_PLANET
 			set_gaia_object_only
 			terrain_to_place_on ROAD
 			actor_area_to_place_in 7
-
+		}
+		percent_chance 70 create_object DEER {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16) /* TODO change amounts */
+			number_of_objects rnd(1,4)
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
 		}
 	end_random
 	create_object OUTPOST {
@@ -2571,7 +2578,7 @@ if CITY_PLANET
 		actor_area_radius 2
 	}
 	start_random
-		percent_chance 50 #define CITY_EXTRA_VILS
+		percent_chance 60 #define CITY_EXTRA_VILS
 	end_random
 	if CITY_EXTRA_VILS
 		create_object ON_GRID {
@@ -2591,7 +2598,7 @@ if CITY_PLANET
 		create_object VILLAGER {
 			avoid_actor_area 1
 			actor_area_to_place_in 9
-			number_of_objects 4
+			number_of_objects rnd(1,4) /* 4 + 1 per planet + 1 from on-grid second object results in a max of 9 vils */
 			set_place_for_every_player
 			min_distance_group_placement 1
 			terrain_to_place_on ROAD
@@ -2608,6 +2615,7 @@ if CITY_PLANET
 		max_distance_to_other_zones 4
 	}
 	/* extra stone, standard gold, but guaranteed to appear. */
+	#define GOLD_PLACED
 	create_object GOLD {
 		terrain_to_place_on ROAD
 		ignore_terrain_restrictions
@@ -2683,25 +2691,30 @@ if SNOW_PLANET /* similar to leaves planet */
 	lurable: can have boars (apparently they're pretty good at adapting to cold climates), but make a sizable chance of them not appearing
 
 	*/
+	
 	start_random 
 		percent_chance 1 #const SNOW_HERDABLE 305 /* DLC_LLAMA */
 		percent_chance 4 #const SNOW_HERDABLE 1245 /* DLC_PIG */
-		percent_chance 55 #const SNOW_HERDABLE 1060 /* DLC_GOAT */
-		percent_chance 40 #const SNOW_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 40 #const SNOW_HERDABLE 1060 /* DLC_GOAT */
+		percent_chance 20 #const SNOW_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 35 #define NO_SNOW_HERDABLE
 	end_random
-	create_object SNOW_HERDABLE {
-		avoid_actor_area 1
-		terrain_to_place_on SNOW
-		number_of_objects rnd(2,4)
-		number_of_groups rnd(4,20)
-		temp_min_distance_group_placement rnd(17,36)
-		set_scaling_to_map_size
-		min_distance_group_placement 1
-		group_variance rnd(0,1)
-		set_loose_grouping
-		/* no avoid forest zone here */
-		max_distance_to_other_zones 1
-	}
+	if NO_SNOW_HERDABLE
+	else
+		create_object SNOW_HERDABLE {
+			avoid_actor_area 1
+			terrain_to_place_on SNOW
+			number_of_objects rnd(2,4)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(17,36)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			group_variance rnd(0,1)
+			set_loose_grouping
+			/* no avoid forest zone here */
+			max_distance_to_other_zones 1
+		}
+	endif
 	start_random 
 		percent_chance 35 #const SNOW_PLANET_HUNTABLE 65 /* DEER */
 		percent_chance 65 #const SNOW_PLANET_HUNTABLE 1239 /* DLC_IBEX */
@@ -2726,7 +2739,7 @@ if SNOW_PLANET /* similar to leaves planet */
 	} 
 	
 	start_random
-		percent_chance 60 #define NO_SNOW_LURABLE
+		percent_chance 80 #define NO_SNOW_LURABLE
 	end_random
 	if NO_SNOW_LURABLE
 	else
@@ -2746,11 +2759,12 @@ if SNOW_PLANET /* similar to leaves planet */
 	endif
 	/* slightly better than standard gold/stone */
 	start_random
-		percent_chance 2 #define NO_SNOW_GOLD
-		percent_chance 5 #define NO_SNOW_STONE
+		percent_chance 15 #define NO_SNOW_GOLD
+		percent_chance 35 #define NO_SNOW_STONE
 	end_random 
 	if NO_SNOW_GOLD
 	else
+		#define GOLD_PLACED
 		create_object GOLD {
 			terrain_to_place_on SNOW
 			number_of_objects rnd(2,4)
@@ -2875,12 +2889,13 @@ if LEAVES_PLANET
 		actor_area_radius 4
 		avoid_actor_area 4
 	}
-	start_random
-		percent_chance 5 #define NO_LEAVES_GOLD
-		percent_chance 20 #define NO_LEAVES_STONE
+	start_random /* a little worse than standard */
+		percent_chance 30 #define NO_LEAVES_GOLD
+		percent_chance 50 #define NO_LEAVES_STONE
 	end_random 
 	if NO_LEAVES_GOLD
 	else
+		#define GOLD_PLACED
 		create_object GOLD {
 			terrain_to_place_on LEAVES
 			number_of_objects rnd(2,4)
@@ -2962,74 +2977,88 @@ if DIRT_MUD_MANGROVE_MAZE_PLANET
 	place gold mines in the forest terrain? and maybe stone mines (on the small 5% chance that they appear?)
 	 */
 	start_random
-		percent_chance 60 #const DIRT_MUD_HERDABLE 1142 /* DLC_WATERBUFFALO */
+		percent_chance 40 #const DIRT_MUD_HERDABLE 1142 /* DLC_WATERBUFFALO */
 		percent_chance 40 #const DIRT_MUD_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 20 #define NO_DIRT_MUD_HERDABLE
 	end_random
-	create_object DIRT_MUD_HERDABLE {
-		avoid_actor_area 1
-		terrain_to_place_on DLC_MANGROVESHALLOW
-		layer_to_place_on MUDDY_SHALLOW
-		number_of_objects rnd(2,5)
-		number_of_groups rnd(4,20)
-		temp_min_distance_group_placement rnd(12,30)
-		set_scaling_to_map_size
-		min_distance_group_placement 1
-		group_variance rnd(0,1)
-		set_loose_grouping
-		/* no avoid forest zone here */
-		max_distance_to_other_zones 1
-	}
+	if NO_DIRT_MUD_HERDABLE
+	else
+		create_object DIRT_MUD_HERDABLE {
+			avoid_actor_area 1
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(12,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			group_variance rnd(0,1)
+			set_loose_grouping
+			/* no avoid forest zone here */
+			max_distance_to_other_zones 1
+		}
+	endif
 	start_random
-		percent_chance 40 #const DIRT_MUD_HUNTABLE 1019 /* DLC_ZEBRA */
-		percent_chance 30 #const DIRT_MUD_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
-		percent_chance 30 #const DIRT_MUD_HUNTABLE 65 /* DEER */
+		percent_chance 30 #const DIRT_MUD_HUNTABLE 1019 /* DLC_ZEBRA */
+		percent_chance 25 #const DIRT_MUD_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
+		percent_chance 25 #const DIRT_MUD_HUNTABLE 65 /* DEER */
+		percent_chance 20 #define NO_DIRT_MUD_HUNTABLE
 	end_random
-
-	create_object DIRT_MUD_HUNTABLE {
-		avoid_actor_area 1
-		terrain_to_place_on DLC_MANGROVESHALLOW
-		layer_to_place_on MUDDY_SHALLOW
-		number_of_objects rnd(2,6)
-		number_of_groups rnd(4,20)
-		temp_min_distance_group_placement rnd(14,30)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		group_variance rnd(0,1)
-		set_loose_grouping
-		set_gaia_object_only
-		/* avoid_forest_zone 1 */
-		avoid_cliff_zone 1
-		max_distance_to_other_zones 1
-		avoid_actor_area 4
-		actor_area 4
-		actor_area_radius 4
-	} 
+	if NO_DIRT_MUD_HUNTABLE
+	else
+		create_object DIRT_MUD_HUNTABLE {
+			avoid_actor_area 1
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on MUDDY_SHALLOW
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,1)
+			set_loose_grouping
+			set_gaia_object_only
+			/* avoid_forest_zone 1 */
+			avoid_cliff_zone 1
+			max_distance_to_other_zones 1
+			avoid_actor_area 4
+			actor_area 4
+			actor_area_radius 4
+		} 
+	endif
 	start_random
 		percent_chance 20 #const DIRT_MUD_LURABLE 1139 /* DLC_RHINO */
 		percent_chance 20 #const DIRT_MUD_LURABLE 1301 /* DLC_ELEPHANT */
 		percent_chance 20 #const DIRT_MUD_LURABLE 48 /* BOAR */
-		percent_chance 40 #const DIRT_MUD_LURABLE 822 /* JAVELINA */
+		percent_chance 20 #const DIRT_MUD_LURABLE 822 /* JAVELINA */
+		percent_chance 20 #define NO_DIRT_MUD_LURABLE
 	end_random
-	create_object DIRT_MUD_LURABLE {
-		avoid_actor_area 1
-		number_of_groups rnd(3,8)
-		temp_min_distance_group_placement rnd(14,30)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		terrain_to_place_on DLC_MANGROVESHALLOW
-		layer_to_place_on MUDDY_SHALLOW
-		/* avoid_forest_zone 1 */
-		set_gaia_object_only
-		actor_area 4
-		actor_area_radius 4
-		avoid_actor_area 4
-	}
+	if NO_DIRT_MUD_LURABLE
+	else
+		create_object DIRT_MUD_LURABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(14,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on MUDDY_SHALLOW
+			/* avoid_forest_zone 1 */
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
 	start_random
-		percent_chance 5 #define NO_DIRT_MUD_GOLD
-		percent_chance 90 #define NO_DIRT_MUD_STONE
+		percent_chance 25 #define NO_DIRT_MUD_GOLD
+	end_random 
+	start_random
+		percent_chance 95 #define NO_DIRT_MUD_STONE
 	end_random 
 	if NO_DIRT_MUD_GOLD
 	else
+		#define GOLD_PLACED
 		create_object GOLD {
 			terrain_to_place_on DLC_MANGROVEFOREST
 			layer_to_place_on MUDDY_SHALLOW
@@ -3125,72 +3154,84 @@ if BOGLAND_MANGROVE_PLANET
 	start_random
 		percent_chance 60 #const SWAMP_HERDABLE 1142 /* DLC_WATERBUFFALO */
 		percent_chance 40 #const SWAMP_HERDABLE 1243 /* DLC_GOOSE */
+		percent_chance 0 #define NO_SWAMP_HERDABLE
 	end_random
-	create_object SWAMP_HERDABLE {
-		avoid_actor_area 1
-		terrain_to_place_on DLC_MANGROVESHALLOW
-		layer_to_place_on DLC_BOGLAND
-		number_of_objects rnd(2,5)
-		number_of_groups rnd(4,20)
-		temp_min_distance_group_placement rnd(12,30)
-		set_scaling_to_map_size
-		min_distance_group_placement 1
-		group_variance rnd(0,1)
-		set_loose_grouping
-		avoid_forest_zone 1
-		max_distance_to_other_zones 1
-	}
+	if NO_SWAMP_HERDABLE
+	else
+		create_object SWAMP_HERDABLE {
+			avoid_actor_area 1
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(2,5)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(12,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 1
+			group_variance rnd(0,1)
+			set_loose_grouping
+			avoid_forest_zone 1
+			max_distance_to_other_zones 1
+		}
+	endif
 	start_random
 		percent_chance 40 #const SWAMP_HUNTABLE 1019 /* DLC_ZEBRA */
 		percent_chance 30 #const SWAMP_HUNTABLE 1026 /* DLC_OSTRICH - ostrich prefer arid areas apparently, though other types of birds would fit. */
 		percent_chance 30 #const SWAMP_HUNTABLE 65 /* DEER */
+		percent_chance 0 #define NO_SWAMP_HUNTABLE
 	end_random
-
-	create_object SWAMP_HUNTABLE {
-		avoid_actor_area 1
-		terrain_to_place_on DLC_MANGROVESHALLOW
-		layer_to_place_on DLC_BOGLAND
-		number_of_objects rnd(2,6)
-		number_of_groups rnd(4,20)
-		temp_min_distance_group_placement rnd(14,30)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		group_variance rnd(0,1)
-		set_loose_grouping
-		set_gaia_object_only
-		avoid_forest_zone 1
-		avoid_cliff_zone 1
-		max_distance_to_other_zones 1
-		avoid_actor_area 4
-		actor_area 4
-		actor_area_radius 4
-	} 
+	if NO_SWAMP_HUNTABLE
+	else
+		create_object SWAMP_HUNTABLE {
+			avoid_actor_area 1
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			number_of_objects rnd(2,6)
+			number_of_groups rnd(4,20)
+			temp_min_distance_group_placement rnd(14,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			group_variance rnd(0,1)
+			set_loose_grouping
+			set_gaia_object_only
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			max_distance_to_other_zones 1
+			avoid_actor_area 4
+			actor_area 4
+			actor_area_radius 4
+		} 
+	endif
 	start_random
 		percent_chance 20 #const SWAMP_LURABLE 1139 /* DLC_RHINO */
 		percent_chance 20 #const SWAMP_LURABLE 1301 /* DLC_ELEPHANT */
 		percent_chance 20 #const SWAMP_LURABLE 48 /* BOAR */
-		percent_chance 40 #const SWAMP_LURABLE 822 /* JAVELINA */
+		percent_chance 20 #const SWAMP_LURABLE 822 /* JAVELINA */
+		percent_chance 20 #define NO_SWAMP_LURABLE
 	end_random
-	create_object SWAMP_LURABLE {
-		avoid_actor_area 1
-		number_of_groups rnd(3,8)
-		temp_min_distance_group_placement rnd(14,30)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		terrain_to_place_on DLC_MANGROVESHALLOW
-		layer_to_place_on DLC_BOGLAND
-		avoid_forest_zone 1
-		set_gaia_object_only
-		actor_area 4
-		actor_area_radius 4
-		avoid_actor_area 4
-	}
+	if NO_SWAMP_LURABLE
+	else
+		create_object SWAMP_LURABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,8)
+			temp_min_distance_group_placement rnd(14,30)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			terrain_to_place_on DLC_MANGROVESHALLOW
+			layer_to_place_on DLC_BOGLAND
+			avoid_forest_zone 1
+			set_gaia_object_only
+			actor_area 4
+			actor_area_radius 4
+			avoid_actor_area 4
+		}
+	endif
 	start_random
 		percent_chance 1 #define NO_SWAMP_GOLD
-		percent_chance 90 #define NO_SWAMP_STONE
+		percent_chance 95 #define NO_SWAMP_STONE
 	end_random 
 	if NO_SWAMP_GOLD
 	else
+		#define GOLD_PLACED
 		create_object GOLD { /* raised gold amounts */
 			terrain_to_place_on DLC_MANGROVESHALLOW
 			layer_to_place_on DLC_BOGLAND
@@ -3314,13 +3355,15 @@ if SAVANNAH_PLANET
 		}
 	endif
 	/* standard gold and stone */
+	
 	start_random
-		percent_chance 5 #define NO_SAVANNAH_GOLD
-		percent_chance 5 #define NO_SAVANNAH_STONE
+		percent_chance 25 #define NO_SAVANNAH_GOLD
+		percent_chance 45 #define NO_SAVANNAH_STONE
 	end_random 
 	if NO_SAVANNAH_GOLD
 	else
-		create_object GOLD { /* TODO adjust amount to fit standard */
+		#define GOLD_PLACED
+		create_object GOLD { 
 			terrain_to_place_on DLC_SAVANNAH
 			number_of_objects rnd(2,4)
 			number_of_groups rnd(4,10)
@@ -3442,11 +3485,12 @@ if DIRT_PLANET
 	endif
 	/* add standard stone/gold */
 	start_random
-		percent_chance 5 #define NO_DIRT_GOLD
-		percent_chance 10 #define NO_DIRT_STONE
+		percent_chance 25 #define NO_DIRT_GOLD
+		percent_chance 45 #define NO_DIRT_STONE
 	end_random 
 	if NO_DIRT_GOLD
 	else
+		#define GOLD_PLACED
 		create_object GOLD {
 			terrain_to_place_on DIRT
 			number_of_objects rnd(2,4)
@@ -3642,8 +3686,8 @@ if SNOW_HEAVY_PLANET
 		max_distance_to_other_zones 1
 	}
 	start_random
-		percent_chance 70 #define SNOW_HEAVY_IBEX
-		percent_chance 30 #define SNOW_HEAVY_DEER
+		percent_chance 60 #define SNOW_HEAVY_IBEX
+		percent_chance 20 #define SNOW_HEAVY_DEER
 	end_random
 	if SNOW_HEAVY_DEER 
 		create_object DEER {
@@ -3684,14 +3728,15 @@ if SNOW_HEAVY_PLANET
 			actor_area_radius 4
 		}
 	endif
-	/* somewhat standard stone/gold low to moderate
+	/* somewhat standard stone/gold low to moderate - stone a little more likely to appear, gold  a little less likely
 	 */
 	start_random
-		percent_chance 5 #define NO_HEAVY_SNOW_GOLD
-		percent_chance 10 #define NO_HEAVY_SNOW_STONE
+		percent_chance 30 #define NO_HEAVY_SNOW_GOLD
+		percent_chance 40 #define NO_HEAVY_SNOW_STONE
 	end_random 
 	if NO_HEAVY_SNOW_GOLD
 	else
+		#define GOLD_PLACED
 		create_object GOLD {
 			terrain_to_place_on SNOW_HEAVY
 			number_of_objects rnd(2,4)
@@ -3750,6 +3795,7 @@ if BARREN_PLANET /* feedback: reduce gold/stone */
 		actor_area 3
 		actor_area_radius 3
 	}
+	#define GOLD_PLACED
 	create_object GOLD { 
 		terrain_to_place_on GRAVEL
 		layer_to_place_on DLC_DESERTGRAVEL
@@ -3799,6 +3845,16 @@ create_object RELIC {
 	avoid_cliff_zone 1
 	avoid_forest_zone 1
 }
+if GOLD_PLACED
+else
+	create_object GOLD { /* TODO scale amount of gold per pile for different map sizes */
+		number_of_objects 9320
+		temp_min_distance_group_placement 1
+		terrain_to_place_on DLC_ROCK
+		ignore_terrain_restrictions
+		place_on_specific_land_id 1
+	}
+endif
 <LAND_GENERATION>
 
 L {
