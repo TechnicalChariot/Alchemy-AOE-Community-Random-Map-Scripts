@@ -5,6 +5,7 @@ Title: Syzygy
 Authors: Jasuni (primary), BPDrej (started script, secondary)
 Date: March 2024
 Notice: Map developed for Alchemy League Season 2 at their request and may be used for it (and any other tournaments that wish to use it may do so, but I request a notification from any doing so).
+Spec: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-07.pdf
 
 idea: randomize the terrains for each planet so that players have to scout it out - nomad start, with 1 vil on top planet, 1 vil bottom planet, and 1 vil somewhere else (place via actor area?) Could also have players start with a fishing ship (good for scouting) in a map corner (either top/bottom or left/right: likely left/right)
 Syzygy randomizing: when selecting terrains, do a random chance for first 1, then random chance with one removed (remove last 1, check for duplicate) for second planet; 3rd planet remove last 2, if get duplicate check which planet it was (first removed if first planet, otherwise second); remove 3 for last planet (handle like 3rd planet)
@@ -71,6 +72,28 @@ behavior_version 2
 nomad_resources
 force_nomad_treaty
 direct_placement
+
+#define TOURNAMENT_VERSION
+if 2_TEAM_GAME
+elseif 2_PLAYER_GAME
+elseif TOURNAMENT_VERSION
+    #define DISABLE_TRADE /* TODO figure out a better solution for FFAs */
+endif
+if DISABLE_TRADE
+/* Removing Trade for Multi-team Games, as per Alchemy requirements.  */
+  #const TRADE_CART_ENABLER 161
+  #const TRADE_COG_ENABLER 180
+  #const TRADE_CARAVAN_ENABLER 48
+  #const HINDU_CARAVANSERAI_ENABLER 518
+  #const PERSIAN_CARAVANSERAI_ENABLER 552  
+  #const SILK_ROAD 499
+  effect_amount DISABLE_TECH TRADE_COG_ENABLER ATTR_DISABLE 180
+  effect_amount DISABLE_TECH TRADE_CART_ENABLER ATTR_DISABLE 161
+  effect_amount DISABLE_TECH TRADE_CARAVAN_ENABLER ATTR_DISABLE 48
+  effect_amount DISABLE_TECH HINDU_CARAVANSERAI_ENABLER ATTR_DISABLE 518
+  effect_amount DISABLE_TECH PERSIAN_CARAVANSERAI_ENABLER ATTR_DISABLE 552
+  effect_amount DISABLE_TECH SILK_ROAD ATTR_DISABLE 499    
+endif
 
 #define SNOWMAN_PLANET_SHAPE
 
@@ -185,9 +208,25 @@ effect_amount GAIA_SET_ATTRIBUTE RUBBLE_AQUEDUCT ATTR_STORAGE_VALUE 99999999
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_NAME_ID 5393
 effect_amount GAIA_SET_ATTRIBUTE TREE_A ATTR_ICON_ID 856
 */
+
+
+/* Remove Visual Effect of Gaia's Dead Fish Trap */
+#const DOLPHIN 61
+#const ON_GRID 278 /* dead fish trap */
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+#const AMPHITHEATRE 251
+#const INDIAN_RUINS 1784 /* don't use */
+#const CASTLE_RUINS 1837
+#const CHURCH_RUINS 1838
+#const TEMPLE_RUIN 1566
+
 /* set berry bushes land id to all land - needed for farmland terrain, I think. */
 effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
 effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
+effect_amount SET_ATTRIBUTE CASTLE_RUINS ATTR_TERRAIN_ID 4 /* why they can normally be placed on water is a mystery - I guess they may want sunken cities. */
+effect_amount SET_ATTRIBUTE CHURCH_RUINS ATTR_TERRAIN_ID 4 
+effect_amount SET_ATTRIBUTE TEMPLE_RUIN ATTR_TERRAIN_ID 4 
 
 /* Defining Planet Terrains
 #define NONRANDOM_PLANETS
@@ -781,10 +820,6 @@ elseif NONRANDOM_PLANETS /* TODO should be able to remove now, but may want for 
 
 endif
 
-/* Remove Visual Effect of Gaia's Dead Fish Trap */
-#const DOLPHIN 61
-#const ON_GRID 278 /* dead fish trap */
-effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
 
 <ELEVATION_GENERATION>
 if SNOW_HEAVY_PLANET
@@ -2218,10 +2253,17 @@ create_object SHORE_FISH {
 	temp_min_distance_group_placement rnd(8,10)
 	avoid_actor_area 1
 }
-/* I think I overdid it on the food, so I can get rid of these. - make much more scarce - so like 10 tiles - and maybe keep the dolphins removed.
 create_object DOLPHIN {
 	number_of_objects 9320
-	temp_min_distance_group_placement 8
+	temp_min_distance_group_placement rnd(10,18)
+	avoid_actor_area 1
+	max_distance_to_other_zones 5
+	terrain_to_place_on WATER
+}
+/* I think I overdid it on the food, so I can get rid of these. - make much more scarce - so like 10 tiles - and maybe keep the dolphins removed. ARgument for it is that farming space is a little scarce, though I can certainly justify increasing the group distance placement.
+create_object DOLPHIN {
+	number_of_objects 9320
+	temp_min_distance_group_placement 8   8-20: 8 is a bit too many iwth the tendency for other food sources, I think. 20 is likely to favor luck in dock placements
 	avoid_actor_area 1
 	max_distance_to_other_zones 5
 	terrain_to_place_on WATER
@@ -2484,192 +2526,6 @@ if DIRT4_PLANET
 	endif
 endif
 
-if CITY_PLANET
-	/* create parks */
-	create_object FORAGE {
-		number_of_objects 9320
-		temp_min_distance_group_placement rnd(2,3) /* used to be 1, but then I determined I overdid it on the food, and 2 will make wood easier to access. */
-		terrain_to_place_on ROAD_FUNGUS
-		actor_area 7
-		actor_area_radius 5
-	}
-	create_object DLC_ORANGEBUSH {
-		number_of_objects 9320
-		temp_min_distance_group_placement rnd(2,3)
-		terrain_to_place_on ROAD_FUNGUS
-		actor_area 7
-		actor_area_radius 5
-	}
-	/*
-	animals: boar
-	deer (I've seen them at two college campuses)
-
-	herdables: most any fit
-	*/
-	start_random
-		percent_chance 10 #const CITY_HERDABLE 594 /* sheep */
-		percent_chance 10 #const CITY_HERDABLE 833 /* turkey */
-		percent_chance 10 #const CITY_HERDABLE 1060 /* goat */
-		percent_chance 10 #const CITY_HERDABLE 1245 /* pig */
-		percent_chance 5 #const CITY_HERDABLE 705 /* cow */
-		percent_chance 5 #const CITY_HERDABLE 1596 /* cow */
-		percent_chance 5 #const CITY_HERDABLE 1598 /* cow */
-		percent_chance 5 #const CITY_HERDABLE 1600 /* cow */
-		percent_chance 1 #const CITY_HERDABLE 305 /* llama */
-		percent_chance 1 #const CITY_HERDABLE 1142 /* water buffalo */
-		percent_chance 10 #const CITY_HERDABLE 1243 /* goose */
-		percent_chance 28 #define NO_CITY_HERDABLE
-	end_random
-	if NO_CITY_HERDABLE
-	else
-		create_object CITY_HERDABLE {
-			avoid_actor_area 1
-			number_of_groups rnd(3,16)
-			number_of_objects rnd(1,4)
-			temp_min_distance_group_placement rnd(8,25)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			avoid_forest_zone 1
-			avoid_cliff_zone 1
-			set_gaia_object_only
-			set_loose_grouping
-			terrain_to_place_on ROAD
-			actor_area_to_place_in 7
-		}
-	endif
-	start_random
-		percent_chance 25 create_object BOAR {
-			avoid_actor_area 1
-			number_of_groups rnd(3,16) /* TODO change amounts */
-			temp_min_distance_group_placement rnd(8,25)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			avoid_forest_zone 1
-			avoid_cliff_zone 1
-			set_gaia_object_only
-			terrain_to_place_on ROAD
-			actor_area_to_place_in 7
-		}
-		percent_chance 70 create_object DEER {
-			avoid_actor_area 1
-			number_of_groups rnd(3,16) /* TODO change amounts */
-			number_of_objects rnd(1,4)
-			temp_min_distance_group_placement rnd(8,25)
-			set_scaling_to_map_size
-			min_distance_group_placement 2
-			avoid_forest_zone 1
-			avoid_cliff_zone 1
-			set_gaia_object_only
-			set_loose_grouping
-			terrain_to_place_on ROAD
-			actor_area_to_place_in 7
-		}
-	end_random
-	create_object OUTPOST {
-		number_of_objects 9320
-		temp_min_distance_group_placement rnd(10,30)
-		set_scaling_to_map_size
-		min_distance_group_placement 1
-		set_gaia_object_only
-		set_building_capturable
-		terrain_to_place_on ROAD
-		avoid_forest_zone 2 /* specs require 6 */
-		actor_area 8
-		actor_area_radius 2
-	}
-	start_random
-		percent_chance 60 #define CITY_EXTRA_VILS
-	end_random
-	if CITY_EXTRA_VILS
-		create_object ON_GRID {
-			avoid_actor_area 1 
-			resource_delta -60 
-			second_object VILLAGER
-			set_place_for_every_player
-			group_placement_radius 3
-			min_distance_group_placement 1
-			actor_area_to_place_in 8
-			actor_area 9
-			actor_area_radius 6
-			avoid_actor_area 9
-			override_actor_radius_if_required
-			terrain_to_place_on ROAD
-		}
-		create_object VILLAGER {
-			avoid_actor_area 1
-			actor_area_to_place_in 9
-			number_of_objects rnd(1,4) /* 4 + 1 per planet + 1 from on-grid second object results in a max of 9 vils */
-			set_place_for_every_player
-			min_distance_group_placement 1
-			terrain_to_place_on ROAD
-		}
-
-	endif
-	create_object ON_GRID { /* TODO - not ideal, since it can place near the water */
-		second_object HOUSE
-		set_place_for_every_player
-		terrain_to_place_on ROAD
-		avoid_actor_area 8
-		avoid_forest_zone 3
-		min_distance_group_placement 2
-		max_distance_to_other_zones 4
-	}
-	/* extra stone, standard gold, but guaranteed to appear. */
-	#define GOLD_PLACED
-	create_object GOLD {
-		terrain_to_place_on ROAD
-		ignore_terrain_restrictions
-		place_on_specific_land_id 1
-		number_of_objects rnd(2,4)
-		number_of_groups rnd(4,10)
-		group_variance rnd(0,1)
-		temp_min_distance_group_placement rnd(16,40)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		max_distance_to_other_zones 1
-		set_gaia_object_only
-		avoid_forest_zone 3
-		set_tight_grouping
-		actor_area 2
-		actor_area_radius 3
-		avoid_actor_area 2
-		avoid_actor_area 3
-	}
-	create_object STONE { /* extra stone */
-		terrain_to_place_on ROAD
-		ignore_terrain_restrictions
-		place_on_specific_land_id 1
-		number_of_objects rnd(2,4)
-		number_of_groups rnd(4,30)
-		group_variance rnd(0,1)
-		temp_min_distance_group_placement rnd(12,30)
-		set_scaling_to_map_size
-		min_distance_group_placement 2
-		max_distance_to_other_zones 1
-		set_gaia_object_only
-		avoid_forest_zone 3
-		set_tight_grouping
-		actor_area 3
-		actor_area_radius 3
-		avoid_actor_area 2
-		avoid_actor_area 3
-	}
-
-	/* TODO add more neutral buildings, and ruins 
-	Not really satisfied with this, but it will do for now.
-	*/
-	create_object HOUSE {
-		set_gaia_object_only
-		set_gaia_unconvertible
-		terrain_to_place_on ROAD
-		avoid_actor_area 8
-		avoid_forest_zone 3
-		min_distance_group_placement 2
-		temp_min_distance_group_placement rnd(5,10)
-		number_of_objects 9320
-		max_distance_to_other_zones 4
-	}
-endif
 if SNOW_PLANET /* similar to leaves planet */
 
 	create_object FORAGE { /* same as on leaves terrain - considered having a randomizer for if there are berries, but decided against it. TODO could make more likely when the trees are a dead forest (since those have bushes in them) */
@@ -3828,6 +3684,224 @@ if BARREN_PLANET /* feedback: reduce gold/stone */
 	endif
 endif
 
+if CITY_PLANET /* moved to end, so that its ruins won't block more important objects */
+	/* create parks */
+	create_object FORAGE {
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(2,3) /* used to be 1, but then I determined I overdid it on the food, and 2 will make wood easier to access. */
+		terrain_to_place_on ROAD_FUNGUS
+		actor_area 7
+		actor_area_radius 5
+	}
+	create_object DLC_ORANGEBUSH {
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(2,3)
+		terrain_to_place_on ROAD_FUNGUS
+		actor_area 7
+		actor_area_radius 5
+	}
+	/*
+	animals: boar
+	deer (I've seen them at two college campuses)
+
+	herdables: most any fit
+	*/
+	start_random
+		percent_chance 10 #const CITY_HERDABLE 594 /* sheep */
+		percent_chance 10 #const CITY_HERDABLE 833 /* turkey */
+		percent_chance 10 #const CITY_HERDABLE 1060 /* goat */
+		percent_chance 10 #const CITY_HERDABLE 1245 /* pig */
+		percent_chance 5 #const CITY_HERDABLE 705 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1596 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1598 /* cow */
+		percent_chance 5 #const CITY_HERDABLE 1600 /* cow */
+		percent_chance 1 #const CITY_HERDABLE 305 /* llama */
+		percent_chance 1 #const CITY_HERDABLE 1142 /* water buffalo */
+		percent_chance 10 #const CITY_HERDABLE 1243 /* goose */
+		percent_chance 28 #define NO_CITY_HERDABLE
+	end_random
+	if NO_CITY_HERDABLE
+	else
+		create_object CITY_HERDABLE {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16)
+			number_of_objects rnd(1,4)
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
+		}
+	endif
+	start_random
+		percent_chance 25 create_object BOAR {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16) /* TODO change amounts */
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
+		}
+		percent_chance 70 create_object DEER {
+			avoid_actor_area 1
+			number_of_groups rnd(3,16) /* TODO change amounts */
+			number_of_objects rnd(1,4)
+			temp_min_distance_group_placement rnd(8,25)
+			set_scaling_to_map_size
+			min_distance_group_placement 2
+			avoid_forest_zone 1
+			avoid_cliff_zone 1
+			set_gaia_object_only
+			set_loose_grouping
+			terrain_to_place_on ROAD
+			actor_area_to_place_in 7
+		}
+	end_random
+	create_object OUTPOST {
+		number_of_objects 9320
+		temp_min_distance_group_placement rnd(10,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 1
+		set_gaia_object_only
+		set_building_capturable
+		terrain_to_place_on ROAD
+		avoid_forest_zone 2 /* specs require 6 */
+		actor_area 8
+		actor_area_radius 2
+	}
+	start_random
+		percent_chance 60 #define CITY_EXTRA_VILS
+	end_random
+	if CITY_EXTRA_VILS
+		create_object ON_GRID {
+			avoid_actor_area 1 
+			resource_delta -60 
+			second_object VILLAGER
+			set_place_for_every_player
+			group_placement_radius 3
+			min_distance_group_placement 1
+			actor_area_to_place_in 8
+			actor_area 9
+			actor_area_radius 6
+			avoid_actor_area 9
+			override_actor_radius_if_required
+			terrain_to_place_on ROAD
+		}
+		create_object VILLAGER {
+			avoid_actor_area 1
+			actor_area_to_place_in 9
+			number_of_objects rnd(1,4) /* 4 + 1 per planet + 1 from on-grid second object results in a max of 9 vils */
+			set_place_for_every_player
+			min_distance_group_placement 1
+			terrain_to_place_on ROAD
+		}
+
+	endif
+	create_object ON_GRID { /* TODO - not ideal, since it can place near the water */
+		second_object HOUSE
+		set_place_for_every_player
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 3
+		min_distance_group_placement 2
+		max_distance_to_other_zones 4
+	}
+	/* extra stone, standard gold, but guaranteed to appear. */
+	#define GOLD_PLACED
+	create_object GOLD {
+		terrain_to_place_on ROAD
+		ignore_terrain_restrictions
+		place_on_specific_land_id 1
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,10)
+		group_variance rnd(0,1)
+		temp_min_distance_group_placement rnd(16,40)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		max_distance_to_other_zones 1
+		set_gaia_object_only
+		avoid_forest_zone 3
+		set_tight_grouping
+		actor_area 2
+		actor_area_radius 3
+		avoid_actor_area 2
+		avoid_actor_area 3
+	}
+	create_object STONE { /* extra stone */
+		terrain_to_place_on ROAD
+		ignore_terrain_restrictions
+		place_on_specific_land_id 1
+		number_of_objects rnd(2,4)
+		number_of_groups rnd(4,30)
+		group_variance rnd(0,1)
+		temp_min_distance_group_placement rnd(12,30)
+		set_scaling_to_map_size
+		min_distance_group_placement 2
+		max_distance_to_other_zones 1
+		set_gaia_object_only
+		avoid_forest_zone 3
+		set_tight_grouping
+		actor_area 3
+		actor_area_radius 3
+		avoid_actor_area 2
+		avoid_actor_area 3
+	}	
+	create_object AMPHITHEATRE {
+		set_gaia_object_only
+		set_gaia_unconvertible
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 6
+		min_distance_group_placement 2
+		max_distance_to_other_zones 6
+		actor_area 10
+		actor_area_radius 12
+	}
+	create_object CASTLE_RUINS {
+		set_gaia_object_only
+		set_gaia_unconvertible
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_actor_area 10
+		avoid_forest_zone 6
+		min_distance_group_placement 2
+		temp_min_distance_group_placement 45
+		number_of_objects rnd(1,2)
+		set_scaling_to_map_size
+		max_distance_to_other_zones 6
+		actor_area 10
+		actor_area_radius 12
+	}
+	create_object CHURCH_RUINS {
+		set_gaia_object_only
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 5
+		min_distance_group_placement 3
+		temp_min_distance_group_placement 30
+		number_of_objects rnd(1,4)
+		set_scaling_to_map_size
+		max_distance_to_other_zones 5
+	}
+	create_object TEMPLE_RUIN {
+		set_gaia_object_only
+		terrain_to_place_on ROAD
+		avoid_actor_area 8
+		avoid_forest_zone 4
+		min_distance_group_placement 2
+		temp_min_distance_group_placement rnd(10,20)
+		number_of_objects 9320
+		max_distance_to_other_zones 4
+	}
+endif
 if PHOTON_SCOUT_PLACED 
 else
 	#define PHOTON_SCOUT_PLACED
@@ -3837,14 +3911,6 @@ else
 		min_distance_group_placement 1
 	} 
 endif
-/* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
-create_object RELIC {
-	number_of_objects rnd(2,6)
-	temp_min_distance_group_placement rnd(30,50)  /*  scale for different map sizes */
-	max_distance_to_other_zones 3
-	avoid_cliff_zone 1
-	avoid_forest_zone 1
-}
 if GOLD_PLACED
 else
 	create_object GOLD { /* TODO scale amount of gold per pile for different map sizes */
@@ -3855,6 +3921,14 @@ else
 		place_on_specific_land_id 1
 	}
 endif
+/* add relics, 1 per planet, or just place 2-5 relics - I'll go 2-5 relics TODO scale for different map sizes? */
+create_object RELIC {
+	number_of_objects rnd(2,6)
+	temp_min_distance_group_placement rnd(30,50)  /*  scale for different map sizes */
+	max_distance_to_other_zones 3
+	avoid_cliff_zone 1
+	avoid_forest_zone 1
+}
 <LAND_GENERATION>
 
 L {
