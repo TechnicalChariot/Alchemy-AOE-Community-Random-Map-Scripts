@@ -56,6 +56,11 @@ Dirt Mud (mangrove and muddy water; forest biome)
 need to add: great plain, cracked, dry mountain, rainforest
 
 Personal playtest notes: Way overdid it on the food resources from the looks of it. I think that I can safely get rid of the dolphins (probably the shore fish as well).
+
+Feedback from Yo Yo Dude: Space seems like an issue (limit hill elevation) - may be an issue in the mid game. If players start closer, then it should be trush wars. Recommends talking to Randy Pan and Alexander.
+	He changed his mind on the elevation, but did mention that there's too much stone/gold on the radioactive/barren planets. Does want me to let him know when I update a new version.
+
+
  */
   /* TODO this would make a fine map idea: a map that is nothing but BAOBOB_FOREST. I could place a TC in the closest spot for each player, and then use actor areas to place villagers, scouts, starting res, etc. Would make for a very unusual map. tentative title: Baobob maze */
 /* date:  */
@@ -194,8 +199,574 @@ effect_amount SET_ATTRIBUTE FORAGE ATTR_TERRAIN_ID 4
 effect_amount SET_ATTRIBUTE DLC_ORANGEBUSH ATTR_TERRAIN_ID 4
 
 /* Defining Planet Terrains
-#define NONRANDOM_PLANETS */
-if NONRANDOM_PLANETS
+#define NONRANDOM_PLANETS
+RADIOACTIVE_PLANET, DESERT_PLANET, DIRT4_PLANET, CITY_PLANET, SNOW_PLANET, LEAVES_PLANET, DIRT_MUD_MANGROVE_MAZE_PLANET, BOGLAND_MANGROVE_PLANET, SAVANNAH_PLANET, DIRT_PLANET, FARMLAND_PLANET, SNOW_HEAVY_PLANET, BARREN_PLANET
+no jungle
+add a const for gold added to one of the planets, and once I've done so, add an if-else at the end that adds gold onto the rocks when no gold has appeared. Stone doesn't need this sort of treatment.
+#define FULL_RANDOM_BIOMES
+ */
+if FULL_RANDOM_BIOMES 
+	start_random
+		percent_chance 8 #define RADIOACTIVE_PLANET_1
+		percent_chance 8 #define DESERT_PLANET_1 
+		percent_chance 8 #define DIRT4_PLANET_1 
+		percent_chance 8 #define CITY_PLANET_1 
+		percent_chance 8 #define SNOW_PLANET_1 
+		percent_chance 8 #define LEAVES_PLANET_1 
+		percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_1 
+		percent_chance 8 #define BOGLAND_MANGROVE_PLANET_1 
+		percent_chance 8 #define SAVANNAH_PLANET_1 
+		percent_chance 7 #define DIRT_PLANET_1 
+		percent_chance 7 #define FARMLAND_PLANET_1
+		percent_chance 7 #define SNOW_HEAVY_PLANET_1 
+		percent_chance 7 #define BARREN_PLANET_1 
+	end_random
+	if RADIOACTIVE_PLANET_1
+		#const PN1 69 /* Corruption */
+		#define RADIOACTIVE_PLANET
+		#const PN1B 109 /* DLC_WETROCKBEACH */
+	elseif DESERT_PLANET_1
+		#const PN1 14  /* DESERT */
+		#define DESERT_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif DIRT4_PLANET_1
+		#const PN1 42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+		#define DIRT4_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif CITY_PLANET_1
+		#const PN1  24  /* ROAD */
+		#define CITY_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif SNOW_PLANET_1
+		#const PN1 32  /* SNOW - a snow forest planetary biome. */
+		#define SNOW_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif LEAVES_PLANET_1
+		#const PN1 5 /* LEAVES */
+		#define LEAVES_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif DIRT_MUD_MANGROVE_MAZE_PLANET_1
+		#const PN1 76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+		#define DIRT_MUD_MANGROVE_MAZE_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif BOGLAND_MANGROVE_PLANET_1
+		#const PN1 101 /* DLC_BOGLAND - mangrove terrain */
+		#define BOGLAND_MANGROVE_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif SAVANNAH_PLANET_1
+		#const PN1 41  /* DLC_SAVANNAH */
+		#define SAVANNAH_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif DIRT_PLANET_1
+		#const PN1  6 /* DIRT */
+		#define DIRT_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif FARMLAND_PLANET_1
+		#const PN1 29 /* Farmland, 0%, aka FARMLAND1 */
+		#define FARMLAND_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif SNOW_HEAVY_PLANET_1
+		#const PN1  74  /* SNOW_HEAVY  */
+		#define SNOW_HEAVY_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	elseif BARREN_PLANET_1
+		#const PN1  70  /* GRAVEL  */
+		#define BARREN_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	else /* bugged generation - minimize damage by activating an unused terrain */
+		#const PN1 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+		#define JUNGLE_PLANET
+		#const PN1B 108 /* DLC_GRAVELBEACH */
+	endif
+
+	start_random
+		percent_chance 9 #define RADIOACTIVE_PLANET_2
+		percent_chance 9 #define DESERT_PLANET_2 
+		percent_chance 9 #define DIRT4_PLANET_2 
+		percent_chance 9 #define CITY_PLANET_2 
+		percent_chance 8 #define SNOW_PLANET_2 
+		percent_chance 8 #define LEAVES_PLANET_2 
+		percent_chance 8 #define DIRT_MUD_MANGROVE_MAZE_PLANET_2 
+		percent_chance 8 #define BOGLAND_MANGROVE_PLANET_2 
+		percent_chance 8 #define SAVANNAH_PLANET_2 
+		percent_chance 8 #define DIRT_PLANET_2 
+		percent_chance 8 #define FARMLAND_PLANET_2
+		percent_chance 8 #define SNOW_HEAVY_PLANET_2 
+		/* percent_chance 0 #define BARREN_PLANET_2  */
+	end_random
+	if RADIOACTIVE_PLANET_2
+		if RADIOACTIVE_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 69 /* Corruption */
+			#define RADIOACTIVE_PLANET
+			#const PN2B 109 /* DLC_WETROCKBEACH */
+		endif
+	elseif DESERT_PLANET_2
+		if DESERT_PLANET_1
+			#define BARREN_PLANET_2
+		else 
+			#const PN2 14  /* DESERT */
+			#define DESERT_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT4_PLANET_2
+		if DIRT4_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+			#define DIRT4_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CITY_PLANET_2
+		if CITY_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2  24  /* ROAD */
+			#define CITY_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SNOW_PLANET_2
+		if SNOW_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 32  /* SNOW - a snow forest planetary biome. */
+			#define SNOW_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif LEAVES_PLANET_2
+		if LEAVES_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 5 /* LEAVES */
+			#define LEAVES_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_MUD_MANGROVE_MAZE_PLANET_2
+		if DIRT_MUD_MANGROVE_MAZE_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+			#define DIRT_MUD_MANGROVE_MAZE_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif BOGLAND_MANGROVE_PLANET_2
+		if BOGLAND_MANGROVE_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 101 /* DLC_BOGLAND - mangrove terrain */
+			#define BOGLAND_MANGROVE_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SAVANNAH_PLANET_2
+		if SAVANNAH_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 41  /* DLC_SAVANNAH */
+			#define SAVANNAH_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_PLANET_2
+		if DIRT_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2  6 /* DIRT */
+			#define DIRT_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif FARMLAND_PLANET_2
+		if FARMLAND_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2 29 /* Farmland, 0%, aka FARMLAND1 */
+			#define FARMLAND_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SNOW_HEAVY_PLANET_2
+		if SNOW_HEAVY_PLANET_1
+			#define BARREN_PLANET_2
+		else
+			#const PN2  74  /* SNOW_HEAVY  */
+			#define SNOW_HEAVY_PLANET
+			#const PN2B 108 /* DLC_GRAVELBEACH */
+		endif
+	else /*  BARREN_PLANET_2 - bug in random, didn't select an option */
+		#define BARREN_PLANET_2
+	endif
+	if BARREN_PLANET_2
+		#const PN2  70  /* GRAVEL  */
+		#define BARREN_PLANET
+		#const PN2B 108 /* DLC_GRAVELBEACH */
+	endif
+
+	start_random
+		percent_chance 10 #define RADIOACTIVE_PLANET_3
+		percent_chance 9 #define DESERT_PLANET_3 
+		percent_chance 9 #define DIRT4_PLANET_3 
+		percent_chance 9 #define CITY_PLANET_3 
+		percent_chance 9 #define SNOW_PLANET_3 
+		percent_chance 9 #define LEAVES_PLANET_3 
+		percent_chance 9 #define DIRT_MUD_MANGROVE_MAZE_PLANET_3 
+		percent_chance 9 #define BOGLAND_MANGROVE_PLANET_3 
+		percent_chance 9 #define SAVANNAH_PLANET_3 
+		percent_chance 9 #define DIRT_PLANET_3 
+		percent_chance 9 #define FARMLAND_PLANET_3
+		/* percent_chance 0 #define SNOW_HEAVY_PLANET_3  */
+		/* percent_chance 0 #define BARREN_PLANET_3  */
+	end_random
+	if RADIOACTIVE_PLANET_3
+		if RADIOACTIVE_PLANET_1 /* check 1 first - if both were selected, then it would be planet 1 TODO breaks when both selected */
+			#define SNOW_HEAVY_PLANET_3
+		elseif RADIOACTIVE_PLANET_2
+			#define BARREN_PLANET_3 /* barren needs to represent the previous planet selection */
+		else
+			#const PN3 69 /* Corruption */
+			#define RADIOACTIVE_PLANET
+			#const PN3B 109 /* DLC_WETROCKBEACH */
+		endif
+	elseif DESERT_PLANET_3
+		if DESERT_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif DESERT_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 14  /* DESERT */
+			#define DESERT_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT4_PLANET_3
+		if DIRT4_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif DIRT4_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+			#define DIRT4_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CITY_PLANET_3
+		if CITY_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif CITY_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3  24  /* ROAD */
+			#define CITY_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SNOW_PLANET_3
+		if SNOW_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif SNOW_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 32  /* SNOW - a snow forest planetary biome. */
+			#define SNOW_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif LEAVES_PLANET_3
+		if LEAVES_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif LEAVES_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 5 /* LEAVES */
+			#define LEAVES_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_MUD_MANGROVE_MAZE_PLANET_3
+		if DIRT_MUD_MANGROVE_MAZE_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif DIRT_MUD_MANGROVE_MAZE_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+			#define DIRT_MUD_MANGROVE_MAZE_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif BOGLAND_MANGROVE_PLANET_3
+		if BOGLAND_MANGROVE_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif BOGLAND_MANGROVE_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 101 /* DLC_BOGLAND - mangrove terrain */
+			#define BOGLAND_MANGROVE_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SAVANNAH_PLANET_3
+		if SAVANNAH_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif SAVANNAH_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 41  /* DLC_SAVANNAH */
+			#define SAVANNAH_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_PLANET_3
+		if DIRT_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif DIRT_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3  6 /* DIRT */
+			#define DIRT_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif FARMLAND_PLANET_3
+		if FARMLAND_PLANET_1
+			#define SNOW_HEAVY_PLANET_3
+		elseif FARMLAND_PLANET_2
+			#define BARREN_PLANET_3
+		else
+			#const PN3 29 /* Farmland, 0%, aka FARMLAND1 */
+			#define FARMLAND_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	else /*  BARREN_PLANET_3 or SNOW_HEAVY_PLANET_3 - bug in random, didn't select an option */
+		#define BARREN_PLANET_3
+	endif
+	if BARREN_PLANET_3 /* previous planet, #2, selected again */
+		if BARREN_PLANET_2 /* Only occurs if P1 == P2, in which case as P3 == P2, P3 == P1. Therefore, in the case, the selection cannot be Snow heavy because snow heavy can't be selected for P3, and by the established equalities, snow heavy isn't P1 or P2 either */
+			#define SNOW_HEAVY_PLANET_3
+		else
+			#const PN3  70  /* GRAVEL  */
+			#define BARREN_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+	if SNOW_HEAVY_PLANET_3 /* 2 planets ago, planet 1, selected again */
+		if SNOW_HEAVY_PLANET_2 /* ex selections: desert P1, heavy snow P2, desert P3 */
+			#define BARREN_PLANET_3 /* need to include remainder here since the barren check has already been passed */
+			#const PN3  70  /* GRAVEL  */
+			#define BARREN_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		else
+			#const PN3  74  /* SNOW_HEAVY  */
+			#define SNOW_HEAVY_PLANET
+			#const PN3B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+
+	/* Start choose planet 4 */
+	start_random
+		percent_chance 10 #define RADIOACTIVE_PLANET_4
+		percent_chance 10 #define DESERT_PLANET_4 
+		percent_chance 10 #define DIRT4_PLANET_4 
+		percent_chance 10 #define CITY_PLANET_4 
+		percent_chance 10 #define SNOW_PLANET_4 
+		percent_chance 10 #define LEAVES_PLANET_4 
+		percent_chance 10 #define DIRT_MUD_MANGROVE_MAZE_PLANET_4 
+		percent_chance 10 #define BOGLAND_MANGROVE_PLANET_4 
+		percent_chance 10 #define SAVANNAH_PLANET_4 
+		percent_chance 10 #define DIRT_PLANET_4 
+		/* percent_chance 0 #define FARMLAND_PLANET_4 */
+		/* percent_chance 0 #define SNOW_HEAVY_PLANET_4  */
+		/* percent_chance 0 #define BARREN_PLANET_4  */
+	end_random
+	if RADIOACTIVE_PLANET_4
+		if RADIOACTIVE_PLANET_1 /* check 1 first - if selected previously multiple times, then it would be the earliest selection. */
+			#define FARMLAND_PLANET_4
+		elseif RADIOACTIVE_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif RADIOACTIVE_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 69 /* Corruption */
+			#define RADIOACTIVE_PLANET
+			#const PN4B 109 /* DLC_WETROCKBEACH */
+		endif
+	elseif DESERT_PLANET_4
+		if DESERT_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif DESERT_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif DESERT_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 14  /* DESERT */
+			#define DESERT_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT4_PLANET_4
+		if DIRT4_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif DIRT4_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif DIRT4_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 42 /* DLC_BAOBABFOREST is 49, DLC_DIRT4 is 42 */
+			#define DIRT4_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif CITY_PLANET_4
+		if CITY_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif CITY_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif CITY_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4  24  /* ROAD */
+			#define CITY_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SNOW_PLANET_4
+		if SNOW_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif SNOW_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif SNOW_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 32  /* SNOW - a snow forest planetary biome. */
+			#define SNOW_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif LEAVES_PLANET_4
+		if LEAVES_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif LEAVES_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif LEAVES_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 5 /* LEAVES */
+			#define LEAVES_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_MUD_MANGROVE_MAZE_PLANET_4
+		if DIRT_MUD_MANGROVE_MAZE_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif DIRT_MUD_MANGROVE_MAZE_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif DIRT_MUD_MANGROVE_MAZE_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 76  /* DIRT_MUD is 76 - maybe make this one of the mangrove terrains - mangrove forest terrain */
+			#define DIRT_MUD_MANGROVE_MAZE_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif BOGLAND_MANGROVE_PLANET_4
+		if BOGLAND_MANGROVE_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif BOGLAND_MANGROVE_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif BOGLAND_MANGROVE_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 101 /* DLC_BOGLAND - mangrove terrain */
+			#define BOGLAND_MANGROVE_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif SAVANNAH_PLANET_4
+		if SAVANNAH_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif SAVANNAH_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif SAVANNAH_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4 41  /* DLC_SAVANNAH */
+			#define SAVANNAH_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	elseif DIRT_PLANET_4
+		if DIRT_PLANET_1
+			#define FARMLAND_PLANET_4
+		elseif DIRT_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif DIRT_PLANET_3
+			#define BARREN_PLANET_4
+		else
+			#const PN4  6 /* DIRT */
+			#define DIRT_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	else /*  BARREN_PLANET_4 or SNOW_HEAVY_PLANET_4 or FARMLAND_PLANET_4 - bug in random, didn't select an option */
+		#define BARREN_PLANET_4
+	endif
+
+	/* TODO change to planet 4  TODO seed: -1788767322 on small size - barren planet on both 1 and 4 */
+	if FARMLAND_PLANET_4 /* planet 1 selected again */
+		if FARMLAND_PLANET_1 /* impossible - farmland can't be selected for P4 */
+			#const PN4 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+			#define JUNGLE_PLANET
+			#define JUNGLE_PLANET_4
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		elseif FARMLAND_PLANET_2
+			#define SNOW_HEAVY_PLANET_4
+		elseif FARMLAND_PLANET_3 /* tad problematic, but shouldn't ever be true here since farmland is not directly selected for planet 4, only chosen if planet 4 selection matches the planet 3 selection (and no others). */
+			#define BARREN_PLANET_4
+		else
+			#const PN4 29 /* Farmland, 0%, aka FARMLAND1 */
+			#define FARMLAND_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+	if SNOW_HEAVY_PLANET_4 /* planet 2 selected again: P4 == P2 */
+		if SNOW_HEAVY_PLANET_1 /* replacement selection is heavy snow, which is same as P1, so now the replacement is replaced by farmland. */
+			#const PN4 29 /* Farmland, 0%, aka FARMLAND1 */
+			#define FARMLAND_PLANET
+			#define FARMLAND_PLANET_4
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		elseif SNOW_HEAVY_PLANET_3 /* heavy snow on planet 2 should be impossible at this point
+			This would indicate that P1 == P3, and P2 == P4 already established: therefore Barren is open and available */
+			#define BARREN_PLANET_4
+		else
+			#const PN4  74  /* SNOW_HEAVY  */
+			#define SNOW_HEAVY_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+	if BARREN_PLANET_4 /* P4 == P3 - can't be direct farmland selection, and effective new selection is barren */
+		if BARREN_PLANET_1 /* effective new selection equaled barren, so pick farmland; P1 barren, P2 __, P3 == P4
+			farmland cannot be P4 and thus can't be P3, but can be P2
+		 */
+		 	if FARMLAND_PLANET_2 /* P1 barren, P2 farm, P3 == P4 - P3 can't directly select barren and wouldn't be == P3 if it was farm, so select heavy snow */
+				#const PN4  74  /* SNOW_HEAVY  */
+				#define SNOW_HEAVY_PLANET
+				#define SNOW_HEAVY_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */
+			else
+				#const PN4 29 /* Farmland, 0%, aka FARMLAND1 */
+				#define FARMLAND_PLANET
+				#define FARMLAND_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */
+			endif
+		elseif BARREN_PLANET_2 /* P1 == P2 after P3 == P4,  */
+			if SNOW_HEAVY_PLANET_1 /* heavy, barren, __(ex:des), __(ex:des) */
+				#const PN4 29 /* Farmland, 0%, aka FARMLAND1 */
+				#define FARMLAND_PLANET
+				#define FARMLAND_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */
+			/* elseif SNOW_HEAVY_PLANET_2 - redundant */
+			/* elseif SNOW_HEAVY_PLANET_3  XX, Barren, heavy, XX - implies planet XX is heavy snow, which isn't possible. */
+			else /* XX, Barren, YY,YY - XX isn't heavy snow, and Y can't select in iether instance */
+				#const PN4  74  /* SNOW_HEAVY  */
+				#define SNOW_HEAVY_PLANET
+				#define SNOW_HEAVY_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */			
+			endif
+		elseif BARREN_PLANET_3 /* P4 == P3 == P2 */
+			if FARMLAND_PLANET_4 /* all equal - TODO should already be handled */
+			else /* P1 is different from P2/P3/P4 - XX, YY, Barren, Snow heavy */
+				/* I suspect it was already handled by this point */
+				#const PN4 71 /* UNDERBRUSH_JUNGLE is 77, UNDERBRUSH_LEAVES is 71 - 71 was used as a terrain mask */
+				#define JUNGLE_PLANET
+				#define JUNGLE_PLANET_4
+				#const PN4B 108 /* DLC_GRAVELBEACH */
+			endif
+		else
+			#const PN4  70  /* GRAVEL  */
+			#define BARREN_PLANET
+			#const PN4B 108 /* DLC_GRAVELBEACH */
+		endif
+	endif
+
+elseif NONRANDOM_PLANETS /* TODO should be able to remove now */
 
 	#const PN1  29 /* Farmland, 0%, aka FARMLAND1 */
 	#define FARMLAND_PLANET
@@ -454,11 +1025,11 @@ if DIRT_PLANET
 		}
 	endif
 endif
-/* standard elevation - may be a bit much when it does appear.
+/* standard elevation - may be a bit much when it does appear. Percent chance will be reduced for the heavily forested biomes. increased for the barren/radioactive biomes
 spacing 3 ensures that it won't spill over onto a mangrove terrain
 if TERRAIN_PLANET
 	start_random
-		percent_chance 30 create_elevation 3 {
+		percent_chance 25 create_elevation 3 {
 			base_terrain TERRAIN
 			number_of_clumps rnd(3,32)
 			number_of_tiles rnd(30,300)
@@ -472,7 +1043,7 @@ endif
  */
 if LEAVES_PLANET
 	start_random
-		percent_chance 30 create_elevation 3 {
+		percent_chance 15 create_elevation 3 {
 			base_terrain LEAVES
 			number_of_clumps rnd(3,32)
 			number_of_tiles rnd(30,300)
@@ -484,7 +1055,7 @@ if LEAVES_PLANET
 endif
 if SNOW_PLANET
 	start_random
-		percent_chance 30 create_elevation 3 {
+		percent_chance 15 create_elevation 3 {
 			base_terrain SNOW
 			number_of_clumps rnd(3,32)
 			number_of_tiles rnd(30,300)
@@ -496,7 +1067,7 @@ if SNOW_PLANET
 endif
 if BARREN_PLANET
 	start_random
-		percent_chance 30 create_elevation 3 {
+		percent_chance 55 create_elevation 3 {
 			base_terrain GRAVEL
 			number_of_clumps rnd(3,32)
 			number_of_tiles rnd(30,300)
@@ -508,7 +1079,7 @@ if BARREN_PLANET
 endif
 if RADIOACTIVE_PLANET /* a bit hard to see, but whatever */
 	start_random
-		percent_chance 30 create_elevation 3 {
+		percent_chance 55 create_elevation 3 {
 			base_terrain CORRUPTION
 			number_of_clumps rnd(3,32)
 			number_of_tiles rnd(30,300)
@@ -544,7 +1115,7 @@ if FARMLAND_PLANET /* Farmland planet is relatively flat */
 endif
 if CITY_PLANET /* city planet is more likely to be flat - cities are sometimes built on hilly terrain, but things may get flattened. Not as flat as farmland terrain though. */
 	start_random
-		percent_chance 20 create_elevation 3 {
+		percent_chance 10 create_elevation 3 {
 			base_terrain ROAD
 			number_of_clumps rnd(2,12)
 			number_of_tiles rnd(40,200)
@@ -569,10 +1140,10 @@ if SAVANNAH_PLANET
 endif
 if DIRT4_PLANET
 	start_random
-		percent_chance 30 create_elevation 3 {
+		percent_chance 10 create_elevation 3 {
 			base_terrain DLC_DIRT4
-			number_of_clumps rnd(3,32)
-			number_of_tiles rnd(30,300)
+			number_of_clumps rnd(2,20)
+			number_of_tiles rnd(20,200)
 			set_scale_by_size
 			enable_balanced_elevation
 			spacing 3 
@@ -1802,7 +2373,7 @@ if REGICIDE
 	}
 endif
 if RADIOACTIVE_PLANET
-	/* maybe add a small chance of there being no resources on the radioactive planet? */
+	/* maybe add a small chance of there being no resources on the radioactive planet? Feedback: reduce gold/stone (more space). */
 	create_object GOLD {
 		terrain_to_place_on CORRUPTION
 		layer_to_place_on DLC_DESERTGRAVEL
@@ -1846,15 +2417,15 @@ if RADIOACTIVE_PLANET
 		min_distance_group_placement 2
 	}
 endif
-/* I think I overdid it on the food, so I can get rid of these.
 create_object SHORE_FISH {
 	number_of_objects 9320
-	temp_min_distance_group_placement 5
+	temp_min_distance_group_placement rnd(8,10)
 	avoid_actor_area 1
 }
+/* I think I overdid it on the food, so I can get rid of these. - make much more scarce - so like 10 tiles - and maybe keep the dolphins removed.
 create_object DOLPHIN {
 	number_of_objects 9320
-	temp_min_distance_group_placement 5
+	temp_min_distance_group_placement 8
 	avoid_actor_area 1
 	max_distance_to_other_zones 5
 	terrain_to_place_on WATER
@@ -1912,7 +2483,8 @@ create_object FLAG_A {
 	temp_min_distance_group_placement 1
 	avoid_forest_zone 2
 	avoid_cliff_zone 2
-} */
+}
+ */
 if DESERT_PLANET
 	create_object GOLD {
 		avoid_actor_area 2
@@ -2423,7 +2995,7 @@ if SNOW_PLANET /* similar to leaves planet */
 		}
 	endif
 endif
-if JUNGLE_PLANET
+if JUNGLE_PLANET /* not finished - do not include. */
 	/* UNDERBRUSH_JUNGLE on inside  UNDERBRUSH_LEAVES on outside
 	TODO finish this biome later - is only biome that can have predators, due to the enclosed nature of the UNDERBRUSH_JUNGLE
 	Should have lots of forage (inside and outside perhaps? - will need to avoid the water terrain a little to ensure a walking path for villagers), plenty of hunt buried in the forest, gold/stone buried in the forest, and possibly some predators buried in the forest also. Should be food rich, and could make generally resource rich.
@@ -3364,7 +3936,7 @@ if SNOW_HEAVY_PLANET
 		}
 	endif
 endif
-if BARREN_PLANET
+if BARREN_PLANET /* feedback: reduce gold/stone */
 	create_object STONE { 
 		terrain_to_place_on GRAVEL
 		layer_to_place_on DLC_ROCK
