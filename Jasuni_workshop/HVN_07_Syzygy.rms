@@ -2642,7 +2642,7 @@ if CITY_PLANET
 		number_of_objects rnd(2,4)
 		number_of_groups rnd(4,30)
 		group_variance rnd(0,1)
-		temp_min_distance_group_placement rnd(10,25)
+		temp_min_distance_group_placement rnd(12,30)
 		set_scaling_to_map_size
 		min_distance_group_placement 2
 		max_distance_to_other_zones 1
