@@ -1,25 +1,25 @@
 /* Nebula */
 /* A Random Map Script by BPDrej */
+/* Terrain Rework by TechChariot */
 /* Released 03/06/2024 */
 /* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
 /* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-03.pdf */
 
-#const GRAVEL1 70
+/* Terrains */
+#const GRAVEL 70
 #const MUD 76
-#const F 69
-#const WRB 82
-#const WGB 108
-#const WGB2 81
+#const EVIL_FOG 69
+#const NNB 79
 #const GW 95
 #const BW 96
-#const BUSHA 302
-#const BUSHB 1360
 
-#const DOLPHIN 61
-#const TRAP 278
+/* Objects */
+
 #const ROCK2 1323
 #const ROCK3 389
 #const ROCK4 396
+#const SMOKE 1308
+
 #const PHOTON_MAN 1292
 
 /* Removing Trade Carts and Cogs for Multi-team Games */
@@ -62,16 +62,576 @@ nomad_resources
 ai_info_map_type NOMAD 1 0 1
 
 behavior_version 1
-effect_amount GAIA_SET_ATTRIBUTE DLC_RAINTREE ATTR_TERRAIN_ID 13
+
+
+#const ON_GRID 278
+effect_amount GAIA_SET_ATTRIBUTE ON_GRID ATTR_STORAGE_VALUE 0
+
+/* Removing Initial Tree Spawn */
+#const BAOBAB_TREE 1052
+effect_amount GAIA_SET_ATTRIBUTE BAOBAB_TREE ATTR_TERRAIN_ID 13
+#const MANGROVE_TREE 1144
+effect_amount GAIA_SET_ATTRIBUTE MANGROVE_TREE ATTR_TERRAIN_ID 19
+
+
+
+<ELEVATION_GENERATION>
+
+if TINY_MAP
+create_elevation 2
+{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+elseif SMALL_MAP
+create_elevation 2
+{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+elseif MEDIUM_MAP
+create_elevation 3
+{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+elseif LARGE_MAP
+create_elevation 3
+{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+else
+create_elevation 3
+{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
+endif
+
+create_elevation 1
+{
+	base_terrain NNB
+if TINY_MAP
+	number_of_tiles 2500
+	number_of_clumps 50
+elseif MEDIUM_MAP
+	number_of_tiles 6500
+	number_of_clumps 45
+elseif LARGE_MAP
+	number_of_tiles 9000
+	number_of_clumps 40
+else
+	number_of_tiles 11000
+	number_of_clumps 45
+endif
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+create_elevation 2
+{
+	base_terrain NNB
+if TINY_MAP
+	number_of_tiles 500
+	number_of_clumps 10
+elseif MEDIUM_MAP
+	number_of_tiles 1000
+	number_of_clumps 10
+elseif LARGE_MAP
+	number_of_tiles 1250
+	number_of_clumps 10
+elseif HUGE_MAP
+	number_of_tiles 1600
+	number_of_clumps 12
+else
+	number_of_tiles 2000
+	number_of_clumps 20
+endif
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+/*
+create_elevation 3
+{
+	base_terrain NNB
+if TINY_MAP
+	number_of_tiles 250
+	number_of_clumps 10
+elseif MEDIUM_MAP
+	number_of_tiles 500
+	number_of_clumps 10
+elseif LARGE_MAP
+	number_of_tiles 700
+	number_of_clumps 10
+elseif HUGE_MAP
+	number_of_tiles 1000
+	number_of_clumps 12
+endif
+	set_scale_by_groups
+	enable_balanced_elevation
+}
+*/
+<TERRAIN_GENERATION>
+
+#define TERRAIN_CLEANUP
+if TERRAIN_CLEANUP
+
+	/* First Placeholder Application */
+	create_terrain GRASS2 { base_terrain DLC_DESERTGRAVEL land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 1 7 }
+	create_terrain GRASS2 { base_terrain DLC_DESERTGRAVEL land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 1 7 }
+	create_terrain GRASS2 { base_terrain DLC_DESERTGRAVEL land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 1 7 }
+	create_terrain GRASS2 { base_terrain DLC_DESERTGRAVEL land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 1 7 }
+
+	/* Generous Base Application */
+	create_terrain NNB { base_terrain DLC_DESERTGRAVEL land_percent 100 set_flat_terrain_only number_of_clumps 9320 }
+	create_terrain NNB { base_terrain DLC_DESERTGRAVEL land_percent 100 set_flat_terrain_only number_of_clumps 9320 }
+	create_terrain NNB { base_terrain DLC_DESERTGRAVEL land_percent 100 set_flat_terrain_only number_of_clumps 9320 }
+	create_terrain NNB { base_terrain DLC_DESERTGRAVEL land_percent 100 set_flat_terrain_only number_of_clumps 9320 }
+
+	/* Second Placeholder Applications */
+	create_terrain GRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 2 }
+	create_terrain GRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 2 }
+	create_terrain GRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 2 }
+	create_terrain GRASS { base_terrain NNB land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 2 }
+
+	/* First Placeholder Expansion */
+	create_terrain GRASS2 { base_terrain NNB land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 }
+	create_terrain GRASS2 { base_terrain NNB land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 }
+	create_terrain GRASS2 { base_terrain NNB land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 }
+	create_terrain GRASS2 { base_terrain NNB land_percent 100 number_of_clumps 9320 spacing_to_other_terrain_types 1 }
+
+	/* Reverting First Placeholder */
+	create_terrain DLC_DESERTGRAVEL { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+	create_terrain DLC_DESERTGRAVEL { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+	create_terrain DLC_DESERTGRAVEL { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+	create_terrain DLC_DESERTGRAVEL { base_terrain GRASS2 land_percent 100 number_of_clumps 9320 }
+
+	/* Reverting Second Placeholder */
+	create_terrain NNB { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+	create_terrain NNB { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+	create_terrain NNB { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+	create_terrain NNB { base_terrain GRASS land_percent 100 number_of_clumps 9320 }
+
+
+endif
+
+#define MS_APPLICATION
+if MS_APPLICATION
+	create_terrain DLC_MANGROVESHALLOW { base_terrain NNB land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain NNB land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain NNB land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
+	create_terrain DLC_MANGROVESHALLOW { base_terrain NNB land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
+endif
+
+
+#define FOREST_APPLICATION
+
+if FOREST_APPLICATION
+	/* Actual Forests */
+	create_terrain DLC_BAOBABFOREST   { base_terrain NNB land_percent 7 number_of_clumps 20 set_scale_by_groups spacing_to_other_terrain_types 3 }
+	create_terrain DLC_MANGROVEFOREST { base_terrain DLC_MANGROVESHALLOW land_percent 7 number_of_clumps 20 set_scale_by_groups spacing_to_other_terrain_types 2 }
+	/* Maskings */
+	create_terrain NNB       { base_terrain DLC_BAOBABFOREST   land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+	create_terrain EVIL_FOG  { base_terrain DLC_MANGROVEFOREST land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+
+endif
+
+#define COSMETIC_LAYERINGS
+if COSMETIC_LAYERINGS
+	/* Water Terrains */
+	create_terrain BW { base_terrain DLC_MANGROVESHALLOW land_percent 6 number_of_clumps 9320 terrain_mask 1 }
+	create_terrain GW { base_terrain DLC_MANGROVESHALLOW land_percent 6 number_of_clumps 9320 terrain_mask 1 }
+	create_terrain DLC_WATER4 { base_terrain DLC_MANGROVESHALLOW land_percent 6 number_of_clumps 9320 terrain_mask 1 }
+	create_terrain EVIL_FOG { base_terrain DLC_MANGROVESHALLOW land_percent 100 number_of_clumps 9320 terrain_mask 1 }
+
+	/* Neutron Star Terrains */
+	create_terrain NNB	    { base_terrain DLC_DESERTGRAVEL land_percent 100 number_of_clumps 9320 terrain_mask 1 height_limits 0 0 }
+	create_terrain DLC_ROCK	{ base_terrain DLC_DESERTGRAVEL land_percent 100 number_of_clumps 9320 terrain_mask 1 height_limits 2 7 }
+
+	/* Generic Land Terrains */
+	create_terrain DIRT	     { base_terrain NNB land_percent 10 number_of_clumps 9320 terrain_mask 1 }
+	create_terrain DLC_DIRT4 { base_terrain NNB land_percent 10 number_of_clumps 9320 terrain_mask 1 }
+	create_terrain DESERT	 { base_terrain NNB land_percent 10 number_of_clumps 9320 terrain_mask 1 }
+	create_terrain DIRT3	 { base_terrain NNB land_percent 10 number_of_clumps 9320 terrain_mask 1 }
+	create_terrain LEAVES	 { base_terrain NNB land_percent 10 number_of_clumps 9320 terrain_mask 1 }
+
+
+endif
+
+/* #define WATER_APPLICATION */
+if WATER_APPLICATION
+
+	/* Water */
+	create_terrain DLC_WATER5
+	{
+		base_terrain DLC_MANGROVESHALLOW
+		land_percent 3
+		number_of_clumps 18
+		clumping_factor 30
+		set_scale_by_size
+	if TINY_MAP
+		spacing_to_other_terrain_types 5
+	elseif MEDIUM_MAP
+		spacing_to_other_terrain_types 5
+	elseif LARGE_MAP
+		spacing_to_other_terrain_types 4
+	elseif HUGE_MAP
+		spacing_to_other_terrain_types 4
+	endif
+		height_limits 0 0
+	}
+	if TINY_MAP
+	create_terrain WATER
+	{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
+	create_terrain WATER
+	{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
+	create_terrain WATER
+	{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
+	else
+	create_terrain WATER
+	{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain WATER
+	{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
+	create_terrain WATER
+	{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
+	endif
+
+
+endif
+
+
+<OBJECTS_GENERATION>
+
+#define FOREST_OBJECTS
+if FOREST_OBJECTS
+
+	#const JUNGLE_BUSH 302
+	#const TREE_REED 1350
+	/* Jungle Bush */
+	create_object ON_GRID { set_gaia_object_only second_object JUNGLE_BUSH        temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object JUNGLE_BUSH        temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Bamboo Tree */
+	create_object ON_GRID { set_gaia_object_only second_object BAMBOO_TREE        temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object BAMBOO_TREE        temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Forest Tree */
+	create_object ON_GRID { set_gaia_object_only second_object FOREST_TREE        temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object FOREST_TREE        temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Pine Tree */
+	create_object ON_GRID { set_gaia_object_only second_object PINETREE           temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object PINETREE           temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Palm Tree */
+	create_object ON_GRID { set_gaia_object_only second_object PALMTREE           temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object PALMTREE           temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Forest Tree */
+	create_object ON_GRID { set_gaia_object_only second_object FOREST_TREE        temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object FOREST_TREE        temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Snow Pine Tree */
+	create_object ON_GRID { set_gaia_object_only second_object SNOWPINETREE       temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object SNOWPINETREE       temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Jungle Tree */
+	create_object ON_GRID { set_gaia_object_only second_object JUNGLETREE         temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object JUNGLETREE         temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Dragon Tree */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_DRAGONTREE     temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_DRAGONTREE     temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Baobab Tree */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_BAOBABTREE     temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_BAOBABTREE     temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* African_Bush */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_AFRICANBUSH    temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_AFRICANBUSH    temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Snowy Bush */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_AFRICANBUSH_2  temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_AFRICANBUSH_2  temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Mangrove Tree */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_MANGROVE_TREE  temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_MANGROVE_TREE  temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Rainforest Tree */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_RAINTREE       temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_RAINTREE       temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Autumn Tree */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_AUTUMNTREE     temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_AUTUMNTREE     temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Autumn Snow Tree */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_AUTUMNSNOWTREE temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_AUTUMNSNOWTREE temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Dead Tree */
+	create_object ON_GRID { set_gaia_object_only second_object DLC_DEADTREE		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object DLC_DEADTREE 	  temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Cypress Tree */
+	create_object ON_GRID { set_gaia_object_only second_object CYPRESS_TREE		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object CYPRESS_TREE		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Italian Pine Tree */
+	create_object ON_GRID { set_gaia_object_only second_object ITALIAN_PINETREE   temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object ITALIAN_PINETREE   temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Olive Tree */
+	create_object ON_GRID { set_gaia_object_only second_object OLIVE_TREE		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object OLIVE_TREE 		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Reed Tree */
+	create_object ON_GRID { set_gaia_object_only second_object TREE_REED 		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object TREE_REED 		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Birch Tree */
+	create_object ON_GRID { set_gaia_object_only second_object BIRCH_TREE		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object BIRCH_TREE		  temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+	/* Tree I */
+	create_object ON_GRID { set_gaia_object_only second_object TREE_I 			  temp_min_distance_group_placement 4 terrain_to_place_on DLC_BAOBABFOREST number_of_groups 9320 set_scaling_to_map_size }
+	create_object ON_GRID { set_gaia_object_only second_object TREE_I			  temp_min_distance_group_placement 4 terrain_to_place_on DLC_MANGROVEFOREST number_of_groups 9320 set_scaling_to_map_size }
+
+endif
+
+#define PLAYER_OBJECTS
+if PLAYER_OBJECTS
+	if REGICIDE
+	create_object KING
+	{
+		set_place_for_every_player
+		avoid_forest_zone 4
+		avoid_actor_area 120
+	}
+	endif
+	create_object VILLAGER
+	{
+		set_place_for_every_player
+		avoid_forest_zone 4
+		avoid_actor_area 120
+	}
+	create_object PHOTON_MAN
+	{
+		set_place_for_every_player
+		avoid_forest_zone 4
+		avoid_actor_area 120
+	}
+endif
+
+#define STAR_RESOURCES
+if STAR_RESOURCES
+	/* Star Resources */
+	create_object GOLD 
+	{
+		number_of_objects 3
+		number_of_groups 1000
+		set_tight_grouping
+		set_gaia_object_only
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 6
+		actor_area 115
+		actor_area_radius 10
+		terrain_to_place_on DLC_DESERTGRAVEL
+	}
+	create_object STONE
+	{
+		number_of_objects 3
+		number_of_groups 1000
+		set_tight_grouping
+		set_gaia_object_only
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 10
+		min_distance_group_placement 5
+		actor_area 116
+		actor_area_radius 10
+		terrain_to_place_on DLC_DESERTGRAVEL
+	}
+endif
+
+#define NETURAL_RESOURCES
+
+#define NEUTRAL_RESOURCES
+if NETURAL_RESOURCES
+
+	create_object RELIC 
+	{
+		min_distance_group_placement 1
+		if TINY_MAP
+			number_of_objects 2
+			temp_min_distance_group_placement 35
+		elseif MEDIUM_MAP
+			number_of_objects 3
+			temp_min_distance_group_placement 38
+		elseif LARGE_MAP
+			number_of_objects 3
+			temp_min_distance_group_placement 48
+		elseif HUGE_MAP
+			number_of_objects 4
+			temp_min_distance_group_placement 52
+		endif
+		terrain_to_place_on NNB
+		avoid_forest_zone 2
+	}
+
+	create_object GOLD 
+	{
+		number_of_objects 4
+		number_of_groups 1000
+		set_tight_grouping
+		set_gaia_object_only
+		set_scaling_to_map_size
+		if TINY_MAP
+			temp_min_distance_group_placement 27
+		elseif SMALL_MAP
+			temp_min_distance_group_placement 27
+		elseif MEDIUM_MAP
+			temp_min_distance_group_placement 30
+		elseif LARGE_MAP
+			temp_min_distance_group_placement 32
+		else
+			temp_min_distance_group_placement 35
+		endif
+		actor_area 66
+		actor_area_radius 4
+		avoid_actor_area 115
+		avoid_actor_area 116
+		avoid_actor_area 120
+		avoid_forest_zone 2
+	}
+
+	create_object STONE
+	{
+		number_of_objects 3
+		number_of_groups 1000
+		set_tight_grouping
+		set_gaia_object_only
+		set_scaling_to_map_size
+		if TINY_MAP
+			temp_min_distance_group_placement 27
+		elseif SMALL_MAP
+			temp_min_distance_group_placement 27
+		elseif MEDIUM_MAP
+			temp_min_distance_group_placement 30
+		elseif LARGE_MAP
+			temp_min_distance_group_placement 32
+		else
+			temp_min_distance_group_placement 35
+		endif
+		actor_area 67
+		actor_area_radius 3
+		avoid_actor_area 66
+		avoid_actor_area 115
+		avoid_actor_area 116
+		avoid_actor_area 120
+		avoid_forest_zone 2
+	}
+
+	create_object FORAGE
+	{
+		number_of_objects 3
+		number_of_groups 99
+		group_placement_radius 3
+		set_tight_grouping
+		set_gaia_object_only
+		temp_min_distance_group_placement 30
+		avoid_actor_area 66
+		avoid_actor_area 67
+		actor_area_radius 2
+		avoid_actor_area 120
+		terrain_to_place_on NNB
+		avoid_forest_zone 2
+	}
+
+	create_object RELIC 
+	{
+		min_distance_group_placement 1
+		if TINY_MAP
+			number_of_objects 3
+			temp_min_distance_group_placement 35
+		elseif MEDIUM_MAP
+			number_of_objects 2
+			temp_min_distance_group_placement 38
+		elseif LARGE_MAP
+			number_of_objects 4
+			temp_min_distance_group_placement 65
+		else
+			number_of_objects 4
+			temp_min_distance_group_placement 75
+		endif
+		avoid_forest_zone 3
+		terrain_to_place_on NNB
+	}
+
+	create_object DLC_WATERBUFFALO
+	{
+		number_of_objects 2
+		number_of_groups 1000
+		set_loose_grouping
+		set_gaia_object_only
+		set_scaling_to_map_size
+		temp_min_distance_group_placement 20
+		avoid_forest_zone 2
+		terrain_to_place_on NNB
+	}
+
+	create_object BOAR
+	{
+		number_of_objects 1
+		number_of_groups 1000
+		set_loose_grouping
+		set_gaia_object_only
+		temp_min_distance_group_placement 24
+		avoid_forest_zone 2
+		terrain_to_place_on NNB
+	}
+
+	create_object ON_GRID
+	{
+		number_of_objects 3
+		number_of_groups 1000
+		set_scaling_to_map_size
+		set_gaia_object_only
+		min_distance_group_placement 3
+		temp_min_distance_group_placement 10
+		set_gaia_unconvertible
+		second_object DLC_BOXTURTLE
+		avoid_forest_zone 3
+		terrain_to_place_on DLC_MANGROVESHALLOW
+	}
+
+
+endif
+
+#define EYE_CANDY_OBJECTS
+if EYE_CANDY_OBJECTS
+
+	/* Aesthetic Objects */
+	create_object ROCK
+	{
+		number_of_objects 1
+		number_of_groups 99
+		set_scaling_to_map_size
+		min_distance_group_placement 5
+		temp_min_distance_group_placement 25
+		avoid_forest_zone 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+	}
+	create_object ROCK3
+	{
+		number_of_objects 1
+		number_of_groups 99
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		temp_min_distance_group_placement 25
+		avoid_forest_zone 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+	}
+	create_object ROCK4
+	{
+		number_of_objects 1
+		number_of_groups 99
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		temp_min_distance_group_placement 25
+		avoid_forest_zone 2
+		terrain_to_place_on DLC_MANGROVESHALLOW
+	}
+
+	create_object SMOKE
+	{
+		number_of_groups 999
+		set_scaling_to_map_size
+		min_distance_group_placement 3
+		temp_min_distance_group_placement 12
+		avoid_forest_zone 4
+		terrain_to_place_on NNB
+	}
+
+
+
+endif
+
+
 
 <LAND_GENERATION>
-base_terrain WGB2
+base_terrain NNB
 
 enable_waves 0
 
 create_player_lands
 {
-	base_terrain WGB2
+	base_terrain NNB
 	land_percent 0
 	base_size 0
 	other_zone_avoidance_distance 12
@@ -224,540 +784,3 @@ create_land
 { terrain_type DLC_DESERTGRAVEL base_size 8 number_of_tiles 500 clumping_factor 30 land_position 61 20 }
 end_random
 endif
-
-<ELEVATION_GENERATION>
-
-if TINY_MAP
-create_elevation 2
-{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
-elseif SMALL_MAP
-create_elevation 2
-{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
-elseif MEDIUM_MAP
-create_elevation 3
-{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
-elseif LARGE_MAP
-create_elevation 3
-{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
-else
-create_elevation 3
-{ base_terrain DLC_DESERTGRAVEL number_of_tiles 5000 number_of_clumps 9320 set_scale_by_size spacing 2 enable_balanced_elevation }
-endif
-
-create_elevation 1
-{
-	base_terrain WGB2
-if TINY_MAP
-	number_of_tiles 2500
-	number_of_clumps 50
-elseif MEDIUM_MAP
-	number_of_tiles 6500
-	number_of_clumps 45
-elseif LARGE_MAP
-	number_of_tiles 9000
-	number_of_clumps 40
-else
-	number_of_tiles 11000
-	number_of_clumps 45
-endif
-	set_scale_by_groups
-	enable_balanced_elevation
-}
-create_elevation 2
-{
-	base_terrain WGB2
-if TINY_MAP
-	number_of_tiles 500
-	number_of_clumps 10
-elseif MEDIUM_MAP
-	number_of_tiles 1000
-	number_of_clumps 10
-elseif LARGE_MAP
-	number_of_tiles 1250
-	number_of_clumps 10
-elseif HUGE_MAP
-	number_of_tiles 1600
-	number_of_clumps 12
-else
-	number_of_tiles 2000
-	number_of_clumps 20
-endif
-	set_scale_by_groups
-	enable_balanced_elevation
-}
-/*
-create_elevation 3
-{
-	base_terrain WGB2
-if TINY_MAP
-	number_of_tiles 250
-	number_of_clumps 10
-elseif MEDIUM_MAP
-	number_of_tiles 500
-	number_of_clumps 10
-elseif LARGE_MAP
-	number_of_tiles 700
-	number_of_clumps 10
-elseif HUGE_MAP
-	number_of_tiles 1000
-	number_of_clumps 12
-endif
-	set_scale_by_groups
-	enable_balanced_elevation
-}
-*/
-<TERRAIN_GENERATION>
-
-create_terrain DLC_ROCK
-{ base_terrain DLC_DESERTGRAVEL land_percent 100 number_of_clumps 9320 terrain_mask 1 }
-create_terrain DLC_ROCK
-{ base_terrain DLC_DESERTGRAVEL land_percent 100 number_of_clumps 9320 terrain_mask 1 }
-
-create_terrain DLC_MANGROVESHALLOW { base_terrain WGB2 land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
-create_terrain DLC_MANGROVESHALLOW { base_terrain WGB2 land_percent 100 set_flat_terrain_only number_of_clumps 9320 height_limits 0 0 spacing_to_other_terrain_types 1 }
-
-create_terrain DLC_RAINFOREST
-{
-	base_terrain WGB2
-	land_percent 14
-	number_of_clumps 20
-	set_scale_by_groups
-	spacing_to_other_terrain_types 1
-}
-create_terrain LEAVES
-{ 
-	base_terrain DLC_RAINFOREST 
-	land_percent 100 
-	number_of_clumps 9320 
-}
-create_terrain DLC_RAINFOREST
-{
-	base_terrain LEAVES
-	land_percent 100
-	number_of_clumps 9320
-	set_scale_by_groups
-	spacing_to_other_terrain_types 1
-}
-
-create_terrain GRAVEL1 { base_terrain LEAVES land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-create_terrain GRAVEL1 { base_terrain LEAVES land_percent 100 number_of_clumps 9320 set_scale_by_groups terrain_mask 1 }
-
-create_terrain GRAVEL1
-{ base_terrain WGB2 land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 3 }
-create_terrain GRAVEL1
-{ base_terrain WGB2 land_percent 100 number_of_clumps 9320 set_scale_by_groups height_limits 1 3 }
-
-create_terrain DLC_ROCK
-{ base_terrain GRAVEL1 land_percent 4 number_of_clumps 60 set_scale_by_groups terrain_mask 1 }
-create_terrain DLC_BOGLAND
-{ base_terrain GRAVEL1 land_percent 8 number_of_clumps 30 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
-
-/* Masking */
-create_terrain F { base_terrain DLC_MANGROVESHALLOW land_percent 25 number_of_clumps 30 clumping_factor -10 terrain_mask 1 set_scale_by_groups }
-
-create_terrain DLC_BOGLAND
-{ base_terrain DLC_MANGROVESHALLOW land_percent 4 number_of_clumps 10 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
-create_terrain SHALLOW
-{ base_terrain DLC_MANGROVESHALLOW land_percent 4 number_of_clumps 10 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
-create_terrain GW
-{ base_terrain DLC_MANGROVESHALLOW land_percent 2 number_of_clumps 10 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
-create_terrain WATER
-{ base_terrain DLC_MANGROVESHALLOW land_percent 4 number_of_clumps 10 clumping_factor -10 set_scale_by_groups terrain_mask 1 }
-
-/* Water */
-create_terrain DLC_WATER5
-{
-	base_terrain DLC_MANGROVESHALLOW
-	land_percent 3
-	number_of_clumps 18
-	clumping_factor 30
-	set_scale_by_size
-if TINY_MAP
-	spacing_to_other_terrain_types 5
-elseif MEDIUM_MAP
-	spacing_to_other_terrain_types 5
-elseif LARGE_MAP
-	spacing_to_other_terrain_types 4
-elseif HUGE_MAP
-	spacing_to_other_terrain_types 4
-endif
-	height_limits 0 0
-}
-if TINY_MAP
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 1 }
-else
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
-create_terrain WATER
-{ base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 set_scale_by_size spacing_to_other_terrain_types 2 }
-endif
-
-/* Space Masking */
-
-create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain DLC_WATER5 land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-
-create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-create_terrain F { base_terrain WATER land_percent 100 number_of_clumps 100 terrain_mask 1 set_scale_by_size }
-
-<OBJECTS_GENERATION>
-
-create_object JUNGLETREE 
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_facet 50
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on DLC_RAINFOREST
-	temp_min_distance_group_placement 1
-	second_object BUSHB
-	set_scaling_to_map_size
-}
-create_object DLC_MANGROVE_TREE
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on DLC_RAINFOREST
-	temp_min_distance_group_placement 1
-	ignore_terrain_restrictions
-	second_object BUSHB
-	set_scaling_to_map_size
-}
-create_object DLC_MANGROVE_TREE
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on DLC_RAINFOREST
-	temp_min_distance_group_placement 1
-	ignore_terrain_restrictions
-	second_object BUSHA
-	set_scaling_to_map_size
-}
-create_object TREE_L
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on DLC_RAINFOREST
-	temp_min_distance_group_placement 1
-	second_object BUSHA
-	set_scaling_to_map_size
-}
-create_object DLC_ROCKJUNGLE
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on DLC_RAINFOREST
-	temp_min_distance_group_placement 3
-	set_scaling_to_map_size
-}
-create_object BUSHB
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on DLC_RAINFOREST
-	temp_min_distance_group_placement 1
-	ignore_terrain_restrictions
-	second_object DLC_MANGROVE_TREE
-	set_scaling_to_map_size
-}
-create_object BUSHB
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on LEAVES
-	temp_min_distance_group_placement 1
-	ignore_terrain_restrictions
-	set_scaling_to_map_size
-}
-create_object JUNGLETREE 
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_facet 50
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on LEAVES
-	temp_min_distance_group_placement 1
-	set_scaling_to_map_size
-}
-create_object BUSHB
-{
-	number_of_objects rnd (1,2)
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	terrain_to_place_on LEAVES
-	second_object BUSHA
-	ignore_terrain_restrictions
-	set_scaling_to_map_size
-}
-if REGICIDE
-create_object KING
-{
-	set_place_for_every_player
-	avoid_forest_zone 4
-	avoid_actor_area 120
-}
-endif
-create_object VILLAGER
-{
-	set_place_for_every_player
-	avoid_forest_zone 4
-	avoid_actor_area 120
-}
-create_object PHOTON_MAN
-{
-	set_place_for_every_player
-	avoid_forest_zone 4
-	avoid_actor_area 120
-}
-create_object TRANSPORT_SHIP
-{
-	set_place_for_every_player
-	avoid_forest_zone 3
-	terrain_to_place_on WATER
-}
-/* Star Resources */
-create_object GOLD 
-{
-	number_of_objects 3
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	temp_min_distance_group_placement 6
-	actor_area 115
-	actor_area_radius 10
-	terrain_to_place_on DLC_DESERTGRAVEL
-}
-create_object STONE
-{
-	number_of_objects 3
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	temp_min_distance_group_placement 10
-	min_distance_group_placement 5
-	actor_area 116
-	actor_area_radius 10
-	terrain_to_place_on DLC_DESERTGRAVEL
-}
-create_object RELIC 
-{
-	min_distance_group_placement 1
-	if TINY_MAP
-		number_of_objects 2
-		temp_min_distance_group_placement 35
-	elseif MEDIUM_MAP
-		number_of_objects 3
-		temp_min_distance_group_placement 38
-	elseif LARGE_MAP
-		number_of_objects 3
-		temp_min_distance_group_placement 48
-	elseif HUGE_MAP
-		number_of_objects 4
-		temp_min_distance_group_placement 52
-	endif
-	terrain_to_place_on GRAVEL1
-}
-/* neutral Resources */
-create_object FORAGE
-{
-	number_of_objects 3
-	number_of_groups 99
-	group_placement_radius 3
-	set_tight_grouping
-	set_gaia_object_only
-	temp_min_distance_group_placement 30
-	avoid_actor_area 66
-    avoid_actor_area 67
-	actor_area_radius 2
-	avoid_actor_area 120
-	terrain_to_place_on GRAVEL1
-}
-create_object GOLD 
-{
-	number_of_objects 4
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	if TINY_MAP
-		temp_min_distance_group_placement 27
-	elseif SMALL_MAP
-		temp_min_distance_group_placement 27
-	elseif MEDIUM_MAP
-		temp_min_distance_group_placement 30
-	elseif LARGE_MAP
-		temp_min_distance_group_placement 32
-	else
-		temp_min_distance_group_placement 35
-	endif
-	actor_area 66
-    actor_area_radius 4
-	avoid_actor_area 115
-	avoid_actor_area 116
-	avoid_actor_area 120
-}
-
-create_object STONE
-{
-	number_of_objects 3
-	number_of_groups 1000
-	set_tight_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	if TINY_MAP
-		temp_min_distance_group_placement 27
-	elseif SMALL_MAP
-		temp_min_distance_group_placement 27
-	elseif MEDIUM_MAP
-		temp_min_distance_group_placement 30
-	elseif LARGE_MAP
-		temp_min_distance_group_placement 32
-	else
-		temp_min_distance_group_placement 35
-	endif
-    actor_area 67
-    actor_area_radius 3
-	avoid_actor_area 66
-	avoid_actor_area 115
-	avoid_actor_area 116
-	avoid_actor_area 120
-}
-create_object RELIC 
-{
-	min_distance_group_placement 1
-	if TINY_MAP
-		number_of_objects 3
-		temp_min_distance_group_placement 35
-	elseif MEDIUM_MAP
-		number_of_objects 2
-		temp_min_distance_group_placement 38
-	elseif LARGE_MAP
-		number_of_objects 4
-		temp_min_distance_group_placement 65
-	else
-		number_of_objects 4
-		temp_min_distance_group_placement 75
-	endif
-	avoid_forest_zone 3
-	terrain_to_place_on WGB2
-}
-create_object DOLPHIN
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_gaia_object_only
-	set_scaling_to_map_size
-	min_distance_group_placement 2
-	temp_min_distance_group_placement 4
-	terrain_to_place_on WATER
-}
-create_object DORADO
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_gaia_object_only
-	set_scaling_to_map_size
-	min_distance_group_placement 2
-	temp_min_distance_group_placement 4
-	terrain_to_place_on WATER
-}
-create_object DLC_WATERBUFFALO
-{
-	number_of_objects 2
-	number_of_groups 1000
-	set_loose_grouping
-	set_gaia_object_only
-	set_scaling_to_map_size
-	temp_min_distance_group_placement 20
-	avoid_forest_zone 2
-	terrain_to_place_on WGB2
-}
-create_object BOAR
-{
-	number_of_objects 1
-	number_of_groups 1000
-	set_loose_grouping
-	set_gaia_object_only
-	temp_min_distance_group_placement 24
-	avoid_forest_zone 2
-	terrain_to_place_on WGB2
-}
-create_object TRAP
-{
-	number_of_objects 3
-	number_of_groups 1000
-	set_scaling_to_map_size
-	set_gaia_object_only
-	min_distance_group_placement 3
-	temp_min_distance_group_placement 10
-	ignore_terrain_restrictions
-	second_object DLC_BOXTURTLE
-	avoid_forest_zone 3
-	terrain_to_place_on DLC_MANGROVESHALLOW
-}
-
-/* Aesthetic Objects */
-create_object ROCK
-{
-	number_of_objects 1
-	number_of_groups 99
-	set_scaling_to_map_size
-	min_distance_group_placement 5
-	temp_min_distance_group_placement 25
-	avoid_forest_zone 2
-	terrain_to_place_on DLC_MANGROVESHALLOW
-}
-create_object ROCK3
-{
-	number_of_objects 1
-	number_of_groups 99
-	set_scaling_to_map_size
-	min_distance_group_placement 3
-	temp_min_distance_group_placement 25
-	avoid_forest_zone 2
-	terrain_to_place_on DLC_MANGROVESHALLOW
-}
-create_object ROCK4
-{
-	number_of_objects 1
-	number_of_groups 99
-	set_scaling_to_map_size
-	min_distance_group_placement 3
-	temp_min_distance_group_placement 25
-	avoid_forest_zone 2
-	terrain_to_place_on DLC_MANGROVESHALLOW
-}
