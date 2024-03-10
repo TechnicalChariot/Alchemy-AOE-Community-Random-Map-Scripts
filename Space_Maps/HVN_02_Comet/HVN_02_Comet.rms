@@ -161,17 +161,23 @@ create_terrain SNOW_FOREST
 {
 	base_terrain DIRT
 	land_percent 4
-	number_of_clumps 8
 	set_scale_by_groups
 	spacing_to_other_terrain_types 6
 if TINY_MAP
 	set_avoid_player_start_areas 17
+	number_of_clumps 12
+elseif SMALL_MAP
+	set_avoid_player_start_areas 17
+	number_of_clumps 11
 elseif MEDIUM_MAP
 	set_avoid_player_start_areas 18
+	number_of_clumps 11
 elseif LARGE_MAP
 	set_avoid_player_start_areas 18
+	number_of_clumps 8
 else
-	set_avoid_player_start_areas 19
+	set_avoid_player_start_areas 18
+	number_of_clumps 6
 endif
 }
 

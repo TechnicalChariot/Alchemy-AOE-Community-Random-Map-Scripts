@@ -1,5 +1,5 @@
 /* Neptune */
-/* A Random Map Script by TechChariot */
+/* A Random Map Script by BPDrej */
 /* Released 03/01/24 */
 /* Consent is given for this map to be used in Alchemy League, Season 2, and Content Creation by Alchemy AOE Community Members */
 /* Component Specification: https://github.com/TechnicalChariot/Alchemy-AOE-Published-Specifications/blob/main/CHEM-CSRM-HVN-11.pdf */
@@ -85,7 +85,7 @@ effect_amount  GAIA_SET_ATTRIBUTE INVIS_COMBATANT ATTR_COMBAT_ABILITY 1
 effect_amount  SET_ATTRIBUTE TRANSPORT_SHIP ATTR_DEAD_ID 545
 effect_amount  SET_ATTRIBUTE TRANSPORT_SHIP ATTR_HERO_STATUS 1
 effect_amount  SET_ATTRIBUTE TRANSPORT_SHIP ATTR_GARRISON_CAPACITY 1000
-
+effect_amount  SET_ATTRIBUTE TRANSPORT_SHIP ATTR_POPULATION 0
 
 <ELEVATION_GENERATION>
 

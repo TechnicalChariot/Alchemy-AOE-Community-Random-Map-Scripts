@@ -143,24 +143,23 @@ create_terrain FOREST
 {
 	base_terrain GRASS
 	land_percent 6
-	clumping_factor 20
+	clumping_factor 30
 	set_scale_by_groups
 	if TINY_MAP
 	number_of_clumps 8
 	spacing_to_other_terrain_types 4
 	elseif MEDIUM_MAP
-	number_of_clumps 14
+	number_of_clumps 9
 	spacing_to_other_terrain_types 5
 	elseif LARGE_MAP
-	number_of_clumps 14
-	spacing_to_other_terrain_types 7
+	number_of_clumps 10
+	spacing_to_other_terrain_types 5
 	elseif HUGE_MAP
-	number_of_clumps 18
-	clumping_factor 20
-	spacing_to_other_terrain_types 8
+	number_of_clumps 10
+	spacing_to_other_terrain_types 6
 	else
-	number_of_clumps 18
-	spacing_to_other_terrain_types 10
+	number_of_clumps 12
+	spacing_to_other_terrain_types 7
 	endif
 }
 create_terrain LEAVES
@@ -272,6 +271,16 @@ create_object TREE_G
 	temp_min_distance_group_placement 1
 	set_scaling_to_map_size
 }
+create_object DLC_DEADTREE 
+{
+	number_of_objects 1
+	number_of_groups 9320
+	set_tight_grouping
+	set_gaia_object_only
+	terrain_to_place_on FOREST
+	temp_min_distance_group_placement 1
+	set_scaling_to_map_size
+}
 create_object TREE_G 
 {
 	number_of_objects 1
@@ -282,6 +291,7 @@ create_object TREE_G
 	terrain_to_place_on FOREST
 	temp_min_distance_group_placement 1
 	set_scaling_to_map_size
+	second_object DLC_AFRICANBUSH
 }
 create_object DLC_AFRICANBUSH 
 {
