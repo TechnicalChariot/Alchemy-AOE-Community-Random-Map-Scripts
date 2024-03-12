@@ -1279,6 +1279,7 @@ create_object FLAME_D {
 	layer_to_place_on NNB3
 }
 */
+if LOW_RESOURCES
 create_object INVIS_COMBATANT
 {
 	number_of_objects 1
@@ -1291,6 +1292,18 @@ create_object INVIS_COMBATANT
 	second_object FLAME_D
 	min_distance_to_players 20
 }
+else
+create_object FLAME_D
+{
+	number_of_objects 1
+	number_of_groups 999
+	set_scaling_to_map_size
+	layer_to_place_on NNB3
+	temp_min_distance_group_placement 4
+	set_gaia_object_only
+	min_distance_to_players 10
+}
+endif
 
 create_object RELIC
 {
